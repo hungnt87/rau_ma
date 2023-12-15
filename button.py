@@ -1,0 +1,6 @@
+bt_CreateCustomLobby="image\CreateCustomLobby.png"
+bt_ServerLocaltion="image\ServerLocaltion.png"
+bt_ServerLocaltion_Singapore="image\ServerLocaltion_Singapore.png"
+bt_CreatePassLobby="image\CreatePassLobby.png"
+bt_CreateGame="image/CreateGame.png"
+bt_StartGame="image\StartGame.png"
