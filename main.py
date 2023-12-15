@@ -1,7 +1,6 @@
 import pyautogui
 import time
 import button
-from pynput.keyboard import HotKey, Key, KeyCode, Listener
 
 
 def click_image(image):

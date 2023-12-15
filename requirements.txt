@@ -1,0 +1,4 @@
+PyAutoGUI==0.9.54
+times==0.7
+Pillow==10.1.0
+opencv-python==4.8.1.78
