@@ -1,11 +1,18 @@
 import round as r
 import win32gui
+import win32con
 import time
+import keyboard
 
 def get_app_window_handle(app_name):
     hwnd = win32gui.FindWindow(None, app_name)
     return hwnd
+def move_window_to(handle, x, y):
+    # Lấy kích thước hiện tại của cửa sổ
+    _, _, width, height = win32gui.GetWindowRect(handle)
 
+    # Thay đổi kích thước và vị trí của cửa sổ
+    win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
 app_name = "Dota 2"
 new_x, new_y = 0, 0  # Tọa độ mới bạn muốn di chuyển cửa sổ đến
 
@@ -15,11 +22,17 @@ if hwnd:
     time.sleep(1)
     win32gui.SetForegroundWindow(hwnd)
     time.sleep(1)
+    move_window_to(hwnd,new_x,new_y)
+    print(f"Tim thay cua so  '{app_name}'")
+    print("Bat dau auto")
+    time.sleep(1)
+
+    r.buy_hero_Luna(1)
+
+
+    print("Ket thuc auto")
+
    
 else:
     print(f"Không tìm thấy cửa sổ có tên '{app_name}'")
 
-#r.round_1()
-#r.click_image(button.bt_Prepare)
-#r.get_round(button.bt_ProceedToRound2)
-r.buy_hero_Luna(1)
