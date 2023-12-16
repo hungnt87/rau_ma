@@ -1,9 +1,5 @@
-import button
 import round as r
-import pyautogui
-import hero
 import win32gui
-
 import time
 
 def get_app_window_handle(app_name):

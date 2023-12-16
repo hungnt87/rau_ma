@@ -2,7 +2,8 @@ import pyautogui
 import time
 import button
 import hero
-number_hero_luna=0
+number_hero_Luna=0
+number_hero_WinterWyvern=0
 def click_image(image):
     i = 0
     while True:
@@ -63,20 +64,20 @@ def buy_hero(hero):
     except pyautogui.ImageNotFoundException:
         return None
     
-def buy_hero_bylevel(hero_img,hero_level):
-    global number_hero_luna
+def buy_hero_Luna(hero_Level):
+    global number_hero_Luna
     while True:
-        if get_hero_level(hero_img) is True:
-            number_hero_luna=1
+        if get_hero_level(hero.Luna_lv1) is True:
+            number_hero_Luna=1
             break        
         break    
-    if hero_level > number_hero_luna:
+    if hero_Level > number_hero_Luna:
         for n in range(0, 4):
-            buy = buy_hero(hero.WinterWyvern)
+            buy = buy_hero(hero.Luna)
             if buy is True:
-                number_hero_luna = number_hero_luna+1
-                print("mua: ", number_hero_luna)
-                if hero_level <= number_hero_luna:
+                number_hero_Luna = number_hero_Luna+1
+                print("mua: ", number_hero_Luna)
+                if hero_Level <= number_hero_Luna:
                     break
 
 
