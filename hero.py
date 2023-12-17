@@ -26,15 +26,17 @@ Windranger_number = 0
 Windranger = infor_hero("Windranger", Windranger_number)
 PriestArcane_number = 0
 PriestArcane = infor_hero("PriestArcane", PriestArcane_number)
+TrollWarlord_number=0
+TrollWarlord=infor_hero("TrollWarlord",TrollWarlord_number)
 
-
-def get_hero_level(hero_img):
-    try:
-        res = pyautogui.locateOnScreen(
-            hero_img, confidence=0.8, region=(0, 0, 1916, 1134))
-        return True
-    except pyautogui.ImageNotFoundException:
-        return None
+# def get_hero_level(infor_hero):
+#     try:
+        
+#         res = pyautogui.locateOnScreen(
+#             infor_hero.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134))
+#         return 1
+#     except pyautogui.ImageNotFoundException:
+#         return 0
 
 
 def buy_hero(hero_img):
@@ -43,7 +45,9 @@ def buy_hero(hero_img):
             hero_img, confidence=0.8, region=(0, 0, 1916, 1134))
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
-        #pyautogui.click(res_center)
+        time.sleep(0.2)
+        pyautogui.click(res_center)
+        time.sleep(0.2)
         return True
     except pyautogui.ImageNotFoundException:
         return None

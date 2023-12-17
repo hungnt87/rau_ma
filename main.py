@@ -29,23 +29,24 @@ if hwnd:
     print(f"Tim thay cua so  '{app_name}'")
     print("Bat dau auto")
     time.sleep(1)
-    #r.round_1()
+   # r.round_1()
   
-    # r.round_2()
+    r.round_2()
   
-    # r.round_3()
+    r.round_3()
 
-    # r.round_4()
+    r.round_4()
 
-    # r.round_5()
-
-
+    r.round_5()
+    # if button.check_not_money():
+    #     print("false")
+    
     #hero.buy_hero_Windranger(1)
     #item.buy_Investment_lv1_precise()
     # if item.check_item(item.ShopDiscount):
     #     print("co hang")
     #hero.buy_hero_infor(hero.WinterWyvern,5)
-    button.exit_game()
+    #button.exit_game()
     print("Ket thuc auto")
 
    
