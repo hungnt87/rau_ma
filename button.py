@@ -1,3 +1,48 @@
+import pyautogui
+import time
+
+class bt_infor():
+    def __init__(self,para_name):
+         self.name= para_name
+         self.img = "data\\image\\"+para_name+".png"
+Back=bt_infor("Back")
+Disconnect=bt_infor("Disconnect")
+LeaveGame=bt_infor("LeaveGame")
+
+
+def click(bt_infor):
+    i = 0
+    while True:
+        try:
+            res = pyautogui.locateOnScreen(
+                bt_infor.img, confidence=0.8, region=(0, 0, 1916, 1134))
+            res_center = pyautogui.center(res)
+            time.sleep(1)
+            pyautogui.moveTo(res_center)
+            pyautogui.click(res_center)
+            time.sleep(0.2)
+            pyautogui.moveTo(200,200)
+            # pyautogui.moveTo(0, 0)
+            # print("I can see it")
+            break
+        except pyautogui.ImageNotFoundException:
+            i = i+1
+            if i > 120:
+                break
+            print("Đang tìm hình ảnh button {} so lan {}".format(bt_infor.name,i))
+            time.sleep(0.5)
+def exit_game():
+    click(Back)
+
+    click(Disconnect)
+
+    click(LeaveGame)
+
+
+
+
+
+
 bt_CreateCustomLobby = r"data\image\CreateCustomLobby.png"
 bt_ServerLocaltion = r"data\image\ServerLocaltion.png"
 bt_ServerLocaltion_Singapore = r"data\image\ServerLocaltion_Singapore.png"
@@ -11,6 +56,7 @@ bt_SelectCharacter = r"data\image\SelectCharacter.png"
 bt_Prepare = r"data\image\Prepare.png"
 bt_ProceedToRound2 = r"data\image\ProceedToRound2.png"
 bt_Roll = r"data\image\Roll.png"
+
 bt_ProceedToRound3 = r"data\image\ProceedToRound3.png"
 bt_ProceedToRound4 = r"data\image\ProceedToRound4.png"
 bt_ProceedToRound5 = r"data\image\ProceedToRound5.png"

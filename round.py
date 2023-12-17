@@ -26,6 +26,7 @@ def click_image(image):
             time.sleep(0.5)
 
 
+
 def get_round(image):
     i = 0
     while True:
@@ -69,6 +70,7 @@ def check_Resurrect(time_wait):
             time.sleep(1)
 
 
+
 def round_1():
     click_image(button.bt_CreateCustomLobby)
     click_image(button.bt_ServerLocaltion)
@@ -94,7 +96,9 @@ def round_2():
         item.buy_Investment_lv1_precise()
 
         # buy hero
-        hero.buy_hero_Luna(1)
+        hero.buy_hero_infor(hero.Hoodwink,5)
+        hero.buy_hero_infor(hero.PriestArcane,1)
+        hero.buy_hero_infor(hero.WinterWyvern,4)      
 
         # roll
         click_image(button.bt_Roll)
