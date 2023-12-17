@@ -80,8 +80,7 @@ def round_2():
     for n in range(0, 3):
         # buy item
         item.buy_Investment_lv1_precise()
-        item.buy_ShopDiscount()
-        
+        item.buy_ShopDiscount()        
         item.buy_TomeOfKnowledge()
 
         # buy hero

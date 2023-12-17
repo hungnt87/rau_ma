@@ -18,8 +18,17 @@ Investment_lv1_precise = infor_item("Investment_lv1_precise",number_Investment_l
 
 TomeOfKnowledg_number=0
 TomeOfKnowledge=infor_item("TomeOfKnowledge",TomeOfKnowledg_number)
-
-
+Locomotive_number=0
+Locomotive=infor_item("Locomotive",Locomotive_number)
+MasterChefHat_number=0
+MasterChefHat=infor_item("MasterChefHat",MasterChefHat_number)
+Helmet_32Luck_Precise=infor_item("Helmet_32Luck_Precise",0)
+WitlessShako_Health_Precise=infor_item("WitlessShako_Health_Precise",0)
+Exp20_Range5=infor_item("Exp20_Range5",0)
+NorthWind_Luck13=infor_item("NorthWind_Luck13",0)
+Vtuber_Inves198_Speed7=infor_item("Vtuber_Inves198_Speed7",0)
+Exp40_Luck6=infor_item("Exp40_Luck6",0)
+Bicycle_lv3=infor_item("Bicycle_lv3",0)
 def buy_item(infor_item):
     try:
         res = pyautogui.locateOnScreen(
