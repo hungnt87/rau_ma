@@ -1,8 +1,15 @@
 import pyautogui
 import time
 
+class infor_item:
+     def __init__(self,para_name):
+         self.name= para_name
+         self.img="data\\image\\item\\"+para_name+".png"
 
-ShopDiscount = r"data\image\item\ShopDiscount.png"
+
+ShopDiscount=infor_item("ShopDiscount")
+
+#ShopDiscount = r"data\image\item\ShopDiscount.png"
 number_ShopDiscount = 0
 
 item_NotMoney = r"data\image\item\NotMoney.png"
@@ -67,7 +74,7 @@ def buy_ShopDiscount():
     global number_ShopDiscount
     if number_ShopDiscount <= 5:
         for n in range(0, 4):
-            if buy_item(ShopDiscount):
+            if buy_item(ShopDiscount.name):
                 print("Da mua ")
 
 
