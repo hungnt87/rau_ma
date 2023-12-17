@@ -3,6 +3,9 @@ import win32gui
 import win32con
 import time
 import keyboard
+import button
+import item
+import hero
 
 def get_app_window_handle(app_name):
     hwnd = win32gui.FindWindow(None, app_name)
@@ -26,8 +29,21 @@ if hwnd:
     print(f"Tim thay cua so  '{app_name}'")
     print("Bat dau auto")
     time.sleep(1)
+    r.round_1()
+  
+    r.round_2()
+  
+    r.round_3()
 
-    r.buy_hero_Luna(1)
+    r.round_4()
+
+    r.round_5()
+
+
+    #hero.buy_hero_Windranger(1)
+    #item.buy_Investment_lv1_precise()
+    # if item.check_item(item.ShopDiscount):
+    #     print("co hang")
 
 
     print("Ket thuc auto")
