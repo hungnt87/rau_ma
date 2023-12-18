@@ -1,3 +1,5 @@
 import hero
 
-print(hero.Luna.number)
+
+
+hero.test_reset_hero()

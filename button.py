@@ -48,6 +48,7 @@ ProceedToRound20 = bt_infor("ProceedToRound20")
 Resurrect = bt_infor("Resurrect")
 NotMoney = bt_infor("NotMoney")
 Recycle = bt_infor("Recycle")
+Abandon=bt_infor("Abandon")
 
 
 def click(bt_infor, time_sleep=0):
@@ -140,11 +141,32 @@ def check_Resurrect(time_wait=10):
                 break
             print("cho xuat hien Resurrect", i)
             time.sleep(1)
+def check_Abandon(time_wait=2):
+    i = 0
+    while True:
+        try:
+            res = pyautogui.locateOnScreen(
+                Abandon.img, confidence=0.8, region=(0, 0, 1916, 1134))
+            res_center = pyautogui.center(res)
+            pyautogui.moveTo(res_center)
+            pyautogui.click(res_center)
+            print("Chon Abandon")
+            for x in range(0, time_wait):
+                print(" cho van dau", x)
+                time.sleep(1)
+            break
+        except pyautogui.ImageNotFoundException:
+            i = i+1
+            if i > time_wait:
+                break
+            print("cho xuat hien Abandon", i)
+            time.sleep(1)
 def check_ProceedToRound():
     check_Resurrect()    
     i = 0
     while True:
         try:
+            check_Abandon()
             res = pyautogui.locateOnScreen(
                 ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None:

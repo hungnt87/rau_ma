@@ -80,6 +80,7 @@ if hwnd:
         # button.check_FindItem()
         button.exit_game()
         print("Ket thuc auto lan ",n)
+        
         time.sleep(20)
 
 
