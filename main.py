@@ -27,7 +27,7 @@ if hwnd:
     print(f"Tim thay cua so  '{app_name}'")
     print("Bat dau auto")
     time.sleep(1)
-    #r.round_1()
+    r.round_1()
   
     r.round_2()
   
