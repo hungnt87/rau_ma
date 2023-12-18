@@ -88,7 +88,7 @@ def buy_hero_infor(infor_hero, number_hero):
                         infor_hero.name, infor_hero.number, number_hero - number))
 
         else:
-            print("ban da du hero {} roi, ko can mua nua")
+            print("ban da du hero {} roi, ko can mua nua".format(infor_hero.name))
             break
 
         # def buy_hero_Windranger(hero_number):

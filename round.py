@@ -24,57 +24,9 @@ def click_image(image):
                 break
             print(i)
             time.sleep(0.5)
-
-
-def get_round(image):
-    i = 0
-    while True:
-        try:
-            res = pyautogui.locateOnScreen(
-                image, confidence=0.8, region=(0, 0, 1916, 1134))
-            res_center = pyautogui.center(res)
-            # time.sleep(1)
-            # pyautogui.moveTo(res_center)
-           # pyautogui.click(res_center)
-            print("I can see it")
-
-            break
-        except pyautogui.ImageNotFoundException:
-            i = i+1
-            if i > 120:
-                break
-            print(i)
-            time.sleep(0.5)
-
-
-def check_Resurrect(time_wait):
-    i = 0
-    while True:
-        try:
-            res = pyautogui.locateOnScreen(
-                button.Resurrect.img, confidence=0.8, region=(0, 0, 1916, 1134))
-            res_center = pyautogui.center(res)
-            time.sleep(1)
-            pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
-            print("Chon Resurrect ")
-
-            for x in range(0, time_wait):
-                print(" cho van dau", x)
-                time.sleep(1)
-            break
-        except pyautogui.ImageNotFoundException:
-            i = i+1
-            if i > time_wait:
-                break
-            print("cho xuat hien Resurrect", i)
-            time.sleep(1)
-    button.check_FindItem()
-
-
 def round_1():
     button.enter_game()
-    check_Resurrect(30)
+    button.check_ProceedToRound()
 
 
 def round_2():
@@ -95,7 +47,7 @@ def round_2():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(35)
+    
     
 
 
@@ -121,10 +73,7 @@ def round_3():
         # roll
         button.roll_game()
         pyautogui.moveTo(200, 200)
-    # next round
-    button.next_round_3()
-    check_Resurrect(40)
-
+    button.next_round()
 
 def round_4():
     for n in range(0, 6):
@@ -150,8 +99,6 @@ def round_4():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(45)
-    button.check_FindItem()
 
 
 def round_5():
@@ -177,7 +124,6 @@ def round_5():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
 def round_6():
     for n in range(0, 7):
         # buy item
@@ -201,7 +147,6 @@ def round_6():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
 def round_7():
     for n in range(0, 7):
         # buy item
@@ -225,7 +170,7 @@ def round_7():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
+    
 def round_8():
     for n in range(0, 7):
         # buy item
@@ -249,7 +194,7 @@ def round_8():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
+    
 def round_9():
     for n in range(0, 7):
         # buy item
@@ -273,7 +218,7 @@ def round_9():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
+    
 def round_10():
     for n in range(0, 7):
         # buy item
@@ -297,7 +242,7 @@ def round_10():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(70)
+
 def round_11():
     for n in range(0, 7):
         # buy item
@@ -321,7 +266,7 @@ def round_11():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(70)
+
 def round_12():
     for n in range(0, 7):
         # buy item
@@ -345,7 +290,7 @@ def round_12():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(55)
+
 def round_13():
     for n in range(0, 7):
         # buy item
@@ -369,7 +314,7 @@ def round_13():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(150)
+
 def round_14():
     for n in range(0, 7):
         # buy item
@@ -393,7 +338,7 @@ def round_14():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_15():
     for n in range(0, 10):
         # buy item
@@ -417,7 +362,7 @@ def round_15():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_16():
     for n in range(0, 7):
         # buy item
@@ -441,7 +386,7 @@ def round_16():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_17():
     for n in range(0, 7):
         # buy item
@@ -465,7 +410,7 @@ def round_17():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_18():
     for n in range(0, 7):
         # buy item
@@ -489,7 +434,7 @@ def round_18():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_19():
     for n in range(0, 7):
         # buy item
@@ -513,7 +458,7 @@ def round_19():
         pyautogui.moveTo(200, 200)
     # next round
     button.next_round()
-    check_Resurrect(120)
+
 def round_20():
     for n in range(0, 7):
         # buy item
@@ -536,7 +481,7 @@ def round_20():
         button.roll_game()
         pyautogui.moveTo(200, 200)
     # next round
-    button.next_round()
-    check_Resurrect(120)
+    
+
 
   
