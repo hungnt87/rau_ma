@@ -44,49 +44,6 @@ def buy_item(infor_item):
     except pyautogui.ImageNotFoundException:
         return False
 
-# def check_item(item_img):
-#     try:
-#         res = pyautogui.locateOnScreen(
-#             item_img, confidence=0.8, region=(0, 0, 1916, 1134))
-#         res_center = pyautogui.center(res)
-#         pyautogui.moveTo(res_center)
-#         time.sleep(0.2)
-#        #pyautogui.click(res_center)
-#         #time.sleep(0.2)
-#         return True
-#     except pyautogui.ImageNotFoundException:
-#         return False
-
-# def check_money(image):
-#     try:
-#         res = pyautogui.locateOnScreen(
-#             image, confidence=0.8, region=(0, 0, 1916, 1134))
-#         # res_center = pyautogui.center(res)
-#         # pyautogui.moveTo(res_center)
-#         return True
-#     except pyautogui.ImageNotFoundException:
-#         return None
-
-
-# def check_not_money():
-#     i = 0
-#     while True:
-#         if check_money(item_NotMoney) is True:
-#             print("ko du tien")
-#             return True
-#         else:
-#             i = i+1
-#         if i >= 10:
-#             return False
-#             break
-
-
-# def buy_ShopDiscount(item_number):
-#     global number_ShopDiscount
-#     if number_ShopDiscount <= 5:
-#         for n in range(0, 4):
-#             if buy_item(ShopDiscount.name):
-#                 print("Da mua ")
 def buy_item_infor(infor_item, number_item):
     number = infor_item.number    
     if number_item > number:
@@ -102,7 +59,7 @@ def buy_item_infor(infor_item, number_item):
                 else:
                     number=number+1
                     print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(infor_item.name,number_buy-number))
-        infor_item.number=number              
+                    infor_item.number=number              
 def buy_ShopDiscount():
     buy_item_infor(ShopDiscount,5)
 
@@ -111,4 +68,10 @@ def buy_Investment_lv1_precise():
             
 def buy_TomeOfKnowledge():  
     buy_item_infor(TomeOfKnowledge,5)
+def buy_Exp20_Range5():
+    buy_item_infor(Exp20_Range5,5)
+def buy_Exp40_Luck6():
+    buy_item_infor(Exp40_Luck6,5)
+def buy_Locomotive():
+    buy_item_infor(Locomotive,5)
 
