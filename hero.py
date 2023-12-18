@@ -1,17 +1,18 @@
 import pyautogui
 import time
+
 import button
 
 
 class infor_hero:
     def __init__(self, para_name, para_number_hero):
         self.name = para_name
-        self.img = "data\\image\\hero\\"+para_name+".png"
-        self.lv1_img = "data\\image\\hero\\"+para_name+"_lv1.png"
-        self.lv2_img = "data\\image\\hero\\"+para_name+"_lv2.png"
-        self.lv3_img = "data\\image\\hero\\"+para_name+"_lv3.png"
-        self.lv4_img = "data\\image\\hero\\"+para_name+"_lv4.png"
-        self.lv5_img = "data\\image\\hero\\"+para_name+"_lv5.png"
+        self.img = "data\\image\\hero\\" + para_name + ".png"
+        self.lv1_img = "data\\image\\hero\\" + para_name + "_lv1.png"
+        self.lv2_img = "data\\image\\hero\\" + para_name + "_lv2.png"
+        self.lv3_img = "data\\image\\hero\\" + para_name + "_lv3.png"
+        self.lv4_img = "data\\image\\hero\\" + para_name + "_lv4.png"
+        self.lv5_img = "data\\image\\hero\\" + para_name + "_lv5.png"
         self.number = para_number_hero
 
 
@@ -36,6 +37,7 @@ DarkWillow_number = 0
 DarkWillow = infor_hero("DarkWillow", DarkWillow_number)
 Clinkz_number = 0
 Clinkz = infor_hero("Clinkz", Clinkz_number)
+
 
 # def get_hero_level(infor_hero):
 #     try:
@@ -62,36 +64,34 @@ def buy_hero(hero_img):
 
 
 def buy_hero_infor(infor_hero, number_hero):
-    i=0       
+    i = 0
     while True:
-        if i>=4:
+        if i >= 4:
             break
-        number = infor_hero.number 
+        number = infor_hero.number
         if number_hero > number:
-            i=i+1
-            number_buy = number_hero-number
+            i = i + 1
+            number_buy = number_hero - number
             # print("Bạn đã có {} hero {}".format(
             #         infor_hero.number, infor_hero.name))
             # print("Bạn cần mua thêm {} hero {} nữa".format(
             #         number_buy, infor_hero.name))
-                    
+
             if buy_hero(infor_hero.img) is True:
                 if button.check_not_money():
                     break
                 else:
-                    number = number+1
-                    
+                    number = number + 1
+
                     infor_hero.number = number
                     print("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
-                        infor_hero.name,infor_hero.number, number_hero-number))
+                        infor_hero.name, infor_hero.number, number_hero - number))
 
-            
         else:
-            print("ban da du hero roi, ko can mua nua")
-            break            
+            print("ban da du hero {} roi, ko can mua nua")
+            break
 
-
-# def buy_hero_Windranger(hero_number):
+        # def buy_hero_Windranger(hero_number):
 #     global number_hero_Windranger
 #     print("Windranger: ", number_hero_Windranger)
 #     while True:
