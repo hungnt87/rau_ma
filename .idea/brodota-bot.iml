@@ -7,4 +7,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="C:\Users\vydie\brodota-bot\requirements.txt" />
+    <option name="modifyBaseFiles" value="true" />
+    <option name="keepMatchingSpecifier" value="false" />
+  </component>
 </module>
