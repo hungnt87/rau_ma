@@ -2,10 +2,8 @@ import round as r
 import win32gui
 import win32con
 import time
-import keyboard
 import button
-import item
-import hero
+
 
 def get_app_window_handle(app_name):
     hwnd = win32gui.FindWindow(None, app_name)
@@ -38,6 +36,33 @@ if hwnd:
     r.round_4()
 
     r.round_5()
+    r.round_6()
+  
+    r.round_7()
+  
+    r.round_8()
+
+    r.round_9()
+
+    r.round_10()
+    r.round_11()
+  
+    r.round_12()
+  
+    r.round_13()
+
+    r.round_14()
+
+    r.round_15()
+    r.round_16()
+  
+    r.round_17()
+  
+    r.round_18()
+
+    r.round_19()
+
+    r.round_20()
     # if button.check_not_money():
     #     print("false")
     
@@ -46,7 +71,8 @@ if hwnd:
     # if item.check_item(item.ShopDiscount):
     #     print("co hang")
     #hero.buy_hero_infor(hero.WinterWyvern,5)
-    #button.exit_game()
+    #button.check_FindItem()
+    button.exit_game()
     print("Ket thuc auto")
 
    

@@ -25,6 +25,7 @@ SelectCharacter = bt_infor("SelectCharacter")
 Prepare = bt_infor("Prepare")
 ProceedToRound2 = bt_infor("ProceedToRound2")
 Roll = bt_infor("Roll")
+ProceedToRound= bt_infor("ProceedToRound")
 ProceedToRound3 = bt_infor("ProceedToRound3")
 ProceedToRound4 = bt_infor("ProceedToRound4")
 ProceedToRound5 = bt_infor("ProceedToRound5")
@@ -45,6 +46,7 @@ ProceedToRound19 = bt_infor("ProceedToRound19")
 ProceedToRound20 = bt_infor("ProceedToRound20")
 Resurrect = bt_infor("Resurrect")
 NotMoney=bt_infor("NotMoney")
+Recycle=bt_infor("Recycle")
 
 
 def click(bt_infor):
@@ -82,10 +84,31 @@ def check_not_money():
             return True
         except pyautogui.ImageNotFoundException:
             i = i+1
-            if i > 5:
+            if i > 2:
                 break
             print("Đang kiem tra ban co tien khong so lan ", i)
             time.sleep(0.2)
+def check_FindItem():
+    for n in range(0,5):
+        i = 0
+        while True:
+            try:
+                res = pyautogui.locateOnScreen(
+                    Recycle.img, confidence=0.8, region=(0, 0, 1916, 1134))
+                res_center = pyautogui.center(res)
+                pyautogui.moveTo(res_center)
+                pyautogui.click(res_center)
+                time.sleep(0.2)
+                pyautogui.moveTo(200, 200)  
+
+                print("Khong lay item")
+                return True
+            except pyautogui.ImageNotFoundException:
+                i = i+1
+                if i > 2:
+                    break
+                print("Đang kiem tra co ruong do rot ko ", i)
+                time.sleep(0.2)
 
 
     
@@ -104,7 +127,8 @@ def enter_game():
     click(CreateGame)
     # time.sleep(4)
     click(StartGame)
-    click(Accept)  # start game
+    click(Accept)
+    #time.sleep(5)  # start game
     click(Confirm)
     click(Challenge)
     click(SelectCharacter)
@@ -115,7 +139,8 @@ def enter_game():
 def roll_game():
     click(Roll)
 
-
+def next_round():
+    click(ProceedToRound)
 def next_round_2():
     click(ProceedToRound2)
 

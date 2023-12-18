@@ -14,11 +14,12 @@ class infor_hero:
         self.lv5_img = "data\\image\\hero\\"+para_name+"_lv5.png"
         self.number = para_number_hero
 
-#hero lv1
+
+# hero lv1
 WinterWyvern_number = 1
 WinterWyvern = infor_hero("WinterWyvern", WinterWyvern_number)
-Hoodwink_number=0
-Hoodwink=infor_hero("Hoodwink",Hoodwink_number)
+Hoodwink_number = 0
+Hoodwink = infor_hero("Hoodwink", Hoodwink_number)
 
 # hero lv2
 Luna_number = 0
@@ -27,18 +28,18 @@ Windranger_number = 0
 Windranger = infor_hero("Windranger", Windranger_number)
 Oracle_number = 0
 Oracle = infor_hero("Oracle", Oracle_number)
-TrollWarlord_number=0
-TrollWarlord=infor_hero("TrollWarlord",TrollWarlord_number)
-Dazzale_number=0
-Dazzale=infor_hero("Dazzale",Dazzale_number)
-DarkWillow_number=0
-DarkWillow=infor_hero("DarkWillow",DarkWillow_number)
-Clinkz_number=0
-Clinkz=infor_hero("Clinkz",Clinkz_number)
+TrollWarlord_number = 0
+TrollWarlord = infor_hero("TrollWarlord", TrollWarlord_number)
+Dazzale_number = 0
+Dazzale = infor_hero("Dazzale", Dazzale_number)
+DarkWillow_number = 0
+DarkWillow = infor_hero("DarkWillow", DarkWillow_number)
+Clinkz_number = 0
+Clinkz = infor_hero("Clinkz", Clinkz_number)
 
 # def get_hero_level(infor_hero):
 #     try:
-        
+
 #         res = pyautogui.locateOnScreen(
 #             infor_hero.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134))
 #         return 1
@@ -61,22 +62,33 @@ def buy_hero(hero_img):
 
 
 def buy_hero_infor(infor_hero, number_hero):
-    number = infor_hero.number
-
-    if number_hero > number:
-        number_buy=number_hero-number
-        for n in range(0, number_buy):
-            buy = buy_hero(infor_hero.img)
-            if buy is True:
-                print("Bạn đã có {} cái {}".format(infor_hero.number,infor_hero.name))
-                print("Bạn cần mua thêm {} cái {} nữa".format(number_buy,infor_hero.name))
+    i=0       
+    while True:
+        if i>=4:
+            break
+        number = infor_hero.number 
+        if number_hero > number:
+            i=i+1
+            number_buy = number_hero-number
+            # print("Bạn đã có {} hero {}".format(
+            #         infor_hero.number, infor_hero.name))
+            # print("Bạn cần mua thêm {} hero {} nữa".format(
+            #         number_buy, infor_hero.name))
+                    
+            if buy_hero(infor_hero.img) is True:
                 if button.check_not_money():
                     break
                 else:
-                    number=number+1
-                    print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(infor_hero.name,number_buy-number))
-        infor_hero.number=number              
+                    number = number+1
+                    
+                    infor_hero.number = number
+                    print("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
+                        infor_hero.name,infor_hero.number, number_hero-number))
 
+            
+        else:
+            print("ban da du hero roi, ko can mua nua")
+            break            
 
 
 # def buy_hero_Windranger(hero_number):
