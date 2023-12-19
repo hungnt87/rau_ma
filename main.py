@@ -4,7 +4,7 @@ import win32con
 import time
 import button
 
-app_name = "Dota 1"
+app_name = "Dota 2"
 new_x, new_y = -1, 0  # Tọa độ mới bạn muốn di chuyển cửa sổ đến
 
 
