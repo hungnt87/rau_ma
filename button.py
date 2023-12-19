@@ -2,66 +2,63 @@ import pyautogui
 import time
 
 
-class bt_infor():
+class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
-        self.img = "data\\image\\"+para_name+".png"
+        self.img = "data\\image\\" + para_name + ".png"
 
 
-Back = bt_infor("Back")
-Disconnect = bt_infor("Disconnect")
-LeaveGame = bt_infor("LeaveGame")
-CreateCustomLobby = bt_infor("CreateCustomLobby")
-CreateCustomLobby = bt_infor("CreateCustomLobby")
-ServerLocaltion = bt_infor("ServerLocaltion")
-ServerLocaltion_Singapore = bt_infor("ServerLocaltion_Singapore")
-CreatePassLobby = bt_infor("CreatePassLobby")
-CreateGame = bt_infor("CreateGame")
-StartGame = bt_infor("StartGame")
-Accept = bt_infor("Accept")
-Confirm = bt_infor("Confirm")
-Challenge = bt_infor("Challenge")
-ChallengeMax= bt_infor("ChallengeMax")
-SelectCharacter = bt_infor("SelectCharacter")
-Prepare = bt_infor("Prepare")
-ProceedToRound2 = bt_infor("ProceedToRound2")
-Roll = bt_infor("Roll")
-ProceedToRound = bt_infor("ProceedToRound")
-ProceedToRound3 = bt_infor("ProceedToRound3")
-ProceedToRound4 = bt_infor("ProceedToRound4")
-ProceedToRound5 = bt_infor("ProceedToRound5")
-ProceedToRound6 = bt_infor("ProceedToRound6")
-ProceedToRound7 = bt_infor("ProceedToRound7")
-ProceedToRound8 = bt_infor("ProceedToRound8")
-ProceedToRound9 = bt_infor("ProceedToRound9")
-ProceedToRound10 = bt_infor("ProceedToRound10")
-ProceedToRound11 = bt_infor("ProceedToRound11")
-ProceedToRound12 = bt_infor("ProceedToRound12")
-ProceedToRound13 = bt_infor("ProceedToRound13")
-ProceedToRound14 = bt_infor("ProceedToRound14")
-ProceedToRound15 = bt_infor("ProceedToRound15")
-ProceedToRound16 = bt_infor("ProceedToRound16")
-ProceedToRound17 = bt_infor("ProceedToRound17")
-ProceedToRound18 = bt_infor("ProceedToRound18")
-ProceedToRound19 = bt_infor("ProceedToRound19")
-ProceedToRound20 = bt_infor("ProceedToRound20")
-Resurrect = bt_infor("Resurrect")
-NotMoney = bt_infor("NotMoney")
-Recycle = bt_infor("Recycle")
-Abandon=bt_infor("Abandon")
+Back = ButtonInfor("Back")
+Disconnect = ButtonInfor("Disconnect")
+LeaveGame = ButtonInfor("LeaveGame")
+CreateCustomLobby = ButtonInfor("CreateCustomLobby")
+ServerLocaltion = ButtonInfor("ServerLocaltion")
+ServerLocaltion_Singapore = ButtonInfor("ServerLocaltion_Singapore")
+CreatePassLobby = ButtonInfor("CreatePassLobby")
+CreateGame = ButtonInfor("CreateGame")
+StartGame = ButtonInfor("StartGame")
+Accept = ButtonInfor("Accept")
+Confirm = ButtonInfor("Confirm")
+Challenge = ButtonInfor("Challenge")
+ChallengeMax = ButtonInfor("ChallengeMax")
+SelectCharacter = ButtonInfor("SelectCharacter")
+Prepare = ButtonInfor("Prepare")
+ProceedToRound2 = ButtonInfor("ProceedToRound2")
+Roll = ButtonInfor("Roll")
+ProceedToRound = ButtonInfor("ProceedToRound")
+ProceedToRound3 = ButtonInfor("ProceedToRound3")
+ProceedToRound4 = ButtonInfor("ProceedToRound4")
+ProceedToRound5 = ButtonInfor("ProceedToRound5")
+ProceedToRound6 = ButtonInfor("ProceedToRound6")
+ProceedToRound7 = ButtonInfor("ProceedToRound7")
+ProceedToRound8 = ButtonInfor("ProceedToRound8")
+ProceedToRound9 = ButtonInfor("ProceedToRound9")
+ProceedToRound10 = ButtonInfor("ProceedToRound10")
+ProceedToRound11 = ButtonInfor("ProceedToRound11")
+ProceedToRound12 = ButtonInfor("ProceedToRound12")
+ProceedToRound13 = ButtonInfor("ProceedToRound13")
+ProceedToRound14 = ButtonInfor("ProceedToRound14")
+ProceedToRound15 = ButtonInfor("ProceedToRound15")
+ProceedToRound16 = ButtonInfor("ProceedToRound16")
+ProceedToRound17 = ButtonInfor("ProceedToRound17")
+ProceedToRound18 = ButtonInfor("ProceedToRound18")
+ProceedToRound19 = ButtonInfor("ProceedToRound19")
+ProceedToRound20 = ButtonInfor("ProceedToRound20")
+Resurrect = ButtonInfor("Resurrect")
+NotMoney = ButtonInfor("NotMoney")
+Recycle = ButtonInfor("Recycle")
+Abandon = ButtonInfor("Abandon")
 
 
 def click(bt_infor, time_sleep=0):
-
     i = 0
     while True:
         try:
-            
 
             res = pyautogui.locateOnScreen(
                 bt_infor.img, confidence=0.8, region=(0, 0, 1916, 1134))
-            if res is not None and time_sleep>0:
-                print("Cho xuat hien {} trong thoi gian {}".format(bt_infor.name,time_sleep))
+            if res is not None and time_sleep > 0:
+                print("Cho xuat hien {} trong thoi gian {}".format(bt_infor.name, time_sleep))
                 time.sleep(time_sleep)
             res_center = pyautogui.center(res)
             time.sleep(1)
@@ -73,7 +70,7 @@ def click(bt_infor, time_sleep=0):
             # print("I can see it")
             break
         except pyautogui.ImageNotFoundException:
-            i = i+1
+            i = i + 1
             if i > 120:
                 break
             print("Đang tìm hình ảnh button {} so lan {}".format(bt_infor.name, i))
@@ -92,15 +89,15 @@ def check_not_money():
             print("Ko du tien")
             return True
         except pyautogui.ImageNotFoundException:
-            i = i+1
+            i = i + 1
             if i > 2:
                 break
             print("Đang kiem tra ban co tien khong so lan ", i)
             time.sleep(0.2)
 
 
-def check_FindItem():
-    i=0   
+def check_find_item():
+    i = 0
     while True:
         try:
             res = pyautogui.locateOnScreen(
@@ -113,13 +110,14 @@ def check_FindItem():
             print("Khong lay item")
             return True
         except pyautogui.ImageNotFoundException:
-            i = i+1
+            i = i + 1
             if i > 2:
                 break
             print("Đang kiem tra co ruong do rot ko ", i)
             time.sleep(0.2)
 
-def check_Resurrect(time_wait=10):
+
+def check_resurrect(time_wait=10):
     i = 0
     while True:
         try:
@@ -136,12 +134,14 @@ def check_Resurrect(time_wait=10):
                 time.sleep(1)
             break
         except pyautogui.ImageNotFoundException:
-            i = i+1
+            i = i + 1
             if i > time_wait:
                 break
             print("cho xuat hien Resurrect", i)
             time.sleep(1)
-def check_Abandon(time_wait=2):
+
+
+def check_abandon(time_wait=2):
     i = 0
     while True:
         try:
@@ -156,30 +156,34 @@ def check_Abandon(time_wait=2):
                 time.sleep(1)
             break
         except pyautogui.ImageNotFoundException:
-            i = i+1
+            i = i + 1
             if i > time_wait:
                 break
             print("cho xuat hien Abandon", i)
             time.sleep(1)
-def check_ProceedToRound():
-    check_Resurrect()    
+
+
+def check_proceed_to_round():
+    check_resurrect()
     i = 0
     while True:
         try:
-            check_Abandon()
+            check_abandon()
             res = pyautogui.locateOnScreen(
                 ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None:
-                print("Cho xuat hien {} lan {}".format(ProceedToRound.name,i))
+                print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
                 time.sleep(1)
-                return True                     
+                return True
         except pyautogui.ImageNotFoundException:
-            check_FindItem()            
-            i = i+1
+            check_find_item()
+            i = i + 1
             if i > 200:
                 break
-            print("Cho xuat hien {} lan {}".format(ProceedToRound.name,i))
+            print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
+
+
 def exit_game():
     click(Back, 0)
     click(Disconnect, 0)
@@ -202,15 +206,17 @@ def enter_game():
     click(Challenge, 0)
     click(SelectCharacter, 0)
     pyautogui.moveTo(100, 100)
-    click(Prepare,0)
+    click(Prepare, 0)
 
 
 def roll_game():
     click(Roll, 0)
 
-def click_ProcceedToRound():
+
+def click_procceed_to_round():
     click(ProceedToRound)
-    
+
+
 def next_round():
     click(ProceedToRound)
-    check_ProceedToRound()
+    check_proceed_to_round()

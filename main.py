@@ -4,6 +4,9 @@ import win32con
 import time
 import button
 
+app_name = "Dota 1"
+new_x, new_y = -1, 0  # Tọa độ mới bạn muốn di chuyển cửa sổ đến
+
 
 def get_app_window_handle(app_name):
     hwnd = win32gui.FindWindow(None, app_name)
@@ -18,9 +21,6 @@ def move_window_to(handle, x, y):
     win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
 
 
-app_name = "Dota 2"
-new_x, new_y = 0, 0  # Tọa độ mới bạn muốn di chuyển cửa sổ đến
-
 hwnd = get_app_window_handle(app_name)
 
 if hwnd:
@@ -29,7 +29,7 @@ if hwnd:
     time.sleep(1)
     move_window_to(hwnd, new_x, new_y)
     print(f"Tim thay cua so  '{app_name}'")
-    
+
     for n in range(0, 10):
         print("Bat dau auto lan: ", n)
         time.sleep(1)
@@ -67,7 +67,7 @@ if hwnd:
         r.round_18()
 
         r.round_19()
-        
+
         r.round_20()
         # if button.check_not_money():
         #     print("false")
@@ -79,8 +79,8 @@ if hwnd:
         # hero.buy_hero_infor(hero.WinterWyvern,5)
         # button.check_FindItem()
         button.exit_game()
-        print("Ket thuc auto lan ",n)
-        
+        print("Ket thuc auto lan ", n)
+
         time.sleep(20)
 
 

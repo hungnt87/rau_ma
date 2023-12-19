@@ -4,7 +4,7 @@ import time
 import button
 
 
-class infor_hero:
+class HeroInfor:
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
         self.img = "data\\image\\hero\\" + para_name + ".png"
@@ -21,30 +21,31 @@ class infor_hero:
 
 # hero lv1
 
-WinterWyvern = infor_hero("WinterWyvern", 1)
+WinterWyvern = HeroInfor("WinterWyvern", 1)
 
-Hoodwink = infor_hero("Hoodwink")
+Hoodwink = HeroInfor("Hoodwink")
 
 # hero lv2
 
-Luna = infor_hero("Luna")
+Luna = HeroInfor("Luna")
 
-Windranger = infor_hero("Windranger")
+Windranger = HeroInfor("Windranger")
 
-Oracle = infor_hero("Oracle")
+Oracle = HeroInfor("Oracle")
 
-TrollWarlord = infor_hero("TrollWarlord")
+TrollWarlord = HeroInfor("TrollWarlord")
 
-Dazzale = infor_hero("Dazzale")
+Dazzale = HeroInfor("Dazzale")
 
 # hero lv3
 
-DarkWillow = infor_hero("DarkWillow")
+DarkWillow = HeroInfor("DarkWillow")
 
-Clinkz = infor_hero("Clinkz")
+Clinkz = HeroInfor("Clinkz")
 
 # hero lv4
-Sniper=infor_hero("Sniper")
+Sniper = HeroInfor("Sniper")
+
 
 def buy_hero(hero_img):
     try:
@@ -83,16 +84,27 @@ def buy_hero_infor(infor_hero, number_hero):
             print("ban da du hero {} roi, ko can mua nua".format(infor_hero.name))
             break
 
-def buy_Sniper():
-    buy_hero_infor(Sniper,10)
-def buy_DarkWillow():
-    buy_hero_infor(DarkWillow,5)
-def buy_Clinkz():
-    buy_hero_infor(Clinkz,5)
-def buy_WinterWyvern():
-    buy_hero_infor(WinterWyvern,4)
-def buy_Hoodwink():
-    buy_hero_infor(Hoodwink,5)
+
+def buy_sniper():
+    buy_hero_infor(Sniper, 10)
+
+
+def buy_dark_willow():
+    buy_hero_infor(DarkWillow, 5)
+
+
+def buy_clinkz():
+    buy_hero_infor(Clinkz, 5)
+
+
+def buy_winter_wyvern():
+    buy_hero_infor(WinterWyvern, 4)
+
+
+def buy_hoodwink():
+    buy_hero_infor(Hoodwink, 5)
+
+
 def reset_hero():
     """
     Reset the hero number to 0

@@ -1,51 +1,50 @@
-
 import pyautogui
 import time
 import button
 
 
-class infor_item:
+class ItemInfor:
     def __init__(self, para_name, para_item_number=0):
         self.name = para_name
-        self.img = "data\\image\\item\\"+para_name+".png"
+        self.img = "data\\image\\item\\" + para_name + ".png"
         self.number = para_item_number
 
     def reset_item_number(self):
         self.number = 0
 
 
-ShopDiscount = infor_item("ShopDiscount")
+ShopDiscount = ItemInfor("ShopDiscount")
 
-Investment_lv1_precise = infor_item("Investment_lv1_precise")
-TomeOfKnowledge = infor_item("TomeOfKnowledge")
-Exp20_Range5 = infor_item("Exp20_Range5")
+Investment_lv1_precise = ItemInfor("Investment_lv1_precise")
+TomeOfKnowledge = ItemInfor("TomeOfKnowledge")
+Exp20_Range5 = ItemInfor("Exp20_Range5")
 
-Exp40_Luck6 = infor_item("Exp40_Luck6")
+Exp40_Luck6 = ItemInfor("Exp40_Luck6")
 
-Locomotive = infor_item("Locomotive")
+Locomotive = ItemInfor("Locomotive")
 
-MasterChefHat = infor_item("MasterChefHat")
+MasterChefHat = ItemInfor("MasterChefHat")
 
-Helmet_32Luck_Precise = infor_item("Helmet_32Luck_Precise")
+Helmet_32Luck_Precise = ItemInfor("Helmet_32Luck_Precise")
 
 # WitlessShako_Health_Precise
-WitlessShako_Health_Precise = infor_item("WitlessShako_Health_Precise")
+WitlessShako_Health_Precise = ItemInfor("WitlessShako_Health_Precise")
 
 # NorthWind_Luck13
-NorthWind_Luck13 = infor_item("NorthWind_Luck13")
+NorthWind_Luck13 = ItemInfor("NorthWind_Luck13")
 
 # Vtuber_Inves198_Speed7
-Vtuber_Inves198_Speed7 = infor_item("Vtuber_Inves198_Speed7")
+Vtuber_Inves198_Speed7 = ItemInfor("Vtuber_Inves198_Speed7")
 
 # Bicycle_lv3
-Bicycle_lv3 = infor_item("Bicycle_lv3")
-Attack16_Arcane16 = infor_item("Attack16_Arcane16")
-Attack16_Strike16 = infor_item("Attack16_Strike16")
-Critical30_Defense10 = infor_item("Critical30_Defense10")
-HealthRegen12_HitRecovery15 = infor_item("HealthRegen12_HitRecovery15")
-Holding_30HealthRegen = infor_item("Holding_30HealthRegen")
-Luck60_Speed25 = infor_item("Luck60_Speed25")
-SplitTheVoid = infor_item("SplitTheVoid")
+Bicycle_lv3 = ItemInfor("Bicycle_lv3")
+Attack16_Arcane16 = ItemInfor("Attack16_Arcane16")
+Attack16_Strike16 = ItemInfor("Attack16_Strike16")
+Critical30_Defense10 = ItemInfor("Critical30_Defense10")
+HealthRegen12_HitRecovery15 = ItemInfor("HealthRegen12_HitRecovery15")
+Holding_30HealthRegen = ItemInfor("Holding_30HealthRegen")
+Luck60_Speed25 = ItemInfor("Luck60_Speed25")
+SplitTheVoid = ItemInfor("SplitTheVoid")
 
 
 def buy_item(infor_item):
@@ -83,7 +82,7 @@ def buy_item_infor(infor_item, number_item=1):
     """
     number = infor_item.number
     if number_item > number:
-        number_buy = number_item-number
+        number_buy = number_item - number
         for n in range(0, number_buy):
             buy = buy_item(infor_item)
             if buy is True:
@@ -94,15 +93,17 @@ def buy_item_infor(infor_item, number_item=1):
                 if button.check_not_money():
                     break
                 else:
-                    number = number+1
+                    number = number + 1
                     print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
-                        infor_item.name, number_buy-number))
+                        infor_item.name, number_buy - number))
                     infor_item.number = number
+
+
 def reset_item():
-    global ShopDiscount, Investment_lv1_precise,TomeOfKnowledge,Exp20_Range5,Exp40_Luck6,Locomotive
-    global MasterChefHat, Helmet_32Luck_Precise ,WitlessShako_Health_Precise, NorthWind_Luck13, Vtuber_Inves198_Speed7
-    global Bicycle_lv3, Attack16_Arcane16,Attack16_Strike16, Critical30_Defense10, HealthRegen12_HitRecovery15
-    global Holding_30HealthRegen, Luck60_Speed25, SplitTheVoid 
+    global ShopDiscount, Investment_lv1_precise, TomeOfKnowledge, Exp20_Range5, Exp40_Luck6, Locomotive
+    global MasterChefHat, Helmet_32Luck_Precise, WitlessShako_Health_Precise, NorthWind_Luck13, Vtuber_Inves198_Speed7
+    global Bicycle_lv3, Attack16_Arcane16, Attack16_Strike16, Critical30_Defense10, HealthRegen12_HitRecovery15
+    global Holding_30HealthRegen, Luck60_Speed25, SplitTheVoid
     ShopDiscount.reset_item_number()
     Investment_lv1_precise.reset_item_number()
     TomeOfKnowledge.reset_item_number()
@@ -124,94 +125,90 @@ def reset_item():
     SplitTheVoid.reset_item_number()
 
 
-    
-
-def buy_ShopDiscount():
+def buy_shop_discount():
     """
     This function is used to buy all items in the ShopDiscount category.
     """
     buy_item_infor(ShopDiscount, 5)
 
 
-def buy_Investment_lv1_precise():
+def buy_investment_lv1_precise():
     """
     This function is used to buy all items in the Investment_lv1_precise category.
     """
     buy_item_infor(Investment_lv1_precise, 5)
 
 
-def buy_TomeOfKnowledge():
+def buy_tome_of_knowledge():
     """
     This function is used to buy all items in the TomeOfKnowledge category.
     """
     buy_item_infor(TomeOfKnowledge, 5)
 
 
-def buy_Exp20_Range5():
+def buy_exp20_range5():
     """
     This function is used to buy all items in the Exp20_Range5 category.
     """
     buy_item_infor(Exp20_Range5, 5)
 
 
-def buy_Exp40_Luck6():
+def buy_exp40_luck6():
     """
     This function is used to buy all items in the Exp40_Luck6 category.
     """
     buy_item_infor(Exp40_Luck6, 5)
 
 
-def buy_Locomotive():
+def buy_locomotive():
     """
     This function is used to buy all items in the Locomotive category.
     """
     buy_item_infor(Locomotive, 5)
 
 
-def buy_MasterChefHat():
+def buy_master_chef_hat():
     """
     This function is used to buy all items in the MasterChefHat category.
     """
     buy_item_infor(MasterChefHat, 5)
 
 
-def buy_Bicycle_lv3():
+def buy_bicycle_lv3():
     buy_item_infor(Bicycle_lv3)
 
 
-def buy_Attack16_Arcane16():
+def buy_attack16_arcane16():
     buy_item_infor(Attack16_Arcane16, 5)
 
 
-def buy_Attack16_Strike16():
+def buy_attack16_strike16():
     buy_item_infor(Attack16_Strike16, 5)
 
 
-def buy_Critical30_Defense10():
+def buy_critical30_defense10():
     buy_item_infor(Critical30_Defense10, 5)
 
 
-def buy_HealthRegen12_HitRecovery15():
+def buy_health_regen12_hit_recovery15():
     buy_item_infor(HealthRegen12_HitRecovery15, 5)
 
 
-def buy_Holding_30HealthRegen():
+def buy_holding_30_health_regen():
     buy_item_infor(Holding_30HealthRegen, 5)
 
 
-def buy_Luck60_Speed25():
+def buy_luck60_speed25():
     buy_item_infor(Luck60_Speed25, 5)
 
 
-def buy_SplitTheVoid():
+def buy_split_the_void():
     buy_item_infor(SplitTheVoid, 5)
 
 
-def buy_Vtuber_Inves198_Speed7():
+def buy_vtuber_inves198_speed7():
     buy_item_infor(Vtuber_Inves198_Speed7, 5)
 
 
-def buy_Helmet_32Luck_Precise():
+def buy_helmet_32_luck_precise():
     buy_item_infor(Helmet_32Luck_Precise, 5)
-
-
