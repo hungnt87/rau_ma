@@ -208,7 +208,9 @@ def enter_game():
 def roll_game():
     click(Roll, 0)
 
-
+def click_ProcceedToRound():
+    click(ProceedToRound)
+    
 def next_round():
     click(ProceedToRound)
     check_ProceedToRound()

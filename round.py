@@ -640,7 +640,7 @@ def round_20():
         pyautogui.moveTo(200, 200)
     hero.reset_hero()
     item.reset_item()
-    button.next_round()
+    button.click_ProcceedToRound()
     time.sleep(140)
     # next round
     
