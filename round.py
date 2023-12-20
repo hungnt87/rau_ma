@@ -75,7 +75,7 @@ def round_3():
         if get_count_buy() >= number_buy:
             break
         # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -107,7 +107,7 @@ def round_4():
         if get_count_buy() >= number_buy:
             break
         # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -140,7 +140,7 @@ def round_5():
         if get_count_buy() >= number_buy:
             break
         # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -170,8 +170,7 @@ def round_6():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -202,8 +201,7 @@ def round_7():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -237,8 +235,7 @@ def round_8():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -269,8 +266,7 @@ def round_9():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -301,8 +297,7 @@ def round_10():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -366,8 +361,7 @@ def round_12():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -396,8 +390,7 @@ def round_13():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -431,8 +424,7 @@ def round_14():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -466,8 +458,7 @@ def round_15():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -501,8 +492,7 @@ def round_16():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -536,8 +526,7 @@ def round_17():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -571,8 +560,7 @@ def round_18():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -606,8 +594,7 @@ def round_19():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
@@ -641,8 +628,7 @@ def round_20():
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
+
         if number_roll <= number_buy + 3:
             continue
         break
