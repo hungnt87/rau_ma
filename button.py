@@ -208,7 +208,7 @@ def enter_game():
     # time.sleep(4)
     click(StartGame, 0)
     click(Accept, 0)
-
+    time.sleep(20)
     click(Confirm, 10)
     click(ChallengeMax)
     click(Challenge, 0)

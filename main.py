@@ -32,7 +32,7 @@ if hwnd:
 
     for n in range(0, 20):
         print("Bat dau auto lan: ", n)
-        time.sleep(1)
+        time.sleep(2)
         r.round_1()
 
         r.round_2()

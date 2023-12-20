@@ -141,7 +141,18 @@ def sell_hero(HeroInfor):
         return False
 
 
+def buy_dazzale():
+    buy_hero_infor(Dazzale, 1)
+
+
+def buy_oracle():
+    buy_hero_infor(Oracle, 1)
+
+
 def buy_sniper():
+    if check_hero(Sniper):
+        sell_hero(Dazzale)
+        sell_hero(Oracle)
     buy_hero_infor(Sniper, 10)
 
 
@@ -161,19 +172,19 @@ def buy_hoodwink():
     buy_hero_infor(Hoodwink, 1)
 
 
-def buy_DrowRanger():
+def buy_drow_ranger():
     if check_hero(DrowRanger) is True:
         sell_hero(Hoodwink)
         buy_hero_infor(DrowRanger, 5)
 
 
-def buy_TemplarAssassin():
+def buy_templar_assassin():
     if check_hero(TemplarAssassin) is True:
         sell_hero(WinterWyvern)
         buy_hero_infor(TemplarAssassin, 5)
 
 
-def buy_Zet():
+def buy_zet():
     if check_hero(Zet) is True:
         sell_hero(Clinkz)
         buy_hero_infor(Zet, 5)
@@ -183,7 +194,8 @@ def reset_hero():
     """
     Reset the hero number to 0
     """
-    global WinterWyvern, Hoodwink, Luna, Windranger, Oracle, TrollWarlord, Dazzale, DarkWillow, Clinkz, Zet, DrowRanger, TemplarAssassin
+    global WinterWyvern, Hoodwink, Luna, Windranger, Oracle, TrollWarlord
+    global Dazzale, DarkWillow, Clinkz, Zet, DrowRanger, TemplarAssassin
     WinterWyvern.reset_hero_number()
     Hoodwink.reset_hero_number()
     Luna.reset_hero_number()
