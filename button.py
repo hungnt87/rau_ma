@@ -50,15 +50,15 @@ Recycle = ButtonInfor("Recycle")
 Abandon = ButtonInfor("Abandon")
 
 
-def click(bt_infor, time_sleep=0):
+def click(ButtonInfor, time_sleep=0):
     i = 0
     while True:
         try:
 
             res = pyautogui.locateOnScreen(
-                bt_infor.img, confidence=0.8, region=(0, 0, 1916, 1134))
+                ButtonInfor.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None and time_sleep > 0:
-                print("Cho xuat hien {} trong thoi gian {}".format(bt_infor.name, time_sleep))
+                print("Cho xuat hien {} trong thoi gian {}".format(ButtonInfor.name, time_sleep))
                 time.sleep(time_sleep)
             res_center = pyautogui.center(res)
             time.sleep(1)
@@ -73,7 +73,7 @@ def click(bt_infor, time_sleep=0):
             i = i + 1
             if i > 120:
                 break
-            print("Đang tìm hình ảnh button {} so lan {}".format(bt_infor.name, i))
+            print("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(0.5)
 
 
