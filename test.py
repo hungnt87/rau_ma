@@ -1,5 +1,6 @@
 import hero
+import time
 
-
-
-hero.test_reset_hero()
+print("check hero")
+time.sleep(4)
+hero.buy_DrowRanger()

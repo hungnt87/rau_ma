@@ -19,6 +19,19 @@ class HeroInfor:
         self.number = 0
 
 
+count_buy_hero = 0
+
+
+def reset_count_buy_hero():
+    global count_buy_hero
+    count_buy_hero = 0
+
+
+def get_count_buy_hero():
+    global count_buy_hero
+    return count_buy_hero
+
+
 # hero lv1
 
 WinterWyvern = HeroInfor("WinterWyvern", 1)
@@ -46,6 +59,11 @@ Clinkz = HeroInfor("Clinkz")
 # hero lv4
 Sniper = HeroInfor("Sniper")
 
+# hero lv5
+DrowRanger = HeroInfor("DrowRanger")
+TemplarAssassin = HeroInfor("TemplarAssassin")
+Zet = HeroInfor("Zet")
+
 
 def buy_hero(hero_img):
     try:
@@ -53,16 +71,15 @@ def buy_hero(hero_img):
             hero_img, confidence=0.8, region=(0, 0, 1916, 1134))
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
-        time.sleep(0.2)
         pyautogui.click(res_center)
-        time.sleep(0.2)
         return True
     except pyautogui.ImageNotFoundException:
         return False
 
 
 def buy_hero_infor(HeroInfor, number_hero=1):
-    print("Bat dau tim {}".format(HeroInfor.name))
+    print("Bat dau tim hero {}".format(HeroInfor.name))
+    global count_buy_hero
     i = 0
     while True:
         if i >= 4:
@@ -78,14 +95,50 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     number = number + 1
 
                     HeroInfor.number = number
+                    count_buy_hero = count_buy_hero + 1
                     print("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
                         HeroInfor.name, HeroInfor.number, number_hero - number))
+                    print("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
             else:
-                print("ko thay {}".format(HeroInfor.name))
+                print("Không tìm thấy hero {} lần {}".format(HeroInfor.name, i))
 
         else:
-            print("ban da du hero {} roi, ko can mua nua".format(HeroInfor.name))
+            print("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
             break
+
+
+def check_hero(HeroInfor):
+    try:
+        res = pyautogui.locateOnScreen(
+            HeroInfor.img, confidence=0.8, region=(0, 0, 1916, 1134))
+        res_center = pyautogui.center(res)
+        # pyautogui.moveTo(res_center)
+        # time.sleep(0.2)
+        # yautogui.click(res_center)
+        # time.sleep(0.2)
+        return res_center
+    except pyautogui.ImageNotFoundException:
+        return None
+
+
+def sell_hero(HeroInfor):
+    try:
+        res = pyautogui.locateOnScreen(
+            HeroInfor.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134))
+        res_center = pyautogui.center(res)
+        pyautogui.moveTo(res_center)
+        pyautogui.rightClick(res_center)
+        time.sleep(0.2)
+        new_res = (res_center.x + 25, res_center.y)
+        pyautogui.moveTo(new_res)
+        time.sleep(0.2)
+        pyautogui.click(new_res)
+        # time.sleep(0.2    )
+
+        # time.sleep(0.2)
+        return True
+    except pyautogui.ImageNotFoundException:
+        return False
 
 
 def buy_sniper():
@@ -105,14 +158,32 @@ def buy_winter_wyvern():
 
 
 def buy_hoodwink():
-    buy_hero_infor(Hoodwink, 5)
+    buy_hero_infor(Hoodwink, 1)
+
+
+def buy_DrowRanger():
+    if check_hero(DrowRanger) is True:
+        sell_hero(Hoodwink)
+        buy_hero_infor(DrowRanger, 5)
+
+
+def buy_TemplarAssassin():
+    if check_hero(TemplarAssassin) is True:
+        sell_hero(WinterWyvern)
+        buy_hero_infor(TemplarAssassin, 5)
+
+
+def buy_Zet():
+    if check_hero(Zet) is True:
+        sell_hero(Clinkz)
+        buy_hero_infor(Zet, 5)
 
 
 def reset_hero():
     """
     Reset the hero number to 0
     """
-    global WinterWyvern, Hoodwink, Luna, Windranger, Oracle, TrollWarlord, Dazzale, DarkWillow, Clinkz
+    global WinterWyvern, Hoodwink, Luna, Windranger, Oracle, TrollWarlord, Dazzale, DarkWillow, Clinkz, Zet, DrowRanger, TemplarAssassin
     WinterWyvern.reset_hero_number()
     Hoodwink.reset_hero_number()
     Luna.reset_hero_number()
@@ -123,3 +194,7 @@ def reset_hero():
     DarkWillow.reset_hero_number()
     Clinkz.reset_hero_number()
     Sniper.reset_hero_number()
+    Zet.reset_hero_number()
+    DrowRanger.reset_hero_number()
+    TemplarAssassin.reset_hero_number()
+    print("Reset the hero number to 0")

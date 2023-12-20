@@ -5,26 +5,47 @@ import hero
 import item
 
 
+def get_count_buy():
+    count = hero.get_count_buy_hero() + item.get_count_buy_item()
+    return count
+
+
+def reset_count_buy():
+    hero.reset_count_buy_hero()
+    item.reset_count_buy_item()
+
+
 def round_1():
     # hero.Clinkz_number
+
     button.enter_game()
     button.check_proceed_to_round()
 
 
 def round_2():
-    for n in range(0, 3):
+    number_roll = 0
+    number_buy = 3
+    reset_count_buy()
+    while True:
+        if number_roll > 0:
+            button.roll_game()
+            pyautogui.moveTo(200, 200)
+        # buy hero
+        hero.buy_hoodwink()
         # buy item
         item.buy_investment_lv1_precise()
         item.buy_shop_discount()
         # item.buy_TomeOfKnowledge()
 
-        # buy hero
-        hero.buy_hoodwink()
-        hero.buy_winter_wyvern()
-
-        # roll
+        number_roll = number_roll + 1
+        if get_count_buy() >= number_buy:
+            break
+        #roll
         button.roll_game()
-        pyautogui.moveTo(200, 200)
+        if number_roll <= number_buy+3:
+            continue
+        break
+
     # next round
     button.next_round()
 
@@ -52,7 +73,7 @@ def round_3():
         # item.buy_Helmet_32Luck_Precise()
         # buy hero
         hero.buy_hoodwink()
-        hero.buy_winter_wyvern()
+        # hero.buy_winter_wyvern()
         # hero.buy_Clinkz()
         # hero.buy_DarkWillow()
         # hero.buy_Sniper()
