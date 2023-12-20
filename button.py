@@ -48,7 +48,8 @@ Resurrect = ButtonInfor("Resurrect")
 NotMoney = ButtonInfor("NotMoney")
 Recycle = ButtonInfor("Recycle")
 Abandon = ButtonInfor("Abandon")
-Back_On_Round20= ButtonInfor("Back_On_Round20")
+Back_On_Round20 = ButtonInfor("Back_On_Round20")
+
 
 def click(ButtonInfor, time_sleep=0):
     i = 0
@@ -71,10 +72,10 @@ def click(ButtonInfor, time_sleep=0):
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            if i > 120:
+            if i > 30:
                 break
             print("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
-            time.sleep(0.5)
+            time.sleep(1)
 
 
 def check_not_money():
@@ -114,7 +115,7 @@ def check_find_item():
             if i > 2:
                 break
             print("Đang kiem tra co ruong do rot ko ", i)
-            time.sleep(0.2)
+            time.sleep(0.5)
 
 
 def check_resurrect(time_wait=10):
@@ -176,9 +177,10 @@ def check_proceed_to_round():
                 time.sleep(1)
                 return True
         except pyautogui.ImageNotFoundException:
+            check_abandon()
             check_find_item()
             i = i + 1
-            if i > 200:
+            if i > 5:
                 break
             print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
@@ -188,8 +190,10 @@ def exit_game():
     click(Back, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
+
+
 def exit_game_round20():
-    click(Back_On_Round20,0)
+    click(Back_On_Round20, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
 

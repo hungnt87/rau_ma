@@ -58,30 +58,33 @@ def buy_hero(hero_img):
         time.sleep(0.2)
         return True
     except pyautogui.ImageNotFoundException:
-        return None
+        return False
 
 
-def buy_hero_infor(infor_hero, number_hero):
+def buy_hero_infor(HeroInfor, number_hero=1):
+    print("Bat dau tim {}".format(HeroInfor.name))
     i = 0
     while True:
         if i >= 4:
             break
-        number = infor_hero.number
+        number = HeroInfor.number
         if number_hero > number:
             i = i + 1
             number_buy = number_hero - number
-            if buy_hero(infor_hero.img) is True:
+            if buy_hero(HeroInfor.img) is True:
                 if button.check_not_money():
                     break
                 else:
                     number = number + 1
 
-                    infor_hero.number = number
+                    HeroInfor.number = number
                     print("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
-                        infor_hero.name, infor_hero.number, number_hero - number))
+                        HeroInfor.name, HeroInfor.number, number_hero - number))
+            else:
+                print("ko thay {}".format(HeroInfor.name))
 
         else:
-            print("ban da du hero {} roi, ko can mua nua".format(infor_hero.name))
+            print("ban da du hero {} roi, ko can mua nua".format(HeroInfor.name))
             break
 
 

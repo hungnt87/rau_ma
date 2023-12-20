@@ -30,7 +30,7 @@ if hwnd:
     move_window_to(hwnd, new_x, new_y)
     print(f"Tim thay cua so  '{app_name}'")
 
-    for n in range(0, 10):
+    for n in range(0, 20):
         print("Bat dau auto lan: ", n)
         time.sleep(1)
         r.round_1()
