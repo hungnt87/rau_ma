@@ -35,17 +35,13 @@ def round_2():
         hero.buy_dazzale()
         hero.buy_oracle()
         # buy item
-        item.buy_investment_lv1_precise()
-        item.buy_shop_discount()
-        item.buy_pickup_range100_lv1()
-        # item.buy_TomeOfKnowledge()
+        item.buy_all_item_round2()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        #roll
-        button.roll_game()
-        if number_roll <= number_buy+3:
+
+        if number_roll <= number_buy:
             continue
         break
 
@@ -66,17 +62,13 @@ def round_3():
         hero.buy_dazzale()
         hero.buy_oracle()
         # buy item
-        item.buy_investment_lv1_precise()
-        item.buy_shop_discount()
-        item.buy_pickup_range100_lv1()
-        item.buy_health_regen10_for_precise_lv1()
-        item.buy_all_item_lv2()
+        item.buy_all_item_round3()
+        
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy+1:
             continue
         break
 
@@ -108,7 +100,7 @@ def round_4():
             break
         # roll
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy+1:
             continue
         break
 
@@ -118,7 +110,7 @@ def round_4():
 
 def round_5():
     number_roll = 0
-    number_buy = 5
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -141,7 +133,7 @@ def round_5():
             break
         # roll
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy+2:
             continue
         break
 
@@ -151,7 +143,7 @@ def round_5():
 
 def round_6():
     number_roll = 0
-    number_buy = 5
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -171,7 +163,7 @@ def round_6():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy+2:
             continue
         break
 
@@ -181,7 +173,7 @@ def round_6():
 
 def round_7():
     number_roll = 0
-    number_buy = 6
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -202,7 +194,7 @@ def round_7():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy+2:
             continue
         break
 
@@ -212,7 +204,7 @@ def round_7():
 
 def round_8():
     number_roll = 0
-    number_buy = 6
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -236,7 +228,7 @@ def round_8():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy:
             continue
         break
 
@@ -246,7 +238,7 @@ def round_8():
 
 def round_9():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -259,7 +251,7 @@ def round_9():
         hero.buy_sniper()
         # buy item
 
-        #item.buy_all_item_lv1()
+        item.buy_all_item_lv1()
         item.buy_all_item_lv2()
         item.buy_all_item_lv3()
 
@@ -267,7 +259,7 @@ def round_9():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -277,7 +269,7 @@ def round_9():
 
 def round_10():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -298,7 +290,7 @@ def round_10():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -308,7 +300,7 @@ def round_10():
 
 def round_11():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -323,15 +315,15 @@ def round_11():
 
         #item.buy_all_item_lv1()
         #item.buy_all_item_lv2()
-        item.buy_all_item_lv3()
         item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
+        
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
-        # roll
-        button.roll_game()
-        if number_roll <= number_buy + 3:
+       
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -341,7 +333,7 @@ def round_11():
 
 def round_12():
     number_roll = 0
-    number_buy = 6
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -354,15 +346,17 @@ def round_12():
         hero.buy_sniper()
         # buy item
 
-
-        item.buy_all_item_lv3()
+        item.buy_all_item_lv5()
         item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
+        
+        
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -372,7 +366,7 @@ def round_12():
 
 def round_13():
     number_roll = 0
-    number_buy = 6
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -382,16 +376,15 @@ def round_13():
         hero.buy_dark_willow()
         hero.buy_sniper()
         # buy item
-
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
         item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -401,7 +394,7 @@ def round_13():
 
 def round_14():
     number_roll = 0
-    number_buy = 6
+    number_buy = 4
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -415,17 +408,17 @@ def round_14():
         hero.buy_drow_ranger()
         hero.buy_zet()
         # buy item
-
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
+
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 2:
             continue
         break
 
@@ -435,7 +428,7 @@ def round_14():
 
 def round_15():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -459,7 +452,7 @@ def round_15():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 
@@ -469,7 +462,7 @@ def round_15():
 
 def round_16():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -484,16 +477,16 @@ def round_16():
         hero.buy_zet()
         # buy item
 
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 
@@ -503,7 +496,7 @@ def round_16():
 
 def round_17():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -518,16 +511,16 @@ def round_17():
         hero.buy_zet()
         # buy item
 
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 
@@ -537,7 +530,7 @@ def round_17():
 
 def round_18():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -552,16 +545,16 @@ def round_18():
         hero.buy_zet()
         # buy item
 
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 
@@ -571,7 +564,7 @@ def round_18():
 
 def round_19():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -586,16 +579,16 @@ def round_19():
         hero.buy_zet()
         # buy item
 
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 
@@ -605,7 +598,7 @@ def round_19():
 
 def round_20():
     number_roll = 0
-    number_buy = 6
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -620,16 +613,16 @@ def round_20():
         hero.buy_zet()
         # buy item
 
-        item.buy_all_item_lv3()
-        item.buy_all_item_lv4()
-        item.buy_all_item_lv5()
         item.buy_all_item_lv6()
+        item.buy_all_item_lv5()
+        item.buy_all_item_lv4()
+        item.buy_all_item_lv3()
 
         number_roll = number_roll + 1
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 3:
+        if number_roll <= number_buy + 1:
             continue
         break
 

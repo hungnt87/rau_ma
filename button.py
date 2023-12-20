@@ -105,20 +105,18 @@ def check_find_item():
                 Recycle.img, confidence=0.8, region=(0, 0, 1916, 1134))
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
-            time.sleep(0.2)
+            pyautogui.click(res_center)            
             pyautogui.moveTo(200, 200)
-            print("Khong lay item")
-            return True
+            print("Khong lay item")           
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
                 break
             print("Đang kiem tra co ruong do rot ko ", i)
-            time.sleep(0.5)
+            time.sleep(1)
 
 
-def check_resurrect(time_wait=10):
+def check_resurrect(time_wait=2):
     i = 0
     while True:
         try:
@@ -151,11 +149,7 @@ def check_abandon(time_wait=2):
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
-            print("Chon Abandon")
-            for x in range(0, time_wait):
-                print(" cho van dau", x)
-                time.sleep(1)
-            break
+            print("Chon Abandon")          
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
@@ -165,11 +159,11 @@ def check_abandon(time_wait=2):
 
 
 def check_proceed_to_round():
-    check_resurrect()
+    #check_resurrect()
     i = 0
     while True:
         try:
-            check_abandon()
+            
             res = pyautogui.locateOnScreen(
                 ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None:
@@ -177,10 +171,11 @@ def check_proceed_to_round():
                 time.sleep(1)
                 return True
         except pyautogui.ImageNotFoundException:
+            check_resurrect(2)
             check_abandon()
             check_find_item()
             i = i + 1
-            if i > 5:
+            if i > 20:
                 break
             print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
