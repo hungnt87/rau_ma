@@ -48,7 +48,7 @@ Resurrect = ButtonInfor("Resurrect")
 NotMoney = ButtonInfor("NotMoney")
 Recycle = ButtonInfor("Recycle")
 Abandon = ButtonInfor("Abandon")
-
+Back_On_Round20= ButtonInfor("Back_On_Round20")
 
 def click(ButtonInfor, time_sleep=0):
     i = 0
@@ -186,6 +186,10 @@ def check_proceed_to_round():
 
 def exit_game():
     click(Back, 0)
+    click(Disconnect, 0)
+    click(LeaveGame, 0)
+def exit_game_round20():
+    click(Back_On_Round20,0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
 

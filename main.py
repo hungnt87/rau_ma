@@ -30,59 +30,59 @@ if hwnd:
     move_window_to(hwnd, new_x, new_y)
     print(f"Tim thay cua so  '{app_name}'")
 
-    # for n in range(0, 10):
-    #     print("Bat dau auto lan: ", n)
-    #     time.sleep(1)
-    #     r.round_1()
+    for n in range(0, 10):
+        print("Bat dau auto lan: ", n)
+        time.sleep(1)
+        r.round_1()
 
-    #     r.round_2()
+        r.round_2()
 
-    #     r.round_3()
+        r.round_3()
 
-    #     r.round_4()
+        r.round_4()
 
-    #     r.round_5()
-    #     r.round_6()
+        r.round_5()
+        r.round_6()
 
-    #     r.round_7()
+        r.round_7()
 
-    #     r.round_8()
+        r.round_8()
 
-    #     r.round_9()
+        r.round_9()
 
-    #     r.round_10()
-    #     r.round_11()
+        r.round_10()
+        r.round_11()
 
-    #     r.round_12()
+        r.round_12()
 
-    #     r.round_13()
+        r.round_13()
 
-    #     r.round_14()
+        r.round_14()
 
-    #     r.round_15()
-    #     r.round_16()
+        r.round_15()
+        r.round_16()
 
-    #     r.round_17()
+        r.round_17()
 
-    #     r.round_18()
+        r.round_18()
 
-    #     r.round_19()
+        r.round_19()
 
-    #     r.round_20()
-    #     # if button.check_not_money():
-    #     #     print("false")
+        r.round_20()
+        # if button.check_not_money():
+        #     print("false")
 
-    #     # hero.buy_hero_Windranger(1)
-    #     # item.buy_Investment_lv1_precise()
-    #     # if item.check_item(item.ShopDiscount):
-    #     #     print("co hang")
-    #     # hero.buy_hero_infor(hero.WinterWyvern,5)
-    #     # button.check_FindItem()
-    #     button.exit_game()
-    #     print("Ket thuc auto lan ", n)
+        # hero.buy_hero_Windranger(1)
+        # item.buy_Investment_lv1_precise()
+        # if item.check_item(item.ShopDiscount):
+        #     print("co hang")
+        # hero.buy_hero_infor(hero.WinterWyvern,5)
+        # button.check_FindItem()
+        button.exit_game_round20()
+        print("Ket thuc auto lan ", n)
 
-    #     time.sleep(20)
-
+        time.sleep(20)
+    
 
 else:
     print(f"Không tìm thấy cửa sổ có tên '{app_name}'")
