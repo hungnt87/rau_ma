@@ -90,14 +90,14 @@ def buy_item_info(ItemInfo, number_item=5):
         number_buy = number_item - number
         try:
             locations = list(pyautogui.locateAllOnScreen(
-                ItemInfo.img,confidence=0.94, region=(0, 0, 1916,1134)))
+                ItemInfo.img, confidence=0.94, region=(0, 0, 1916, 1134)))
             if locations is not None:
                 for location in locations:
                     res_center = pyautogui.center(location)
                     pyautogui.moveTo(res_center)
                 # #time.sleep(2)
                 #     print("Found at:", location)
-                    #pyautogui.moveTo(222,213)            
+                    # pyautogui.moveTo(222,213)
                     pyautogui.click(res_center)
                     if button.check_not_money():
                         print("Bạn không đủ tiền mua item này")
@@ -111,13 +111,13 @@ def buy_item_info(ItemInfo, number_item=5):
         except pyscreeze.ImageNotFoundException:
             print("khoong tim thay")
             return False
-        
+
         # for location in locations:
         #     # res_center = pyautogui.center(location)
         #     # pyautogui.moveTo(res_center)
         #     #time.sleep(2)
         #     print("Found at:", location)
-            # pyautogui.moveTo(222,213)            
+            # pyautogui.moveTo(222,213)
             # #pyautogui.click(res_center)
             # if button.check_not_money():
             #     print("Bạn không đủ tiền mua item này")
@@ -147,6 +147,7 @@ Exp40_Luck6_lv2 = ItemInfo("Exp40_Luck6_lv2")
 ExtraDamage10_lv3 = ItemInfo("ExtraDamage10_lv3")
 ExtraDamage14_Kill1000_Unique_lv2 = ItemInfo(
     "ExtraDamage14_Kill1000_Unique_lv2")
+ExtraDamage17_Set_Unique_lv4 = ItemInfo("ExtraDamage17_Set_Unique_lv4")
 ExtraDamage30_Luck30_lv5 = ItemInfo("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = ItemInfo("ExtraDamage30_lv6")
 ExtraDamage40_Kill100_Unique_lv5 = ItemInfo("ExtraDamage40_Kill100_Unique_lv5")
@@ -162,6 +163,7 @@ Holding_Plus_Cooldown35_lv4 = ItemInfo("Holding_Plus_Cooldown35_lv4")
 Holding_Plus_Def32_lv4 = ItemInfo("Holding_Plus_Def32_lv4")
 Holding_Plus_HealthRegen30_lv4 = ItemInfo("Holding_Plus_HealthRegen30_lv4")
 Immunity_Unique_lv5 = ItemInfo("Immunity_Unique_lv5")
+Immunity10_lv5 = ItemInfo("Immunity10_lv5")
 ImmunityCount4_lv4 = ItemInfo("ImmunityCount4_lv4")
 Investment88_For_Precise_lv1 = ItemInfo("Investment88_For_Precise_lv1")
 Investment138_Defense3_lv2 = ItemInfo("Investment138_Defense3_lv2")
@@ -181,6 +183,7 @@ PreciseDamage12_Every1s_Plus1_lv6 = ItemInfo(
     "PreciseDamage12_Every1s_Plus1_lv6")
 PreciseDamage12_Speed12_lv2 = ItemInfo("PreciseDamage12_Speed12_lv2")
 Random_10_28_Evasion_lv4 = ItemInfo("Random_10_28_Evasion_lv4")
+Random_10_28_HealthRegen_lv3 = ItemInfo("Random_10_28_HealthRegen_lv3")
 Random_16_36_Defense_lv4 = ItemInfo("Random_16_36_Defense_lv4")
 Range15_Invest55_lv5 = ItemInfo("Range15_Invest55_lv5")
 Range16_Def16_lv5 = ItemInfo("Range16_Def16_lv5")
@@ -231,62 +234,66 @@ def buy_all_item_lv2():
 def buy_all_item_lv3():
     buy_item_info(Investment198_Speed7_lv3)
     buy_item_info(Investment218_Evasion8_lv3)
-    buy_item_info(ExtraDamage10_lv3)
+    buy_item_info(ExtraDamage10_lv3,2)
     buy_item_info(TomeOfKnowledge_lv3)
     buy_item_info(Attack16_Arcane16_lv3)
     buy_item_info(Attack16_Strike16_lv3)
-    buy_item_info(MultishotDamage20_lv3)
-    buy_item_info(Health48_For_Precise_lv3)
-    buy_item_info(Bicycle_lv3)
+    buy_item_info(MultishotDamage20_lv3,5)
+    buy_item_info(Random_10_28_HealthRegen_lv3,1)
+    buy_item_info(Health48_For_Precise_lv3,1)
+    buy_item_info(Bicycle_lv3,1)
 
 
 def buy_all_item_lv4():
-    buy_item_info(ImmunityCount4_lv4)
-    buy_item_info(Luck60_Speed25_lv4)
-    buy_item_info(Luck54_Arcane27_lv4)
-    buy_item_info(Health30_Speed20_lv4)
-    buy_item_info(Evasion21_Attack5_lv4)
-    buy_item_info(Holding_Plus_Def32_lv4)
-    buy_item_info(Random_10_28_Evasion_lv4)
-    buy_item_info(Random_16_36_Defense_lv4)
-    buy_item_info(Holding_Plus_Cooldown35_lv4)
-    buy_item_info(Holding_Plus_HealthRegen30_lv4)
+    buy_item_info(ExtraDamage17_Set_Unique_lv4,1)
+    buy_item_info(ImmunityCount4_lv4,1)
+    buy_item_info(Luck60_Speed25_lv4,1)
+    buy_item_info(Luck54_Arcane27_lv4,1)
+    buy_item_info(Health30_Speed20_lv4,1)
+    buy_item_info(Evasion21_Attack5_lv4,1)
+    buy_item_info(Holding_Plus_Def32_lv4,1)
+    buy_item_info(Random_10_28_Evasion_lv4,1)
+    buy_item_info(Random_16_36_Defense_lv4,1)
+    buy_item_info(Holding_Plus_Cooldown35_lv4,1)
+    buy_item_info(Holding_Plus_HealthRegen30_lv,1)
 
 
 def buy_all_item_lv5():
+    buy_item_info(Immunity10_lv5, 1)
     buy_item_info(Immunity_Unique_lv5, 1)
     buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
-    buy_item_info(Health88_lv5)
-    buy_item_info(Range16_Def16_lv5)
-    buy_item_info(Range15_Invest55_lv5)
-    buy_item_info(Critical30_Defense10_lv5)
-    buy_item_info(ExtraDamage30_Luck30_lv5)
-    buy_item_info(HealthRegen45_Invest99_lv5)
+    buy_item_info(Health88_lv5,1)
+    buy_item_info(Range16_Def16_lv5,1)
+    buy_item_info(Range15_Invest55_lv5,1)
+    buy_item_info(Critical30_Defense10_lv5,1)
+    buy_item_info(ExtraDamage30_Luck30_lv5,1)
+    buy_item_info(HealthRegen45_Invest99_lv5,1)
 
 
 def buy_all_item_lv6():
-    buy_item_info(PantyMask_lv6)
-    buy_item_info(ExtraDamage30_lv6)
-    buy_item_info(Cooldown45_Speed15_lv6)
-    buy_item_info(Range24_ExtraDamage14_lv6)
-    buy_item_info(PreciseDamage12_Every1s_Plus1_lv6)
+    buy_item_info(PantyMask_lv6,1)
+    buy_item_info(ExtraDamage30_lv6,1)
+    buy_item_info(Cooldown45_Speed15_lv6,1)
+    buy_item_info(Range24_ExtraDamage14_lv6,1)
+    buy_item_info(PreciseDamage12_Every1s_Plus1_lv6,1)
 
 
 def reset_item():
     global Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
     global Cooldown45_Speed15_lv6, Critical30_Defense10_lv5, Defense20_Speed10_lv2, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage14_Kill1000_Unique_lv2
-    global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, ExtraDamage10_lv3, ExtraDamage14_Kill1000_Unique_lv2, ExtraDamage30_Luck30_lv5, ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
+    global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2
+    global ExtraDamage17_Set_Unique_lv4, ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
     global Health30_Speed20_lv4, Health48_For_Precise_lv3, Health88_lv5, HealthRegen10_For_Precise_lv1
     global HealthRegen12_HitRecovery15_lv2, HealthRegen12_HitRecovery15_lv2
     global HealthRegen18_Mango50_lv2, HealthRegen20_Strike20_lv2, HealthRegen45_Invest99_lv5, Holding_Plus_Cooldown35_lv4
-    global Holding_Plus_Def32_lv4, Holding_Plus_HealthRegen30_lv4, Immunity_Unique_lv5, ImmunityCount4_lv4
+    global Holding_Plus_Def32_lv4, Holding_Plus_HealthRegen30_lv4, Immunity_Unique_lv5, Immunity10_lv5, ImmunityCount4_lv4
     global Investment88_For_Precise_lv1, Investment138_Defense3_lv2, Investment198_Speed7_lv3
     global Investment218_Evasion8_lv3, Locomotive_lv2, Luck13_lv1, Luck32ForPrecise_lv2
     global Luck54_Arcane27_lv4, Luck60_Speed25_lv4
     global MasterChefHat_lv2, MultishotDamage20_lv3, PantyMask_lv6, PickupRange100_lv1
-    global PreciseDamage12_Every1s_Plus1_lv6, PreciseDamage12_Speed12_lv2, Random_10_28_Evasion_lv4
-    global Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6
+    global PreciseDamage12_Every1s_Plus1_lv6, PreciseDamage12_Speed12_lv2, Random_10_28_Evasion_lv4,Random_10_28_HealthRegen_lv3
+    global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6
     global ShopDiscount_lv1, SplitTheVoid_lv2, TomeOfKnowledge_lv3
 
     Attack16_Arcane16_lv3.reset_item_number()
@@ -304,6 +311,7 @@ def reset_item():
     Exp40_Luck6_lv2.reset_item_number()
     ExtraDamage10_lv3.reset_item_number()
     ExtraDamage14_Kill1000_Unique_lv2.reset_item_number()
+    Random_10_28_HealthRegen_lv3.reset_item_number()
     ExtraDamage30_Luck30_lv5.reset_item_number()
     ExtraDamage30_lv6.reset_item_number()
     ExtraDamage40_Kill100_Unique_lv5.reset_item_number()
@@ -319,6 +327,7 @@ def reset_item():
     Holding_Plus_Def32_lv4.reset_item_number()
     Holding_Plus_HealthRegen30_lv4.reset_item_number()
     Immunity_Unique_lv5.reset_item_number()
+    Immunity10_lv5.reset_item_number()
     ImmunityCount4_lv4.reset_item_number()
     Investment88_For_Precise_lv1.reset_item_number()
     Investment138_Defense3_lv2.reset_item_number()
@@ -336,6 +345,7 @@ def reset_item():
     PreciseDamage12_Every1s_Plus1_lv6.reset_item_number()
     PreciseDamage12_Speed12_lv2.reset_item_number()
     Random_10_28_Evasion_lv4.reset_item_number()
+    Immunity10_lv5= ItemInfo("Immunity10_lv5")
     Random_16_36_Defense_lv4.reset_item_number()
     Range15_Invest55_lv5.reset_item_number()
     Range16_Def16_lv5.reset_item_number()
