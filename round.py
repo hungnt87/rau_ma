@@ -228,7 +228,7 @@ def round_8():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy:
+        if number_roll <= number_buy+2:
             continue
         break
 
@@ -333,7 +333,7 @@ def round_11():
 
 def round_12():
     number_roll = 0
-    number_buy = 4
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -366,7 +366,7 @@ def round_12():
 
 def round_13():
     number_roll = 0
-    number_buy = 4
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -394,7 +394,7 @@ def round_13():
 
 def round_14():
     number_roll = 0
-    number_buy = 4
+    number_buy = 5
     reset_count_buy()
     while True:
         if number_roll > 0:
@@ -452,7 +452,7 @@ def round_15():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 1:
+        if number_roll <= number_buy + 3:
             continue
         break
 
@@ -486,7 +486,7 @@ def round_16():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 1:
+        if number_roll <= number_buy + 3:
             continue
         break
 
@@ -520,7 +520,7 @@ def round_17():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 1:
+        if number_roll <= number_buy + 3:
             continue
         break
 
@@ -554,7 +554,7 @@ def round_18():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 1:
+        if number_roll <= number_buy + 3:
             continue
         break
 
@@ -588,7 +588,7 @@ def round_19():
         if get_count_buy() >= number_buy:
             break
 
-        if number_roll <= number_buy + 1:
+        if number_roll <= number_buy + 3:
             continue
         break
 
@@ -598,7 +598,7 @@ def round_19():
 
 def round_20():
     number_roll = 0
-    number_buy = 5
+    number_buy = 10
     reset_count_buy()
     while True:
         if number_roll > 0:
