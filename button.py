@@ -82,12 +82,8 @@ def check_not_money():
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                NotMoney.img, confidence=0.8, region=(0, 0, 1916, 1134))
-            # res_center = pyautogui.center(res)
-            # stime.sleep(1)
-
-            print("Ko du tien")
+            pyautogui.locateOnScreen(
+                NotMoney.img, confidence=0.8, region=(0, 0, 1916, 1134)) 
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
