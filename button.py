@@ -1,7 +1,6 @@
 import pyautogui
 import time
 
-
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name

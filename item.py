@@ -255,7 +255,7 @@ def buy_all_item_lv4():
     buy_item_info(Random_10_28_Evasion_lv4,1)
     buy_item_info(Random_16_36_Defense_lv4,1)
     buy_item_info(Holding_Plus_Cooldown35_lv4,1)
-    buy_item_info(Holding_Plus_HealthRegen30_lv,1)
+    buy_item_info(Holding_Plus_HealthRegen30_lv4,1)
 
 
 def buy_all_item_lv5():
