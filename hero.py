@@ -189,6 +189,25 @@ def buy_zet():
         sell_hero(Clinkz)
     buy_hero_infor(Zet, 5)
 
+def buy_all_hero(round_number):
+    if round_number ==3:
+        buy_dazzale()
+        buy_oracle()
+        buy_hoodwink()
+    elif round_number<=8:
+        buy_dazzale()
+        buy_oracle()
+        buy_hoodwink()
+        buy_dark_willow()
+        buy_clinkz()
+    else:
+        buy_dark_willow()
+        buy_clinkz()
+        buy_sniper()
+        buy_drow_ranger()
+        buy_templar_assassin()
+        buy_zet()
+
 
 def reset_hero():
     """

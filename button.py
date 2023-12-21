@@ -71,7 +71,7 @@ def click(ButtonInfor, time_sleep=0):
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            if i > 30:
+            if i > 60:
                 break
             print("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
@@ -111,7 +111,7 @@ def check_find_item():
             time.sleep(1)
 
 
-def check_resurrect(time_wait=2):
+def check_resurrect(time_wait=10):
     i = 0
     while True:
         try:
@@ -154,7 +154,7 @@ def check_abandon(time_wait=2):
 
 
 def check_proceed_to_round():
-    #check_resurrect()
+    check_resurrect()
     i = 0
     while True:
         try:
@@ -166,7 +166,7 @@ def check_proceed_to_round():
                 time.sleep(1)
                 return True
         except pyautogui.ImageNotFoundException:
-            check_resurrect(2)
+            #check_resurrect(2)
             check_abandon()
             check_find_item()
             i = i + 1
