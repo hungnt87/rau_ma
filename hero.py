@@ -173,21 +173,21 @@ def buy_hoodwink():
 
 
 def buy_drow_ranger():
-    if check_hero(DrowRanger) is True:
+    if check_hero(DrowRanger):
         sell_hero(Hoodwink)
-        buy_hero_infor(DrowRanger, 5)
+    buy_hero_infor(DrowRanger, 5)
 
 
 def buy_templar_assassin():
-    if check_hero(TemplarAssassin) is True:
+    if check_hero(TemplarAssassin):
         sell_hero(WinterWyvern)
-        buy_hero_infor(TemplarAssassin, 5)
+    buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():
-    if check_hero(Zet) is True:
+    if check_hero(Zet):
         sell_hero(Clinkz)
-        buy_hero_infor(Zet, 5)
+    buy_hero_infor(Zet, 5)
 
 
 def reset_hero():

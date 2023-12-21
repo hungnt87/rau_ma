@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import button
+import pyscreeze
 
 count_buy_item = 0
 
@@ -87,21 +88,46 @@ def buy_item_info(ItemInfo, number_item=5):
     number = ItemInfo.number
     if number_item > number:
         number_buy = number_item - number
-        locations = list(pyautogui.locateAllOnScreen(
-            ItemInfo.img, confidence=0.8, region=(0, 0, 1916,)))
-        for location in locations:
-            res_center = pyautogui.center(location)
-            # pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
-            if button.check_not_money():
-                print("Bạn không đủ tiền mua item này")
-                break
-            else:
-                number = number + 1
-                print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
-                    ItemInfo.name, number_buy - number))
-                ItemInfo.number = number
-                count_buy_item = count_buy_item + 1
+        try:
+            locations = list(pyautogui.locateAllOnScreen(
+                ItemInfo.img,confidence=0.94, region=(0, 0, 1916,1134)))
+            if locations is not None:
+                for location in locations:
+                    res_center = pyautogui.center(location)
+                    pyautogui.moveTo(res_center)
+                # #time.sleep(2)
+                #     print("Found at:", location)
+                    #pyautogui.moveTo(222,213)            
+                    pyautogui.click(res_center)
+                    if button.check_not_money():
+                        print("Bạn không đủ tiền mua item này")
+                        break
+                    else:
+                        number = number + 1
+                        print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+                            ItemInfo.name, number_buy - number))
+                        ItemInfo.number = number
+                        count_buy_item = count_buy_item + 1
+        except pyscreeze.ImageNotFoundException:
+            print("khoong tim thay")
+            return False
+        
+        # for location in locations:
+        #     # res_center = pyautogui.center(location)
+        #     # pyautogui.moveTo(res_center)
+        #     #time.sleep(2)
+        #     print("Found at:", location)
+            # pyautogui.moveTo(222,213)            
+            # #pyautogui.click(res_center)
+            # if button.check_not_money():
+            #     print("Bạn không đủ tiền mua item này")
+            #     break
+            # else:
+            #     number = number + 1
+            #     print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+            #         ItemInfo.name, number_buy - number))
+            #     ItemInfo.number = number
+            #     count_buy_item = count_buy_item + 1
 
 
 Attack16_Arcane16_lv3 = ItemInfo("Attack16_Arcane16_lv3")
