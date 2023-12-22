@@ -40,7 +40,7 @@ def buy_item(ItemInfo):
     try:
         res = pyautogui.locateOnScreen(
             ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134))
-        logger.info("xuat hien ", ItemInfo.name)
+        #logger.info("xuat hien ", ItemInfo.name)
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.click(res_center)
@@ -79,7 +79,7 @@ def buy_item(ItemInfo):
 
 
 def buy_item_info(ItemInfo, number_item=3):
-    logger.info("Date {}:Bạn đang tìm item {}".format(datetime.now().time(),ItemInfo.name))
+    logger.info("Ban dang tim item {}".format(ItemInfo.name))
     global count_buy_item
     number = ItemInfo.number
     if number_item > number:
@@ -96,7 +96,7 @@ def buy_item_info(ItemInfo, number_item=3):
                     logger.info("Bạn không đủ tiền mua item này")
                 else:
                     number = number + 1
-                    logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+                    logger.info("Ban da mua thanh cong 1 cai {}, ban can mua them {}".format(
                         ItemInfo.name, number_buy - number))
                     ItemInfo.number = number
                     count_buy_item = count_buy_item + 1

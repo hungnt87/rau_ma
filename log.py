@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 # create the handler for the main logger
 file_logger = logging.FileHandler('smartfile_test.log')
 NEW_FORMAT = '[%(asctime)s] - [%(levelname)s] - %(message)s'
-format_log ='%(asctime)s\t %(levelname)s\t %(filename)s:%(funcName)s():%(lineno)d\t %(message)s'
+format_log ='%(asctime)s\t %(levelname)s\t %(message)s'
 
 file_logger_format = logging.Formatter(format_log)
 

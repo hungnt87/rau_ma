@@ -95,14 +95,14 @@ def buy_hero_infor(HeroInfor, number_hero=1):
 
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
-                    logger.info("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
+                    logger.info("Ban da mua thanh cong 1 hero {}, ban dang co {}, ban can mua them {} ".format(
                         HeroInfor.name, HeroInfor.number, number_hero - number))
-                    logger.info("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
+                    #logger.info("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
             else:
-                logger.info("Không tìm thấy hero {} lần {}".format(HeroInfor.name, i))
+                logger.warning("Khong tim thay hero {} lan {}".format(HeroInfor.name, i))
 
         else:
-            logger.info("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
+            #logger.info("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
             break
 
 

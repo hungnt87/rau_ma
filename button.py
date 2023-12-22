@@ -74,7 +74,7 @@ def click(ButtonInfor, time_sleep=0):
             i = i + 1
             if i > 60:
                 break
-            logger.info("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
+            logger.warning("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
 
 
@@ -89,7 +89,8 @@ def check_not_money():
             i = i + 1
             if i > 2:
                 break
-            logger.info("Đang kiem tra ban co tien khong so lan ", i)
+            #logger.info("Đang kiem tra ban co tien khong so lan {}", i)
+            logger.warning("Dang kiem tra ban co tien khong so lan {}".format(i))
             time.sleep(0.2)
 
 
@@ -109,7 +110,7 @@ def check_find_item():
             i = i + 1
             if i > 2:
                 break
-            logger.info("Đang kiem tra co ruong do rot ko ", i)
+            logger.warning("Cho xuat hien Recycle so lan {}".format(i))
             time.sleep(1)
 
 
@@ -124,16 +125,12 @@ def check_resurrect(time_wait=10):
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
             logger.info("Chon Resurrect ")
-
-            for x in range(0, time_wait):
-                logger.info(" cho van dau", x)
-                time.sleep(1)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
                 break
-            logger.info("cho xuat hien Resurrect", i)
+            logger.warning("Cho xuat hien Resurrect {}".format(i))
             time.sleep(1)
 
 
@@ -152,7 +149,7 @@ def check_abandon(time_wait=2):
             i = i + 1
             if i > time_wait:
                 break
-            logger.info("cho xuat hien Abandon", i)
+            logger.warning("Cho xuat hien Abandon so lan {}".format(i))
             time.sleep(1)
 
 
@@ -175,7 +172,7 @@ def check_proceed_to_round():
             i = i + 1
             if i > 20:
                 break
-            logger.info("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+            logger.warning("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
 
 

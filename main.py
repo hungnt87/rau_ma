@@ -38,12 +38,12 @@ if hwnd:
     logger.info(f"Tim thay cua so  '{app_name}'")
 
     for n in range(0, 20):
-       #print("Date {} Bat dau auto lan: {}".format(datetime.now().time(),n))
-        logger.info("Date {} Bat dau auto lan: {}".format(datetime.now().time(),n))
+       #print("t dau auto lan: {}".format(n))
+        logger.info("Bat dau auto lan: {}".format(n))
         r.round_all(n)
         button.exit_game_round20()
-        #print("Date {}  :Ket thuc auto lan {}".format(datetime.now().time(),n))
-        logger.info("Date {}  :Ket thuc auto lan {}".format(datetime.now().time(),n))
+        #print("Ket thuc auto lan {}".format(n))
+        logger.info("Ket thuc auto lan {}".format(n))
         time.sleep(20)
     
 
