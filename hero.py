@@ -3,6 +3,7 @@ import time
 import button
 from log import logger
 
+
 class HeroInfor:
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
@@ -76,9 +77,17 @@ def buy_hero(hero_img):
         return False
 
 
+hero_status_money = True
+
+
+def reset_hero_status_money():
+    global hero_status_money
+    hero_status_money = True
+
+
 def buy_hero_infor(HeroInfor, number_hero=1):
     logger.info("Bat dau tim hero {}".format(HeroInfor.name))
-    global count_buy_hero
+    global count_buy_hero, hero_status_money
     i = 0
     while True:
         if i >= 4:
@@ -88,22 +97,15 @@ def buy_hero_infor(HeroInfor, number_hero=1):
             i = i + 1
             number_buy = number_hero - number
             if buy_hero(HeroInfor.img) is True:
-                if button.check_not_money():
+                if button.check_not_money() is True:
+                    hero_status_money = False
                     break
                 else:
                     number = number + 1
-
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
                     logger.info("Ban da mua thanh cong 1 hero {}, ban dang co {}, ban can mua them {} ".format(
                         HeroInfor.name, HeroInfor.number, number_hero - number))
-                    #logger.info("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
-            else:
-                logger.warning("Khong tim thay hero {} lan {}".format(HeroInfor.name, i))
-
-        else:
-            #logger.info("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
-            break
 
 
 def check_hero(HeroInfor):
@@ -127,16 +129,19 @@ def sell_hero(HeroInfor):
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.rightClick(res_center)
-        time.sleep(0.2)
+        time.sleep(1)
         new_res = (res_center.x + 25, res_center.y)
         pyautogui.moveTo(new_res)
-        time.sleep(0.2)
+        time.sleep(1)
         pyautogui.click(new_res)
         # time.sleep(0.2    )
 
         # time.sleep(0.2)
         return True
     except pyautogui.ImageNotFoundException:
+        return False
+    except TypeError:
+        logger.error("Khong tim thay hinh anh {}".format(HeroInfor.lv1_img))
         return False
 
 
@@ -188,12 +193,13 @@ def buy_zet():
         sell_hero(Clinkz)
     buy_hero_infor(Zet, 5)
 
+
 def buy_all_hero(round_number):
-    if round_number ==3:
+    if round_number == 3:
         buy_dazzale()
         buy_oracle()
         buy_hoodwink()
-    elif round_number<=8:
+    elif round_number <= 8:
         buy_dazzale()
         buy_oracle()
         buy_hoodwink()
@@ -212,19 +218,40 @@ def reset_hero():
     """
     Reset the hero number to 0
     """
+
     global WinterWyvern, Hoodwink, Luna, Windranger, Oracle, TrollWarlord
     global Dazzale, DarkWillow, Clinkz, Zet, DrowRanger, TemplarAssassin
-    WinterWyvern.reset_hero_number()
-    Hoodwink.reset_hero_number()
-    Luna.reset_hero_number()
-    Windranger.reset_hero_number()
-    Oracle.reset_hero_number()
-    TrollWarlord.reset_hero_number()
-    Dazzale.reset_hero_number()
-    DarkWillow.reset_hero_number()
-    Clinkz.reset_hero_number()
-    Sniper.reset_hero_number()
-    Zet.reset_hero_number()
-    DrowRanger.reset_hero_number()
-    TemplarAssassin.reset_hero_number()
-    logger.info("Reset the hero number to 0")
+    try:
+        logger.debug("Reset the hero number to 0")
+        WinterWyvern.reset_hero_number()
+        Hoodwink.reset_hero_number()
+        Luna.reset_hero_number()
+        Windranger.reset_hero_number()
+        Oracle.reset_hero_number()
+        TrollWarlord.reset_hero_number()
+        Dazzale.reset_hero_number()
+        DarkWillow.reset_hero_number()
+        Clinkz.reset_hero_number()
+        Sniper.reset_hero_number()
+        Zet.reset_hero_number()
+        DrowRanger.reset_hero_number()
+        TemplarAssassin.reset_hero_number()
+    except typeError:
+        logger.error("Reset hero error")
+
+
+def test_reset_hero():
+    reset_hero()
+    print(WinterWyvern.number)
+    print(Hoodwink.number)
+    print(Luna.number)
+    print(Windranger.number)
+    print(Oracle.number)
+    print(TrollWarlord.number)
+    print(Dazzale.number)
+    print(DarkWillow.number)
+    print(Clinkz.number)
+    print(Sniper.number)
+    print(Zet.number)
+    print(DrowRanger.number)
+    print(TemplarAssassin.number)

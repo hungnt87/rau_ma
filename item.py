@@ -40,7 +40,7 @@ def buy_item(ItemInfo):
     try:
         res = pyautogui.locateOnScreen(
             ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134))
-        #logger.info("xuat hien ", ItemInfo.name)
+        # logger.info("xuat hien ", ItemInfo.name)
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.click(res_center)
@@ -64,7 +64,7 @@ def buy_item(ItemInfo):
 #     global count_buy_item
 #     number = ItemInfo.number
 #     if number_item > number:
-#         number_buy = number_item - number       
+#         number_buy = number_item - number
 #         buy = buy_item(ItemInfo)
 #         if buy is True:
 #             if button.check_not_money():
@@ -76,31 +76,40 @@ def buy_item(ItemInfo):
 #                 ItemInfo.number = number
 #                 count_buy_item = count_buy_item + 1
 #                 logger.info("Ban da mua item lan thu {}".format(count_buy_item))
+item_status_money = True
+
+
+def reset_status_money():
+    global item_status_money
+    item_status_money = True
 
 
 def buy_item_info(ItemInfo, number_item=3):
-    logger.info("Ban dang tim item {}".format(ItemInfo.name))
-    global count_buy_item
+    # logger.info("Ban dang tim item {}".format(ItemInfo.name))
+    global count_buy_item, item_status_money
     number = ItemInfo.number
     if number_item > number:
         number_buy = number_item - number
         try:
             location = pyautogui.locateOnScreen(
-            ItemInfo.img, confidence=0.9, region=(0, 0, 1916, 1134))
-            if location is not None:                
-                res_center = pyautogui.center(location)
-                pyautogui.moveTo(res_center)                
-                pyautogui.click(res_center)
-                pyautogui.moveTo(222,213)
-                if button.check_not_money():
-                    logger.info("Bạn không đủ tiền mua item này")
-                else:
-                    number = number + 1
-                    logger.info("Ban da mua thanh cong 1 cai {}, ban can mua them {}".format(
-                        ItemInfo.name, number_buy - number))
-                    ItemInfo.number = number
-                    count_buy_item = count_buy_item + 1
-        except pyautogui.ImageNotFoundException:            
+                ItemInfo.img, confidence=0.9, region=(0, 0, 1916, 1134))
+            res_center = pyautogui.center(location)
+            pyautogui.moveTo(res_center)
+            pyautogui.click(res_center)
+            pyautogui.moveTo(222, 213)
+            if button.check_not_money() is True:
+                item_status_money = False
+                break
+            else:
+                number = number + 1
+                logger.info("Ban da mua thanh cong 1 cai {}, ban can mua them {}".format(
+                    ItemInfo.name, number_buy - number))
+                ItemInfo.number = number
+                count_buy_item = count_buy_item + 1
+        except pyautogui.ImageNotFoundException:
+            return False
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(ItemInfo.name))
             return False
 
         # for location in locations:
@@ -205,6 +214,7 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
 
 def buy_all_set_item():
+    logger.debug("Ban dang mua set item")
     buy_item_info(PickupRange100_lv1, 1)
     buy_item_info(Set_Speed_lv1, 1)
     buy_item_info(Set_Defense8_lv2, 1)
@@ -214,7 +224,7 @@ def buy_all_set_item():
 
 
 def buy_all_item_investments(round_number):
-
+    logger.debug("Ban dang mua item investments")
     if round_number <= 9:
         buy_item_info(Investment88_For_Precise_lv1, 5)
     if 3 <= round_number <= 13:
@@ -222,7 +232,7 @@ def buy_all_item_investments(round_number):
     if 6 <= round_number <= 15:
         buy_item_info(Investment198_Speed7_lv3, 1)
         buy_item_info(Investment218_Evasion8_lv3, 1)
-        buy_item_info(Investment368_HitRecovery18_lv5,1)
+        buy_item_info(Investment368_HitRecovery18_lv5, 1)
     if round_number == 0:
         buy_item_info(Investment88_For_Precise_lv1, 5)
         buy_item_info(Investment138_Defense3_lv2, 5)
@@ -242,6 +252,7 @@ def buy_all_item_round3():
 
 
 def buy_all_item_lv1():
+    logger.debug("Ban dang mua item lv1")
     # buy_item_info(Investment88_For_Precise_lv1)
     buy_item_info(ShopDiscount_lv1)
     buy_item_info(PickupRange100_lv1, 2)
@@ -251,6 +262,7 @@ def buy_all_item_lv1():
 
 
 def buy_all_item_lv2():
+    logger.debug("Ban dang mua item lv2")
     # buy_item_info(Investment138_Defense3_lv2)
     buy_item_info(PreciseDamage12_Speed12_lv2)
     buy_item_info(Exp40_Luck6_lv2)
@@ -273,6 +285,7 @@ def buy_all_item_lv2():
 
 
 def buy_all_item_lv3():
+    logger.debug("Ban dang mua item lv3")
     # buy_item_info(Investment198_Speed7_lv3)
     # buy_item_info(Investment218_Evasion8_lv3)
     buy_item_info(Immunity6_lv3)
@@ -291,6 +304,7 @@ def buy_all_item_lv3():
 
 
 def buy_all_item_lv4():
+    logger.debug("Ban dang mua item lv4")
     buy_item_info(Pillager_lv4)
 
     buy_item_info(ImmunityCount4_lv4, 1)
@@ -308,6 +322,7 @@ def buy_all_item_lv4():
 
 
 def buy_all_item_lv5():
+    logger.debug("Ban dang mua item lv5")
     buy_item_info(Immunity10_lv5, 5)
     buy_item_info(Immunity_Unique_lv5, 5)
     buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
@@ -321,6 +336,7 @@ def buy_all_item_lv5():
 
 
 def buy_all_item_lv6():
+    logger.debug("Ban dang mua item lv6")
     buy_item_info(PantyMask_lv6, 1)
     buy_item_info(ExtraDamage30_lv6, 1)
     buy_item_info(Cooldown45_Speed15_lv6, 1)

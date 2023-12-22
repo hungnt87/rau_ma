@@ -19,7 +19,7 @@ def reset_count_buy():
 
 def round_all(round_number):
     n = 0
-    while n < 21:
+    while n < 20:
         n = n+1
         logger.info(f"Bat dau roll in round: {n}")
         number_roll = 0
@@ -44,7 +44,7 @@ def round_all(round_number):
             while True:
                 if number_roll > 0:
                     button.roll_game()
-                number_roll += 1                
+                number_roll += 1
                 hero.buy_all_hero(round_number=n)
                 item.buy_all_item_investments(round_number=n)
                 item.buy_all_set_item()
