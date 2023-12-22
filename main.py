@@ -3,6 +3,7 @@ import win32gui
 import win32con
 import time
 import button
+from datetime import datetime
 
 app_name = "Dota 2"
 new_x, new_y = -1, 0  # Tọa độ mới bạn muốn di chuyển cửa sổ đến
@@ -31,10 +32,10 @@ if hwnd:
     print(f"Tim thay cua so  '{app_name}'")
 
     for n in range(0, 20):
-        print("Bat dau auto lan: ", n)
-        r.round_all()
+        print("Date {} Bat dau auto lan: {}".format(datetime.now().time(),n))
+        r.round_all(n)
         button.exit_game_round20()
-        print("Ket thuc auto lan ", n)
+        print("Date {}  :Ket thuc auto lan {}".format(datetime.now().time(),n))
         time.sleep(20)
     
 

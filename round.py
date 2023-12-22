@@ -3,7 +3,7 @@ import time
 import button
 import hero
 import item
-
+from datetime import datetime
 
 def get_count_buy():
     count = hero.get_count_buy_hero() + item.get_count_buy_item()
@@ -15,9 +15,9 @@ def reset_count_buy():
     item.reset_count_buy_item()
 
 
-def round_all():
+def round_all(round_number):
     for n in range(1, 21):
-        print("Bat dau round : ", n)
+        print("Date: {}:Bat dau round: {}".format(datetime.now().time(),n))
         number_roll = 0
         
         if n==2:
@@ -54,9 +54,10 @@ def round_all():
                 
             if n <  20:
                 button.next_round()
+                print("Date: {}: Day la vong auto lan thu {}, round thu {}".format(datetime.now().time(),round_number,n))
             else:
                 hero.reset_hero()
                 item.reset_item()
                 button.click_procceed_to_round()
                 time.sleep(130)
-                print("Ket thuc round ", n)
+                print("Date {}:Ket thuc round ".format(datetime.now().time(),n))

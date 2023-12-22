@@ -2,6 +2,7 @@ import pyautogui
 import time
 import button
 import pyscreeze
+from datetime import datetime
 
 count_buy_item = 0
 
@@ -78,7 +79,7 @@ def buy_item(ItemInfo):
 
 
 def buy_item_info(ItemInfo, number_item=3):
-    print("Bạn đang tìm item {}".format(ItemInfo.name))
+    print("Date {}:Bạn đang tìm item {}".format(datetime.now().time(),ItemInfo.name))
     global count_buy_item
     number = ItemInfo.number
     if number_item > number:

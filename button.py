@@ -1,6 +1,6 @@
 import pyautogui
 import time
-
+import pyscreeze
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
@@ -97,12 +97,13 @@ def check_find_item():
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Recycle.img, confidence=0.8, region=(0, 0, 1916, 1134))
+                Recycle.img, confidence=0.9, region=(0, 0, 1916, 1134))
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)            
             pyautogui.moveTo(200, 200)
-            print("Khong lay item")           
+            print("Khong lay item")
+            break           
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
@@ -116,7 +117,7 @@ def check_resurrect(time_wait=10):
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Resurrect.img, confidence=0.8, region=(0, 0, 1916, 1134))
+                Resurrect.img, confidence=0.9, region=(0, 0, 1916, 1134))
             res_center = pyautogui.center(res)
             time.sleep(1)
             pyautogui.moveTo(res_center)
@@ -140,11 +141,12 @@ def check_abandon(time_wait=2):
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Abandon.img, confidence=0.8, region=(0, 0, 1916, 1134))
+                Abandon.img, confidence=0.9, region=(0, 0, 1916, 1134))
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
-            print("Chon Abandon")          
+            print("Chon Abandon")
+            break          
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
