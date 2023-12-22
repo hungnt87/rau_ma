@@ -29,9 +29,9 @@ def round_all(round_number):
         elif n<=8:
             number_buy = 4
         elif n<=15:
-            number_buy = 4
+            number_buy = 5
         else:
-            number_buy = 4
+            number_buy = 5
         if n==1:
             button.enter_game()
             button.check_proceed_to_round()
