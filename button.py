@@ -2,6 +2,8 @@ import pyautogui
 import time
 import pyscreeze
 from log import logger
+
+
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
@@ -52,30 +54,33 @@ Back_On_Round20 = ButtonInfor("Back_On_Round20")
 
 
 def click(ButtonInfor, time_sleep=0):
+    logger.info("Click {}".format(ButtonInfor.name))
     i = 0
     while True:
         try:
-
             res = pyautogui.locateOnScreen(
                 ButtonInfor.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None and time_sleep > 0:
-                logger.info("Cho xuat hien {} trong thoi gian {}".format(ButtonInfor.name, time_sleep))
+                logger.info("Cho xuat hien {} trong thoi gian {}".format(
+                    ButtonInfor.name, time_sleep))
                 time.sleep(time_sleep)
             res_center = pyautogui.center(res)
-            time.sleep(1)
+            # time.sleep(1)
             pyautogui.moveTo(res_center)
+            time.sleep(1)
             pyautogui.click(res_center)
-            time.sleep(0.2)
+            time.sleep(1)
             pyautogui.moveTo(200, 200)
-            # pyautogui.moveTo(0, 0)
-            # logger.info("I can see it")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
                 break
-            logger.warning("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
+            logger.debug("Dang tim hinh anh {} so lan {}".format(
+                ButtonInfor.name, i))
             time.sleep(1)
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(ButtonInfor.name))
 
 
 def check_not_money():
@@ -83,15 +88,20 @@ def check_not_money():
     while True:
         try:
             pyautogui.locateOnScreen(
-                NotMoney.img, confidence=0.8, region=(0, 0, 1916, 1134)) 
+                NotMoney.img, confidence=0.8, region=(0, 0, 1916, 1134))
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
                 break
-            #logger.info("Đang kiem tra ban co tien khong so lan {}", i)
-            logger.warning("Dang kiem tra ban co tien khong so lan {}".format(i))
+            # logger.info("Đang kiem tra ban co tien khong so lan {}", i)
+            logger.debug(
+                "Dang kiem tra ban co tien khong so lan {}".format(i))
             time.sleep(0.2)
+            return False
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(NotMoney.name))
+            return False
 
 
 def check_find_item():
@@ -102,16 +112,19 @@ def check_find_item():
                 Recycle.img, confidence=0.9, region=(0, 0, 1916, 1134))
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)            
+            pyautogui.click(res_center)
             pyautogui.moveTo(200, 200)
             logger.info("Khong lay item")
-            break           
+            break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
                 break
-            logger.warning("Cho xuat hien Recycle so lan {}".format(i))
+            logger.debug("Cho xuat hien Recycle so lan {}".format(i))
             time.sleep(1)
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(Recycle.name))
+            break
 
 
 def check_resurrect(time_wait=10):
@@ -130,11 +143,14 @@ def check_resurrect(time_wait=10):
             i = i + 1
             if i > time_wait:
                 break
-            logger.warning("Cho xuat hien Resurrect {}".format(i))
+            logger.debug("Cho xuat hien Resurrect {}".format(i))
             time.sleep(1)
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(Resurrect.name))
 
 
 def check_abandon(time_wait=2):
+    logger.info("Kiem tra Abandon")
     i = 0
     while True:
         try:
@@ -143,14 +159,16 @@ def check_abandon(time_wait=2):
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
-            logger.info("Chon Abandon")
-            break          
+            break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
                 break
-            logger.warning("Cho xuat hien Abandon so lan {}".format(i))
+            logger.debug("Cho xuat hien Abandon so lan {}".format(i))
             time.sleep(1)
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(Abandon.name))
+            break
 
 
 def check_proceed_to_round():
@@ -158,53 +176,62 @@ def check_proceed_to_round():
     i = 0
     while True:
         try:
-            
+
             res = pyautogui.locateOnScreen(
                 ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None:
-                logger.info("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+                logger.info("Cho xuat hien {} lan {}".format(
+                    ProceedToRound.name, i))
                 time.sleep(1)
                 return True
         except pyautogui.ImageNotFoundException:
-            #check_resurrect(2)
+            # check_resurrect(2)
             check_abandon()
             check_find_item()
             i = i + 1
             if i > 20:
                 break
-            logger.warning("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+            logger.debug("Cho xuat hien {} lan {}".format(
+                ProceedToRound.name, i))
             time.sleep(1)
+        except TypeError:
+            logger.error("Khong tim thay hinh anh {}".format(
+                ProceedToRound.name))
+            break
 
 
 def exit_game():
+    logger.info("Thoat game")
     click(Back, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
 
 
 def exit_game_round20():
+    logger.info("Thoat game round 20")
     click(Back_On_Round20, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
 
 
 def enter_game():
-    click(CreateCustomLobby)
-    click(ServerLocaltion)
-    click(ServerLocaltion_Singapore, 0)
-    click(CreatePassLobby, 0)
-    pyautogui.write("as")  # add password
-    click(CreateGame, 0)
+    logger.info("Vao game")
+    click(CreateCustomLobby, 1)
+    click(ServerLocaltion, 1)
+    click(ServerLocaltion_Singapore, 1)
+    click(CreatePassLobby, 1)
+    pyautogui.write("asx")  # add password
+    click(CreateGame, 2)
     # time.sleep(4)
-    click(StartGame, 0)
-    click(Accept, 0)
+    click(StartGame, 2)
+    click(Accept, 2)
     time.sleep(20)
     click(Confirm, 10)
-    click(ChallengeMax)
-    click(Challenge, 0)
-    click(SelectCharacter, 0)
+    click(ChallengeMax, 2)
+    click(Challenge, 2)
+    click(SelectCharacter, 2)
     pyautogui.moveTo(100, 100)
-    click(Prepare, 0)
+    click(Prepare, 2)
 
 
 def roll_game():
@@ -216,5 +243,6 @@ def click_procceed_to_round():
 
 
 def next_round():
+    logger.info("Next round")
     click(ProceedToRound)
     check_proceed_to_round()
