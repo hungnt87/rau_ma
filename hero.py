@@ -106,6 +106,8 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     count_buy_hero = count_buy_hero + 1
                     logger.info("Ban da mua thanh cong 1 hero {}, ban dang co {}, ban can mua them {} ".format(
                         HeroInfor.name, HeroInfor.number, number_hero - number))
+        else:
+            break
 
 
 def check_hero(HeroInfor):

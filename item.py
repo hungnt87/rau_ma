@@ -99,7 +99,6 @@ def buy_item_info(ItemInfo, number_item=3):
             pyautogui.moveTo(222, 213)
             if button.check_not_money() is True:
                 item_status_money = False
-                break
             else:
                 number = number + 1
                 logger.info("Ban da mua thanh cong 1 cai {}, ban can mua them {}".format(

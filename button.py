@@ -156,8 +156,11 @@ def check_abandon(time_wait=2):
         try:
             res = pyautogui.locateOnScreen(
                 Abandon.img, confidence=0.9, region=(0, 0, 1916, 1134))
+            
             res_center = pyautogui.center(res)
+            time.sleep(1)
             pyautogui.moveTo(res_center)
+            time.sleep(1)
             pyautogui.click(res_center)
             break
         except pyautogui.ImageNotFoundException:
@@ -176,14 +179,9 @@ def check_proceed_to_round():
     i = 0
     while True:
         try:
-
-            res = pyautogui.locateOnScreen(
-                ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
-            if res is not None:
-                logger.info("Cho xuat hien {} lan {}".format(
-                    ProceedToRound.name, i))
-                time.sleep(1)
-                return True
+            res = pyautogui.locateOnScreen(ProceedToRound.img, confidence=0.9, region=(0, 0, 1916, 1134))
+            time.sleep(1)
+            return True
         except pyautogui.ImageNotFoundException:
             # check_resurrect(2)
             check_abandon()
@@ -227,7 +225,7 @@ def enter_game():
     click(Accept, 2)
     time.sleep(20)
     click(Confirm, 10)
-    click(ChallengeMax, 2)
+    #click(ChallengeMax, 2)
     click(Challenge, 2)
     click(SelectCharacter, 2)
     pyautogui.moveTo(100, 100)
