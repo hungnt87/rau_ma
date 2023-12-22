@@ -6,6 +6,7 @@ import item
 from datetime import datetime
 from log import logger
 
+
 def get_count_buy():
     count = hero.get_count_buy_hero() + item.get_count_buy_item()
     return count
@@ -17,8 +18,10 @@ def reset_count_buy():
 
 
 def round_all(round_number):
-    for n in range(1, 21):
-        logger.info(f"Bat dau round: {n}")
+    n = 0
+    while n < 21:
+        n = n+1
+        logger.info(f"Bat dau roll in round: {n}")
         number_roll = 0
 
         if n == 2:
@@ -41,9 +44,7 @@ def round_all(round_number):
             while True:
                 if number_roll > 0:
                     button.roll_game()
-                number_roll += 1
-                if n == 20:
-                    break
+                number_roll += 1                
                 hero.buy_all_hero(round_number=n)
                 item.buy_all_item_investments(round_number=n)
                 item.buy_all_set_item()
@@ -55,7 +56,8 @@ def round_all(round_number):
 
             if n < 20:
                 button.next_round()
-                logger.info(f"Day la vong auto lan thu {round_number}, round thu {n}")
+                logger.info(
+                    f"Day la vong auto lan thu {round_number}, round thu {n}")
             else:
                 hero.reset_hero()
                 item.reset_item()
