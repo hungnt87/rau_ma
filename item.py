@@ -3,7 +3,7 @@ import time
 import button
 import pyscreeze
 from datetime import datetime
-
+from log import logger
 count_buy_item = 0
 
 
@@ -40,7 +40,7 @@ def buy_item(ItemInfo):
     try:
         res = pyautogui.locateOnScreen(
             ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134))
-        print("xuat hien ", ItemInfo.name)
+        logger.info("xuat hien ", ItemInfo.name)
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.click(res_center)
@@ -60,7 +60,7 @@ def buy_item(ItemInfo):
 #     Returns:
 #     Nothing.
 #     """
-#     print("Bạn đang tìm item {}".format(ItemInfo.name))
+#     logger.info("Bạn đang tìm item {}".format(ItemInfo.name))
 #     global count_buy_item
 #     number = ItemInfo.number
 #     if number_item > number:
@@ -71,15 +71,15 @@ def buy_item(ItemInfo):
 #                 break
 #             else:
 #                 number = number + 1
-#                 print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+#                 logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
 #                     ItemInfo.name, number_buy - number))
 #                 ItemInfo.number = number
 #                 count_buy_item = count_buy_item + 1
-#                 print("Ban da mua item lan thu {}".format(count_buy_item))
+#                 logger.info("Ban da mua item lan thu {}".format(count_buy_item))
 
 
 def buy_item_info(ItemInfo, number_item=3):
-    print("Date {}:Bạn đang tìm item {}".format(datetime.now().time(),ItemInfo.name))
+    logger.info("Date {}:Bạn đang tìm item {}".format(datetime.now().time(),ItemInfo.name))
     global count_buy_item
     number = ItemInfo.number
     if number_item > number:
@@ -93,10 +93,10 @@ def buy_item_info(ItemInfo, number_item=3):
                 pyautogui.click(res_center)
                 pyautogui.moveTo(222,213)
                 if button.check_not_money():
-                    print("Bạn không đủ tiền mua item này")
+                    logger.info("Bạn không đủ tiền mua item này")
                 else:
                     number = number + 1
-                    print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+                    logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
                         ItemInfo.name, number_buy - number))
                     ItemInfo.number = number
                     count_buy_item = count_buy_item + 1
@@ -107,15 +107,15 @@ def buy_item_info(ItemInfo, number_item=3):
         #     # res_center = pyautogui.center(location)
         #     # pyautogui.moveTo(res_center)
         #     #time.sleep(2)
-        #     print("Found at:", location)
+        #     logger.info("Found at:", location)
             # pyautogui.moveTo(222,213)
             # #pyautogui.click(res_center)
             # if button.check_not_money():
-            #     print("Bạn không đủ tiền mua item này")
+            #     logger.info("Bạn không đủ tiền mua item này")
             #     break
             # else:
             #     number = number + 1
-            #     print("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+            #     logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
             #         ItemInfo.name, number_buy - number))
             #     ItemInfo.number = number
             #     count_buy_item = count_buy_item + 1

@@ -1,8 +1,7 @@
 import pyautogui
 import time
-
 import button
-
+from log import logger
 
 class HeroInfor:
     def __init__(self, para_name, para_number_hero=0):
@@ -78,7 +77,7 @@ def buy_hero(hero_img):
 
 
 def buy_hero_infor(HeroInfor, number_hero=1):
-    print("Bat dau tim hero {}".format(HeroInfor.name))
+    logger.info("Bat dau tim hero {}".format(HeroInfor.name))
     global count_buy_hero
     i = 0
     while True:
@@ -96,14 +95,14 @@ def buy_hero_infor(HeroInfor, number_hero=1):
 
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
-                    print("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
+                    logger.info("Bạn đã mua thành công 1 hero {}, bạn đang có {}, bạn cần mua thêm {} nữa".format(
                         HeroInfor.name, HeroInfor.number, number_hero - number))
-                    print("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
+                    logger.info("Bạn đã mua hero lần thứ {}".format(count_buy_hero))
             else:
-                print("Không tìm thấy hero {} lần {}".format(HeroInfor.name, i))
+                logger.info("Không tìm thấy hero {} lần {}".format(HeroInfor.name, i))
 
         else:
-            print("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
+            logger.info("Bạn đã đủ hero {} rồi, không cần mua nữa".format(HeroInfor.name))
             break
 
 
@@ -228,4 +227,4 @@ def reset_hero():
     Zet.reset_hero_number()
     DrowRanger.reset_hero_number()
     TemplarAssassin.reset_hero_number()
-    print("Reset the hero number to 0")
+    logger.info("Reset the hero number to 0")

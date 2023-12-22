@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import pyscreeze
+from log import logger
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
@@ -58,7 +59,7 @@ def click(ButtonInfor, time_sleep=0):
             res = pyautogui.locateOnScreen(
                 ButtonInfor.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None and time_sleep > 0:
-                print("Cho xuat hien {} trong thoi gian {}".format(ButtonInfor.name, time_sleep))
+                logger.info("Cho xuat hien {} trong thoi gian {}".format(ButtonInfor.name, time_sleep))
                 time.sleep(time_sleep)
             res_center = pyautogui.center(res)
             time.sleep(1)
@@ -67,13 +68,13 @@ def click(ButtonInfor, time_sleep=0):
             time.sleep(0.2)
             pyautogui.moveTo(200, 200)
             # pyautogui.moveTo(0, 0)
-            # print("I can see it")
+            # logger.info("I can see it")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
                 break
-            print("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
+            logger.info("Đang tìm hình ảnh button {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
 
 
@@ -88,7 +89,7 @@ def check_not_money():
             i = i + 1
             if i > 2:
                 break
-            print("Đang kiem tra ban co tien khong so lan ", i)
+            logger.info("Đang kiem tra ban co tien khong so lan ", i)
             time.sleep(0.2)
 
 
@@ -102,13 +103,13 @@ def check_find_item():
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)            
             pyautogui.moveTo(200, 200)
-            print("Khong lay item")
+            logger.info("Khong lay item")
             break           
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
                 break
-            print("Đang kiem tra co ruong do rot ko ", i)
+            logger.info("Đang kiem tra co ruong do rot ko ", i)
             time.sleep(1)
 
 
@@ -122,17 +123,17 @@ def check_resurrect(time_wait=10):
             time.sleep(1)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
-            print("Chon Resurrect ")
+            logger.info("Chon Resurrect ")
 
             for x in range(0, time_wait):
-                print(" cho van dau", x)
+                logger.info(" cho van dau", x)
                 time.sleep(1)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
                 break
-            print("cho xuat hien Resurrect", i)
+            logger.info("cho xuat hien Resurrect", i)
             time.sleep(1)
 
 
@@ -145,13 +146,13 @@ def check_abandon(time_wait=2):
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
-            print("Chon Abandon")
+            logger.info("Chon Abandon")
             break          
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
                 break
-            print("cho xuat hien Abandon", i)
+            logger.info("cho xuat hien Abandon", i)
             time.sleep(1)
 
 
@@ -164,7 +165,7 @@ def check_proceed_to_round():
             res = pyautogui.locateOnScreen(
                 ProceedToRound.img, confidence=0.8, region=(0, 0, 1916, 1134))
             if res is not None:
-                print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+                logger.info("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
                 time.sleep(1)
                 return True
         except pyautogui.ImageNotFoundException:
@@ -174,7 +175,7 @@ def check_proceed_to_round():
             i = i + 1
             if i > 20:
                 break
-            print("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+            logger.info("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
 
 
