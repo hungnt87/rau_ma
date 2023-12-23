@@ -95,7 +95,7 @@ def check_not_money():
             logger.debug(
                 "Dang kiem tra ban co tien khong so lan {}".format(i))
             time.sleep(0.2)   
-            if i > 2:
+            if i >= 2:
                 return False                     
         except TypeError:
             logger.error("Khong tim thay hinh anh {}".format(NotMoney.name))
