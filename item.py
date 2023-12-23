@@ -4,6 +4,7 @@ import button
 import pyscreeze
 from datetime import datetime
 from log import logger
+
 count_buy_item = 0
 
 
@@ -39,7 +40,8 @@ def buy_item(ItemInfo):
     """
     try:
         res = pyautogui.locateOnScreen(
-            ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134))
+            ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134)
+        )
         # logger.info("xuat hien ", ItemInfo.name)
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
@@ -88,11 +90,12 @@ def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
     global count_buy_item, item_status_money
     number = ItemInfo.number
-    if number_item > number:
-        number_buy = number_item - number
+    number_buy = number_item - number
+    if number_buy > 0:
         try:
             location = pyautogui.locateOnScreen(
-                ItemInfo.img, confidence=0.9, region=(0, 0, 1916, 1134))
+                ItemInfo.img, confidence=0.9, region=(0, 0, 1916, 1134)
+            )
             res_center = pyautogui.center(location)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
@@ -101,32 +104,38 @@ def buy_item_info(ItemInfo, number_item=3):
                 item_status_money = False
             else:
                 number = number + 1
-                logger.info("Ban da mua thanh cong 1 cai {}, ban can mua them {}".format(
-                    ItemInfo.name, number_buy - number))
+                number_buy = number_item - number
+                logger.info(
+                    f"Ban da mua thanh cong 1 cai {ItemInfo.name}, ban can mua them {number_buy}"
+                )
                 ItemInfo.number = number
                 count_buy_item = count_buy_item + 1
+                return True
         except pyautogui.ImageNotFoundException:
             return False
         except TypeError:
             logger.error("Khong tim thay hinh anh {}".format(ItemInfo.name))
             return False
-
+    else:
+        logger.debug(
+            f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"
+        )
         # for location in locations:
         #     # res_center = pyautogui.center(location)
         #     # pyautogui.moveTo(res_center)
         #     #time.sleep(2)
         #     logger.info("Found at:", location)
-            # pyautogui.moveTo(222,213)
-            # #pyautogui.click(res_center)
-            # if button.check_not_money():
-            #     logger.info("Bạn không đủ tiền mua item này")
-            #     break
-            # else:
-            #     number = number + 1
-            #     logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
-            #         ItemInfo.name, number_buy - number))
-            #     ItemInfo.number = number
-            #     count_buy_item = count_buy_item + 1
+        # pyautogui.moveTo(222,213)
+        # #pyautogui.click(res_center)
+        # if button.check_not_money():
+        #     logger.info("Bạn không đủ tiền mua item này")
+        #     break
+        # else:
+        #     number = number + 1
+        #     logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
+        #         ItemInfo.name, number_buy - number))
+        #     ItemInfo.number = number
+        #     count_buy_item = count_buy_item + 1
 
 
 Attack12_Kill1000_Unique_lv2 = ItemInfo("Attack12_Kill1000_Unique_lv2")
@@ -152,8 +161,7 @@ Exp40_Luck6_lv2 = ItemInfo("Exp40_Luck6_lv2")
 Exp45_Attack4_lv2 = ItemInfo("Exp45_Attack4_lv2")
 ExtraDamage10_lv3 = ItemInfo("ExtraDamage10_lv3")
 ExtraDamage13_For_Precise_lv2 = ItemInfo("ExtraDamage13_For_Precise_lv2")
-ExtraDamage14_Kill1000_Unique_lv2 = ItemInfo(
-    "ExtraDamage14_Kill1000_Unique_lv2")
+ExtraDamage14_Kill1000_Unique_lv2 = ItemInfo("ExtraDamage14_Kill1000_Unique_lv2")
 ExtraDamage30_Luck30_lv5 = ItemInfo("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = ItemInfo("ExtraDamage30_lv6")
 ExtraDamage40_Kill100_Unique_lv5 = ItemInfo("ExtraDamage40_Kill100_Unique_lv5")
@@ -190,8 +198,7 @@ MultishotDamage20_lv3 = ItemInfo("MultishotDamage20_lv3")
 PantyMask_lv6 = ItemInfo("PantyMask_lv6")
 PickupRange100_lv1 = ItemInfo("PickupRange100_lv1")
 Pillager_lv4 = ItemInfo("Pillager_lv4")
-PreciseDamage12_Every1s_Plus1_lv6 = ItemInfo(
-    "PreciseDamage12_Every1s_Plus1_lv6")
+PreciseDamage12_Every1s_Plus1_lv6 = ItemInfo("PreciseDamage12_Every1s_Plus1_lv6")
 PreciseDamage12_Speed12_lv2 = ItemInfo("PreciseDamage12_Speed12_lv2")
 PreciseDamage16_Strike16_lv3 = ItemInfo("PreciseDamage16_Strike16_lv3")
 Random_10_28_Evasion_lv4 = ItemInfo("Random_10_28_Evasion_lv4")
@@ -229,23 +236,16 @@ def buy_all_item_investments(round_number):
     if 3 <= round_number <= 13:
         buy_item_info(Investment138_Defense3_lv2, 5)
     if 6 <= round_number <= 15:
-        buy_item_info(Investment198_Speed7_lv3, 1)
+        buy_item_info(Investment198_Speed7_lv3, 3)
         buy_item_info(Investment218_Evasion8_lv3, 1)
-        buy_item_info(Investment368_HitRecovery18_lv5, 1)
-    if round_number == 0:
-        buy_item_info(Investment88_For_Precise_lv1, 5)
-        buy_item_info(Investment138_Defense3_lv2, 5)
-        buy_item_info(Investment198_Speed7_lv3, 5)
-        buy_item_info(Investment218_Evasion8_lv3, 5)
+        buy_item_info(Investment368_HitRecovery18_lv5, 3)
 
 
 def buy_all_item_round2():
-    buy_item_info(Investment88_For_Precise_lv1)
     buy_item_info(ShopDiscount_lv1)
 
 
 def buy_all_item_round3():
-    buy_item_info(Investment88_For_Precise_lv1)
     buy_item_info(ShopDiscount_lv1)
     buy_item_info(PickupRange100_lv1)
 
@@ -253,8 +253,8 @@ def buy_all_item_round3():
 def buy_all_item_lv1():
     logger.debug("Ban dang mua item lv1")
     # buy_item_info(Investment88_For_Precise_lv1)
-    buy_item_info(ShopDiscount_lv1)
-    buy_item_info(PickupRange100_lv1, 2)
+    buy_item_info(ShopDiscount_lv1, 5)
+    # buy_item_info(PickupRange100_lv1, 2)
     buy_item_info(Exp20_Range5_lv1, 2)
     buy_item_info(Evasion6_For_Precise_lv1)
     buy_item_info(HealthRegen10_For_Precise_lv1, 2)

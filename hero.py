@@ -89,12 +89,13 @@ def buy_hero_infor(HeroInfor, number_hero=1):
     logger.info("Bat dau tim hero {}".format(HeroInfor.name))
     global count_buy_hero, hero_status_money
     i = 0
+    number = HeroInfor.number
+    number_buy = number_hero-number
     while True:
-        if i >= 4:
+        if i >= 2:
             break
-        number = HeroInfor.number
-        if number_hero > number:
-            i = i + 1
+        i= i + 1
+        if number_buy > 0:            
             number_buy = number_hero - number
             if buy_hero(HeroInfor.img) is True:
                 if button.check_not_money() is True:
@@ -102,11 +103,12 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     break
                 else:
                     number = number + 1
+                    number_buy = number_hero - number
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
-                    logger.info("Ban da mua thanh cong 1 hero {}, ban dang co {}, ban can mua them {} ".format(
-                        HeroInfor.name, HeroInfor.number, number_hero - number))
+                    logger.info(f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}")
         else:
+            logger.info(f"Ban da co {number_hero} hero {HeroInfor.name}, da du so luong can mua")
             break
 
 
