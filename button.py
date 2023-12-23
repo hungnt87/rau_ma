@@ -59,10 +59,14 @@ def click(ButtonInfor, time_sleep=0):
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                ButtonInfor.img, confidence=0.8, region=(0, 0, 1936,1119))
+                ButtonInfor.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            )
             if res is not None and time_sleep > 0:
-                logger.info("Cho xuat hien {} trong thoi gian {}".format(
-                    ButtonInfor.name, time_sleep))
+                logger.info(
+                    "Cho xuat hien {} trong thoi gian {}".format(
+                        ButtonInfor.name, time_sleep
+                    )
+                )
                 time.sleep(time_sleep)
             res_center = pyautogui.center(res)
             # time.sleep(1)
@@ -76,8 +80,7 @@ def click(ButtonInfor, time_sleep=0):
             i = i + 1
             if i > 60:
                 break
-            logger.debug("Dang tim hinh anh {} so lan {}".format(
-                ButtonInfor.name, i))
+            logger.debug("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
         except TypeError:
             logger.error("Khong tim thay hinh anh {}".format(ButtonInfor.name))
@@ -88,15 +91,15 @@ def check_not_money():
     while True:
         try:
             pyautogui.locateOnScreen(
-                NotMoney.img, confidence=0.8, region=(0, 0, 1936,1119))
+                NotMoney.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            )
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            logger.debug(
-                "Dang kiem tra ban co tien khong so lan {}".format(i))
-            time.sleep(0.2)   
+            logger.debug("Dang kiem tra ban co tien khong so lan {}".format(i))
+            time.sleep(0.2)
             if i >= 2:
-                return False                     
+                return False
         except TypeError:
             logger.error("Khong tim thay hinh anh {}".format(NotMoney.name))
             return False
@@ -107,7 +110,8 @@ def check_find_item():
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Recycle.img, confidence=0.8, region=(0, 0, 1936,1119))
+                Recycle.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            )
             res_center = pyautogui.center(res)
             pyautogui.moveTo(res_center)
             pyautogui.click(res_center)
@@ -130,7 +134,8 @@ def check_resurrect(time_wait=10):
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Resurrect.img, confidence=0.8, region=(0, 0, 1920, 1135))
+                Resurrect.img, confidence=0.8, region=(0, 0, 1920, 1135)
+            )
             res_center = pyautogui.center(res)
             time.sleep(1)
             pyautogui.moveTo(res_center)
@@ -153,8 +158,9 @@ def check_abandon(time_wait=2):
     while True:
         try:
             res = pyautogui.locateOnScreen(
-                Abandon.img, confidence=0.8, region=(0, 0, 1936,1119))
-            
+                Abandon.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            )
+
             res_center = pyautogui.center(res)
             time.sleep(1)
             pyautogui.moveTo(res_center)
@@ -177,7 +183,9 @@ def check_proceed_to_round():
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(ProceedToRound.img, confidence=0.9, region=(0, 0, 1936,1119))
+            res = pyautogui.locateOnScreen(
+                ProceedToRound.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            )
             time.sleep(1)
             return True
         except pyautogui.ImageNotFoundException:
@@ -187,12 +195,13 @@ def check_proceed_to_round():
             i = i + 1
             if i > 20:
                 return False
-            logger.debug("Cho xuat hien {} lan {}".format(
-                ProceedToRound.name, i))
+            logger.debug("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
             time.sleep(1)
+        except pyscreeze.ImageNotFoundException:
+            logger.error("khong tim thay hinh anh")
+
         except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(
-                ProceedToRound.name))
+            logger.error("Khong tim thay hinh anh {}".format(ProceedToRound.name))
             return False
 
 
@@ -223,7 +232,7 @@ def enter_game():
     click(Accept, 2)
     time.sleep(30)
     click(Confirm, 10)
-    #click(ChallengeMax, 2)
+    # click(ChallengeMax, 2)
     click(Challenge, 2)
     click(SelectCharacter, 2)
     pyautogui.moveTo(100, 100)
