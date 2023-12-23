@@ -238,7 +238,7 @@ def buy_all_item_investments(round_number):
     if 6 <= round_number <= 15:
         buy_item_info(Investment198_Speed7_lv3, 3)
         buy_item_info(Investment218_Evasion8_lv3, 1)
-        buy_item_info(Investment368_HitRecovery18_lv5, 3)
+        buy_item_info(Investment368_HitRecovery18_lv5, 1)
 
 
 def buy_all_item_round2():
@@ -306,24 +306,24 @@ def buy_all_item_lv4():
     logger.debug("Ban dang mua item lv4")
     buy_item_info(Pillager_lv4)
 
-    buy_item_info(ImmunityCount4_lv4, 1)
+    buy_item_info(ImmunityCount4_lv4, 2)
     buy_item_info(Minazuki_lv4)
-    buy_item_info(Luck60_Speed25_lv4, 1)
+    buy_item_info(Luck60_Speed25_lv4, )
     buy_item_info(Luck54_Arcane27_lv4, 1)
-    buy_item_info(Health30_Speed20_lv4, 1)
-    buy_item_info(Evasion21_Attack5_lv4, 1)
+    buy_item_info(Health30_Speed20_lv4)
+    buy_item_info(Evasion21_Attack5_lv4)
     buy_item_info(Holding_Plus_Def32_lv4, 1)
     buy_item_info(Random_10_28_Evasion_lv4, 1)
     buy_item_info(Random_16_36_Defense_lv4, 1)
-    buy_item_info(Holding_Plus_Cooldown35_lv4, 1)
-    buy_item_info(Holding_Plus_HealthRegen30_lv4, 1)
-    buy_item_info(RevivalCount1_Health5_lv4, 1)
+    buy_item_info(Holding_Plus_Cooldown35_lv4)
+    buy_item_info(Holding_Plus_HealthRegen30_lv4)
+    buy_item_info(RevivalCount1_Health5_lv4)
 
 
 def buy_all_item_lv5():
     logger.debug("Ban dang mua item lv5")
-    buy_item_info(Immunity10_lv5, 5)
-    buy_item_info(Immunity_Unique_lv5, 5)
+    buy_item_info(Immunity10_lv5)
+    buy_item_info(Immunity_Unique_lv5)
     buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
     buy_item_info(Health88_lv5, 1)
     buy_item_info(Range16_Def16_lv5, 1)
