@@ -126,13 +126,16 @@ def buy_item_info(ItemInfo, number_item=3):
 Attack12_Kill1000_Unique_lv2 = ItemInfo("Attack12_Kill1000_Unique_lv2")
 Attack16_Arcane16_lv3 = ItemInfo("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = ItemInfo("Attack16_Strike16_lv3")
+Attack35_Kill1000_Unique_lv5= ItemInfo("Attack35_Kill1000_Unique_lv5")
 Bicycle_lv3 = ItemInfo("Bicycle_lv3")
 Cooldown16_Kill1000_Unique_lv2 = ItemInfo("Cooldown16_Kill1000_Unique_lv2")
 Cooldown21_lv5 = ItemInfo("Cooldown21_lv5")
 Cooldown45_Speed15_lv6 = ItemInfo("Cooldown45_Speed15_lv6")
 Critical9_Luck_lv3 = ItemInfo("Critical9_Luck_lv3")
-Critical16_Kill100_Unique_lv2 = ItemInfo("Critical16_Kill100_Unique_lv2")
+Critical16_Kill1000_Unique_lv2 = ItemInfo("Critical16_Kill1000_Unique_lv2")
+Critical20_Defense_lv3 = ItemInfo("Critical20_Defense_lv3")
 Critical30_Defense10_lv5 = ItemInfo("Critical30_Defense10_lv5")
+Critical40_Kill1000_Unique_lv5 = ItemInfo("Critical40_Kill1000_Unique_lv5")
 Defense20_Speed10_lv2 = ItemInfo("Defense20_Speed10_lv2")
 EnemyCount10_lv6 = ItemInfo("EnemyCount10_lv6")
 Evasion6_For_Precise_lv1 = ItemInfo("Evasion6_For_Precise_lv1")
@@ -215,9 +218,11 @@ def buy_all_set_item(round_number):
     if round_number < 18:
         buy_item_info(Attack12_Kill1000_Unique_lv2, 1)
         buy_item_info(Cooldown16_Kill1000_Unique_lv2, 1)
-        buy_item_info(Critical16_Kill100_Unique_lv2, 1)
+        buy_item_info(Critical16_Kill1000_Unique_lv2, 1)
         buy_item_info(ExtraDamage14_Kill1000_Unique_lv2, 1)
         buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
+        buy_item_info(Critical40_Kill1000_Unique_lv5, 1)
+        buy_item_info(Attack35_Kill1000_Unique_lv5, 1)
 
 
 def buy_all_item_investments(round_number):
@@ -275,6 +280,7 @@ def buy_all_item_lv3():
     logger.debug("Ban dang mua item lv3")
     # buy_item_info(Investment198_Speed7_lv3)
     # buy_item_info(Investment218_Evasion8_lv3)
+    buy_item_info(Critical20_Defense_lv3)
     buy_item_info(Immunity6_lv3)
     buy_item_info(ExtraDamage10_lv3, 2)
     buy_item_info(PreciseDamage16_Strike16_lv3)
@@ -370,8 +376,8 @@ def test_all_item():
 
 
 def reset_item():
-    global Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    global Cooldown45_Speed15_lv6, Critical16_Kill100_Unique_lv2, Critical30_Defense10_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
+    global Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3,Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
+    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2,Critical20_Defense_lv3, Critical30_Defense10_lv5,Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
     global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
     global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
@@ -390,13 +396,16 @@ def reset_item():
     Attack12_Kill1000_Unique_lv2.reset_item_number()
     Attack16_Arcane16_lv3.reset_item_number()
     Attack16_Strike16_lv3.reset_item_number()
+    Attack35_Kill1000_Unique_lv5.reset_item_number()
     Bicycle_lv3.reset_item_number()
     Cooldown16_Kill1000_Unique_lv2.reset_item_number()
     Cooldown21_lv5.reset_item_number()
     Cooldown45_Speed15_lv6.reset_item_number()
     Critical9_Luck_lv3.reset_item_number()
-    Critical16_Kill100_Unique_lv2.reset_item_number()
+    Critical16_Kill1000_Unique_lv2.reset_item_number()
+    Critical20_Defense_lv3.reset_item_number()
     Critical30_Defense10_lv5.reset_item_number()
+    Critical40_Kill1000_Unique_lv5.reset_item_number()
     Defense20_Speed10_lv2.reset_item_number()
     EnemyCount10_lv6.reset_item_number()
     Evasion6_For_Precise_lv1.reset_item_number()
