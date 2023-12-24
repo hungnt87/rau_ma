@@ -176,7 +176,7 @@ def buy_dark_willow():
 
 
 def buy_clinkz():
-    buy_hero_infor(Clinkz, 5)
+    buy_hero_infor(Clinkz, 1)
 
 
 def buy_winter_wyvern():

@@ -204,7 +204,7 @@ SplitTheVoid_lv2 = ItemInfo("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
 
-def buy_all_set_item():
+def buy_all_set_item(round_number):
     logger.debug("Ban dang mua set item")
     buy_item_info(PickupRange100_lv1, 1)
     buy_item_info(Set_Speed_lv1, 1)
@@ -212,6 +212,12 @@ def buy_all_set_item():
     buy_item_info(Set_Investment108_lv2, 1)
     buy_item_info(Set_Defense188_lv3, 1)
     buy_item_info(Set_ExtraDamage17_lv4, 1)
+    if round_number < 18:
+        buy_item_info(Attack12_Kill1000_Unique_lv2, 1)
+        buy_item_info(Cooldown16_Kill1000_Unique_lv2, 1)
+        buy_item_info(Critical16_Kill100_Unique_lv2, 1)
+        buy_item_info(ExtraDamage14_Kill1000_Unique_lv2, 1)
+        buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
 
 
 def buy_all_item_investments(round_number):
@@ -256,9 +262,6 @@ def buy_all_item_lv2():
     buy_item_info(SplitTheVoid_lv2)
     buy_item_info(MasterChefHat_lv2)
     buy_item_info(Attack12_Kill1000_Unique_lv2, 1)
-    buy_item_info(Cooldown16_Kill1000_Unique_lv2, 1)
-    buy_item_info(ExtraDamage14_Kill1000_Unique_lv2, 1)
-    buy_item_info(Critical16_Kill100_Unique_lv2, 1)
     buy_item_info(ExtraDamage13_For_Precise_lv2)
     buy_item_info(Defense20_Speed10_lv2)
     buy_item_info(Evasion12_Strike6_lv2)
@@ -278,24 +281,21 @@ def buy_all_item_lv3():
     buy_item_info(TomeOfKnowledge_lv3)
     buy_item_info(Attack16_Arcane16_lv3)
     buy_item_info(Attack16_Strike16_lv3)
-    buy_item_info(MultishotDamage20_lv3, 5)
-    buy_item_info(Random_10_28_HealthRegen_lv3, 1)
+    buy_item_info(MultishotDamage20_lv3)
+    buy_item_info(Random_10_28_HealthRegen_lv3)
     buy_item_info(Health48_For_Precise_lv3, 1)
     buy_item_info(Bicycle_lv3, 1)
-    buy_item_info(Critical9_Luck_lv3, 1)
-    buy_item_info(Evasion16_Investment16_lv3, 1)
+    buy_item_info(Critical9_Luck_lv3)
+    buy_item_info(Evasion16_Investment16_lv3)
     buy_item_info(Luck45_HitRecovery25_lv3, 1)
 
 
 def buy_all_item_lv4():
     logger.debug("Ban dang mua item lv4")
     buy_item_info(Pillager_lv4)
-
     buy_item_info(ImmunityCount4_lv4, 2)
     buy_item_info(Minazuki_lv4)
-    buy_item_info(
-        Luck60_Speed25_lv4,
-    )
+    buy_item_info(Luck60_Speed25_lv4, 1)
     buy_item_info(Luck54_Arcane27_lv4, 1)
     buy_item_info(Health30_Speed20_lv4)
     buy_item_info(Evasion21_Attack5_lv4)
@@ -310,10 +310,9 @@ def buy_all_item_lv4():
 def buy_all_item_lv5():
     logger.debug("Ban dang mua item lv5")
     buy_item_info(Immunity10_lv5)
-    buy_item_info(Immunity_Unique_lv5)
-    buy_item_info(ExtraDamage40_Kill100_Unique_lv5, 1)
+    buy_item_info(Immunity_Unique_lv5, 1)
     buy_item_info(Health88_lv5, 1)
-    buy_item_info(Range16_Def16_lv5, 1)
+    # buy_item_info(Range16_Def16_lv5, 1)
     buy_item_info(Range15_Invest55_lv5, 1)
     buy_item_info(Critical30_Defense10_lv5, 2)
     buy_item_info(ExtraDamage30_Luck30_lv5, 1)
@@ -326,7 +325,7 @@ def buy_all_item_lv6():
     buy_item_info(PantyMask_lv6, 1)
     buy_item_info(ExtraDamage30_lv6, 1)
     buy_item_info(Cooldown45_Speed15_lv6, 1)
-    buy_item_info(Range24_ExtraDamage14_lv6, 1)
+    # buy_item_info(Range24_ExtraDamage14_lv6, 1)
     buy_item_info(PreciseDamage12_Every1s_Plus1_lv6, 1)
     buy_item_info(EnemyCount10_lv6, 1)
 

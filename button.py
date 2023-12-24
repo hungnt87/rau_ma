@@ -51,15 +51,29 @@ NotMoney = ButtonInfor("NotMoney")
 Recycle = ButtonInfor("Recycle")
 Abandon = ButtonInfor("Abandon")
 Back_On_Round20 = ButtonInfor("Back_On_Round20")
-
+Hide = ButtonInfor("Hide")
+BulkDisassembly = ButtonInfor("BulkDisassembly")
+BulkAll = ButtonInfor("BulkAll")
+ConfirmDisassemBingEquip = ButtonInfor("ConfirmDisassemBingEquip")
+Equip = ButtonInfor("Equip")
+ClickToClose = ButtonInfor("ClickToClose")
 
 def click(ButtonInfor, time_sleep=0):
+    """Click button infor
+    Args:
+        ButtonInfor: ButtonInfor
+        time_sleep: time sleep after click
+    """
     logger.info("Click {}".format(ButtonInfor.name))
     i = 0
+    time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                ButtonInfor.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=True
+                ButtonInfor.img,
+                confidence=0.9,
+                region=(0, 0, 1936, 1119),
+                grayscale=True,
             )
             if res is not None and time_sleep > 0:
                 logger.info(
@@ -67,8 +81,7 @@ def click(ButtonInfor, time_sleep=0):
                         ButtonInfor.name, time_sleep
                     )
                 )
-                time.sleep(time_sleep)
-            
+            time.sleep(time_sleep)
             # time.sleep(1)
             pyautogui.moveTo(res)
             time.sleep(1)
@@ -112,7 +125,7 @@ def check_find_item():
             res = pyautogui.locateCenterOnScreen(
                 Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-           
+
             pyautogui.moveTo(res)
             pyautogui.click(res)
             pyautogui.moveTo(200, 200)
@@ -134,8 +147,11 @@ def check_resurrect(time_wait=10):
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                Resurrect.img, confidence=0.9, region=(0, 0, 1920, 1135), grayscale=False
-            )            
+                Resurrect.img,
+                confidence=0.9,
+                region=(0, 0, 1920, 1135),
+                grayscale=False,
+            )
             time.sleep(1)
             pyautogui.moveTo(res)
             pyautogui.click(res)
@@ -158,7 +174,7 @@ def check_abandon(time_wait=2):
         try:
             res = pyautogui.locateCenterOnScreen(
                 Abandon.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
-            )           
+            )
             time.sleep(1)
             pyautogui.moveTo(res)
             time.sleep(1)
@@ -181,7 +197,10 @@ def check_proceed_to_round():
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                ProceedToRound.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
+                ProceedToRound.img,
+                confidence=0.9,
+                region=(0, 0, 1936, 1119),
+                grayscale=False,
             )
             time.sleep(1)
             return True
@@ -248,3 +267,27 @@ def next_round():
     logger.info("Next round")
     click(ProceedToRound)
     check_proceed_to_round()
+
+
+def bulk_disassembly():
+    """
+    Perform bulk disassembly by clicking on the necessary buttons.
+    """
+    logger.info("Bat dau phan giai tat ca trang bi da nhat")
+    try:
+        click(Hide)
+        click(Equip)
+        click(BulkDisassembly)
+        click(BulkAll)
+        click(ConfirmDisassemBingEquip)
+        click(ClickToClose)
+        return True
+    except TypeError:
+        logger.error("Khong hoan thanh phan giai trang bi")
+        return False
+
+
+if __name__=="__main__":
+    #bulk_disassembly()
+    #exit_game()
+    pass
