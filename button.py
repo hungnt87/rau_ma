@@ -58,8 +58,8 @@ def click(ButtonInfor, time_sleep=0):
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                ButtonInfor.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            res = pyautogui.locateCenterOnScreen(
+                ButtonInfor.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=True
             )
             if res is not None and time_sleep > 0:
                 logger.info(
@@ -68,11 +68,11 @@ def click(ButtonInfor, time_sleep=0):
                     )
                 )
                 time.sleep(time_sleep)
-            res_center = pyautogui.center(res)
+            
             # time.sleep(1)
-            pyautogui.moveTo(res_center)
+            pyautogui.moveTo(res)
             time.sleep(1)
-            pyautogui.click(res_center)
+            pyautogui.click(res)
             time.sleep(1)
             pyautogui.moveTo(200, 200)
             break
@@ -90,8 +90,8 @@ def check_not_money():
     i = 0
     while True:
         try:
-            pyautogui.locateOnScreen(
-                NotMoney.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            pyautogui.locateCenterOnScreen(
+                NotMoney.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
             return True
         except pyautogui.ImageNotFoundException:
@@ -109,12 +109,12 @@ def check_find_item():
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                Recycle.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            res = pyautogui.locateCenterOnScreen(
+                Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-            res_center = pyautogui.center(res)
-            pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
+           
+            pyautogui.moveTo(res)
+            pyautogui.click(res)
             pyautogui.moveTo(200, 200)
             logger.info("Khong lay item")
             break
@@ -133,13 +133,12 @@ def check_resurrect(time_wait=10):
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                Resurrect.img, confidence=0.8, region=(0, 0, 1920, 1135)
-            )
-            res_center = pyautogui.center(res)
+            res = pyautogui.locateCenterOnScreen(
+                Resurrect.img, confidence=0.9, region=(0, 0, 1920, 1135), grayscale=False
+            )            
             time.sleep(1)
-            pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
+            pyautogui.moveTo(res)
+            pyautogui.click(res)
             logger.info("Chon Resurrect ")
             break
         except pyautogui.ImageNotFoundException:
@@ -157,15 +156,13 @@ def check_abandon(time_wait=2):
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                Abandon.img, confidence=0.8, region=(0, 0, 1936, 1119)
-            )
-
-            res_center = pyautogui.center(res)
+            res = pyautogui.locateCenterOnScreen(
+                Abandon.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
+            )           
             time.sleep(1)
-            pyautogui.moveTo(res_center)
+            pyautogui.moveTo(res)
             time.sleep(1)
-            pyautogui.click(res_center)
+            pyautogui.click(res)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -183,8 +180,8 @@ def check_proceed_to_round():
     i = 0
     while True:
         try:
-            res = pyautogui.locateOnScreen(
-                ProceedToRound.img, confidence=0.8, region=(0, 0, 1936, 1119)
+            res = pyautogui.locateCenterOnScreen(
+                ProceedToRound.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
             time.sleep(1)
             return True

@@ -68,7 +68,8 @@ Zet = HeroInfor("Zet")
 def buy_hero(hero_img):
     try:
         res = pyautogui.locateOnScreen(
-            hero_img, confidence=0.8, region=(0, 0, 1916, 1134))
+            hero_img, confidence=0.8, region=(0, 0, 1916, 1134)
+        )
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.click(res_center)
@@ -90,12 +91,12 @@ def buy_hero_infor(HeroInfor, number_hero=1):
     global count_buy_hero, hero_status_money
     i = 0
     number = HeroInfor.number
-    number_buy = number_hero-number
+    number_buy = number_hero - number
     while True:
         if i >= 2:
             break
-        i= i + 1
-        if number_buy > 0:            
+        i = i + 1
+        if number_buy > 0:
             number_buy = number_hero - number
             if buy_hero(HeroInfor.img) is True:
                 if button.check_not_money() is True:
@@ -106,16 +107,21 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     number_buy = number_hero - number
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
-                    logger.info(f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}")
+                    logger.info(
+                        f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}"
+                    )
         else:
-            logger.info(f"Ban da co {number_hero} hero {HeroInfor.name}, da du so luong can mua")
+            # logger.debug(
+            #     f"Ban da co {number_hero} hero {HeroInfor.name}, da du so luong can mua"
+            # )
             break
 
 
 def check_hero(HeroInfor):
     try:
         res = pyautogui.locateOnScreen(
-            HeroInfor.img, confidence=0.8, region=(0, 0, 1916, 1134))
+            HeroInfor.img, confidence=0.8, region=(0, 0, 1916, 1134)
+        )
         res_center = pyautogui.center(res)
         # pyautogui.moveTo(res_center)
         # time.sleep(0.2)
@@ -129,7 +135,8 @@ def check_hero(HeroInfor):
 def sell_hero(HeroInfor):
     try:
         res = pyautogui.locateOnScreen(
-            HeroInfor.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134))
+            HeroInfor.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134)
+        )
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
         pyautogui.rightClick(res_center)

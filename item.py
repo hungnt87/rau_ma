@@ -117,25 +117,10 @@ def buy_item_info(ItemInfo, number_item=3):
             logger.error("Khong tim thay hinh anh {}".format(ItemInfo.name))
             return False
     else:
-        logger.debug(
-            f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"
-        )
-        # for location in locations:
-        #     # res_center = pyautogui.center(location)
-        #     # pyautogui.moveTo(res_center)
-        #     #time.sleep(2)
-        #     logger.info("Found at:", location)
-        # pyautogui.moveTo(222,213)
-        # #pyautogui.click(res_center)
-        # if button.check_not_money():
-        #     logger.info("Bạn không đủ tiền mua item này")
-        #     break
-        # else:
-        #     number = number + 1
-        #     logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
-        #         ItemInfo.name, number_buy - number))
-        #     ItemInfo.number = number
-        #     count_buy_item = count_buy_item + 1
+        pass
+        # logger.debug(
+        #     f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"
+        # )
 
 
 Attack12_Kill1000_Unique_lv2 = ItemInfo("Attack12_Kill1000_Unique_lv2")
@@ -308,7 +293,9 @@ def buy_all_item_lv4():
 
     buy_item_info(ImmunityCount4_lv4, 2)
     buy_item_info(Minazuki_lv4)
-    buy_item_info(Luck60_Speed25_lv4, )
+    buy_item_info(
+        Luck60_Speed25_lv4,
+    )
     buy_item_info(Luck54_Arcane27_lv4, 1)
     buy_item_info(Health30_Speed20_lv4)
     buy_item_info(Evasion21_Attack5_lv4)
