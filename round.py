@@ -47,7 +47,7 @@ def round_all(round_number):
                 number_roll += 1
                 hero.buy_all_hero(round_number=n)
                 item.buy_all_item_investments(round_number=n)
-                item.buy_all_set_item()
+                item.buy_all_set_item(round_number=n)
                 item.buy_all_item(round_number=n)
                 if get_count_buy() >= number_buy:
                     break
