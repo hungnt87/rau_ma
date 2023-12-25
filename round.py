@@ -62,5 +62,6 @@ def round_all(round_number):
                 hero.reset_hero()
                 item.reset_item()
                 button.click_procceed_to_round()
-                time.sleep(130)
                 logger.info(f"Ket thuc round {n}")
+                time.sleep(130)
+                

@@ -229,8 +229,8 @@ def exit_game():
 
 
 def exit_game_round20():
-    logger.info("Thoat game round 20")
-    click(Back_On_Round20, 0)
+    bulk_disassembly()
+    click(Back, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
 
@@ -290,4 +290,5 @@ def bulk_disassembly():
 if __name__=="__main__":
     #bulk_disassembly()
     #exit_game()
+    exit_game_round20()
     pass
