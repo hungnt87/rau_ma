@@ -77,7 +77,7 @@ def buy_hero(hero_img):
     except pyautogui.ImageNotFoundException:
         return False
 
-
+#def main():
 hero_status_money = True
 
 
@@ -266,3 +266,5 @@ def test_reset_hero():
     print(Zet.number)
     print(DrowRanger.number)
     print(TemplarAssassin.number)
+if __name__ == "__main__":
+    pass

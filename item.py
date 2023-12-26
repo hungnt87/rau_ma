@@ -6,6 +6,7 @@ from datetime import datetime
 from log import logger
 
 count_buy_item = 0
+item_status_money = True
 
 
 class ItemInfo:
@@ -78,7 +79,7 @@ def buy_item(ItemInfo):
 #                 ItemInfo.number = number
 #                 count_buy_item = count_buy_item + 1
 #                 logger.info("Ban da mua item lan thu {}".format(count_buy_item))
-item_status_money = True
+
 
 
 def reset_status_money():

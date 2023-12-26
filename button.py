@@ -3,13 +3,14 @@ import time
 import pyscreeze
 from log import logger
 
-
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
         self.img = "data\\image\\" + para_name + ".png"
-
-
+status_money = True
+def reset_status_money():
+    global status_money
+    status_money = True
 Back = ButtonInfor("Back")
 Disconnect = ButtonInfor("Disconnect")
 LeaveGame = ButtonInfor("LeaveGame")
@@ -256,7 +257,35 @@ def enter_game():
 
 
 def roll_game():
-    click(Roll, 0)
+    logger.info("Click {}".format(Roll.name))
+    i = 0
+    global status_money
+    time.sleep(1)
+    while True:
+        try:
+            res = pyautogui.locateCenterOnScreen(
+                Roll.img,
+                confidence=0.9,
+                region=(0, 0, 1936, 1119),
+                grayscale=True
+            )            
+            pyautogui.moveTo(res)
+            time.sleep(1)
+            pyautogui.click(res)
+            time.sleep(1)
+            pyautogui.moveTo(200, 200)
+            if check_not_money() is True:
+                status_money = False
+                break
+            break
+        except pyautogui.ImageNotFoundException:
+            i = i + 1
+            if i > 60:
+                break
+            logger.debug(f"Dang tim hinh anh {Roll.name} so lan {i}")
+            time.sleep(1)
+        except TypeError:
+            logger.error(f"Khong tim thay hinh anh {Roll.name}")
 
 
 def click_procceed_to_round():
@@ -290,5 +319,5 @@ def bulk_disassembly():
 if __name__=="__main__":
     #bulk_disassembly()
     #exit_game()
-    exit_game_round20()
+    #exit_game_round20()
     pass
