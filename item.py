@@ -4,6 +4,7 @@ import button
 import pyscreeze
 from datetime import datetime
 from log import logger
+import pydirectinput
 
 count_buy_item = 0
 item_status_money = True
@@ -45,8 +46,8 @@ def buy_item(ItemInfo):
         )
         # logger.info("xuat hien ", ItemInfo.name)
         res_center = pyautogui.center(res)
-        pyautogui.moveTo(res_center)
-        pyautogui.click(res_center)
+        pydirectinput.moveTo(res_center)
+        pydirectinput.click(res_center)
         return True
     except pyautogui.ImageNotFoundException:
         return False
@@ -81,7 +82,6 @@ def buy_item(ItemInfo):
 #                 logger.info("Ban da mua item lan thu {}".format(count_buy_item))
 
 
-
 def reset_status_money():
     global item_status_money
     item_status_money = True
@@ -89,19 +89,43 @@ def reset_status_money():
 
 def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
+    ITEM_REGION = (536, 480, 1144, 350)
     global count_buy_item, item_status_money
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
         try:
             location = pyautogui.locateOnScreen(
-                ItemInfo.img, confidence=0.9, region=(0, 0, 1916, 1134)
+                ItemInfo.img, confidence=0.9, region=(ITEM_REGION), grayscale=True
             )
             res_center = pyautogui.center(location)
-            pyautogui.moveTo(res_center)
-            pyautogui.click(res_center)
-            pyautogui.moveTo(222, 213)
+            pydirectinput.moveTo(res_center)
+            pydirectinput.click(res_center)
+            pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
+                LOOK_REGION = (
+                    res_center.x,
+                    res_center.y,
+                    res_center.x + 267,
+                    res_center.y + 312,
+                )
+                try:
+                    location_look = pyautogui.locateOnScreen(
+                        button.Look.img,
+                        confidence=0.9,
+                        region=(LOOK_REGION),
+                        grayscale=True,
+                    )
+                    res_center_look = pyautogui.center(location_look)
+                    pydirectinput.moveTo(res_center_look)
+                    pydirectinput.click(res_center_look)
+                    logger.debug(
+                        f"Ban khong du tien mua {ItemInfo.name}, khoa de lan sau mua"
+                    )
+                except pyautogui.ImageNotFoundException:
+                    logger.debug(f"Khong tim thay hinh anh {ItemInfo.name}")
+                except Exception as e:
+                    logger.error(e)
                 item_status_money = False
             else:
                 number = number + 1
@@ -127,7 +151,7 @@ def buy_item_info(ItemInfo, number_item=3):
 Attack12_Kill1000_Unique_lv2 = ItemInfo("Attack12_Kill1000_Unique_lv2")
 Attack16_Arcane16_lv3 = ItemInfo("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = ItemInfo("Attack16_Strike16_lv3")
-Attack35_Kill1000_Unique_lv5= ItemInfo("Attack35_Kill1000_Unique_lv5")
+Attack35_Kill1000_Unique_lv5 = ItemInfo("Attack35_Kill1000_Unique_lv5")
 Bicycle_lv3 = ItemInfo("Bicycle_lv3")
 Cooldown16_Kill1000_Unique_lv2 = ItemInfo("Cooldown16_Kill1000_Unique_lv2")
 Cooldown21_lv5 = ItemInfo("Cooldown21_lv5")
@@ -377,8 +401,8 @@ def test_all_item():
 
 
 def reset_item():
-    global Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3,Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2,Critical20_Defense_lv3, Critical30_Defense10_lv5,Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
+    global Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
+    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
     global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
     global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
@@ -473,3 +497,7 @@ def reset_item():
     ShopDiscount_lv1.reset_item_number()
     SplitTheVoid_lv2.reset_item_number()
     TomeOfKnowledge_lv3.reset_item_number()
+
+
+if __name__ == "__main__":
+    pass
