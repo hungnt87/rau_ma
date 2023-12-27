@@ -58,7 +58,7 @@ BulkAll = ButtonInfor("BulkAll")
 ConfirmDisassemBingEquip = ButtonInfor("ConfirmDisassemBingEquip")
 Equip = ButtonInfor("Equip")
 ClickToClose = ButtonInfor("ClickToClose")
-
+Look=ButtonInfor("Look")
 def click(ButtonInfor, time_sleep=0):
     """Click button infor
     Args:
