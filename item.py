@@ -132,6 +132,7 @@ def buy_item_info(ItemInfo, number_item=3):
                     logger.error(e)
                 item_status_money = False
                 previous_item.append(location)
+                return False
             else:
                 number = number + 1
                 number_buy = number_item - number

@@ -97,7 +97,7 @@ def reset_hero_status_money():
 
 
 def buy_hero_infor(HeroInfor, number_hero=1):
-    logger.info("Bat dau tim hero {}".format(HeroInfor.name))
+    #logger.debug("Bat dau tim hero {}".format(HeroInfor.name))
     global count_buy_hero, hero_status_money
     i = 0
     number = HeroInfor.number
@@ -216,6 +216,7 @@ def buy_zet():
 
 
 def buy_all_hero(round_number):
+    logger.info(f"Bat dau mua hero in round: {round_number}")
     if round_number == 3:
         buy_dazzale()
         buy_oracle()
