@@ -30,58 +30,6 @@ def get_count_buy_item():
     return count_buy_item
 
 
-def buy_item(ItemInfo):
-    """
-    This function is used to buy a specific item.
-
-    Parameters:
-    ItemInfo (ItemInfo object): The information of the item to buy.
-
-    Returns:
-    True if the item is bought successfully, False otherwise.
-    """
-    try:
-        res = pyautogui.locateOnScreen(
-            ItemInfo.img, confidence=0.8, region=(0, 0, 1916, 1134)
-        )
-        # logger.info("xuat hien ", ItemInfo.name)
-        res_center = pyautogui.center(res)
-        pydirectinput.moveTo(res_center)
-        pydirectinput.click(res_center)
-        return True
-    except pyautogui.ImageNotFoundException:
-        return False
-
-
-# def buy_item_info(ItemInfo, number_item=5):
-#     """
-#     This function is used to buy a specific number of a specific item.
-
-#     Parameters:
-#     ItemInfo (ItemInfo object): The information of the item to buy.
-#     number_item (int): The number of items to buy.
-
-#     Returns:
-#     Nothing.
-#     """
-#     logger.info("Bạn đang tìm item {}".format(ItemInfo.name))
-#     global count_buy_item
-#     number = ItemInfo.number
-#     if number_item > number:
-#         number_buy = number_item - number
-#         buy = buy_item(ItemInfo)
-#         if buy is True:
-#             if button.check_not_money():
-#                 break
-#             else:
-#                 number = number + 1
-#                 logger.info("Bạn đã mua thành công 1 cái {}, bạn cần mua thêm {} nữa".format(
-#                     ItemInfo.name, number_buy - number))
-#                 ItemInfo.number = number
-#                 count_buy_item = count_buy_item + 1
-#                 logger.info("Ban da mua item lan thu {}".format(count_buy_item))
-
-
 def reset_status_money():
     global item_status_money
     item_status_money = True
@@ -100,36 +48,17 @@ def buy_item_info(ItemInfo, number_item=3):
                 confidence=0.9, 
                 region=(ITEM_REGION),
                 grayscale=True
-            )
-            #res_center = pyautogui.center(location)
-            #pydirectinput.moveTo(location.x, location.y)
+            )            
             pydirectinput.click(location.x, location.y)
             pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
                 LOOK_REGION = (
                     location.x,
                     location.y,
-                    location.x + 267,
-                    location.y + 312,
+                    267,
+                    312
                 )
-                try:
-                    location_look = pyautogui.locateCenterOnScreen(
-                        button.Look.img,
-                        confidence=0.9,
-                        region=(LOOK_REGION),
-                        grayscale=True,
-                    )
-                    #res_center_look = pyautogui.center(location_look)
-                    #pydirectinput.moveTo(location_look.x, location_look.y)
-                    pydirectinput.click(location_look.x, location_look.y)
-                    pydirectinput.moveTo(222, 213)
-                    logger.debug(
-                        f"Ban khong du tien mua {ItemInfo.name}, khoa de lan sau mua"
-                    )
-                except pyautogui.ImageNotFoundException:
-                    logger.debug(f"Khong tim thay hinh anh {ItemInfo.name}")
-                except Exception as e:
-                    logger.error(e)
+                button.click_lock(ItemInfo.name,LOOK_REGION)               
                 item_status_money = False
                 previous_item.append(location)
                 return False
@@ -240,13 +169,14 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 def buy_all_previous_item():
     global previous_item
     if len(previous_item) > 0:
+        logger.debug("Ban dang mua lai item da khoa o round truoc")
         for item in previous_item:
             pydirectinput.click(item.x, item.y)
             pydirectinput.moveTo(222, 213)
             time.sleep(0.5)
         previous_item = list()
     else:
-        logger.debug("Khong co item nao de mua")    
+        logger.debug("Khong co item khoa o vong truoc")    
 
 def buy_all_set_item(round_number):
     logger.debug("Ban dang mua set item")
@@ -307,7 +237,7 @@ def buy_all_item_lv2():
     buy_item_info(Luck32ForPrecise_lv2)
     buy_item_info(SplitTheVoid_lv2)
     buy_item_info(MasterChefHat_lv2)
-    buy_item_info(Attack12_Kill1000_Unique_lv2, 1)
+    
     buy_item_info(ExtraDamage13_For_Precise_lv2)
     buy_item_info(Defense20_Speed10_lv2)
     buy_item_info(Evasion12_Strike6_lv2)
