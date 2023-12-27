@@ -71,7 +71,7 @@ def round_all(round_number):
                 if get_status_money() is False:
                     break
                 number_roll += 1
-                item.buy_all_previous_item()
+                #item.buy_all_previous_item()
                 hero.buy_all_hero(round_number=n)
                 item.buy_all_item_investments(round_number=n)
                 item.buy_all_set_item(round_number=n)
