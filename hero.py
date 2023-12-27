@@ -2,12 +2,17 @@ import pyautogui
 import time
 import button
 from log import logger
+from PIL import Image
+#import opencv
 
 
 class HeroInfor:
+    HERO_IMG = None
+    
     def __init__(self, para_name, para_number_hero=0):
-        self.name = para_name
-        self.img = "data\\image\\hero\\" + para_name + ".png"
+        self.name = para_name        
+        #self.img = get_hero_img(para_name, self.HERO_IMG)
+        self.img = f"data/imagehero/{para_name}.png"
         self.lv1_img = "data\\image\\hero\\" + para_name + "_lv1.png"
         self.lv2_img = "data\\image\\hero\\" + para_name + "_lv2.png"
         self.lv3_img = "data\\image\\hero\\" + para_name + "_lv3.png"
@@ -17,8 +22,13 @@ class HeroInfor:
 
     def reset_hero_number(self):
         self.number = 0
-
-
+    
+def get_hero_img(para_name, hero_img=None):
+        #global HERO_IMG
+    if hero_img is None:
+        hero_img =Image.open(f"data/image/hero/{para_name}.png")
+    return hero_img
+    
 count_buy_hero = 0
 
 
@@ -266,5 +276,16 @@ def test_reset_hero():
     print(Zet.number)
     print(DrowRanger.number)
     print(TemplarAssassin.number)
+def install_hero():
+    #Clinkz=HeroInfor("Clinkz")
+    if Sniper.img is None:
+        logger.debug("None")
+    else:   
+        logger.debug("da ton tai")
 if __name__ == "__main__":
+    #install_hero()
+    if Sniper.img is None:
+        logger.debug("None")
+    else:   
+        logger.debug("da ton tai")
     pass
