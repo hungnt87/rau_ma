@@ -8,7 +8,7 @@ import pydirectinput
 
 count_buy_item = 0
 item_status_money = True
-
+previous_item = list()
 
 class ItemInfo:
     def __init__(self, para_name, para_item_number=0):
@@ -90,7 +90,7 @@ def reset_status_money():
 def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
     ITEM_REGION = (498, 500, 1212, 386)
-    global count_buy_item, item_status_money
+    global count_buy_item, item_status_money, previous_item
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
@@ -131,6 +131,7 @@ def buy_item_info(ItemInfo, number_item=3):
                 except Exception as e:
                     logger.error(e)
                 item_status_money = False
+                previous_item.append(location)
             else:
                 number = number + 1
                 number_buy = number_item - number
@@ -235,6 +236,16 @@ ShopDiscount_lv1 = ItemInfo("ShopDiscount_lv1")
 SplitTheVoid_lv2 = ItemInfo("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
+def buy_all_previous_item():
+    global previous_item
+    if len(previous_item) > 0:
+        for item in previous_item:
+            pydirectinput.click(item.x, item.y)
+            pydirectinput.moveTo(222, 213)
+            time.sleep(0.5)
+        previous_item = list()
+    else:
+        logger.debug("Khong co item nao de mua")    
 
 def buy_all_set_item(round_number):
     logger.debug("Ban dang mua set item")
@@ -507,4 +518,5 @@ if __name__ == "__main__":
     #reset_item()
     #time.sleep(2)
     #buy_item_info(PickupRange100_lv1)
+    buy_all_previous_item()
     pass
