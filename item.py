@@ -122,6 +122,7 @@ def buy_item_info(ItemInfo, number_item=3):
                     #res_center_look = pyautogui.center(location_look)
                     #pydirectinput.moveTo(location_look.x, location_look.y)
                     pydirectinput.click(location_look.x, location_look.y)
+                    pydirectinput.moveTo(222, 213)
                     logger.debug(
                         f"Ban khong du tien mua {ItemInfo.name}, khoa de lan sau mua"
                     )
