@@ -89,18 +89,21 @@ def reset_status_money():
 
 def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
-    ITEM_REGION = (536, 480, 1144, 350)
+    ITEM_REGION = (498, 500, 1212, 386)
     global count_buy_item, item_status_money
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
         try:
-            location = pyautogui.locateOnScreen(
-                ItemInfo.img, confidence=0.9, region=(ITEM_REGION), grayscale=True
+            location = pyautogui.locateCenterOnScreen(
+                ItemInfo.img, 
+                confidence=0.9, 
+                region=(ITEM_REGION),
+                grayscale=True
             )
-            res_center = pyautogui.center(location)
-            pydirectinput.moveTo(res_center)
-            pydirectinput.click(res_center)
+            #res_center = pyautogui.center(location)
+            #pydirectinput.moveTo(location.x, location.y)
+            pydirectinput.click(location.x, location.y)
             pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
                 LOOK_REGION = (
@@ -110,15 +113,15 @@ def buy_item_info(ItemInfo, number_item=3):
                     res_center.y + 312,
                 )
                 try:
-                    location_look = pyautogui.locateOnScreen(
+                    location_look = pyautogui.locateCenterOnScreen(
                         button.Look.img,
                         confidence=0.9,
                         region=(LOOK_REGION),
                         grayscale=True,
                     )
-                    res_center_look = pyautogui.center(location_look)
-                    pydirectinput.moveTo(res_center_look)
-                    pydirectinput.click(res_center_look)
+                    #res_center_look = pyautogui.center(location_look)
+                    #pydirectinput.moveTo(location_look.x, location_look.y)
+                    pydirectinput.click(location_look.x, location_look.y)
                     logger.debug(
                         f"Ban khong du tien mua {ItemInfo.name}, khoa de lan sau mua"
                     )
@@ -138,8 +141,8 @@ def buy_item_info(ItemInfo, number_item=3):
                 return True
         except pyautogui.ImageNotFoundException:
             return False
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(ItemInfo.name))
+        except Exception as e:  
+            logger.error(e)
             return False
     else:
         pass
@@ -500,4 +503,7 @@ def reset_item():
 
 
 if __name__ == "__main__":
+    #reset_item()
+    #time.sleep(2)
+    #buy_item_info(PickupRange100_lv1)
     pass
