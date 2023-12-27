@@ -3,16 +3,18 @@ import time
 import button
 from log import logger
 from PIL import Image
-#import opencv
+import pydirectinput
+
+# import opencv
 
 
 class HeroInfor:
     HERO_IMG = None
-    
+
     def __init__(self, para_name, para_number_hero=0):
-        self.name = para_name        
+        self.name = para_name
         self.img = get_hero_img(para_name, self.HERO_IMG)
-        #self.img = f"data/image/hero/{para_name}.png"
+        # self.img = f"data/image/hero/{para_name}.png"
         self.lv1_img = "data\\image\\hero\\" + para_name + "_lv1.png"
         self.lv2_img = "data\\image\\hero\\" + para_name + "_lv2.png"
         self.lv3_img = "data\\image\\hero\\" + para_name + "_lv3.png"
@@ -22,13 +24,15 @@ class HeroInfor:
 
     def reset_hero_number(self):
         self.number = 0
-    
+
+
 def get_hero_img(para_name, hero_img=None):
-        #global HERO_IMG
+    # global HERO_IMG
     if hero_img is None:
-        hero_img =Image.open(f"data/image/hero/{para_name}.png")
+        hero_img = Image.open(f"data/image/hero/{para_name}.png")
     return hero_img
-    
+
+
 count_buy_hero = 0
 
 
@@ -78,16 +82,22 @@ Zet = HeroInfor("Zet")
 def buy_hero(hero_img):
     try:
         res = pyautogui.locateOnScreen(
-            hero_img, confidence=0.8, region=(0, 0, 1916, 1134)
+            hero_img, confidence=0.9, region=(537, 125, 1158, 406), grayscale=True
         )
         res_center = pyautogui.center(res)
-        pyautogui.moveTo(res_center)
-        pyautogui.click(res_center)
-        return True
+        #pydirectinput.moveTo(res_center.x, res_center.y)
+        pydirectinput.click(res_center.x, res_center.y)
+        pydirectinput.moveTo(201,213)
+        return res_center
     except pyautogui.ImageNotFoundException:
+        # logger.debug("Khong tim thay hinh anh {}".format(hero_img))
+        return False
+    except Exception as e:
+        logger.error(e)
         return False
 
-#def main():
+
+# def main():
 hero_status_money = True
 
 
@@ -97,7 +107,7 @@ def reset_hero_status_money():
 
 
 def buy_hero_infor(HeroInfor, number_hero=1):
-    #logger.debug("Bat dau tim hero {}".format(HeroInfor.name))
+    # logger.debug("Bat dau tim hero {}".format(HeroInfor.name))
     global count_buy_hero, hero_status_money
     i = 0
     number = HeroInfor.number
@@ -106,12 +116,17 @@ def buy_hero_infor(HeroInfor, number_hero=1):
         if i >= 2:
             break
         i = i + 1
+        #logger.debug(i)
         if number_buy > 0:
             number_buy = number_hero - number
-            if buy_hero(HeroInfor.img) is True:
-                if button.check_not_money() is True:
+            location = buy_hero(HeroInfor.img)
+            if location is not False:
+                if button.check_not_money() is True:                    
+                    box_lock = (location.x, location.y, 267, 312)
+                    button.click_lock_hero(box_lock)
                     hero_status_money = False
-                    break
+                    return False
+                    #break
                 else:
                     number = number + 1
                     number_buy = number_hero - number
@@ -120,10 +135,11 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     logger.info(
                         f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}"
                     )
+                    return True
+            else:
+                logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
+                time.sleep(0.5)
         else:
-            # logger.debug(
-            #     f"Ban da co {number_hero} hero {HeroInfor.name}, da du so luong can mua"
-            # )
             break
 
 
@@ -132,11 +148,7 @@ def check_hero(HeroInfor):
         res = pyautogui.locateOnScreen(
             HeroInfor.img, confidence=0.8, region=(0, 0, 1916, 1134)
         )
-        res_center = pyautogui.center(res)
-        # pyautogui.moveTo(res_center)
-        # time.sleep(0.2)
-        # yautogui.click(res_center)
-        # time.sleep(0.2)
+        res_center = pyautogui.center(res)       
         return res_center
     except pyautogui.ImageNotFoundException:
         return None
@@ -277,16 +289,18 @@ def test_reset_hero():
     print(Zet.number)
     print(DrowRanger.number)
     print(TemplarAssassin.number)
+
+
 def install_hero():
-    #Clinkz=HeroInfor("Clinkz")
+    # Clinkz=HeroInfor("Clinkz")
     if Sniper.img is None:
         logger.debug("None")
-    else:   
+    else:
         logger.debug("da ton tai")
+
+
 if __name__ == "__main__":
-    #install_hero()
-    if Sniper.img is None:
-        logger.debug("None")
-    else:   
-        logger.debug("da ton tai")
+    # install_hero()
+    time.sleep(2)
+    buy_hero_infor(Zet, 3)
     pass
