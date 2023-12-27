@@ -107,15 +107,15 @@ def check_not_money():
             pyautogui.locateCenterOnScreen(
                 NotMoney.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
+            logger.debug("Ban khong du tien, di tiep vong sau")
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            logger.debug("Dang kiem tra ban co tien khong so lan {}".format(i))
             time.sleep(0.2)
             if i >= 2:
                 return False
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(NotMoney.name))
+        except Exception as e:
+            logger.error(e)
             return False
 
 
@@ -126,7 +126,6 @@ def check_find_item():
             res = pyautogui.locateCenterOnScreen(
                 Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-
             pyautogui.moveTo(res)
             pyautogui.click(res)
             pyautogui.moveTo(200, 200)
@@ -135,11 +134,10 @@ def check_find_item():
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
-                break
-            logger.debug("Cho xuat hien Recycle so lan {}".format(i))
-            time.sleep(1)
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(Recycle.name))
+                break            #logger.debug("Cho xuat hien Recycle so lan {}".format(i))
+            time.sleep(0.5)
+        except Exception as e:
+            logger.error(e)
             break
 
 
@@ -161,11 +159,10 @@ def check_resurrect(time_wait=10):
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
-                break
-            logger.debug("Cho xuat hien Resurrect {}".format(i))
+                break           
             time.sleep(1)
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(Resurrect.name))
+        except Exception as e:
+            logger.error(e)
 
 
 def check_abandon(time_wait=2):
@@ -185,10 +182,10 @@ def check_abandon(time_wait=2):
             i = i + 1
             if i > time_wait:
                 break
-            logger.debug("Cho xuat hien Abandon so lan {}".format(i))
-            time.sleep(1)
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(Abandon.name))
+           #logger.debug("Cho xuat hien Abandon so lan {}".format(i))
+            time.sleep(0.5)
+        except Exception as e:
+            logger.error(e)
             break
 
 
@@ -212,13 +209,13 @@ def check_proceed_to_round():
             i = i + 1
             if i > 20:
                 return False
-            logger.debug("Cho xuat hien {} lan {}".format(ProceedToRound.name, i))
+            logger.debug(f"Cho xuat hien {ProceedToRound.name} lan {i}")
             time.sleep(1)
         except pyscreeze.ImageNotFoundException:
             logger.error("khong tim thay hinh anh")
-
-        except TypeError:
-            logger.error("Khong tim thay hinh anh {}".format(ProceedToRound.name))
+            return False
+        except Exception as e:
+            logger.error(e)
             return False
 
 
