@@ -107,10 +107,10 @@ def buy_item_info(ItemInfo, number_item=3):
             pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
                 LOOK_REGION = (
-                    res_center.x,
-                    res_center.y,
-                    res_center.x + 267,
-                    res_center.y + 312,
+                    location.x,
+                    location.y,
+                    location.x + 267,
+                    location.y + 312,
                 )
                 try:
                     location_look = pyautogui.locateCenterOnScreen(
