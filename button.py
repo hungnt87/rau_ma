@@ -2,15 +2,23 @@ import pyautogui
 import time
 import pyscreeze
 from log import logger
+import pydirectinput
+
 
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
         self.img = "data\\image\\" + para_name + ".png"
+
+
 status_money = True
+
+
 def reset_status_money():
     global status_money
     status_money = True
+
+
 Back = ButtonInfor("Back")
 Disconnect = ButtonInfor("Disconnect")
 LeaveGame = ButtonInfor("LeaveGame")
@@ -58,16 +66,12 @@ BulkAll = ButtonInfor("BulkAll")
 ConfirmDisassemBingEquip = ButtonInfor("ConfirmDisassemBingEquip")
 Equip = ButtonInfor("Equip")
 ClickToClose = ButtonInfor("ClickToClose")
-Look=ButtonInfor("Look")
-def click(ButtonInfor, time_sleep=0):
-    """Click button infor
-    Args:
-        ButtonInfor: ButtonInfor
-        time_sleep: time sleep after click
-    """
-    logger.info("Click {}".format(ButtonInfor.name))
+Look = ButtonInfor("Look")
+Lock_hero = ButtonInfor("Lock_hero")
+
+def check_button(ButtonInfor):
     i = 0
-    time.sleep(1)
+    #time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
@@ -76,28 +80,49 @@ def click(ButtonInfor, time_sleep=0):
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
             )
-            if res is not None and time_sleep > 0:
-                logger.info(
-                    "Cho xuat hien {} trong thoi gian {}".format(
-                        ButtonInfor.name, time_sleep
-                    )
-                )
-            time.sleep(time_sleep)
-            # time.sleep(1)
-            pyautogui.moveTo(res)
-            time.sleep(1)
-            pyautogui.click(res)
-            time.sleep(1)
-            pyautogui.moveTo(200, 200)
-            break
+            if res is not None:
+                logger.info("Da tim thay {}".format(ButtonInfor.name))
+                return True            
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
                 break
             logger.debug("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
-        except TypeError:
+            #return False
+        except Exception as e:
+            logger.error(e)
+            return False
+
+
+def click(ButtonInfor, time_sleep=2):
+    """Click button infor
+    Args:
+        ButtonInfor: ButtonInfor
+        time_sleep: time sleep after click
+    """
+    logger.info("Click {}".format(ButtonInfor.name))
+    #time.sleep(time_sleep)
+    if check_button(ButtonInfor) is True:
+        time.sleep(time_sleep)
+        try:
+            res = pyautogui.locateCenterOnScreen(
+                ButtonInfor.img,
+                confidence=0.9,
+                region=(0, 0, 1936, 1119),
+                grayscale=True,
+            )            
+            #time.sleep(time_sleep)
+            # time.sleep(1)
+            pydirectinput.moveTo(res.x, res.y)
+            time.sleep(1)
+            pydirectinput.click(res.x, res.y)
+            time.sleep(1)
+            pydirectinput.moveTo(200, 200)
+        except pyautogui.ImageNotFoundException:
             logger.error("Khong tim thay hinh anh {}".format(ButtonInfor.name))
+        except Exception as e:
+            logger.error(e)
 
 
 def check_not_money():
@@ -134,7 +159,7 @@ def check_find_item():
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
-                break            #logger.debug("Cho xuat hien Recycle so lan {}".format(i))
+                break  # logger.debug("Cho xuat hien Recycle so lan {}".format(i))
             time.sleep(0.5)
         except Exception as e:
             logger.error(e)
@@ -159,7 +184,7 @@ def check_resurrect(time_wait=10):
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
-                break           
+                break
             time.sleep(1)
         except Exception as e:
             logger.error(e)
@@ -182,7 +207,7 @@ def check_abandon(time_wait=2):
             i = i + 1
             if i > time_wait:
                 break
-           #logger.debug("Cho xuat hien Abandon so lan {}".format(i))
+            # logger.debug("Cho xuat hien Abandon so lan {}".format(i))
             time.sleep(0.5)
         except Exception as e:
             logger.error(e)
@@ -235,15 +260,15 @@ def exit_game_round20():
 
 def enter_game():
     logger.info("Vao game")
-    click(CreateCustomLobby, 1)
-    click(ServerLocaltion, 1)
-    click(ServerLocaltion_Singapore, 1)
-    click(CreatePassLobby, 1)
+    click(CreateCustomLobby)
+    click(ServerLocaltion)
+    click(ServerLocaltion_Singapore)
+    click(CreatePassLobby)
     pyautogui.write("asx")  # add password
-    click(CreateGame, 2)
+    click(CreateGame)
     # time.sleep(4)
-    click(StartGame, 2)
-    click(Accept, 2)
+    click(StartGame,5)
+    click(Accept)
     time.sleep(30)
     click(Confirm, 10)
     # click(ChallengeMax, 2)
@@ -257,19 +282,16 @@ def roll_game():
     logger.info("Click {}".format(Roll.name))
     i = 0
     global status_money
-    time.sleep(1)
+    #time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                Roll.img,
-                confidence=0.9,
-                region=(0, 0, 1936, 1119),
-                grayscale=True
-            )            
-            pyautogui.moveTo(res)
-            time.sleep(1)
-            pyautogui.click(res)
-            time.sleep(1)
+                Roll.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=True
+            )
+            #pyautogui.moveTo(res)
+            #time.sleep(1)
+            pydirectinput.click(res.x, res.y)
+            #time.sleep(1)
             pyautogui.moveTo(200, 200)
             if check_not_money() is True:
                 status_money = False
@@ -281,8 +303,9 @@ def roll_game():
                 break
             logger.debug(f"Dang tim hinh anh {Roll.name} so lan {i}")
             time.sleep(1)
-        except TypeError:
-            logger.error(f"Khong tim thay hinh anh {Roll.name}")
+        except Exception as e:
+            logger.error(e)
+            break
 
 
 def click_procceed_to_round():
@@ -313,8 +336,63 @@ def bulk_disassembly():
         return False
 
 
-if __name__=="__main__":
-    #bulk_disassembly()
-    #exit_game()
-    #exit_game_round20()
+def click_lock(name_item, box):
+    logger.info("Click lock")
+    i = 0
+    while True:
+        try:
+            res = pyautogui.locateCenterOnScreen(
+                Look.img, confidence=0.9, 
+                region=box, 
+                grayscale=True
+            )
+            # pydirectinput.moveTo(res)
+            # time.sleep(1)
+            pydirectinput.click(res.x, res.y)
+            # time.sleep(1)
+            pydirectinput.moveTo(200, 200)
+            logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
+            break
+        except pyautogui.ImageNotFoundException:
+            i = i + 1
+            if i > 2:
+                break
+            logger.debug(f"Dang tim hinh anh {Look.name} so lan {i}")
+            time.sleep(1)
+        except TypeError:
+            logger.error(f"Khong tim thay hinh anh {Look.name}")
+def click_lock_hero(box):
+    logger.info("Click lock")
+    i = 0
+    #box=(828,169,296,348)
+    #box = (687,237,158,276)
+    while True:
+        try:
+            res = pyautogui.locateCenterOnScreen(
+                Lock_hero.img, confidence=0.9, 
+                region=box, 
+                grayscale=True
+            )
+            #pydirectinput.moveTo(res.x, res.y+20)
+            # time.sleep(1)
+            pydirectinput.click(res.x, res.y+20)
+            # time.sleep(1)
+            pydirectinput.moveTo(200, 200)
+            logger.debug(f"Ban khong du tien mua  khoa de lan sau mua")
+            break
+        except pyautogui.ImageNotFoundException:
+            i = i + 1
+            if i > 2:
+                break
+            logger.debug(f"Dang tim hinh anh {Lock_hero.name} so lan {i}")
+            time.sleep(0.5)
+        except Exception as e:
+            logger.error(e)
+
+if __name__ == "__main__":
+    # bulk_disassembly()
+    # exit_game()
+    # exit_game_round20()
+    time.sleep(1)
+    click_lock_hero()
     pass
