@@ -202,7 +202,7 @@ def check_abandon(time_wait=2):
             #time.sleep(1)
             #pydirectinput.moveTo(res.x, res.y)
             #time.sleep(1)
-            pydirectinput.click(res.x)
+            pydirectinput.click(res.x,res.y)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
