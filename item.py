@@ -10,6 +10,7 @@ count_buy_item = 0
 item_status_money = True
 previous_item = list()
 
+
 class ItemInfo:
     def __init__(self, para_name, para_item_number=0):
         self.name = para_name
@@ -44,21 +45,13 @@ def buy_item_info(ItemInfo, number_item=3):
     if number_buy > 0:
         try:
             location = pyautogui.locateCenterOnScreen(
-                ItemInfo.img, 
-                confidence=0.9, 
-                region=(ITEM_REGION),
-                grayscale=True
-            )            
+                ItemInfo.img, confidence=0.9, region=(ITEM_REGION), grayscale=True
+            )
             pydirectinput.click(location.x, location.y)
             pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
-                LOOK_REGION = (
-                    location.x,
-                    location.y,
-                    267,
-                    312
-                )
-                button.click_lock(ItemInfo.name,LOOK_REGION)               
+                LOOK_REGION = (location.x, location.y, 267, 312)
+                button.click_lock(ItemInfo.name, LOOK_REGION)
                 item_status_money = False
                 previous_item.append(location)
                 return False
@@ -73,7 +66,7 @@ def buy_item_info(ItemInfo, number_item=3):
                 return True
         except pyautogui.ImageNotFoundException:
             return False
-        except Exception as e:  
+        except Exception as e:
             logger.error(e)
             return False
     else:
@@ -83,6 +76,7 @@ def buy_item_info(ItemInfo, number_item=3):
         # )
 
 
+Attack10EveryBuyPlus5_lv2 = ItemInfo("Attack10EveryBuyPlus5_lv2")
 Attack12_Kill1000_Unique_lv2 = ItemInfo("Attack12_Kill1000_Unique_lv2")
 Attack16_Arcane16_lv3 = ItemInfo("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = ItemInfo("Attack16_Strike16_lv3")
@@ -99,6 +93,7 @@ Critical40_Kill1000_Unique_lv5 = ItemInfo("Critical40_Kill1000_Unique_lv5")
 Defense20_Speed10_lv2 = ItemInfo("Defense20_Speed10_lv2")
 EnemyCount10_lv6 = ItemInfo("EnemyCount10_lv6")
 Evasion6_For_Precise_lv1 = ItemInfo("Evasion6_For_Precise_lv1")
+Evasion8_Speed5_lv1 = ItemInfo("Evasion8_Speed5_lv1")
 Evasion12_Strike6_lv2 = ItemInfo("Evasion12_Strike6_lv2")
 Evasion13_Health13_lv2 = ItemInfo("Evasion13_Health13_lv2")
 Evasion16_Investment16_lv3 = ItemInfo("Evasion16_Investment16_lv3")
@@ -166,6 +161,7 @@ ShopDiscount_lv1 = ItemInfo("ShopDiscount_lv1")
 SplitTheVoid_lv2 = ItemInfo("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
+
 def buy_all_previous_item():
     global previous_item
     if len(previous_item) > 0:
@@ -176,7 +172,8 @@ def buy_all_previous_item():
             time.sleep(0.5)
         previous_item = list()
     else:
-        logger.debug("Khong co item khoa o vong truoc")    
+        logger.debug("Khong co item khoa o vong truoc")
+
 
 def buy_all_set_item(round_number):
     logger.debug("Ban dang mua set item")
@@ -186,6 +183,7 @@ def buy_all_set_item(round_number):
     buy_item_info(Set_Investment108_lv2, 1)
     buy_item_info(Set_Defense188_lv3, 1)
     buy_item_info(Set_ExtraDamage17_lv4, 1)
+    buy_item_info(Attack10EveryBuyPlus5_lv2, 5)
     if round_number < 18:
         buy_item_info(Attack12_Kill1000_Unique_lv2, 1)
         buy_item_info(Cooldown16_Kill1000_Unique_lv2, 1)
@@ -219,17 +217,16 @@ def buy_all_item_round3():
 
 def buy_all_item_lv1():
     logger.debug("Ban dang mua item lv1")
-    # buy_item_info(Investment88_For_Precise_lv1)
+
     buy_item_info(ShopDiscount_lv1, 5)
-    # buy_item_info(PickupRange100_lv1, 2)
-    buy_item_info(Exp20_Range5_lv1, 2)
+    buy_item_info(Evasion8_Speed5_lv1)
+    buy_item_info(Exp20_Range5_lv1)
     buy_item_info(Evasion6_For_Precise_lv1)
-    buy_item_info(HealthRegen10_For_Precise_lv1, 2)
+    buy_item_info(HealthRegen10_For_Precise_lv1)
 
 
 def buy_all_item_lv2():
-    logger.debug("Ban dang mua item lv2")
-    # buy_item_info(Investment138_Defense3_lv2)
+    logger.debug("Ban dang mua item lv2")    
     buy_item_info(PreciseDamage12_Speed12_lv2)
     buy_item_info(Exp40_Luck6_lv2)
     buy_item_info(Exp45_Attack4_lv2)
@@ -237,7 +234,7 @@ def buy_all_item_lv2():
     buy_item_info(Luck32ForPrecise_lv2)
     buy_item_info(SplitTheVoid_lv2)
     buy_item_info(MasterChefHat_lv2)
-    
+
     buy_item_info(ExtraDamage13_For_Precise_lv2)
     buy_item_info(Defense20_Speed10_lv2)
     buy_item_info(Evasion12_Strike6_lv2)
@@ -347,8 +344,8 @@ def test_all_item():
 
 
 def reset_item():
-    global Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion12_Strike6_lv2
+    global Attack10EveryBuyPlus5_lv2, Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
+    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1,Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
     global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
     global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
@@ -364,6 +361,7 @@ def reset_item():
     global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6, RevivalCount1_Health5_lv4
     global Set_Defense8_lv2, Set_Defense188_lv3, Set_ExtraDamage17_lv4, Set_Investment108_lv2, ShopDiscount_lv1, SplitTheVoid_lv2, TomeOfKnowledge_lv3
 
+    Attack10EveryBuyPlus5_lv2.reset_item_number()
     Attack12_Kill1000_Unique_lv2.reset_item_number()
     Attack16_Arcane16_lv3.reset_item_number()
     Attack16_Strike16_lv3.reset_item_number()
@@ -380,6 +378,7 @@ def reset_item():
     Defense20_Speed10_lv2.reset_item_number()
     EnemyCount10_lv6.reset_item_number()
     Evasion6_For_Precise_lv1.reset_item_number()
+    Evasion8_Speed5_lv1.reset_item_number()
     Evasion13_Health13_lv2.reset_item_number()
     Evasion13_Health13_lv2.reset_item_number()
     Evasion16_Investment16_lv3.reset_item_number()
@@ -446,8 +445,8 @@ def reset_item():
 
 
 if __name__ == "__main__":
-    #reset_item()
-    #time.sleep(2)
-    #buy_item_info(PickupRange100_lv1)
+    # reset_item()
+    # time.sleep(2)
+    # buy_item_info(PickupRange100_lv1)
     buy_all_previous_item()
     pass

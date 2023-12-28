@@ -80,9 +80,9 @@ def check_button(ButtonInfor):
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
             )
-            if res is not None:
-                logger.info("Da tim thay {}".format(ButtonInfor.name))
-                return True            
+            # if res is not None:
+            #     logger.info("Da tim thay {}".format(ButtonInfor.name))
+            return True            
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
@@ -101,10 +101,11 @@ def click(ButtonInfor, time_sleep=2):
         ButtonInfor: ButtonInfor
         time_sleep: time sleep after click
     """
-    logger.info("Click {}".format(ButtonInfor.name))
+    
     #time.sleep(time_sleep)
     if check_button(ButtonInfor) is True:
         time.sleep(time_sleep)
+        logger.info("Click {}".format(ButtonInfor.name))
         try:
             res = pyautogui.locateCenterOnScreen(
                 ButtonInfor.img,
@@ -120,7 +121,7 @@ def click(ButtonInfor, time_sleep=2):
             time.sleep(1)
             pydirectinput.moveTo(200, 200)
         except pyautogui.ImageNotFoundException:
-            logger.error("Khong tim thay hinh anh {}".format(ButtonInfor.name))
+            logger.debug("Khong tim thay hinh anh {}".format(ButtonInfor.name))
         except Exception as e:
             logger.error(e)
 
@@ -144,21 +145,21 @@ def check_not_money():
             return False
 
 
-def check_find_item():
+def check_find_item(time_wait=2):
     i = 0
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
                 Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-            pyautogui.moveTo(res)
-            pyautogui.click(res)
+            #pydirectinput.moveTo(res.x, res.y)
+            pydirectinput.click(res.x, res.y)
             pyautogui.moveTo(200, 200)
-            logger.info("Khong lay item")
+            #logger.info("Khong lay item")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            if i > 2:
+            if i > time_wait:
                 break  # logger.debug("Cho xuat hien Recycle so lan {}".format(i))
             time.sleep(0.5)
         except Exception as e:
@@ -176,10 +177,10 @@ def check_resurrect(time_wait=10):
                 region=(0, 0, 1920, 1135),
                 grayscale=False,
             )
-            time.sleep(1)
-            pyautogui.moveTo(res)
-            pyautogui.click(res)
-            logger.info("Chon Resurrect ")
+            #time.sleep(1)
+            #pydirectinput.moveTo(res.x, res.y)
+            pyautogui.click(res.x, res.y)
+            #logger.info("Chon Resurrect ")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -191,17 +192,17 @@ def check_resurrect(time_wait=10):
 
 
 def check_abandon(time_wait=2):
-    logger.info("Kiem tra Abandon")
+    #logger.info("Kiem tra Abandon")
     i = 0
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
                 Abandon.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-            time.sleep(1)
-            pyautogui.moveTo(res)
-            time.sleep(1)
-            pyautogui.click(res)
+            #time.sleep(1)
+            #pydirectinput.moveTo(res.x, res.y)
+            #time.sleep(1)
+            pydirectinput.click(res.x)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -214,7 +215,7 @@ def check_abandon(time_wait=2):
             break
 
 
-def check_proceed_to_round():
+def check_proceed_to_round(time_wait=40):
     check_resurrect()
     i = 0
     while True:
@@ -223,16 +224,16 @@ def check_proceed_to_round():
                 ProceedToRound.img,
                 confidence=0.9,
                 region=(0, 0, 1936, 1119),
-                grayscale=False,
+                grayscale=True,
             )
-            time.sleep(1)
+            #time.sleep(1)
             return True
         except pyautogui.ImageNotFoundException:
             # check_resurrect(2)
             check_abandon()
             check_find_item()
             i = i + 1
-            if i > 20:
+            if i > time_wait:
                 return False
             logger.debug(f"Cho xuat hien {ProceedToRound.name} lan {i}")
             time.sleep(1)
@@ -252,6 +253,7 @@ def exit_game():
 
 
 def exit_game_round20():
+    logger.info("Thoat game")
     bulk_disassembly()
     click(Back, 0)
     click(Disconnect, 0)
@@ -331,8 +333,9 @@ def bulk_disassembly():
         click(ConfirmDisassemBingEquip)
         click(ClickToClose)
         return True
-    except TypeError:
+    except Exception as e:
         logger.error("Khong hoan thanh phan giai trang bi")
+        logger.error(e)
         return False
 
 
@@ -352,15 +355,17 @@ def click_lock(name_item, box):
             # time.sleep(1)
             pydirectinput.moveTo(200, 200)
             logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
-            break
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
-                break
+                return False
             logger.debug(f"Dang tim hinh anh {Look.name} so lan {i}")
             time.sleep(1)
+            break
         except TypeError:
             logger.error(f"Khong tim thay hinh anh {Look.name}")
+            return False
 def click_lock_hero(box):
     logger.info("Click lock")
     i = 0
@@ -388,6 +393,7 @@ def click_lock_hero(box):
             time.sleep(0.5)
         except Exception as e:
             logger.error(e)
+            break
 
 if __name__ == "__main__":
     # bulk_disassembly()

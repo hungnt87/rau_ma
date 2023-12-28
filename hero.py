@@ -6,14 +6,14 @@ from PIL import Image
 import pydirectinput
 
 # import opencv
-
-
+def main():
+    pass
 class HeroInfor:
     HERO_IMG = None
 
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
-        self.img = get_hero_img(para_name, self.HERO_IMG)
+        self.img = self.get_hero_img(para_name)
         # self.img = f"data/image/hero/{para_name}.png"
         self.lv1_img = "data\\image\\hero\\" + para_name + "_lv1.png"
         self.lv2_img = "data\\image\\hero\\" + para_name + "_lv2.png"
@@ -24,13 +24,17 @@ class HeroInfor:
 
     def reset_hero_number(self):
         self.number = 0
+    def get_hero_img(self,para_name,hero_img=None):
+        #global HERO_IMG
+        if self.HERO_IMG is None:
+            self.HERO_IMG = Image.open(f"data/image/hero/{para_name}.png")
+        return self.HERO_IMG
 
-
-def get_hero_img(para_name, hero_img=None):
-    # global HERO_IMG
-    if hero_img is None:
-        hero_img = Image.open(f"data/image/hero/{para_name}.png")
-    return hero_img
+# def get_hero_img(para_name, hero_img=None):
+#     # global HERO_IMG
+#     if hero_img is None:
+#         hero_img = Image.open(f"data/image/hero/{para_name}.png")
+#     return hero_img
 
 
 count_buy_hero = 0
@@ -188,9 +192,13 @@ def buy_oracle():
 
 def buy_sniper():
     if check_hero(Sniper):
-        sell_hero(Dazzale)
-        sell_hero(Oracle)
-    buy_hero_infor(Sniper, 10)
+        if Dazzale.number > 0:
+            sell_hero(Dazzale)
+            Dazzale.reset_hero_number()
+        if Oracle.number > 0:
+            sell_hero(Oracle)
+            Oracle.reset_hero_number()       
+        buy_hero_infor(Sniper, 10)
 
 
 def buy_dark_willow():
@@ -211,19 +219,25 @@ def buy_hoodwink():
 
 def buy_drow_ranger():
     if check_hero(DrowRanger):
-        sell_hero(Hoodwink)
+        if Hoodwink.number > 0:
+            sell_hero(Hoodwink)
+            Hoodwink.reset_hero_number()
     buy_hero_infor(DrowRanger, 5)
 
 
 def buy_templar_assassin():
     if check_hero(TemplarAssassin):
-        sell_hero(WinterWyvern)
+        if WinterWyvern.number > 0:
+            sell_hero(WinterWyvern)
+            WinterWyvern.reset_hero_number()
     buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():
     if check_hero(Zet):
-        sell_hero(Clinkz)
+        if Clinkz.number > 0:
+            sell_hero(Clinkz)
+            Clinkz.reset_hero_number()
     buy_hero_infor(Zet, 5)
 
 
@@ -300,7 +314,5 @@ def install_hero():
 
 
 if __name__ == "__main__":
-    # install_hero()
-    time.sleep(2)
-    buy_hero_infor(Zet, 3)
+    main()
     pass
