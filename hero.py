@@ -191,13 +191,11 @@ def buy_oracle():
 
 
 def buy_sniper():
-    if check_hero(Sniper):
+    if Sniper.number == 0:    
         if Dazzale.number > 0:
             sell_hero(Dazzale)
-            Dazzale.reset_hero_number()
         if Oracle.number > 0:
-            sell_hero(Oracle)
-            Oracle.reset_hero_number()       
+            sell_hero(Oracle) 
         buy_hero_infor(Sniper, 10)
 
 
@@ -207,37 +205,29 @@ def buy_dark_willow():
 
 def buy_clinkz():
     buy_hero_infor(Clinkz, 1)
-
-
-def buy_winter_wyvern():
-    buy_hero_infor(WinterWyvern, 4)
-
-
 def buy_hoodwink():
     buy_hero_infor(Hoodwink, 1)
 
 
 def buy_drow_ranger():
-    if check_hero(DrowRanger):
+    if DrowRanger == 0:
         if Hoodwink.number > 0:
             sell_hero(Hoodwink)
-            Hoodwink.reset_hero_number()
+            
     buy_hero_infor(DrowRanger, 5)
 
 
 def buy_templar_assassin():
-    if check_hero(TemplarAssassin):
-        if WinterWyvern.number > 0:
-            sell_hero(WinterWyvern)
-            WinterWyvern.reset_hero_number()
+    if TemplarAssassin.number == 0:
+        if WinterWyvern > 0:
+            sell_hero(DrowRanger)               
     buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():
-    if check_hero(Zet):
+    if Zet.number == 0:        
         if Clinkz.number > 0:
             sell_hero(Clinkz)
-            Clinkz.reset_hero_number()
     buy_hero_infor(Zet, 5)
 
 
@@ -284,8 +274,8 @@ def reset_hero():
         Zet.reset_hero_number()
         DrowRanger.reset_hero_number()
         TemplarAssassin.reset_hero_number()
-    except typeError:
-        logger.error("Reset hero error")
+    except Exception as e:
+        logger.error(e)
 
 
 def test_reset_hero():
