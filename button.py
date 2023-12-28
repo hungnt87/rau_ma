@@ -115,10 +115,10 @@ def click(ButtonInfor, time_sleep=2):
             )            
             #time.sleep(time_sleep)
             # time.sleep(1)
-            pydirectinput.moveTo(res.x, res.y)
-            time.sleep(1)
+            #pydirectinput.moveTo(res.x, res.y)
+            #time.sleep(1)
             pydirectinput.click(res.x, res.y)
-            time.sleep(1)
+            #time.sleep(1)
             pydirectinput.moveTo(200, 200)
         except pyautogui.ImageNotFoundException:
             logger.debug("Khong tim thay hinh anh {}".format(ButtonInfor.name))
@@ -154,7 +154,7 @@ def check_find_item(time_wait=2):
             )
             #pydirectinput.moveTo(res.x, res.y)
             pydirectinput.click(res.x, res.y)
-            pyautogui.moveTo(200, 200)
+            pydirectinput.moveTo(200, 200)
             #logger.info("Khong lay item")
             break
         except pyautogui.ImageNotFoundException:
@@ -179,7 +179,8 @@ def check_resurrect(time_wait=10):
             )
             #time.sleep(1)
             #pydirectinput.moveTo(res.x, res.y)
-            pyautogui.click(res.x, res.y)
+            pydirectinput.click(res.x, res.y)
+            pydirectinput.moveTo(200, 200)
             #logger.info("Chon Resurrect ")
             break
         except pyautogui.ImageNotFoundException:
