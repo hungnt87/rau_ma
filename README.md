@@ -23,5 +23,5 @@
 9. Khi đang bot thì ko được tắt màn hình, ko dùng chuột nữa vì có thể gây lỗi.
 
 8. Video hướng dẫn
-
+https://youtu.be/1B_rowkZvLE
 
