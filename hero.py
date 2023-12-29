@@ -5,9 +5,15 @@ from log import logger
 from PIL import Image
 import pydirectinput
 
+REGION_HERO= (537, 125, 1158, 406)
+
+REGION_SELL_HERO= (774, 915, 378, 232)
+
 # import opencv
 def main():
     pass
+
+
 class HeroInfor:
     HERO_IMG = None
 
@@ -24,11 +30,13 @@ class HeroInfor:
 
     def reset_hero_number(self):
         self.number = 0
-    def get_hero_img(self,para_name,hero_img=None):
-        #global HERO_IMG
+
+    def get_hero_img(self, para_name, hero_img=None):
+        # global HERO_IMG
         if self.HERO_IMG is None:
             self.HERO_IMG = Image.open(f"data/image/hero/{para_name}.png")
         return self.HERO_IMG
+
 
 # def get_hero_img(para_name, hero_img=None):
 #     # global HERO_IMG
@@ -84,14 +92,15 @@ Zet = HeroInfor("Zet")
 
 
 def buy_hero(hero_img):
+    global REGION_HERO
     try:
         res = pyautogui.locateOnScreen(
-            hero_img, confidence=0.9, region=(537, 125, 1158, 406), grayscale=True
+            hero_img, confidence=0.8, region=REGION_HERO, grayscale=True
         )
         res_center = pyautogui.center(res)
-        #pydirectinput.moveTo(res_center.x, res_center.y)
+        # pydirectinput.moveTo(res_center.x, res_center.y)
         pydirectinput.click(res_center.x, res_center.y)
-        pydirectinput.moveTo(201,213)
+        pydirectinput.moveTo(201, 213)
         return res_center
     except pyautogui.ImageNotFoundException:
         # logger.debug("Khong tim thay hinh anh {}".format(hero_img))
@@ -120,17 +129,17 @@ def buy_hero_infor(HeroInfor, number_hero=1):
         if i >= 2:
             break
         i = i + 1
-        #logger.debug(i)
+        # logger.debug(i)
         if number_buy > 0:
             number_buy = number_hero - number
             location = buy_hero(HeroInfor.img)
             if location is not False:
-                if button.check_not_money() is True:                    
+                if button.check_not_money() is True:
                     box_lock = (location.x, location.y, 267, 312)
                     button.click_lock_hero(box_lock)
                     hero_status_money = False
                     return False
-                    #break
+                    # break
                 else:
                     number = number + 1
                     number_buy = number_hero - number
@@ -141,26 +150,28 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     )
                     return True
             else:
-                #logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
+                # logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
                 time.sleep(0.2)
         else:
             break
 
 
 def check_hero(HeroInfor):
+    global REGION_HERO
     try:
         res = pyautogui.locateOnScreen(
-            HeroInfor.img, confidence=0.8, region=(0, 0, 1916, 1134)
-        )   
+            HeroInfor.img, confidence=0.8, region=REGION_HERO, grayscale=True
+        )
         return True
     except pyautogui.ImageNotFoundException:
         return False
 
 
 def sell_hero(HeroInfor):
+    global REGION_SELL_HERO
     try:
         res = pyautogui.locateOnScreen(
-            HeroInfor.lv1_img, confidence=0.8, region=(0, 0, 1916, 1134)
+            HeroInfor.lv1_img, confidence=0.8, region=REGION_SELL_HERO, grayscale=True
         )
         res_center = pyautogui.center(res)
         pyautogui.moveTo(res_center)
@@ -176,8 +187,8 @@ def sell_hero(HeroInfor):
         return True
     except pyautogui.ImageNotFoundException:
         return False
-    except TypeError:
-        logger.error("Khong tim thay hinh anh {}".format(HeroInfor.lv1_img))
+    except Exception as e:
+        logger.error(e)
         return False
 
 
@@ -190,8 +201,8 @@ def buy_oracle():
 
 
 def buy_sniper():
-    if Sniper.number == 0: 
-        if check_hero(Sniper) is True: 
+    if Sniper.number == 0:
+        if check_hero(Sniper) is True:
             if Dazzale.number == 0:
                 Dazzale.number = 1
             else:
@@ -211,6 +222,8 @@ def buy_dark_willow():
 
 def buy_clinkz():
     buy_hero_infor(Clinkz, 1)
+
+
 def buy_hoodwink():
     buy_hero_infor(Hoodwink, 1)
 
@@ -221,7 +234,7 @@ def buy_drow_ranger():
             if Hoodwink.number == 0:
                 Hoodwink.number = 1
             else:
-                sell_hero(Hoodwink)            
+                sell_hero(Hoodwink)
     buy_hero_infor(DrowRanger, 5)
 
 
@@ -231,7 +244,7 @@ def buy_templar_assassin():
             if WinterWyvern.number == 0:
                 WinterWyvern.number = 1
             else:
-                sell_hero(WinterWyvern)               
+                sell_hero(WinterWyvern)
     buy_hero_infor(TemplarAssassin, 5)
 
 
@@ -241,7 +254,7 @@ def buy_zet():
             if Clinkz.number == 0:
                 Clinkz.number = 1
             else:
-                sell_hero(Clinkz)  
+                sell_hero(Clinkz)
     buy_hero_infor(Zet, 5)
 
 
