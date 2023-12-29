@@ -196,7 +196,7 @@ def buy_sniper():
             sell_hero(Dazzale)
         if Oracle.number > 0:
             sell_hero(Oracle) 
-        buy_hero_infor(Sniper, 10)
+    buy_hero_infor(Sniper, 10)
 
 
 def buy_dark_willow():
