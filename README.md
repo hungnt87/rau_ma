@@ -18,7 +18,7 @@
 
 7. Vào cmd tại thư mục brodota-bot rồi run: python main.py
 
-8. Các bạn chọn con phật, rồi chọn hero WinterWyvern khởi đầu. Hoặc chơi con tướng nào mà có hero WinterWyvern khởi đầu là đc vì tôi tối ưu cho hero khởi đầu rồi. Về sau nó sẽ đc bán đi khi có hero 5 vàng
+8. Các bạn chọn con phật, rồi chọn hero WinterWyvern khởi đầu, chọn sẵn chế độ chơi như N8-100, N10-30 ở lần chơi trước. Chơi dưới sức thôi vì nó ko có chế độ né quái đâu. Hoặc chơi con tướng nào mà có hero WinterWyvern khởi đầu là đc vì tôi tối ưu cho hero khởi đầu rồi. Về sau nó sẽ đc bán đi khi có hero 5 vàng
 
 9. Khi đang bot thì ko được tắt màn hình, ko dùng chuột nữa vì có thể gây lỗi.
 
