@@ -9,6 +9,7 @@ import pydirectinput
 count_buy_item = 0
 item_status_money = True
 previous_item = list()
+ITEM_REGION = (498, 500, 1212, 386)
 
 
 class ItemInfo:
@@ -38,14 +39,14 @@ def reset_status_money():
 
 def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
-    ITEM_REGION = (498, 500, 1212, 386)
-    global count_buy_item, item_status_money, previous_item
+
+    global count_buy_item, item_status_money, previous_item, ITEM_REGION
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
         try:
             location = pyautogui.locateCenterOnScreen(
-                ItemInfo.img, confidence=0.9, region=(ITEM_REGION), grayscale=True
+                ItemInfo.img, confidence=0.8, region=(ITEM_REGION), grayscale=True
             )
             pydirectinput.click(location.x, location.y)
             pydirectinput.moveTo(222, 213)
@@ -226,7 +227,7 @@ def buy_all_item_lv1():
 
 
 def buy_all_item_lv2():
-    logger.debug("Ban dang mua item lv2")    
+    logger.debug("Ban dang mua item lv2")
     buy_item_info(PreciseDamage12_Speed12_lv2)
     buy_item_info(Exp40_Luck6_lv2)
     buy_item_info(Exp45_Attack4_lv2)
@@ -345,7 +346,7 @@ def test_all_item():
 
 def reset_item():
     global Attack10EveryBuyPlus5_lv2, Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1,Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
+    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
     global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
     global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
