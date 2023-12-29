@@ -220,7 +220,7 @@ def buy_drow_ranger():
 def buy_templar_assassin():
     if TemplarAssassin.number == 0:
         if WinterWyvern.number > 0:
-            sell_hero(DrowRanger)               
+            sell_hero(Windranger)               
     buy_hero_infor(TemplarAssassin, 5)
 
 
