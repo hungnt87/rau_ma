@@ -192,9 +192,13 @@ def buy_oracle():
 
 def buy_sniper():
     if Sniper.number == 0:    
-        if Dazzale.number > 0:
+        if Dazzale.number == 0:
+            Dazzale.number = 1
+        else:
             sell_hero(Dazzale)
-        if Oracle.number > 0:
+        if Oracle.number == 0:
+            Oracle.number = 1
+        else:
             sell_hero(Oracle) 
     buy_hero_infor(Sniper, 10)
 
@@ -211,23 +215,28 @@ def buy_hoodwink():
 
 def buy_drow_ranger():
     if DrowRanger == 0:
-        if Hoodwink.number > 0:
-            sell_hero(Hoodwink)
-            
+        if Hoodwink.number == 0:
+            Hoodwink.number = 1
+        else:
+            sell_hero(Hoodwink)            
     buy_hero_infor(DrowRanger, 5)
 
 
 def buy_templar_assassin():
     if TemplarAssassin.number == 0:
-        if WinterWyvern.number > 0:
+        if WinterWyvern.number == 0:
+            WinterWyvern.number = 1
+        else:
             sell_hero(WinterWyvern)               
     buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():
-    if Zet.number == 0:        
-        if Clinkz.number > 0:
-            sell_hero(Clinkz)
+    if Zet.number == 0:
+        if Clinkz.number == 0:
+            Clinkz.number = 1
+        else:
+            sell_hero(Clinkz)  
     buy_hero_infor(Zet, 5)
 
 
