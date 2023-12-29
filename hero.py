@@ -141,8 +141,8 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     )
                     return True
             else:
-                logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
-                time.sleep(0.5)
+                #logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
+                time.sleep(0.2)
         else:
             break
 
