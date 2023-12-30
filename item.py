@@ -9,7 +9,7 @@ import pydirectinput
 count_buy_item = 0
 item_status_money = True
 previous_item = list()
-ITEM_REGION = (498, 500, 1212, 386)
+REGION_BUY_ITEM = (394, 321, 1384, 692)
 CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
 
@@ -42,7 +42,7 @@ def reset_status_money():
 def buy_item_info(ItemInfo, number_item=3):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
 
-    global count_buy_item, item_status_money, previous_item, ITEM_REGION, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
+    global count_buy_item, item_status_money, previous_item, REGION_BUY_ITEM, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
@@ -50,7 +50,7 @@ def buy_item_info(ItemInfo, number_item=3):
             location = pyautogui.locateCenterOnScreen(
                 ItemInfo.img,
                 confidence=CONFIDENCE_BUY_ITEM,
-                region=ITEM_REGION,
+                region=REGION_BUY_ITEM,
                 grayscale=GRAYSCALE_BUY_ITEM,
             )
             pydirectinput.click(location.x, location.y)
