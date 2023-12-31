@@ -299,6 +299,10 @@ def buy_zet():
 
 def buy_all_hero(round_number):
     logger.info(f"Bat dau mua hero in round: {round_number}")
+    global hero_status_money
+    if hero_status_money is False:
+        logger.debug("Khong du tien, next round")
+        return False
     if round_number == 3:
         buy_dazzale()
         buy_oracle()
