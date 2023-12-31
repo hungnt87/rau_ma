@@ -83,9 +83,10 @@ Look = ButtonInfor("Look")
 Lock_hero = ButtonInfor("Lock_hero")
 Save = ButtonInfor("Save")
 Button_X = ButtonInfor("Button_X")
+Update = ButtonInfor("Update")
 
 
-def check_button(ButtonInfor):
+def check_button(ButtonInfor, time_wait=60):
     i = 0
     # time.sleep(1)
     while True:
@@ -103,11 +104,10 @@ def check_button(ButtonInfor):
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
-            if i > 60:
+            if i > time_wait:
+                logger.error(f"Khong tim thay hinh anh {ButtonInfor.name}")
                 break
-            logger.debug(
-                "Dang tim hinh anh {} so lan {}/60".format(ButtonInfor.name, i)
-            )
+            logger.debug(f"Dang tim hinh anh {ButtonInfor.name} so lan {i}/{time_wait}")
             time.sleep(1)
             # return False
         except Exception as e:
@@ -115,7 +115,7 @@ def check_button(ButtonInfor):
             return False
 
 
-def click(ButtonInfor, time_sleep=2):
+def click(ButtonInfor, time_sleep=2, time_wait=60):
     """Click button infor
     Args:
         ButtonInfor: ButtonInfor
@@ -123,22 +123,17 @@ def click(ButtonInfor, time_sleep=2):
     """
 
     # time.sleep(time_sleep)
-    if check_button(ButtonInfor) is True:
+    if check_button(ButtonInfor, time_wait=time_wait) is True:
         time.sleep(time_sleep)
         logger.info("Click {}".format(ButtonInfor.name))
         try:
             res = pyautogui.locateCenterOnScreen(
                 ButtonInfor.img,
-                confidence=0.9,
+                confidence=0.8,
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
             )
-            # time.sleep(time_sleep)
-            # time.sleep(1)
-            # pydirectinput.moveTo(res.x, res.y)
-            # time.sleep(1)
-            pydirectinput.click(res.x, res.y)
-            # time.sleep(1)
+            pydirectinput.click(res[0], res[1])
             pydirectinput.moveTo(200, 200)
         except pyautogui.ImageNotFoundException:
             logger.debug("Khong tim thay hinh anh {}".format(ButtonInfor.name))
@@ -281,6 +276,8 @@ def exit_game_round20():
     click(Back, 0)
     click(Disconnect, 0)
     click(LeaveGame, 0)
+    logger.info("Check game co update trong 10s")
+    click(Update, 2, 10)
 
 
 def enter_game():
@@ -418,6 +415,6 @@ if __name__ == "__main__":
     # exit_game()
     # exit_game_round20()
     # time.sleep(2)
-    # click_lock_hero()
+    # check_button(Update, 5)
     # bulk_disassembly()
     pass
