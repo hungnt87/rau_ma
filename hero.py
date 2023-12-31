@@ -141,6 +141,7 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     box_lock = (location.x, location.y, 267, 312)
                     button.click_lock_hero(box_lock)
                     hero_status_money = False
+                    button.set_status_not_money(True)
                     previous_hero.append(HeroInfor)
                     return False
                     # break
@@ -299,8 +300,7 @@ def buy_zet():
 
 def buy_all_hero(round_number):
     logger.info(f"Bat dau mua hero in round: {round_number}")
-    global hero_status_money
-    if hero_status_money is False:
+    if button.get_status_not_money() is True:
         logger.debug("Khong du tien, next round")
         return False
     if round_number == 3:

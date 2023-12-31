@@ -19,24 +19,18 @@ def reset_count_buy():
     item.reset_count_buy_item()
 
 
-def get_status_money():
+def get_status_not_money():
     # global hero.hero_status_money, item.item_status_money
-    if (
-        hero.hero_status_money is True
-        and item.item_status_money is True
-        and button.status_money is True
-    ):
+    if button.get_status_not_money() is True:
         # logger.debug("Du tien")
         return True
     else:
-        logger.debug("Khong du tien")
+        # logger.debug("Khong du tien")
         return False
 
 
-def reset_status_money():
-    hero.hero_status_money = True
-    item.item_status_money = True
-    button.status_money = True
+def reset_status_not_money():
+    button.set_status_not_money(False)
 
 
 def round_all(round_number):
@@ -64,9 +58,9 @@ def round_all(round_number):
             button.check_proceed_to_round()
         else:
             reset_count_buy()
-            reset_status_money()
+            reset_status_not_money()
             while True:
-                if get_status_money() is False:
+                if get_status_not_money() is True:
                     break
                 if number_roll > 0:
                     if button.roll_game() is False:
@@ -78,7 +72,7 @@ def round_all(round_number):
                 item.buy_all_item_investments(round_number=n)
                 item.buy_all_set_item(round_number=n)
                 item.buy_all_item(round_number=n)
-                if get_status_money() is False:
+                if get_status_not_money() is False:
                     break
                 if get_count_buy() >= number_buy:
                     break
@@ -97,5 +91,5 @@ def round_all(round_number):
 
 
 if __name__ == "__main__":
-    # get_status_money()
+    # get_status_moneynot_()
     pass

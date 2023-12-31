@@ -11,12 +11,25 @@ class ButtonInfor:
         self.img = "data\\image\\" + para_name + ".png"
 
 
-status_money = True
+status_not_money = True
 
 
-def reset_status_money():
-    global status_money
-    status_money = True
+def get_status_not_money():
+    global status_not_money
+    if status_not_money is True:
+        return True
+    else:
+        return False
+
+
+def set_status_not_money(status=False):
+    global status_not_money
+    status_not_money = status
+
+
+def reset_status_not_money():
+    global status_not_money
+    status_not_money = True
 
 
 Back = ButtonInfor("Back")
@@ -135,11 +148,13 @@ def check_not_money():
                 NotMoney.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
             logger.debug("Ban khong du tien, di tiep vong sau")
+            set_status_not_money(True)
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             time.sleep(0.2)
             if i >= 2:
+                status_not_money = False
                 return False
         except Exception as e:
             logger.error(e)
@@ -285,8 +300,6 @@ def enter_game():
 def roll_game():
     logger.info("Click {}".format(Roll.name))
     i = 0
-    global status_money
-    # time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
@@ -295,7 +308,7 @@ def roll_game():
             pydirectinput.click(res.x, res.y)
             pyautogui.moveTo(200, 200)
             if check_not_money() is True:
-                status_money = False
+                set_status_not_money(True)
                 return False
             return True
         except pyautogui.ImageNotFoundException:

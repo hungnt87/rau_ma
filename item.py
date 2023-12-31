@@ -67,6 +67,7 @@ def buy_item_info(ItemInfo, number_item=3):
                 LOOK_REGION = (location.x, location.y, 267, 312)
                 button.click_lock(ItemInfo.name, LOOK_REGION)
                 item_status_money = False
+                button.set_status_not_money(True)
                 previous_item.append(ItemInfo)
                 return False
             else:
@@ -337,9 +338,8 @@ def buy_all_item_lv6():
 
 def buy_all_item(round_number):
     logger.info(f"Ban dang mua item round {round_number}")
-    global item_status_money
-    if item_status_money is False:
-        logger.debug("Ban khong du tien, next round")
+    if button.get_status_not_money() is True:
+        logger.debug("Khong du tien, next round")
         return False
     if round_number == 2:
         buy_all_item_round2()
