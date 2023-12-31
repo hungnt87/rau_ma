@@ -72,7 +72,7 @@ def round_all(round_number):
                 item.buy_all_item_investments(round_number=n)
                 item.buy_all_set_item(round_number=n)
                 item.buy_all_item(round_number=n)
-                if get_status_not_money() is False:
+                if get_status_not_money() is True:
                     break
                 if get_count_buy() >= number_buy:
                     break
