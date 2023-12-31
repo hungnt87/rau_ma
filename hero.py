@@ -182,7 +182,7 @@ def sell_hero(HeroInfor):
             HeroInfor.lv1_img, confidence=0.8, region=REGION_SELL_HERO, grayscale=True
         )
         pydirectinput.rightClick(res_center.x, res_center.y)
-        time.sleep(0.2)
+        time.sleep(1)
         pydirectinput.click(res_center.x + 20, res_center.y)
         pydirectinput.moveTo(213, 201)
         logger.debug(f"Ban thanh cong hero {HeroInfor.name}")
