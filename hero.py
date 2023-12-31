@@ -8,6 +8,8 @@ import pydirectinput
 REGION_HERO = (537, 125, 1158, 406)
 
 REGION_SELL_HERO = (662, 791, 704, 358)
+count_buy_hero = 0
+previous_hero = list()
 
 
 # import opencv
@@ -47,9 +49,6 @@ class HeroInfor:
 #     if hero_img is None:
 #         hero_img = Image.open(f"data/image/hero/{para_name}.png")
 #     return hero_img
-
-
-count_buy_hero = 0
 
 
 def reset_count_buy_hero():
@@ -142,6 +141,7 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     box_lock = (location.x, location.y, 267, 312)
                     button.click_lock_hero(box_lock)
                     hero_status_money = False
+                    previous_hero.append(HeroInfor)
                     return False
                     # break
                 else:
@@ -192,6 +192,25 @@ def sell_hero(HeroInfor):
     except Exception as e:
         logger.error(e)
         return False
+
+
+def buy_all_previous_hero():
+    global previous_hero
+    if len(previous_hero) > 0:
+        logger.info("Ban dang mua lai item da khoa o round truoc")
+        # for item in previous_hero:
+        #     buy_item_info(item)
+
+        while True:
+            if len(previous_hero) == 0:
+                break
+            if buy_item_info(previous_hero[0]) is True:
+                del previous_hero[0]
+            else:
+                break
+
+    else:
+        logger.debug("Khong co item khoa o vong truoc")
 
 
 def buy_dazzale():
