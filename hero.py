@@ -127,14 +127,22 @@ def buy_hero_infor(HeroInfor, number_hero=1):
     global count_buy_hero, hero_status_money
     i = 0
     number = HeroInfor.number
-    number_buy = number_hero - number
+    if number_hero == None:
+        number_buy = 1
+        pass
+    else:
+        number_buy = number_hero - number
     while True:
         if i >= 2:
             break
         i = i + 1
         # logger.debug(i)
         if number_buy > 0:
-            number_buy = number_hero - number
+            if number_hero == None:
+                number_buy = 0
+                pass
+            else:
+                number_buy = number_hero - number
             location = buy_hero(HeroInfor.img)
             if location is not False:
                 if button.check_not_money() is True:
@@ -147,12 +155,20 @@ def buy_hero_infor(HeroInfor, number_hero=1):
                     # break
                 else:
                     number = number + 1
-                    number_buy = number_hero - number
+                    if number_hero == None:
+                        number_buy = 0
+                    else:
+                        number_buy = number_hero - number
                     HeroInfor.number = number
                     count_buy_hero = count_buy_hero + 1
-                    logger.info(
-                        f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}"
-                    )
+                    if number_hero == None:
+                        logger.info(
+                            f"Ban da mua thanh cong 1 hero {HeroInfor.name} da khoa round truoc"
+                        )
+                    else:
+                        logger.info(
+                            f"Ban da mua thanh cong 1 hero {HeroInfor.name}, ban can mua them {number_buy}"
+                        )
                     return True
             else:
                 # logger.debug("Khong tim thay hinh anh {}".format(HeroInfor.name))
@@ -205,7 +221,7 @@ def buy_all_previous_hero():
         while True:
             if len(previous_hero) == 0:
                 break
-            if buy_hero_infor(previous_hero[0]) is True:
+            if buy_hero_infor(previous_hero[0], nunber_hero=None) is True:
                 del previous_hero[0]
             else:
                 break
@@ -282,8 +298,8 @@ def buy_templar_assassin():
             else:
                 sell_hero(WinterWyvern)
             buy_hero_infor(TemplarAssassin, 5)
-        else:
-            buy_hero_infor(TemplarAssassin, 5)
+    else:
+        buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():

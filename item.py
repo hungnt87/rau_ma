@@ -186,7 +186,7 @@ def buy_all_previous_item():
         while True:
             if len(previous_item) == 0:
                 break
-            if buy_item_info(previous_item[0]) is True:
+            if buy_item_info(previous_item[0], number_item=10) is True:
                 del previous_item[0]
             else:
                 break
