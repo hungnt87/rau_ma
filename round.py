@@ -81,15 +81,20 @@ def round_all(round_number):
 
             if n < 20:
                 button.next_round()
-                logger.info(f"Day la vong auto lan thu {round_number}, round thu {n}")
+                logger.info(f"Day la vong auto lan thu {round_number+1}, round {n}")
             else:
                 hero.reset_hero()
                 item.reset_item()
                 button.click_procceed_to_round()
+                for s in range(120):
+                    s = 120 - s
+                    time.sleep(1)
+                    logger.info(
+                        f"Ban dang danh boss round {n}, thoi gian con lai {s}/120"
+                    )
                 logger.info(f"Ket thuc round {n}")
-                time.sleep(130)
+                # time.sleep(130)
 
 
 if __name__ == "__main__":
-    # get_status_moneynot_()
     pass
