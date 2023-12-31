@@ -191,7 +191,7 @@ def buy_all_previous_item():
                 break
 
     else:
-        logger.debug("Khong co item khoa o vong truoc")
+        logger.debug("Khong co item khoa o round truoc")
 
 
 def buy_all_set_item(round_number):

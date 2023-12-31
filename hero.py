@@ -210,7 +210,7 @@ def buy_all_previous_hero():
                 break
 
     else:
-        logger.debug("Khong co item khoa o vong truoc")
+        logger.debug("Khong co hero khoa o round truoc")
 
 
 def buy_dazzale():
