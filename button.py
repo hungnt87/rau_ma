@@ -69,9 +69,10 @@ ClickToClose = ButtonInfor("ClickToClose")
 Look = ButtonInfor("Look")
 Lock_hero = ButtonInfor("Lock_hero")
 
+
 def check_button(ButtonInfor):
     i = 0
-    #time.sleep(1)
+    # time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
@@ -82,14 +83,14 @@ def check_button(ButtonInfor):
             )
             # if res is not None:
             #     logger.info("Da tim thay {}".format(ButtonInfor.name))
-            return True            
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
                 break
             logger.debug("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
             time.sleep(1)
-            #return False
+            # return False
         except Exception as e:
             logger.error(e)
             return False
@@ -101,8 +102,8 @@ def click(ButtonInfor, time_sleep=2):
         ButtonInfor: ButtonInfor
         time_sleep: time sleep after click
     """
-    
-    #time.sleep(time_sleep)
+
+    # time.sleep(time_sleep)
     if check_button(ButtonInfor) is True:
         time.sleep(time_sleep)
         logger.info("Click {}".format(ButtonInfor.name))
@@ -112,13 +113,13 @@ def click(ButtonInfor, time_sleep=2):
                 confidence=0.9,
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
-            )            
-            #time.sleep(time_sleep)
+            )
+            # time.sleep(time_sleep)
             # time.sleep(1)
-            #pydirectinput.moveTo(res.x, res.y)
-            #time.sleep(1)
+            # pydirectinput.moveTo(res.x, res.y)
+            # time.sleep(1)
             pydirectinput.click(res.x, res.y)
-            #time.sleep(1)
+            # time.sleep(1)
             pydirectinput.moveTo(200, 200)
         except pyautogui.ImageNotFoundException:
             logger.debug("Khong tim thay hinh anh {}".format(ButtonInfor.name))
@@ -152,10 +153,10 @@ def check_find_item(time_wait=2):
             res = pyautogui.locateCenterOnScreen(
                 Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-            #pydirectinput.moveTo(res.x, res.y)
+            # pydirectinput.moveTo(res.x, res.y)
             pydirectinput.click(res.x, res.y)
             pydirectinput.moveTo(200, 200)
-            #logger.info("Khong lay item")
+            # logger.info("Khong lay item")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -177,11 +178,11 @@ def check_resurrect(time_wait=10):
                 region=(0, 0, 1920, 1135),
                 grayscale=False,
             )
-            #time.sleep(1)
-            #pydirectinput.moveTo(res.x, res.y)
+            # time.sleep(1)
+            # pydirectinput.moveTo(res.x, res.y)
             pydirectinput.click(res.x, res.y)
             pydirectinput.moveTo(200, 200)
-            #logger.info("Chon Resurrect ")
+            # logger.info("Chon Resurrect ")
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -193,17 +194,17 @@ def check_resurrect(time_wait=10):
 
 
 def check_abandon(time_wait=2):
-    #logger.info("Kiem tra Abandon")
+    # logger.info("Kiem tra Abandon")
     i = 0
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
                 Abandon.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
             )
-            #time.sleep(1)
-            #pydirectinput.moveTo(res.x, res.y)
-            #time.sleep(1)
-            pydirectinput.click(res.x,res.y)
+            # time.sleep(1)
+            # pydirectinput.moveTo(res.x, res.y)
+            # time.sleep(1)
+            pydirectinput.click(res.x, res.y)
             break
         except pyautogui.ImageNotFoundException:
             i = i + 1
@@ -227,7 +228,7 @@ def check_proceed_to_round(time_wait=40):
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
             )
-            #time.sleep(1)
+            # time.sleep(1)
             return True
         except pyautogui.ImageNotFoundException:
             # check_resurrect(2)
@@ -270,7 +271,7 @@ def enter_game():
     pyautogui.write("asx")  # add password
     click(CreateGame)
     # time.sleep(4)
-    click(StartGame,5)
+    click(StartGame, 5)
     click(Accept)
     time.sleep(30)
     click(Confirm, 10)
@@ -285,30 +286,27 @@ def roll_game():
     logger.info("Click {}".format(Roll.name))
     i = 0
     global status_money
-    #time.sleep(1)
+    # time.sleep(1)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
                 Roll.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=True
             )
-            #pyautogui.moveTo(res)
-            #time.sleep(1)
             pydirectinput.click(res.x, res.y)
-            #time.sleep(1)
             pyautogui.moveTo(200, 200)
             if check_not_money() is True:
                 status_money = False
-                break
-            break
+                return False
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
-                break
+                return False
             logger.debug(f"Dang tim hinh anh {Roll.name} so lan {i}")
             time.sleep(1)
         except Exception as e:
             logger.error(e)
-            break
+            return False
 
 
 def click_procceed_to_round():
@@ -346,9 +344,7 @@ def click_lock(name_item, box):
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                Look.img, confidence=0.9, 
-                region=box, 
-                grayscale=True
+                Look.img, confidence=0.9, region=box, grayscale=True
             )
             # pydirectinput.moveTo(res)
             # time.sleep(1)
@@ -367,21 +363,21 @@ def click_lock(name_item, box):
         except TypeError:
             logger.error(f"Khong tim thay hinh anh {Look.name}")
             return False
+
+
 def click_lock_hero(box):
     logger.info("Click lock")
     i = 0
-    #box=(828,169,296,348)
-    #box = (687,237,158,276)
+    # box=(828,169,296,348)
+    # box = (687,237,158,276)
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                Lock_hero.img, confidence=0.9, 
-                region=box, 
-                grayscale=True
+                Lock_hero.img, confidence=0.9, region=box, grayscale=True
             )
-            #pydirectinput.moveTo(res.x, res.y+20)
+            # pydirectinput.moveTo(res.x, res.y+20)
             # time.sleep(1)
-            pydirectinput.click(res.x, res.y+20)
+            pydirectinput.click(res.x, res.y + 20)
             # time.sleep(1)
             pydirectinput.moveTo(200, 200)
             logger.debug(f"Ban khong du tien mua  khoa de lan sau mua")
@@ -395,6 +391,7 @@ def click_lock_hero(box):
         except Exception as e:
             logger.error(e)
             break
+
 
 if __name__ == "__main__":
     # bulk_disassembly()

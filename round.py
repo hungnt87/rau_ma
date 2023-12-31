@@ -66,10 +66,11 @@ def round_all(round_number):
             reset_count_buy()
             reset_status_money()
             while True:
-                if number_roll > 0:
-                    button.roll_game()
                 if get_status_money() is False:
                     break
+                if number_roll > 0:
+                    if button.roll_game() is False:
+                        break
                 number_roll += 1
                 hero.buy_all_previous_hero()
                 item.buy_all_previous_item()
