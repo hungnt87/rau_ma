@@ -73,9 +73,7 @@ def buy_item_info(ItemInfo, number_item=3):
             else:
                 number = number + 1
                 number_buy = number_item - number
-                logger.info(
-                    f"Ban da mua thanh cong 1 cai {ItemInfo.name}, ban can mua them {number_buy}"
-                )
+                logger.info(f"Ban da mua thanh cong 1 cai {ItemInfo.name}")
                 ItemInfo.number = number
                 count_buy_item = count_buy_item + 1
                 return True
@@ -180,7 +178,7 @@ def buy_all_previous_item():
     global previous_item
     if len(previous_item) > 0:
         for item in previous_item:
-            if buy_item_info(item, number_item=None) is True:
+            if buy_item_info(item, 10) is True:
                 previous_item.remove(item)
     else:
         logger.debug("Khong co item khoa o round truoc")
