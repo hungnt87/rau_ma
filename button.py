@@ -81,6 +81,8 @@ Equip = ButtonInfor("Equip")
 ClickToClose = ButtonInfor("ClickToClose")
 Look = ButtonInfor("Look")
 Lock_hero = ButtonInfor("Lock_hero")
+Save = ButtonInfor("Save")
+Button_X = ButtonInfor("Button_X")
 
 
 def check_button(ButtonInfor):
@@ -94,14 +96,18 @@ def check_button(ButtonInfor):
                 region=(0, 0, 1936, 1119),
                 grayscale=True,
             )
+            # pydirectinput.moveTo(res.x, res.y)
             # if res is not None:
-            #     logger.info("Da tim thay {}".format(ButtonInfor.name))
+            # logger.info("Da tim thay {}".format(ButtonInfor.name))
+
             return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 60:
                 break
-            logger.debug("Dang tim hinh anh {} so lan {}".format(ButtonInfor.name, i))
+            logger.debug(
+                "Dang tim hinh anh {} so lan {}/60".format(ButtonInfor.name, i)
+            )
             time.sleep(1)
             # return False
         except Exception as e:
@@ -252,7 +258,7 @@ def check_proceed_to_round(time_wait=40):
             i = i + 1
             if i > time_wait:
                 return False
-            logger.debug(f"Cho xuat hien {ProceedToRound.name} lan {i}")
+            logger.debug(f"Cho xuat hien {ProceedToRound.name} lan {i}/{time_wait}")
             time.sleep(1)
         except pyscreeze.ImageNotFoundException:
             logger.error("khong tim thay hinh anh")
@@ -315,7 +321,7 @@ def roll_game():
             i = i + 1
             if i > 60:
                 return False
-            logger.debug(f"Dang tim hinh anh {Roll.name} so lan {i}")
+            logger.debug(f"Dang tim hinh anh {Roll.name} so lan {i}/60")
             time.sleep(1)
         except Exception as e:
             logger.error(e)
@@ -338,6 +344,7 @@ def bulk_disassembly():
     """
     logger.info("Bat dau phan giai tat ca trang bi da nhat")
     try:
+        click(Button_X)
         click(Hide)
         click(Equip)
         click(BulkDisassembly)
@@ -410,6 +417,7 @@ if __name__ == "__main__":
     # bulk_disassembly()
     # exit_game()
     # exit_game_round20()
-    time.sleep(1)
-    click_lock_hero()
+    # time.sleep(2)
+    # click_lock_hero()
+    # bulk_disassembly()
     pass
