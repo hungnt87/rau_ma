@@ -204,7 +204,7 @@ def buy_all_previous_hero():
         while True:
             if len(previous_hero) == 0:
                 break
-            if buy_item_info(previous_hero[0]) is True:
+            if buy_hero_infor(previous_hero[0]) is True:
                 del previous_hero[0]
             else:
                 break
