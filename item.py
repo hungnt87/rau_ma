@@ -338,9 +338,9 @@ def buy_all_item_lv6():
 
 def buy_all_item(round_number):
     logger.info(f"Ban dang mua item round {round_number}")
-    if button.get_status_not_money() is True:
-        logger.debug("Khong du tien, next round")
-        return False
+    # if button.get_status_not_money() is True:
+    #     logger.debug("Khong du tien, next round")
+    #     return False
     if round_number == 2:
         buy_all_item_round2()
     if round_number == 3:
