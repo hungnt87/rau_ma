@@ -214,7 +214,9 @@ def sell_hero(HeroInfor):
 def buy_all_previous_hero():
     global previous_hero
     if len(previous_hero) > 0:
+        logger.debug("Ban dang mua hero khoa o round truoc")
         for item in previous_hero:
+            logger.debug(f"Ban dang mua hero {item.name} khoa o round truoc")
             if buy_hero_infor(item, number_hero=None) is True:
                 previous_hero.remove(item)
     else:

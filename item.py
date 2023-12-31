@@ -177,7 +177,9 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 def buy_all_previous_item():
     global previous_item
     if len(previous_item) > 0:
+        logger.debug("Ban dang mua item khoa o round truoc")
         for item in previous_item:
+            logger.debug(f"Ban dang tim item {item.name} dang khoa o round truoc")
             if buy_item_info(item, 10) is True:
                 previous_item.remove(item)
     else:
