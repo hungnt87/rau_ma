@@ -13,6 +13,11 @@ CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
 
 
+def reset_previous_item():
+    global previous_item
+    previous_item = list()
+
+
 class ItemInfo:
     img = None
 

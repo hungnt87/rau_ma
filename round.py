@@ -84,7 +84,9 @@ def round_all(round_number):
                 logger.info(f"Day la vong auto lan thu {round_number+1}, round {n}")
             else:
                 hero.reset_hero()
+                hero.reset_previous_hero()
                 item.reset_item()
+                item.reset_previous_item()
                 button.click_procceed_to_round()
                 for s in range(120):
                     s = 120 - s

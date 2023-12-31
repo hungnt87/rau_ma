@@ -12,6 +12,11 @@ count_buy_hero = 0
 previous_hero = list()
 
 
+def reset_previous_hero():
+    global previous_hero
+    previous_hero = list()
+
+
 # import opencv
 def main():
     # time.sleep(2)

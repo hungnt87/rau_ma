@@ -10,17 +10,20 @@ from log import logger
 
 
 def get_app_window_handle(app_name):
-        hwnd = win32gui.FindWindow(None, app_name)
-        return hwnd
+    hwnd = win32gui.FindWindow(None, app_name)
+    return hwnd
+
 
 def move_window_to(handle, x, y):
-        # Lấy kích thước hiện tại của cửa sổ
-        _, _, width, height = win32gui.GetWindowRect(handle)
+    # Lấy kích thước hiện tại của cửa sổ
+    _, _, width, height = win32gui.GetWindowRect(handle)
 
-        # Thay đổi kích thước và vị trí của cửa sổ
-        win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
+    # Thay đổi kích thước và vị trí của cửa sổ
+    win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
+
+
 def main():
-    #ten cua so
+    # ten cua so
     app_name = "Dota 2"
     # toa do cua so
     new_x, new_y = 0, 0
@@ -41,10 +44,13 @@ def main():
             button.exit_game_round20()
             # print("Ket thuc auto lan {}".format(n))
             logger.info("Ket thuc auto lan {}".format(n))
-            time.sleep(20)
+            for t in range(20):
+                t = 20 - t
+                # print("Dang cho 5s")
+                logger.info(f"Dang cho bat auto lai sau {t}/20s")
+                time.sleep(1)
 
     else:
-
         logger.info("Khong tim thay cua so co ten {}".format(app_name))
 
 
