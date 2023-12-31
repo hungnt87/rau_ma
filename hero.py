@@ -5,12 +5,16 @@ from log import logger
 from PIL import Image
 import pydirectinput
 
-REGION_HERO= (537, 125, 1158, 406)
+REGION_HERO = (537, 125, 1158, 406)
 
-REGION_SELL_HERO= (774, 915, 378, 232)
+REGION_SELL_HERO = (662, 791, 704, 358)
+
 
 # import opencv
 def main():
+    # time.sleep(2)
+    # buy_WinterWyvern()
+    # test_reset_hero()
     pass
 
 
@@ -159,33 +163,31 @@ def buy_hero_infor(HeroInfor, number_hero=1):
 def check_hero(HeroInfor):
     global REGION_HERO
     try:
-        res = pyautogui.locateOnScreen(
+        res = pyautogui.locateCenterOnScreen(
             HeroInfor.img, confidence=0.8, region=REGION_HERO, grayscale=True
         )
         return True
     except pyautogui.ImageNotFoundException:
+        return False
+    except Exception as e:
+        logger.error(e)
         return False
 
 
 def sell_hero(HeroInfor):
     global REGION_SELL_HERO
     try:
-        res = pyautogui.locateOnScreen(
+        res_center = pyautogui.locateCenterOnScreen(
             HeroInfor.lv1_img, confidence=0.8, region=REGION_SELL_HERO, grayscale=True
         )
-        res_center = pyautogui.center(res)
-        pyautogui.moveTo(res_center)
-        pyautogui.rightClick(res_center)
-        time.sleep(1)
-        new_res = (res_center.x + 25, res_center.y)
-        pyautogui.moveTo(new_res)
-        time.sleep(1)
-        pyautogui.click(new_res)
-        # time.sleep(0.2    )
-
-        # time.sleep(0.2)
+        pydirectinput.rightClick(res_center.x, res_center.y)
+        time.sleep(0.2)
+        pydirectinput.click(res_center.x + 20, res_center.y)
+        pydirectinput.moveTo(213, 201)
+        logger.debug(f"Ban thanh cong hero {HeroInfor.name}")
         return True
     except pyautogui.ImageNotFoundException:
+        logger.debug(f"Khong co hero  {HeroInfor.name} de ban")
         return False
     except Exception as e:
         logger.error(e)
@@ -198,6 +200,18 @@ def buy_dazzale():
 
 def buy_oracle():
     buy_hero_infor(Oracle, 1)
+
+
+def buy_WinterWyvern():
+    if WinterWyvern.number == 0:
+        if check_hero(WinterWyvern) is True:
+            if Hoodwink.number == 0:
+                Hoodwink.number = 1
+            else:
+                sell_hero(Hoodwink)
+            buy_hero_infor(WinterWyvern, 5)
+    else:
+        buy_hero_infor(WinterWyvern, 5)
 
 
 def buy_sniper():
@@ -229,13 +243,15 @@ def buy_hoodwink():
 
 
 def buy_drow_ranger():
-    if DrowRanger == 0:
+    if DrowRanger.number == 0:
         if check_hero(DrowRanger) is True:
             if Hoodwink.number == 0:
                 Hoodwink.number = 1
             else:
                 sell_hero(Hoodwink)
-    buy_hero_infor(DrowRanger, 5)
+            buy_hero_infor(DrowRanger, 5)
+    else:
+        buy_hero_infor(DrowRanger, 5)
 
 
 def buy_templar_assassin():
@@ -245,7 +261,9 @@ def buy_templar_assassin():
                 WinterWyvern.number = 1
             else:
                 sell_hero(WinterWyvern)
-    buy_hero_infor(TemplarAssassin, 5)
+            buy_hero_infor(TemplarAssassin, 5)
+        else:
+            buy_hero_infor(TemplarAssassin, 5)
 
 
 def buy_zet():
@@ -255,7 +273,9 @@ def buy_zet():
                 Clinkz.number = 1
             else:
                 sell_hero(Clinkz)
-    buy_hero_infor(Zet, 5)
+            buy_hero_infor(Zet, 5)
+    else:
+        buy_hero_infor(Zet, 5)
 
 
 def buy_all_hero(round_number):
@@ -306,9 +326,9 @@ def reset_hero():
 
 
 def test_reset_hero():
-    reset_hero()
-    print(WinterWyvern.number)
-    print(Hoodwink.number)
+    # reset_hero()
+    print(f"WinterWyvern number = {WinterWyvern.number}")
+    print(f"Hoodwink.number = {Hoodwink.number}")
     print(Luna.number)
     print(Windranger.number)
     print(Oracle.number)
