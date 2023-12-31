@@ -67,7 +67,7 @@ def buy_item_info(ItemInfo, number_item=3):
                 LOOK_REGION = (location.x, location.y, 267, 312)
                 button.click_lock(ItemInfo.name, LOOK_REGION)
                 item_status_money = False
-                previous_item.append(location)
+                previous_item.append(ItemInfo)
                 return False
             else:
                 number = number + 1
@@ -178,12 +178,18 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 def buy_all_previous_item():
     global previous_item
     if len(previous_item) > 0:
-        logger.debug("Ban dang mua lai item da khoa o round truoc")
-        for item in previous_item:
-            pydirectinput.click(item.x, item.y)
-            pydirectinput.moveTo(222, 213)
-            time.sleep(0.5)
-        previous_item = list()
+        logger.info("Ban dang mua lai item da khoa o round truoc")
+        # for item in previous_item:
+        #     buy_item_info(item)
+
+        while True:
+            if len(previous_item) == 0:
+                break
+            if buy_item_info(previous_item[0]) is True:
+                del previous_item[0]
+            else:
+                break
+
     else:
         logger.debug("Khong co item khoa o vong truoc")
 
