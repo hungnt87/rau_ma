@@ -1,10 +1,9 @@
 import pyautogui
 import time
 import button
-import pyscreeze
-from datetime import datetime
 from log import logger
 import pydirectinput
+from PIL import Image
 
 count_buy_item = 0
 item_status_money = True
@@ -15,13 +14,22 @@ GRAYSCALE_BUY_ITEM = True
 
 
 class ItemInfo:
+    img = None
+
     def __init__(self, para_name, para_item_number=0):
         self.name = para_name
-        self.img = "data\\image\\item\\" + para_name + ".png"
+        # self.img = "data\\image\\item\\" + para_name + ".png"
+        self.img = self.get_item_img(para_name)
         self.number = para_item_number
 
     def reset_item_number(self):
         self.number = 0
+
+    def get_item_img(self, para_name):
+        # global HERO_IMG
+        if self.img is None:
+            self.img = Image.open(f"data/image/item/{para_name}.png")
+        return self.img
 
 
 def reset_count_buy_item():
@@ -142,7 +150,6 @@ Luck54_Arcane27_lv4 = ItemInfo("Luck54_Arcane27_lv4")
 Luck60_Speed25_lv4 = ItemInfo("Luck60_Speed25_lv4")
 MasterChefHat_lv2 = ItemInfo("MasterChefHat_lv2")
 Minazuki_lv4 = ItemInfo("Minazuki_lv4")
-NorthWind_Luck13 = ItemInfo("NorthWind_Luck13")
 MultishotDamage20_lv3 = ItemInfo("MultishotDamage20_lv3")
 PantyMask_lv6 = ItemInfo("PantyMask_lv6")
 PickupRange100_lv1 = ItemInfo("PickupRange100_lv1")
@@ -301,7 +308,19 @@ def buy_all_item_lv5():
 
 
 def buy_all_item_lv6():
-    logger.debug("Ban dang mua item lv6")
+    """
+    Buys all level 6 items.
+
+    This function purchases all the level 6 items required for the game.
+    It logs a debug message and calls the `buy_item_info` function to buy each item.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
+    logger.info("Ban dang mua item lv6")
     buy_item_info(PantyMask_lv6, 1)
     buy_item_info(ExtraDamage30_lv6, 1)
     buy_item_info(Cooldown45_Speed15_lv6, 1)
@@ -454,5 +473,5 @@ if __name__ == "__main__":
     # reset_item()
     # time.sleep(2)
     # buy_item_info(PickupRange100_lv1)
-    buy_all_previous_item()
+    # buy_all_previous_item()
     pass
