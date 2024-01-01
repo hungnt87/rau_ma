@@ -9,12 +9,12 @@ REGION_HERO = (537, 125, 1158, 406)
 
 REGION_SELL_HERO = (662, 791, 704, 358)
 count_buy_hero = 0
-previous_hero = list()
+previous_hero = dict()
 
 
 def reset_previous_hero():
     global previous_hero
-    previous_hero = list()
+    previous_hero.clear()
 
 
 # import opencv
@@ -107,7 +107,7 @@ def buy_hero(hero_img):
         )
         res_center = pyautogui.center(res)
         # pydirectinput.moveTo(res_center.x, res_center.y)
-        pydirectinput.click(res_center.x, res_center.y)
+        pydirectinput.click(res_center[0], res_center[1])
         pydirectinput.moveTo(201, 213)
         return res_center
     except pyautogui.ImageNotFoundException:
@@ -151,11 +151,10 @@ def buy_hero_infor(HeroInfor, number_hero=1):
             location = buy_hero(HeroInfor.img)
             if location is not False:
                 if button.check_not_money() is True:
-                    box_lock = (location.x, location.y, 267, 312)
-                    button.click_lock_hero(box_lock)
-                    hero_status_money = False
                     button.set_status_not_money(True)
-                    previous_hero.append(HeroInfor)
+                    box_lock = (location.x, location.y, 267, 312)
+                    if button.click_lock_hero(box_lock) is True:
+                        previous_hero[location] = HeroInfor
                     return False
                     # break
                 else:
@@ -217,13 +216,19 @@ def sell_hero(HeroInfor):
 
 
 def buy_all_previous_hero():
-    global previous_hero
-    if len(previous_hero) > 0:
+    global previous_hero, count_buy_hero
+    if previous_hero:
         logger.debug("Ban dang mua hero khoa o round truoc")
-        for item in previous_hero:
-            logger.debug(f"Ban dang mua hero {item.name} khoa o round truoc")
-            if buy_hero_infor(item, number_hero=None) is True:
-                previous_hero.remove(item)
+        for key, value in previous_hero:
+            pydirectinput.click(key[0], key[1])
+            if button.check_not_money() is True:
+                return False
+            else:
+                logger.info(f"Ban da mua thanh cong 1 {value.name}")
+                value.number = value.number + 1
+                count_buy_hero = count_buy_hero + 1
+                del previous_hero[key]
+
     else:
         logger.debug("Khong co hero khoa o round truoc")
 

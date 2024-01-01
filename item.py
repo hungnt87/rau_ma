@@ -7,7 +7,7 @@ from PIL import Image
 
 count_buy_item = 0
 item_status_money = True
-previous_item = list()
+previous_item = dict()
 REGION_BUY_ITEM = (394, 321, 1384, 692)
 CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
@@ -15,7 +15,7 @@ GRAYSCALE_BUY_ITEM = True
 
 def reset_previous_item():
     global previous_item
-    previous_item = list()
+    previous_item.clear()
 
 
 class ItemInfo:
@@ -66,14 +66,13 @@ def buy_item_info(ItemInfo, number_item=3):
                 region=REGION_BUY_ITEM,
                 grayscale=GRAYSCALE_BUY_ITEM,
             )
-            pydirectinput.click(location.x, location.y)
+            pydirectinput.click(location[0], location[1])
             pydirectinput.moveTo(222, 213)
             if button.check_not_money() is True:
                 LOOK_REGION = (location.x, location.y, 267, 312)
-                button.click_lock(ItemInfo.name, LOOK_REGION)
-                item_status_money = False
                 button.set_status_not_money(True)
-                previous_item.append(ItemInfo)
+                if button.click_lock(ItemInfo.name, LOOK_REGION) is True:
+                    previous_item[location] = ItemInfo
                 return False
             else:
                 number = number + 1
@@ -180,13 +179,18 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
 
 def buy_all_previous_item():
-    global previous_item
-    if len(previous_item) > 0:
+    global previous_item, count_buy_item
+    if previous_item:
         logger.debug("Ban dang mua item khoa o round truoc")
-        for item in previous_item:
-            logger.debug(f"Ban dang tim item {item.name} dang khoa o round truoc")
-            if buy_item_info(item, 10) is True:
-                previous_item.remove(item)
+        for key, value in previous_item.items():
+            pydirectinput.click(key[0], key[1])
+            if button.check_not_money() is True:
+                return False
+            else:
+                logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
+                value.number = value.number + 1
+                count_buy_item = count_buy_item + 1
+                del previous_item[key]
     else:
         logger.debug("Khong co item khoa o round truoc")
 

@@ -361,7 +361,7 @@ def click_lock(name_item, box):
     while True:
         try:
             res = pyautogui.locateCenterOnScreen(
-                Look.img, confidence=0.9, region=box, grayscale=True
+                Look.img, confidence=0.8, region=box, grayscale=True
             )
             # pydirectinput.moveTo(res)
             # time.sleep(1)
