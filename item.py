@@ -108,6 +108,7 @@ Critical20_Defense_lv3 = ItemInfo("Critical20_Defense_lv3")
 Critical30_Defense10_lv5 = ItemInfo("Critical30_Defense10_lv5")
 Critical40_Kill1000_Unique_lv5 = ItemInfo("Critical40_Kill1000_Unique_lv5")
 Defense20_Speed10_lv2 = ItemInfo("Defense20_Speed10_lv2")
+Critical21_For_Precise_lv3 = ItemInfo("Critical21_For_Precise_lv3")
 EnemyCount10_lv6 = ItemInfo("EnemyCount10_lv6")
 Evasion6_For_Precise_lv1 = ItemInfo("Evasion6_For_Precise_lv1")
 Evasion8_Speed5_lv1 = ItemInfo("Evasion8_Speed5_lv1")
@@ -166,6 +167,7 @@ Random_16_36_Defense_lv4 = ItemInfo("Random_16_36_Defense_lv4")
 Range15_Invest55_lv5 = ItemInfo("Range15_Invest55_lv5")
 Range16_Def16_lv5 = ItemInfo("Range16_Def16_lv5")
 Range24_ExtraDamage14_lv6 = ItemInfo("Range24_ExtraDamage14_lv6")
+RevivalCount1_CriticalRate5_lv3 = ItemInfo("RevivalCount1_CriticalRate5_lv3")
 RevivalCount1_Health5_lv4 = ItemInfo("RevivalCount1_Health5_lv4")
 Set_Defense8_lv2 = ItemInfo("Set_Defense8_lv2")
 Set_Defense188_lv3 = ItemInfo("Set_Defense188_lv3")
@@ -282,6 +284,8 @@ def buy_all_item_lv3():
     buy_item_info(Critical9_Luck_lv3)
     buy_item_info(Evasion16_Investment16_lv3)
     buy_item_info(Luck45_HitRecovery25_lv3, 1)
+    buy_item_info(Critical21_For_Precise_lv3, 1)
+    buy_item_info(RevivalCount1_CriticalRate5_lv3)
 
 
 def buy_all_item_lv4():
@@ -381,7 +385,7 @@ def test_all_item():
 
 def reset_item():
     global Attack10EveryBuyPlus5_lv2, Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3, Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
+    global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3, Critical21_For_Precise_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2, EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
     global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3, ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
     global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
     global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
@@ -394,7 +398,7 @@ def reset_item():
     global Luck54_Arcane27_lv4, Luck60_Speed25_lv4
     global MasterChefHat_lv2, Minazuki_lv4, MultishotDamage20_lv3, PantyMask_lv6, PickupRange100_lv1, Pillager_lv4
     global PreciseDamage12_Every1s_Plus1_lv6, PreciseDamage12_Speed12_lv2, PreciseDamage16_Strike16_lv3, Random_10_28_Evasion_lv4, Random_10_28_HealthRegen_lv3
-    global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6, RevivalCount1_Health5_lv4
+    global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6, RevivalCount1_CriticalRate5_lv3, RevivalCount1_Health5_lv4
     global Set_Defense8_lv2, Set_Defense188_lv3, Set_ExtraDamage17_lv4, Set_Investment108_lv2, ShopDiscount_lv1, SplitTheVoid_lv2, TomeOfKnowledge_lv3
 
     Attack10EveryBuyPlus5_lv2.reset_item_number()
@@ -409,6 +413,7 @@ def reset_item():
     Critical9_Luck_lv3.reset_item_number()
     Critical16_Kill1000_Unique_lv2.reset_item_number()
     Critical20_Defense_lv3.reset_item_number()
+    Critical21_For_Precise_lv3.reset_item_number()
     Critical30_Defense10_lv5.reset_item_number()
     Critical40_Kill1000_Unique_lv5.reset_item_number()
     Defense20_Speed10_lv2.reset_item_number()
@@ -470,6 +475,7 @@ def reset_item():
     Range15_Invest55_lv5.reset_item_number()
     Range16_Def16_lv5.reset_item_number()
     Range24_ExtraDamage14_lv6.reset_item_number()
+    RevivalCount1_CriticalRate5_lv3.reset_item_number()
     RevivalCount1_Health5_lv4.reset_item_number()
     Set_Defense8_lv2.reset_item_number()
     Set_Defense188_lv3.reset_item_number()
