@@ -182,7 +182,7 @@ def buy_all_previous_item():
     global previous_item, count_buy_item
     if previous_item:
         logger.debug("Ban dang mua item khoa o round truoc")
-        for key, value in previous_item.items():
+        for key, value in list(previous_item.items()):
             pydirectinput.click(key[0], key[1])
             if button.check_not_money() is True:
                 return False

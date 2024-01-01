@@ -219,7 +219,7 @@ def buy_all_previous_hero():
     global previous_hero, count_buy_hero
     if previous_hero:
         logger.debug("Ban dang mua hero khoa o round truoc")
-        for key, value in previous_hero:
+        for key, value in list(previous_hero.items()):
             pydirectinput.click(key[0], key[1])
             if button.check_not_money() is True:
                 return False
