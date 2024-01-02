@@ -5,20 +5,25 @@ from log import logger
 import pydirectinput
 from PIL import Image
 import os
+import sys
 
-path_parent = os.getcwd()
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
 path_data = "data"
 path_image = "image"
 path_item = "item"
-path_item_image = os.path.join(path_parent, path_data, path_image, path_item)
+
 count_buy_item = 0
 item_status_money = True
 previous_item = dict()
 REGION_BUY_ITEM = (394, 321, 1384, 692)
 CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
-
-print(path_item_image)
 
 
 def reset_previous_item():
@@ -42,7 +47,8 @@ class ItemInfo:
         # global HERO_IMG
         if self.img is None:
             file_name = para_name + ".png"
-            self.img = Image.open(os.path.join(path_item_image, file_name))
+            relative_path = os.path.join(path_data, path_image, path_item, file_name)
+            self.img = Image.open(resource_path(relative_path))
         return self.img
 
 

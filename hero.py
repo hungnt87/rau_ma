@@ -4,6 +4,29 @@ import button
 from log import logger
 from PIL import Image
 import pydirectinput
+import os
+import sys
+
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
+path_parent = os.getcwd()
+path_data = "data"
+path_image = "image"
+path_hero = "hero"
+
+# relative_path = os.path.join(path_data, path_image, path_hero)
+# path_data_image = resource_path(relative_path)
+
+# path_parent = os.getcwd()
+# path_data = "data"
+# path_image = "image"
+# path_hero = "hero"
+# path_hero_image = os.path.join(path_data, path_image, path_hero)
 
 REGION_HERO = (537, 125, 1158, 406)
 
@@ -26,27 +49,38 @@ def main():
 
 
 class HeroInfor:
-    HERO_IMG = None
+    img = None
+    lv1_img = None
 
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
-        self.img = self.get_hero_img(para_name)
-        # self.img = f"data/image/hero/{para_name}.png"
-        self.lv1_img = "data\\image\\hero\\" + para_name + "_lv1.png"
-        self.lv2_img = "data\\image\\hero\\" + para_name + "_lv2.png"
-        self.lv3_img = "data\\image\\hero\\" + para_name + "_lv3.png"
-        self.lv4_img = "data\\image\\hero\\" + para_name + "_lv4.png"
-        self.lv5_img = "data\\image\\hero\\" + para_name + "_lv5.png"
+        # self.img = self.get_hero_img(para_name)
+        file_name = f"{para_name}.png"
+        self.img = resource_path(
+            os.path.join(path_data, path_image, path_hero, file_name)
+        )
+        file_name_lv1 = f"{para_name}_lv1.png"
+        path = os.path.join(path_data, path_image, path_hero, file_name_lv1)
+        self.lv1_img = resource_path(path)
+
         self.number = para_number_hero
 
     def reset_hero_number(self):
         self.number = 0
 
-    def get_hero_img(self, para_name, hero_img=None):
-        # global HERO_IMG
-        if self.HERO_IMG is None:
-            self.HERO_IMG = Image.open(f"data/image/hero/{para_name}.png")
-        return self.HERO_IMG
+    def get_hero_img(self, para_name):
+        file_name = f"{para_name}.png"
+        path = os.path.join(path_data, path_image, path_hero, file_name)
+        if self.img is None:
+            self.img = Image.open(resource_path(path))
+        return self.img
+
+    # def get_hero_img_lv1(self, para_name):
+    #     file_name = para_name + "_lv1.png"
+    #     relative_path = os.path.join(path_hero_image, file_name)
+    #     if self.lv1_img is None:
+    #         self.lv1_img = Image.open(resource_path(relative_path))
+    #     return self.lv1_img
 
 
 # def get_hero_img(para_name, hero_img=None):

@@ -1,12 +1,21 @@
 import logging
 import os
+import sys
 
-path = os.getcwd()
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
+path = "log.log"
+
 # create the logging instance for logging to file only
 logger = logging.getLogger(__name__)
 
 # create the handler for the main logger
-file_logger = logging.FileHandler("log.log")
+file_logger = logging.FileHandler(resource_path(path))
 NEW_FORMAT = "[%(asctime)s] - [%(levelname)s] - %(message)s"
 format_log = "%(asctime)s\t %(levelname)s\t %(message)s"
 
@@ -22,7 +31,7 @@ logger.addHandler(file_logger)
 # we set it manually
 logger.setLevel(logging.DEBUG)
 
-print(path)
+# print(path)
 # now we can add the console logging
 # console = logging.StreamHandler()
 # console.setFormatter(console_format)

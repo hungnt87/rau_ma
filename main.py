@@ -48,24 +48,26 @@ class myGUI(tk.Frame):
 
     def build_gui(self):
         # Build GUI
-        self.root.title("TEST")
+        self.root.title("Brodota-bot")
         self.root.option_add("*tearOff", "FALSE")
-        self.grid(column=0, row=0, sticky="ew")
+        self.grid(column=0, row=3, sticky="ew")
         self.grid_columnconfigure(0, weight=1, uniform="a")
         self.grid_columnconfigure(1, weight=1, uniform="a")
         self.grid_columnconfigure(2, weight=1, uniform="a")
         self.grid_columnconfigure(3, weight=1, uniform="a")
-        button1 = tk.Button(self, text="Button1", command=threading_main)
+        button1 = tk.Button(self, text="Start", command=threading_main)
         button1.grid(column=0, row=0, sticky="ew")
         # butt
         # Add text widget to display logging info
         st = ScrolledText.ScrolledText(self, state="disabled")
+        st.grid(column=0, row=1, sticky="w", columnspan=4)
         st.configure(font="TkFixedFont")
         st.grid(column=0, row=1, sticky="w", columnspan=4)
+        format_log = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")
 
         # Create textLogger
         text_handler = TextHandler(st)
-
+        text_handler.setFormatter(format_log)
         # Logging configuration
         # logging.basicConfig(
         #     filename="test.log",
