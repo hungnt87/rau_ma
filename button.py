@@ -3,12 +3,20 @@ import time
 import pyscreeze
 from log import logger
 import pydirectinput
+import os
+
+path_parent = os.getcwd()
+path_data = "data"
+path_image = "image"
+
+path_data_image = os.path.join(path_parent, path_data, path_image)
 
 
 class ButtonInfor:
     def __init__(self, para_name):
         self.name = para_name
-        self.img = "data\\image\\" + para_name + ".png"
+        file_name = para_name + ".png"
+        self.img = os.path.join(path_data_image, file_name)
 
 
 status_not_money = True

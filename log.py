@@ -1,5 +1,7 @@
 import logging
+import os
 
+path = os.getcwd()
 # create the logging instance for logging to file only
 logger = logging.getLogger(__name__)
 
@@ -20,9 +22,9 @@ logger.addHandler(file_logger)
 # we set it manually
 logger.setLevel(logging.DEBUG)
 
-
+print(path)
 # now we can add the console logging
-console = logging.StreamHandler()
-console.setFormatter(console_format)
-console.setLevel(logging.DEBUG)
-logging.getLogger(__name__).addHandler(console)
+# console = logging.StreamHandler()
+# console.setFormatter(console_format)
+# console.setLevel(logging.DEBUG)
+# logging.getLogger(__name__).addHandler(console)

@@ -4,13 +4,21 @@ import button
 from log import logger
 import pydirectinput
 from PIL import Image
+import os
 
+path_parent = os.getcwd()
+path_data = "data"
+path_image = "image"
+path_item = "item"
+path_item_image = os.path.join(path_parent, path_data, path_image, path_item)
 count_buy_item = 0
 item_status_money = True
 previous_item = dict()
 REGION_BUY_ITEM = (394, 321, 1384, 692)
 CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
+
+print(path_item_image)
 
 
 def reset_previous_item():
@@ -33,7 +41,8 @@ class ItemInfo:
     def get_item_img(self, para_name):
         # global HERO_IMG
         if self.img is None:
-            self.img = Image.open(f"data/image/item/{para_name}.png")
+            file_name = para_name + ".png"
+            self.img = Image.open(os.path.join(path_item_image, file_name))
         return self.img
 
 
@@ -487,8 +496,7 @@ def reset_item():
 
 
 if __name__ == "__main__":
-    # reset_item()
-    # time.sleep(2)
-    # buy_item_info(PickupRange100_lv1)
-    # buy_all_previous_item()
+    # print(os.path.join(path_parent, path_data, path_image, path_item))
+    # print(path_parent)
+
     pass
