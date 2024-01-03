@@ -6,6 +6,14 @@ import pydirectinput
 from PIL import Image
 import os
 import sys
+import threading
+
+event_stop = threading.Event()
+
+
+def set_event_stop(event=threading.Event()):
+    global event_stop
+    event_stop = event
 
 
 def resource_path(relative_path):
@@ -67,13 +75,16 @@ def reset_status_money():
     item_status_money = True
 
 
-def buy_item_info(ItemInfo, number_item=3):
+def buy_item_info(ItemInfo, number_item=3, event_stop=event_stop):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
-
+    if event.is_set():
+        return
     global count_buy_item, item_status_money, previous_item, REGION_BUY_ITEM, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
+        if event.is_set():
+            return
         try:
             location = pyautogui.locateCenterOnScreen(
                 ItemInfo.img,
@@ -195,11 +206,17 @@ SplitTheVoid_lv2 = ItemInfo("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3")
 
 
-def buy_all_previous_item():
+def buy_all_previous_item(event=threading.Event()):
+    if event.is_set():
+        return
     global previous_item, count_buy_item
     if previous_item:
+        if event.is_set():
+            return
         logger.debug("Ban dang mua item khoa o round truoc")
         for key, value in list(previous_item.items()):
+            if event.is_set():
+                break
             pydirectinput.click(key[0], key[1])
             if button.check_not_money() is True:
                 return False
@@ -209,10 +226,14 @@ def buy_all_previous_item():
                 count_buy_item = count_buy_item + 1
                 del previous_item[key]
     else:
+        if event.is_set():
+            return
         logger.debug("Khong co item khoa o round truoc")
 
 
-def buy_all_set_item(round_number):
+def buy_all_set_item(round_number, event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua set item")
     buy_item_info(PickupRange100_lv1, 1)
     buy_item_info(Set_Speed_lv1, 1)
@@ -231,7 +252,9 @@ def buy_all_set_item(round_number):
         buy_item_info(Attack35_Kill1000_Unique_lv5, 1)
 
 
-def buy_all_item_investments(round_number):
+def buy_all_item_investments(round_number, event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item investments")
     if round_number <= 9:
         buy_item_info(Investment88_For_Precise_lv1, 5)
@@ -243,16 +266,22 @@ def buy_all_item_investments(round_number):
         buy_item_info(Investment368_HitRecovery18_lv5, 1)
 
 
-def buy_all_item_round2():
+def buy_all_item_round2(event=threading.Event()):
+    if event.is_set():
+        return
     buy_item_info(ShopDiscount_lv1)
 
 
-def buy_all_item_round3():
+def buy_all_item_round3(event=threading.Event()):
+    if event.is_set():
+        return
     buy_item_info(ShopDiscount_lv1)
     buy_item_info(PickupRange100_lv1)
 
 
-def buy_all_item_lv1():
+def buy_all_item_lv1(event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item lv1")
 
     buy_item_info(ShopDiscount_lv1, 5)
@@ -262,7 +291,9 @@ def buy_all_item_lv1():
     buy_item_info(HealthRegen10_For_Precise_lv1)
 
 
-def buy_all_item_lv2():
+def buy_all_item_lv2(event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item lv2")
     buy_item_info(PreciseDamage12_Speed12_lv2)
     buy_item_info(Exp40_Luck6_lv2)
@@ -281,7 +312,9 @@ def buy_all_item_lv2():
     buy_item_info(HealthRegen12_HitRecovery15_lv2)
 
 
-def buy_all_item_lv3():
+def buy_all_item_lv3(event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item lv3")
     # buy_item_info(Investment198_Speed7_lv3)
     # buy_item_info(Investment218_Evasion8_lv3)
@@ -303,7 +336,9 @@ def buy_all_item_lv3():
     buy_item_info(RevivalCount1_CriticalRate5_lv3)
 
 
-def buy_all_item_lv4():
+def buy_all_item_lv4(event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item lv4")
     buy_item_info(Pillager_lv4)
     buy_item_info(ImmunityCount4_lv4, 2)
@@ -320,7 +355,9 @@ def buy_all_item_lv4():
     buy_item_info(RevivalCount1_Health5_lv4)
 
 
-def buy_all_item_lv5():
+def buy_all_item_lv5(event=threading.Event()):
+    if event.is_set():
+        return
     logger.debug("Ban dang mua item lv5")
     buy_item_info(Immunity10_lv5)
     buy_item_info(Immunity_Unique_lv5, 1)
@@ -333,7 +370,7 @@ def buy_all_item_lv5():
     buy_item_info(Cooldown21_lv5, 2)
 
 
-def buy_all_item_lv6():
+def buy_all_item_lv6(event=threading.Event()):
     """
     Buys all level 6 items.
 
@@ -346,6 +383,8 @@ def buy_all_item_lv6():
     Returns:
         None
     """
+    if event.is_set():
+        return
     logger.info("Ban dang mua item lv6")
     buy_item_info(PantyMask_lv6, 1)
     buy_item_info(ExtraDamage30_lv6, 1)
@@ -355,36 +394,38 @@ def buy_all_item_lv6():
     buy_item_info(EnemyCount10_lv6, 1)
 
 
-def buy_all_item(round_number):
+def buy_all_item(round_number, event=threading.Event()):
+    if event.is_set():
+        return
     logger.info(f"Ban dang mua item round {round_number}")
     if button.get_status_not_money() is True:
         logger.debug("Khong du tien, next round")
         return False
     if round_number == 2:
-        buy_all_item_round2()
+        buy_all_item_round2(event=event)
     if round_number == 3:
-        buy_all_item_round3()
+        buy_all_item_round3(event=event)
     if 3 < round_number <= 6:
-        buy_all_item_lv1()
-        buy_all_item_lv2()
+        buy_all_item_lv1(event=event)
+        buy_all_item_lv2(event=event)
     if 6 < round_number <= 9:
-        buy_all_item_lv1()
-        buy_all_item_lv2()
-        buy_all_item_lv3()
+        buy_all_item_lv1(event=event)
+        buy_all_item_lv2(event=event)
+        buy_all_item_lv3(event=event)
     if 9 < round_number <= 12:
-        buy_all_item_lv2()
-        buy_all_item_lv3()
-        buy_all_item_lv4()
+        buy_all_item_lv2(event=event)
+        buy_all_item_lv3(event=event)
+        buy_all_item_lv4(event=event)
     if 12 < round_number <= 15:
-        buy_all_item_lv2()
-        buy_all_item_lv3()
-        buy_all_item_lv4()
-        buy_all_item_lv5()
+        buy_all_item_lv2(event=event)
+        buy_all_item_lv3(event=event)
+        buy_all_item_lv4(event=event)
+        buy_all_item_lv5(event=event)
     if 15 < round_number <= 20:
-        buy_all_item_lv3()
-        buy_all_item_lv4()
-        buy_all_item_lv5()
-        buy_all_item_lv6()
+        buy_all_item_lv3(event=event)
+        buy_all_item_lv4(event=event)
+        buy_all_item_lv5(event=event)
+        buy_all_item_lv6(event=event)
 
 
 def test_all_item():

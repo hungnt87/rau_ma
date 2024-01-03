@@ -6,6 +6,7 @@ from PIL import Image
 import pydirectinput
 import os
 import sys
+import threading
 
 
 def resource_path(relative_path):
@@ -249,11 +250,17 @@ def sell_hero(HeroInfor):
         return False
 
 
-def buy_all_previous_hero():
+def buy_all_previous_hero(event=threading.Event()):
+    if event.is_set():
+        return
     global previous_hero, count_buy_hero
     if previous_hero:
+        if event.is_set():
+            return
         logger.debug("Ban dang mua hero khoa o round truoc")
         for key, value in list(previous_hero.items()):
+            if event.is_set():
+                break
             pydirectinput.click(key[0], key[1])
             if button.check_not_money() is True:
                 return False
@@ -264,6 +271,8 @@ def buy_all_previous_hero():
                 del previous_hero[key]
 
     else:
+        if event.is_set():
+            return
         logger.debug("Khong co hero khoa o round truoc")
 
 

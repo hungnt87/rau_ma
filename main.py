@@ -1,4 +1,4 @@
-import round as r
+import PySimpleGUI as sg
 import win32gui
 import win32con
 import time
@@ -10,6 +10,9 @@ import tkinter as tk  # Python 3.x
 import tkinter.scrolledtext as ScrolledText
 import threading
 import keyboard
+import round as r
+
+event_main = threading.Event()
 
 
 class TextHandler(logging.Handler):
@@ -58,9 +61,9 @@ class myGUI(tk.Frame):
         self.grid_columnconfigure(2, weight=1, uniform="a")
         self.grid_columnconfigure(3, weight=1, uniform="a")
         button1 = tk.Button(self, text="Start (Ctrl+F10)", command=threading_main)
-        if IsOpen is True:
-            button1["state"] = "disabled"
         button1.grid(column=0, row=0, sticky="ew")
+        button2 = tk.Button(self, text="Stop (Ctrt + F11)", command=threading_test)
+        button2.grid(column=1, row=0, sticky="ew")
         # butt
         # Add text widget to display logging info
         st = ScrolledText.ScrolledText(self, state="disabled")
@@ -97,7 +100,7 @@ def move_window_to(handle, x, y):
     win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
 
 
-def main():
+def main(event=threading.Event()):
     # ten cua so
     app_name = "Dota 2"
     # toa do cua so
@@ -113,13 +116,19 @@ def main():
         logger.info(f"Tim thay cua so  '{app_name}'")
 
         for n in range(0, 20):
+            if event.is_set():
+                logger.info("Stop thread main")
+                break
             # print("t dau auto lan: {}".format(n))
             logger.info("Bat dau auto lan: {}".format(n))
-            r.round_all(n)
+            r.round_all(n, event)
             button.exit_game_round20()
             # print("Ket thuc auto lan {}".format(n))
             logger.info("Ket thuc auto lan {}".format(n))
             for t in range(20):
+                if event.is_set():
+                    logger.info("Stop thread main")
+                    break
                 t = 20 - t
                 # print("Dang cho 5s")
                 logger.info(f"Dang cho bat auto lai sau {t}/20s")
@@ -131,38 +140,89 @@ def main():
 
 IsOpen = False
 
+t1 = None
+t2 = None
+
 
 def threading_main():
     # Call work function
-    global IsOpen
+    global IsOpen, t1, event_main
     if IsOpen is True:
         return
     else:
         IsOpen = True
-        t1 = threading.Thread(target=main, args=[])
+        t1 = threading.Thread(
+            target=test_round,
+            args=[
+                event_main,
+            ],
+        )
         t1.start()
 
 
+def test_round():
+    r.test_stop_thread()
+
+
+def threading_test():
+    t2 = threading.Thread(target=stop_thread_main, args=[])
+    t2.start()
+    # t2.join()
+
+
+def stop_thread_main():
+    global event_main, t1
+    event_main.set()
+    logger.info("Stop thread main")
+    # if t1:
+    #     t1.join()
+    #     logger.info("Stop thread all")
+
+
+def gui():
+    layout = [[sg.Button("Start Thread"), sg.Button("Stop Thread"), sg.Button("Pause")]]
+
+    window = sg.Window("Thread Demo", layout)
+
+    thread = None
+    event_stop = threading.Event()
+    event_pause = threading.Event()
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED:
+            # exit_event.set()
+            r.event_stop.set()
+            button.event_stop.set()
+            if thread:
+                thread.join()
+            break
+        elif event == "Start Thread" and not thread:
+            r.event_stop.clear()
+            button.event_stop.clear()
+            r.event_pause.set()
+            thread = threading.Thread(
+                target=r.round_all,
+                args=[
+                    0,
+                ],
+            )
+            thread.start()
+        elif event == "Stop Thread" and thread:
+            r.event_pause.set()
+            r.event_stop.set()
+            button.event_stop.set()
+            thread.join()
+            thread = None
+        elif event == "Pause" and thread:
+            logger.info("Pause")
+            r.event_pause.clear()
+            button.event_pause.clear()
+            # thread.join()
+            # thread = None
+
+    window.close()
+
+
 if __name__ == "__main__":
-    # global IsOpen
-    root = tk.Tk()
-
-    def on_activate():
-        # Điều gì đó bạn muốn thực hiện khi phím tắt được kích hoạt
-        # print("F9 Hotkey activated!")
-        root.destroy()
-
-    def on_closing():
-        root.destroy()
-
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-    myGUI(root)
-    if IsOpen is False:
-        root.button1["state"] = "disabled"
-    # t1 = threading.Thread(target=main, args=[])
-    # t1.start()
-    keyboard.add_hotkey("Ctrl+F9", on_activate)
-    keyboard.add_hotkey("Ctrl+q", on_activate)
-    keyboard.add_hotkey("Ctrl+F10", threading_main)
-    root.mainloop()
+    gui()
     # t1.join()

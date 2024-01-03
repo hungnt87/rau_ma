@@ -4,6 +4,7 @@ from log import logger
 import pydirectinput
 import os
 import sys
+import threading
 
 
 def resource_path(relative_path):
@@ -101,12 +102,28 @@ Save = ButtonInfor("Save")
 Button_X = ButtonInfor("Button_X")
 Update = ButtonInfor("Update")
 
+event_stop = threading.Event()
+event_pause = threading.Event()
 
-def check_button(ButtonInfor, time_wait=60):
+
+def check_button(
+    ButtonInfor, time_wait=60, stop_event=event_stop, pause_event=event_pause
+):
     i = 0
     # time.sleep(1)
+    logger.debug(f"Check button {ButtonInfor.name}")
     while True:
+        if stop_event.is_set():
+            logger.info(f"Stop thread check button 1 {ButtonInfor.name}")
+            break
+        if pause_event.is_set():
+            logger.info(f"Pause thread check button 1 {ButtonInfor.name}")
+            time.sleep(1)
+            continue
         try:
+            if stop_event.is_set():
+                logger.info(f"Stop thread check button 2{ButtonInfor.name}")
+                break
             res = pyautogui.locateCenterOnScreen(
                 ButtonInfor.img,
                 confidence=0.9,
@@ -119,6 +136,9 @@ def check_button(ButtonInfor, time_wait=60):
 
             return True
         except pyautogui.ImageNotFoundException:
+            if stop_event.is_set():
+                logger.info(f"Stop thread check button 3 {ButtonInfor.name}")
+                break
             i = i + 1
             if i > time_wait:
                 logger.error(f"Khong tim thay hinh anh {ButtonInfor.name}")
@@ -131,15 +151,21 @@ def check_button(ButtonInfor, time_wait=60):
             break
 
 
-def click(ButtonInfor, time_sleep=2, time_wait=60):
+def click(ButtonInfor, time_sleep=2, time_wait=60, stop_event=event_stop):
     """Click button infor
     Args:
         ButtonInfor: ButtonInfor
         time_sleep: time sleep after click
     """
-
+    logger.info(f"Click {ButtonInfor.name}")
+    if stop_event.is_set():
+        logger.info(f"Stop thread click button 1{ButtonInfor.name}")
+        return
     # time.sleep(time_sleep)
     if check_button(ButtonInfor, time_wait=time_wait) is True:
+        if stop_event.is_set():
+            logger.info(f"Stop thread click button 2{ButtonInfor.name}")
+            return
         time.sleep(time_sleep)
         logger.info("Click {}".format(ButtonInfor.name))
         try:
@@ -160,9 +186,11 @@ def click(ButtonInfor, time_sleep=2, time_wait=60):
             return
 
 
-def check_not_money():
+def check_not_money(event=threading.Event()):
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             pyautogui.locateCenterOnScreen(
                 NotMoney.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
@@ -181,9 +209,11 @@ def check_not_money():
             break
 
 
-def check_find_item(time_wait=2):
+def check_find_item(time_wait=2, event=threading.Event()):
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Recycle.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
@@ -203,9 +233,11 @@ def check_find_item(time_wait=2):
             break
 
 
-def check_resurrect(time_wait=10):
+def check_resurrect(time_wait=10, event=threading.Event()):
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Resurrect.img,
@@ -229,10 +261,12 @@ def check_resurrect(time_wait=10):
             break
 
 
-def check_abandon(time_wait=2):
+def check_abandon(time_wait=2, event=threading.Event()):
     # logger.info("Kiem tra Abandon")
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Abandon.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=False
@@ -253,10 +287,12 @@ def check_abandon(time_wait=2):
             break
 
 
-def check_proceed_to_round(time_wait=40):
+def check_proceed_to_round(time_wait=40, event=threading.Event()):
     check_resurrect()
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 ProceedToRound.img,
@@ -290,40 +326,46 @@ def exit_game():
     click(LeaveGame, 0)
 
 
-def exit_game_round20():
+def exit_game_round20(event=threading.Event()):
     logger.info("Thoat game")
     bulk_disassembly()
-    click(Back, 0)
-    click(Disconnect, 0)
-    click(LeaveGame, 0)
+    click(Back, event=event)
+    click(Disconnect, event=event)
+    click(LeaveGame, event=event)
     logger.info("Check game co update trong 10s")
-    click(Update, 2, 10)
+    click(Update, time_sleep=2, time_wait=10, event=event)
 
 
-def enter_game():
+def enter_game(event=threading.Event()):
+    # event.set()
+    if event.is_set():
+        logger.info("Stop thread enter game")
+        return
     logger.info("Vao game")
-    click(CreateCustomLobby)
-    click(ServerLocaltion)
-    click(ServerLocaltion_Singapore)
-    click(CreatePassLobby)
+    click(CreateCustomLobby, event=event)
+    click(ServerLocaltion, event=event)
+    click(ServerLocaltion_Singapore, event=event)
+    click(CreatePassLobby, event=event)
     pyautogui.write("asx")  # add password
-    click(CreateGame)
+    click(CreateGame, event=event)
     # time.sleep(4)
-    click(StartGame, 5)
-    click(Accept)
+    click(StartGame, time_sleep=2, event=event)
+    click(Accept, event=event)
     time.sleep(30)
-    click(Confirm, 10)
+    click(Confirm, time_sleep=2, event=event)
     # click(ChallengeMax, 2)
-    click(Challenge, 2)
-    click(SelectCharacter, 2)
-    pyautogui.moveTo(100, 100)
-    click(Prepare, 2)
+    click(Challenge, time_sleep=2, event=event)
+    click(SelectCharacter, time_sleep=2, event=event)
+    # py.moveTo(100, 100)
+    click(Prepare, time_sleep=2, event=event)
 
 
-def roll_game():
+def roll_game(event=threading.Event()):
     logger.info("Click {}".format(Roll.name))
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Roll.img, confidence=0.9, region=(0, 0, 1936, 1119), grayscale=True
@@ -345,29 +387,29 @@ def roll_game():
             break
 
 
-def click_procceed_to_round():
-    click(ProceedToRound)
+def click_procceed_to_round(event=threading.Event()):
+    click(ProceedToRound, event=event)
 
 
 def next_round():
     logger.info("Next round")
-    click(ProceedToRound)
-    check_proceed_to_round()
+    click(ProceedToRound, event=event)
+    check_proceed_to_round(event=event)
 
 
-def bulk_disassembly():
+def bulk_disassembly(event=threading.Event()):
     """
     Perform bulk disassembly by clicking on the necessary buttons.
     """
     logger.info("Bat dau phan giai tat ca trang bi da nhat")
     try:
-        click(Button_X)
-        click(Hide)
-        click(Equip)
-        click(BulkDisassembly)
-        click(BulkAll)
-        click(ConfirmDisassemBingEquip)
-        click(ClickToClose)
+        click(Button_X, event=event)
+        click(Hide, event=event)
+        click(Equip, event=event)
+        click(BulkDisassembly, event=event)
+        click(BulkAll, event=event)
+        click(ConfirmDisassemBingEquip, event=event)
+        click(ClickToClose, event=event)
         return True
     except Exception as e:
         logger.error("Khong hoan thanh phan giai trang bi")
@@ -375,10 +417,12 @@ def bulk_disassembly():
         return False
 
 
-def click_lock(name_item, box):
+def click_lock(name_item, box, event=threading.Event()):
     logger.info("Click lock")
     i = 0
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Look.img, confidence=0.8, region=box, grayscale=True
@@ -402,12 +446,14 @@ def click_lock(name_item, box):
             break
 
 
-def click_lock_hero(box):
+def click_lock_hero(box, event=threading.Event()):
     logger.info("Click lock")
     i = 0
     # box=(828,169,296,348)
     # box = (687,237,158,276)
     while True:
+        if event.is_set():
+            break
         try:
             res = pyautogui.locateCenterOnScreen(
                 Lock_hero.img, confidence=0.9, region=box, grayscale=True
