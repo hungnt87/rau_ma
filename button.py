@@ -122,13 +122,13 @@ def check_button(ButtonInfor, time_wait=60):
             i = i + 1
             if i > time_wait:
                 logger.error(f"Khong tim thay hinh anh {ButtonInfor.name}")
-                break
+                return False
             logger.debug(f"Dang tim hinh anh {ButtonInfor.name} so lan {i}/{time_wait}")
             time.sleep(1)
             # return False
         except Exception as e:
             logger.error(e)
-            return False
+            break
 
 
 def click(ButtonInfor, time_sleep=2, time_wait=60):
@@ -151,10 +151,13 @@ def click(ButtonInfor, time_sleep=2, time_wait=60):
             )
             pydirectinput.click(res[0], res[1])
             pydirectinput.moveTo(200, 200)
+            return True
         except pyautogui.ImageNotFoundException:
             logger.debug("Khong tim thay hinh anh {}".format(ButtonInfor.name))
+            return False
         except Exception as e:
             logger.error(e)
+            return
 
 
 def check_not_money():
@@ -175,7 +178,7 @@ def check_not_money():
                 return False
         except Exception as e:
             logger.error(e)
-            return False
+            break
 
 
 def check_find_item(time_wait=2):
@@ -189,11 +192,11 @@ def check_find_item(time_wait=2):
             pydirectinput.click(res.x, res.y)
             pydirectinput.moveTo(200, 200)
             # logger.info("Khong lay item")
-            break
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
-                break  # logger.debug("Cho xuat hien Recycle so lan {}".format(i))
+                return False
             time.sleep(0.5)
         except Exception as e:
             logger.error(e)
@@ -219,10 +222,11 @@ def check_resurrect(time_wait=10):
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
-                break
+                return True
             time.sleep(1)
         except Exception as e:
             logger.error(e)
+            break
 
 
 def check_abandon(time_wait=2):
@@ -237,11 +241,11 @@ def check_abandon(time_wait=2):
             # pydirectinput.moveTo(res.x, res.y)
             # time.sleep(1)
             pydirectinput.click(res.x, res.y)
-            break
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > time_wait:
-                break
+                return False
             # logger.debug("Cho xuat hien Abandon so lan {}".format(i))
             time.sleep(0.5)
         except Exception as e:
@@ -276,7 +280,7 @@ def check_proceed_to_round(time_wait=40):
             return False
         except Exception as e:
             logger.error(e)
-            return False
+            break
 
 
 def exit_game():
@@ -338,7 +342,7 @@ def roll_game():
             time.sleep(1)
         except Exception as e:
             logger.error(e)
-            return False
+            break
 
 
 def click_procceed_to_round():
@@ -393,9 +397,9 @@ def click_lock(name_item, box):
             logger.debug(f"Dang tim hinh anh {Look.name} so lan {i}")
             time.sleep(1)
             break
-        except TypeError:
-            logger.error(f"Khong tim thay hinh anh {Look.name}")
-            return False
+        except Exception as e:
+            logger.error(e)
+            break
 
 
 def click_lock_hero(box):
@@ -414,11 +418,11 @@ def click_lock_hero(box):
             # time.sleep(1)
             pydirectinput.moveTo(200, 200)
             logger.debug(f"Ban khong du tien mua  khoa de lan sau mua")
-            break
+            return True
         except pyautogui.ImageNotFoundException:
             i = i + 1
             if i > 2:
-                break
+                return False
             logger.debug(f"Dang tim hinh anh {Lock_hero.name} so lan {i}")
             time.sleep(0.5)
         except Exception as e:

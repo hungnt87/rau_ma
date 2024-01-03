@@ -9,6 +9,7 @@ from log import logger
 import tkinter as tk  # Python 3.x
 import tkinter.scrolledtext as ScrolledText
 import threading
+import keyboard
 
 
 class TextHandler(logging.Handler):
@@ -48,6 +49,7 @@ class myGUI(tk.Frame):
 
     def build_gui(self):
         # Build GUI
+        global IsOpen
         self.root.title("Brodota-bot")
         self.root.option_add("*tearOff", "FALSE")
         self.grid(column=0, row=3, sticky="ew")
@@ -55,7 +57,9 @@ class myGUI(tk.Frame):
         self.grid_columnconfigure(1, weight=1, uniform="a")
         self.grid_columnconfigure(2, weight=1, uniform="a")
         self.grid_columnconfigure(3, weight=1, uniform="a")
-        button1 = tk.Button(self, text="Start", command=threading_main)
+        button1 = tk.Button(self, text="Start (Ctrl+F10)", command=threading_main)
+        if IsOpen is True:
+            button1["state"] = "disabled"
         button1.grid(column=0, row=0, sticky="ew")
         # butt
         # Add text widget to display logging info
@@ -140,11 +144,25 @@ def threading_main():
 
 
 if __name__ == "__main__":
+    # global IsOpen
     root = tk.Tk()
-    myGUI(root)
 
+    def on_activate():
+        # Điều gì đó bạn muốn thực hiện khi phím tắt được kích hoạt
+        # print("F9 Hotkey activated!")
+        root.destroy()
+
+    def on_closing():
+        root.destroy()
+
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    myGUI(root)
+    if IsOpen is False:
+        root.button1["state"] = "disabled"
     # t1 = threading.Thread(target=main, args=[])
     # t1.start()
-
+    keyboard.add_hotkey("Ctrl+F9", on_activate)
+    keyboard.add_hotkey("Ctrl+q", on_activate)
+    keyboard.add_hotkey("Ctrl+F10", threading_main)
     root.mainloop()
     # t1.join()
