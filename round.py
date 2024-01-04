@@ -37,96 +37,116 @@ def reset_status_not_money():
     button.set_status_not_money(False)
 
 
+def set_event_run():
+    global event_stop
+    event_stop.clear()
+    event_pause.set()
+    item.set_event_run()
+    button.set_event_run()
+
+
 def set_event_stop():
     global event_stop
     event_stop.set()
+    event_pause.set()
+    item.set_event_stop()
+    button.set_event_stop()
 
 
 def set_event_pause():
     global event_pause
+    event_pause.clear()
+    item.set_event_pause()
+    button.set_event_pause()
+
+
+def set_event_resume():
+    global event_pause
     event_pause.set()
+    item.set_event_resume()
+    button.set_event_resume()
 
 
 def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
+    if stop_event.is_set():
+        logger.info("Stop thread round 1")
+        return
     n = 0
     while True:
-        pause_event.wait()
         if stop_event.is_set():
-            logger.info("Stop thread round all")
+            logger.info("Stop thread round 2")
             break
-
+        pause_event.wait()
         n = n + 1
         logger.info(f"Bat dau roll in round: {n}")
 
-        # button.click(button.CreateCustomLobby, stop_event=stop_event)
+        # button.click(button.CreateCustomLobby)
         time.sleep(1)
-    # number_roll = 0
+        number_roll = 0
 
-    # if n == 2:
-    #     number_buy = 4
-    # elif n <= 4:
-    #     number_buy = 4
-    # elif n <= 6:
-    #     number_buy = 6
-    # elif n <= 8:
-    #     number_buy = 7
-    # elif n <= 15:
-    #     number_buy = 9
-    # else:
-    #     number_buy = 9
-    # if n == 1:
-    # button.click(button.CreateCustomLobby, stop_event=stop_event)
-    # button.enter_game(event=event_stop)
-    # if stop_event.is_set():
-    #     logger.info("Stop thread round enter game")
-    #     break
-    # # button.check_proceed_to_round(event=event_stop)
-    # if stop_event.is_set():
-    #     logger.info("Stop thread round check proceed to round")
-    #     break
-    # else:
-    #     reset_count_buy()
-    #     reset_status_not_money()
-    #     # while True:
-    #     #     if get_status_not_money() is True:
-    #     #         break
-    #     #     if number_roll > 0:
-    #     #         if button.roll_game(event=event_stop) is False:
-    #     #             break
-    #     #     number_roll += 1
-    #     #     hero.buy_all_previous_hero(event=event_stop)
-    #     #     item.buy_all_previous_item(event=event_stop)
-    #     #     hero.buy_all_hero(round_number=n, event=event_stop)
-    #     #     item.buy_all_item_investments(round_number=n, event=event_stop)
-    #     #     item.buy_all_set_item(round_number=n, event=event_stop)
-    #     #     item.buy_all_item(round_number=n, event=event_stop)
-    #     #     if get_status_not_money() is True:
-    #     #         break
-    #     #     if get_count_buy() >= number_buy:
-    #     #         break
-    #     #     if number_roll >= number_buy + 2:
-    #     #         break
+        if n == 2:
+            number_buy = 4
+        elif n <= 4:
+            number_buy = 4
+        elif n <= 6:
+            number_buy = 6
+        elif n <= 8:
+            number_buy = 7
+        elif n <= 15:
+            number_buy = 9
+        else:
+            number_buy = 9
+        if n == 1:
+            # button.click(button.CreateCustomLobby)
+            button.enter_game()
+        if stop_event.is_set():
+            logger.info("Stop thread round enter game")
+            break
+        # button.check_proceed_to_round(event=event_stop)
+        if stop_event.is_set():
+            logger.info("Stop thread round check proceed to round")
+            break
+        else:
+            reset_count_buy()
+            reset_status_not_money()
+        while True:
+            if get_status_not_money() is True:
+                break
+            if number_roll > 0:
+                if button.roll_game() is False:
+                    break
+            number_roll += 1
+            hero.buy_all_previous_hero()
+            item.buy_all_previous_item()
+            hero.buy_all_hero(round_number=n)
+            item.buy_all_item_investments(round_number=n)
+            item.buy_all_set_item(round_number=n)
+            item.buy_all_item(round_number=n)
+            if get_status_not_money() is True:
+                break
+            if get_count_buy() >= number_buy:
+                break
+            if number_roll >= number_buy + 2:
+                break
 
-    #     # if n < 20:
-    #     #     button.next_round(event=event_stop)
-    #     #     logger.info(f"Day la vong auto lan thu {round_number+1}, round {n}")
-    #     # else:
-    #     #     hero.reset_hero()
-    #     #     hero.reset_previous_hero()
-    #     #     item.reset_item()
-    #     #     item.reset_previous_item()
-    #     #     button.click_procceed_to_round(event=event_stop)
-    #     #     for s in range(120):
-    #     #         if event.is_set():
-    #     #             logger.info("Stop thread round")
-    #     #             break
-    #     #         s = 120 - s
-    #     #         time.sleep(1)
-    #     #         logger.info(
-    #     #             f"Ban dang danh boss round {n}, thoi gian con lai {s}/120"
-    #     #         )
-    #     #     logger.info(f"Ket thuc round {n}")
-    #     #     # time.sleep(130)
+        if n < 20:
+            button.next_round()
+            logger.info(f"Day la vong auto lan thu {round_number+1}, round {n}")
+        else:
+            hero.reset_hero()
+            hero.reset_previous_hero()
+            item.reset_item()
+            item.reset_previous_item()
+            button.click_procceed_to_round()
+            for s in range(120):
+                if event.is_set():
+                    logger.info("Stop thread round")
+                    break
+                s = 120 - s
+                time.sleep(1)
+                logger.info(f"Ban dang danh boss round {n}, thoi gian con lai {s}/120")
+            logger.info(f"Ket thuc round {n}")
+            # time.sleep(130)
 
 
 if __name__ == "__main__":

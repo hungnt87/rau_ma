@@ -3,6 +3,28 @@ import os
 import sys
 
 
+class TextHandler(logging.Handler):
+    def __init__(self, elem):
+        logging.Handler.__init__(self)
+        self.elem = elem
+
+    def emit(self, record):
+        log_message = self.format(record)
+        color = self.get_log_color(record.levelname)
+        self.elem.print(log_message, text_color=color)
+
+    def get_log_color(self, levelname):
+        # Xác định màu chữ dựa trên levelname (ví dụ: WARNING màu vàng)
+        if levelname == "WARNING":
+            return "green"
+        elif levelname == "ERROR":
+            return "red"
+        elif levelname == "CRITICAL":
+            return "red"
+        else:
+            return None
+
+
 # def resource_path(relative_path):
 #     """Get absolute path to resource, works for dev and for PyInstaller"""
 #     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
