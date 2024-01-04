@@ -67,16 +67,23 @@ def set_event_resume():
     button.set_event_resume()
 
 
+def check_event():
+    global event_stop, event_pause
+    if event_stop.is_set():
+        logger.info("Stop thread round 3")
+        return False
+    event_pause.wait()
+    return True
+
+
 def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
     if stop_event.is_set():
         logger.info("Stop thread round 1")
         return
     n = 0
     while True:
-        if stop_event.is_set():
-            logger.info("Stop thread round 2")
+        if check_event() is False:
             break
-        pause_event.wait()
         n = n + 1
         logger.info(f"Bat dau roll in round: {n}")
 
@@ -99,13 +106,13 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
         if n == 1:
             # button.click(button.CreateCustomLobby)
             button.enter_game()
-        if stop_event.is_set():
-            logger.info("Stop thread round enter game")
-            break
-        # button.check_proceed_to_round(event=event_stop)
-        if stop_event.is_set():
-            logger.info("Stop thread round check proceed to round")
-            break
+            if stop_event.is_set():
+                logger.info("Stop thread round enter game")
+                break
+            button.check_proceed_to_round()
+            if stop_event.is_set():
+                logger.info("Stop thread round check proceed to round")
+                break
         else:
             reset_count_buy()
             reset_status_not_money()

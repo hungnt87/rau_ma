@@ -21,6 +21,7 @@ def set_event_stop():
 def set_event_run():
     global event_stop
     event_stop.clear()
+    event_pause.set()
 
 
 def set_event_pause():
@@ -391,30 +392,30 @@ def buy_all_item(round_number):
         logger.debug("Khong du tien, next round")
         return False
     if round_number == 2:
-        buy_all_item_round2(event=event)
+        buy_all_item_round2()
     if round_number == 3:
-        buy_all_item_round3(event=event)
+        buy_all_item_round3()
     if 3 < round_number <= 6:
-        buy_all_item_lv1(event=event)
-        buy_all_item_lv2(event=event)
+        buy_all_item_lv1()
+        buy_all_item_lv2()
     if 6 < round_number <= 9:
-        buy_all_item_lv1(event=event)
-        buy_all_item_lv2(event=event)
-        buy_all_item_lv3(event=event)
+        buy_all_item_lv1()
+        buy_all_item_lv2()
+        buy_all_item_lv3()
     if 9 < round_number <= 12:
-        buy_all_item_lv2(event=event)
-        buy_all_item_lv3(event=event)
-        buy_all_item_lv4(event=event)
+        buy_all_item_lv2()
+        buy_all_item_lv3()
+        buy_all_item_lv4()
     if 12 < round_number <= 15:
-        buy_all_item_lv2(event=event)
-        buy_all_item_lv3(event=event)
-        buy_all_item_lv4(event=event)
-        buy_all_item_lv5(event=event)
+        buy_all_item_lv2()
+        buy_all_item_lv3()
+        buy_all_item_lv4()
+        buy_all_item_lv5()
     if 15 < round_number <= 20:
-        buy_all_item_lv3(event=event)
-        buy_all_item_lv4(event=event)
-        buy_all_item_lv5(event=event)
-        buy_all_item_lv6(event=event)
+        buy_all_item_lv3()
+        buy_all_item_lv4()
+        buy_all_item_lv5()
+        buy_all_item_lv6()
 
 
 def test_all_item():
