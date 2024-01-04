@@ -72,15 +72,6 @@ class myGUI(tk.Frame):
         # Create textLogger
         text_handler = TextHandler(st)
         text_handler.setFormatter(format_log)
-        # Logging configuration
-        # logging.basicConfig(
-        #     filename="test.log",
-        #     level=logging.INFO,
-        #     format="%(asctime)s - %(levelname)s - %(message)s",
-        # )
-
-        # Add the handler to logger
-        # logger = logging.getLogger()
         logger.addHandler(text_handler)
 
 
@@ -157,10 +148,6 @@ if __name__ == "__main__":
 
     root.protocol("WM_DELETE_WINDOW", on_closing)
     myGUI(root)
-    if IsOpen is False:
-        root.button1["state"] = "disabled"
-    # t1 = threading.Thread(target=main, args=[])
-    # t1.start()
     keyboard.add_hotkey("Ctrl+F9", on_activate)
     keyboard.add_hotkey("Ctrl+q", on_activate)
     keyboard.add_hotkey("Ctrl+F10", threading_main)

@@ -32,7 +32,9 @@ def reset_previous_item():
 
 
 class ItemInfo:
+    name = None
     img = None
+    number = 0
 
     def __init__(self, para_name, para_item_number=0):
         self.name = para_name
@@ -48,7 +50,8 @@ class ItemInfo:
         if self.img is None:
             file_name = para_name + ".png"
             relative_path = os.path.join(path_data, path_image, path_item, file_name)
-            self.img = Image.open(resource_path(relative_path))
+            imgae = Image.open(resource_path(relative_path))
+            self.img = imgae
         return self.img
 
 
