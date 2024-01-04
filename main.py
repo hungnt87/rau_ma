@@ -58,8 +58,6 @@ class myGUI(tk.Frame):
         self.grid_columnconfigure(2, weight=1, uniform="a")
         self.grid_columnconfigure(3, weight=1, uniform="a")
         button1 = tk.Button(self, text="Start (Ctrl+F10)", command=threading_main)
-        if IsOpen is True:
-            button1["state"] = "disabled"
         button1.grid(column=0, row=0, sticky="ew")
         # butt
         # Add text widget to display logging info

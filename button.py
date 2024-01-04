@@ -4,6 +4,7 @@ import pyautogui
 import time
 from log import logger
 import pydirectinput
+from PIL import Image
 
 
 def resource_path(relative_path):
@@ -32,8 +33,8 @@ class ButtonInfor:
         if self.img is None:
             file_name = para_name + ".png"
             relative_path = os.path.join(path_data, path_image, file_name)
-            imgae = Image.open(resource_path(relative_path))
-            self.img = imgae
+            imgage = Image.open(resource_path(relative_path))
+            self.img = imgage
         return self.img
 
 
@@ -76,24 +77,6 @@ Prepare = ButtonInfor("Prepare")
 ProceedToRound2 = ButtonInfor("ProceedToRound2")
 Roll = ButtonInfor("Roll")
 ProceedToRound = ButtonInfor("ProceedToRound")
-ProceedToRound3 = ButtonInfor("ProceedToRound3")
-ProceedToRound4 = ButtonInfor("ProceedToRound4")
-ProceedToRound5 = ButtonInfor("ProceedToRound5")
-ProceedToRound6 = ButtonInfor("ProceedToRound6")
-ProceedToRound7 = ButtonInfor("ProceedToRound7")
-ProceedToRound8 = ButtonInfor("ProceedToRound8")
-ProceedToRound9 = ButtonInfor("ProceedToRound9")
-ProceedToRound10 = ButtonInfor("ProceedToRound10")
-ProceedToRound11 = ButtonInfor("ProceedToRound11")
-ProceedToRound12 = ButtonInfor("ProceedToRound12")
-ProceedToRound13 = ButtonInfor("ProceedToRound13")
-ProceedToRound14 = ButtonInfor("ProceedToRound14")
-ProceedToRound15 = ButtonInfor("ProceedToRound15")
-ProceedToRound16 = ButtonInfor("ProceedToRound16")
-ProceedToRound17 = ButtonInfor("ProceedToRound17")
-ProceedToRound18 = ButtonInfor("ProceedToRound18")
-ProceedToRound19 = ButtonInfor("ProceedToRound19")
-ProceedToRound20 = ButtonInfor("ProceedToRound20")
 Resurrect = ButtonInfor("Resurrect")
 NotMoney = ButtonInfor("NotMoney")
 Recycle = ButtonInfor("Recycle")
