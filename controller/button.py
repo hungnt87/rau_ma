@@ -18,17 +18,4 @@ class Button:
 
 
 if __name__ == "__main__":
-    logger.info("Start")
-    path = os.path.join("data", "imgae", "item")
-    path = gv.resource_path(path)
-    logger.info(path)
-    i = -0
-    while True:        
-        if gv.check_event():
-            break
-        i += 1
-        logger.info(i)
-        time.sleep(1)
-        if
-
     pass

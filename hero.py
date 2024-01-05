@@ -1,12 +1,16 @@
+import os
+import sys
+import threading
 import pyautogui
 import time
 import button
 from log import logger
-from PIL import Image
 import pydirectinput
-import os
-import sys
-import threading
+import controller.global_variables as cgv
+
+gv = cgv.Global_variables()
+event_stop = cgv.event_stop
+event_pause = cgv.event_pause
 
 
 def resource_path(relative_path):
@@ -57,14 +61,8 @@ class HeroInfor:
 
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
-        # self.img = self.get_hero_img(para_name)
-        file_name = f"{para_name}.png"
-        self.img = resource_path(
-            os.path.join(path_data, path_image, path_hero, file_name)
-        )
-        file_name_lv1 = f"{para_name}_lv1.png"
-        path = os.path.join(path_data, path_image, path_hero, file_name_lv1)
-        self.lv1_img = resource_path(path)
+        self.img = self.get_hero_img(para_name)
+        self.lv1_img = self.get_hero_img_lv1(para_name)
 
         self.number = para_number_hero
 
@@ -137,6 +135,8 @@ Zet = HeroInfor("Zet")
 
 
 def buy_hero(hero_img):
+    if gv.check_event():
+        return
     global REGION_HERO
     try:
         res = pyautogui.locateOnScreen(
@@ -165,6 +165,8 @@ def reset_hero_status_money():
 
 
 def buy_hero_infor(HeroInfor, number_hero=1):
+    if gv.check_event():
+        return
     # logger.debug("Bat dau tim hero {}".format(HeroInfor.name))
     global count_buy_hero, hero_status_money
     i = 0
@@ -175,6 +177,8 @@ def buy_hero_infor(HeroInfor, number_hero=1):
     else:
         number_buy = number_hero - number
     while True:
+        if gv.check_event():
+            break
         if i >= 2:
             break
         i = i + 1
@@ -219,6 +223,8 @@ def buy_hero_infor(HeroInfor, number_hero=1):
 
 
 def check_hero(HeroInfor):
+    if gv.check_event():
+        return
     global REGION_HERO
     try:
         res = pyautogui.locateCenterOnScreen(
@@ -233,6 +239,8 @@ def check_hero(HeroInfor):
 
 
 def sell_hero(HeroInfor):
+    if gv.check_event():
+        return
     global REGION_SELL_HERO
     try:
         res_center = pyautogui.locateCenterOnScreen(
@@ -252,17 +260,13 @@ def sell_hero(HeroInfor):
         return False
 
 
-def buy_all_previous_hero(event=threading.Event()):
-    if event.is_set():
-        return
+def buy_all_previous_hero():
+    if gv.check_event():
+        return False
     global previous_hero, count_buy_hero
     if previous_hero:
-        if event.is_set():
-            return
         logger.debug("Ban dang mua hero khoa o round truoc")
         for key, value in list(previous_hero.items()):
-            if event.is_set():
-                break
             pydirectinput.click(key[0], key[1])
             if button.check_not_money() is True:
                 return False
@@ -273,8 +277,6 @@ def buy_all_previous_hero(event=threading.Event()):
                 del previous_hero[key]
 
     else:
-        if event.is_set():
-            return
         logger.debug("Khong co hero khoa o round truoc")
 
 
@@ -363,6 +365,8 @@ def buy_zet():
 
 
 def buy_all_hero(round_number):
+    if gv.check_event():
+        return False
     logger.info(f"Bat dau mua hero in round: {round_number}")
     if button.get_status_not_money() is True:
         logger.debug("Khong du tien, next round")
