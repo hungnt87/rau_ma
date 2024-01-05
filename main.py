@@ -68,9 +68,9 @@ def main():
                 logger.info(f"Dang cho bat auto lai sau {t}/10s")
                 time.sleep(1)
 
-        else:
-            main_status = False
-            logger.info("Khong tim thay cua so co ten {}".format(app_name))
+    else:
+        main_status = False
+        logger.info("Khong tim thay cua so co ten {}".format(app_name))
 
 
 class ThreadedApp:
