@@ -1,9 +1,9 @@
 import os
 import sys
 import threading
-import pyautogui
 import time
-from log import logger
+
+# from .log import logger
 
 event_stop = threading.Event()
 event_pause = threading.Event()
@@ -24,14 +24,14 @@ class Global_variables:
     def app_pause(self):
         if event_pause.is_set():
             event_pause.clear()
-            logger.debug("App paused")
+            # logger.debug("App paused")
         else:
             event_pause.set()
-            logger.debug("App resumed")
+            # logger.debug("App resumed")
 
     def app_resume(self):
         event_pause.set()
-        logger.debug("App resumed")
+        # logger.debug("App resumed")
 
     def check_event(self):
         if event_stop.is_set():

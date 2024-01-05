@@ -1,6 +1,9 @@
 import logging
 import os
 import sys
+import controller.global_variables as cgv
+
+# gv = cgv.Global_variables()
 
 
 class TextHandler(logging.Handler):
@@ -32,7 +35,7 @@ class TextHandler(logging.Handler):
 
 
 path = "log.log"
-
+path = cgv.resource_path(path)
 # create the logging instance for logging to file only
 logger = logging.getLogger(__name__)
 
@@ -55,7 +58,7 @@ logger.setLevel(logging.DEBUG)
 
 # print(path)
 # now we can add the console logging
-console = logging.StreamHandler()
-console.setFormatter(console_format)
-console.setLevel(logging.DEBUG)
-logging.getLogger(__name__).addHandler(console)
+# console = logging.StreamHandler()
+# console.setFormatter(console_format)
+# console.setLevel(logging.DEBUG)
+# logging.getLogger(__name__).addHandler(console)
