@@ -1,35 +1,11 @@
+import os
+import sys
 import pyautogui
 import time
 from log import logger
 import pydirectinput
 import os
 import sys
-import threading
-
-event_stop = threading.Event()
-event_pause = threading.Event()
-
-
-def set_event_stop():
-    global event_stop
-    event_pause.set()
-    event_stop.set()
-
-
-def set_event_run():
-    global event_stop
-    event_stop.clear()
-    event_pause.set()
-
-
-def set_event_pause():
-    global event_pause
-    event_pause.clear()
-
-
-def set_event_resume():
-    global event_pause
-    event_pause.set()
 
 
 def resource_path(relative_path):
@@ -42,15 +18,25 @@ path_parent = os.getcwd()
 path_data = "data"
 path_image = "image"
 # relative_path = os.path.join(path_data, path_image)
-path_data_image = os.path.join(path_data, path_image)
+# path_data_image = os.path.join(path_data, path_image)
 
 
 class ButtonInfor:
+    name = ""
+    img = None
+
     def __init__(self, para_name):
         self.name = para_name
-        file_name = para_name + ".png"
-        relative_path = os.path.join(path_data_image, file_name)
-        self.img = resource_path(relative_path)
+        self.img = self.get_button_img(para_name)
+
+    def get_button_img(self, para_name):
+        # global HERO_IMG
+        if self.img is None:
+            file_name = para_name + ".png"
+            relative_path = os.path.join(path_data, path_image, file_name)
+            imgage = Image.open(resource_path(relative_path))
+            self.img = imgage
+        return self.img
 
 
 status_not_money = True
@@ -92,24 +78,6 @@ Prepare = ButtonInfor("Prepare")
 ProceedToRound2 = ButtonInfor("ProceedToRound2")
 Roll = ButtonInfor("Roll")
 ProceedToRound = ButtonInfor("ProceedToRound")
-ProceedToRound3 = ButtonInfor("ProceedToRound3")
-ProceedToRound4 = ButtonInfor("ProceedToRound4")
-ProceedToRound5 = ButtonInfor("ProceedToRound5")
-ProceedToRound6 = ButtonInfor("ProceedToRound6")
-ProceedToRound7 = ButtonInfor("ProceedToRound7")
-ProceedToRound8 = ButtonInfor("ProceedToRound8")
-ProceedToRound9 = ButtonInfor("ProceedToRound9")
-ProceedToRound10 = ButtonInfor("ProceedToRound10")
-ProceedToRound11 = ButtonInfor("ProceedToRound11")
-ProceedToRound12 = ButtonInfor("ProceedToRound12")
-ProceedToRound13 = ButtonInfor("ProceedToRound13")
-ProceedToRound14 = ButtonInfor("ProceedToRound14")
-ProceedToRound15 = ButtonInfor("ProceedToRound15")
-ProceedToRound16 = ButtonInfor("ProceedToRound16")
-ProceedToRound17 = ButtonInfor("ProceedToRound17")
-ProceedToRound18 = ButtonInfor("ProceedToRound18")
-ProceedToRound19 = ButtonInfor("ProceedToRound19")
-ProceedToRound20 = ButtonInfor("ProceedToRound20")
 Resurrect = ButtonInfor("Resurrect")
 NotMoney = ButtonInfor("NotMoney")
 Recycle = ButtonInfor("Recycle")

@@ -50,12 +50,18 @@ def main():
 
 
 class HeroInfor:
+    name = None
     img = None
     lv1_img = None
+    number = 0
 
     def __init__(self, para_name, para_number_hero=0):
         self.name = para_name
-        self.img = self.get_hero_img(para_name)
+        # self.img = self.get_hero_img(para_name)
+        file_name = f"{para_name}.png"
+        self.img = resource_path(
+            os.path.join(path_data, path_image, path_hero, file_name)
+        )
         file_name_lv1 = f"{para_name}_lv1.png"
         path = os.path.join(path_data, path_image, path_hero, file_name_lv1)
         self.lv1_img = resource_path(path)
@@ -72,12 +78,12 @@ class HeroInfor:
             self.img = resource_path(path)
         return self.img
 
-    # def get_hero_img_lv1(self, para_name):
-    #     file_name = para_name + "_lv1.png"
-    #     relative_path = os.path.join(path_hero_image, file_name)
-    #     if self.lv1_img is None:
-    #         self.lv1_img = Image.open(resource_path(relative_path))
-    #     return self.lv1_img
+    def get_hero_img_lv1(self, para_name):
+        file_name = para_name + "_lv1.png"
+        relative_path = os.path.join(path_data, path_image, path_hero, file_name)
+        if self.lv1_img is None:
+            self.lv1_img = resource_path(relative_path)
+        return self.lv1_img
 
 
 # def get_hero_img(para_name, hero_img=None):

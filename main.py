@@ -9,12 +9,78 @@ import queue
 from log import logger
 
 import keyboard
-import round as r
 
-event_stop = threading.Event()
-event_pause = threading.Event()
-main_status = False
-# Setup logging and start app
+
+class TextHandler(logging.Handler):
+    # This class allows you to log to a Tkinter Text or ScrolledText widget
+    # Adapted from Moshe Kaplan: https://gist.github.com/moshekaplan/c425f861de7bbf28ef06
+    format_log = "%(asctime)s\t %(levelname)s\t %(message)s"
+
+    file_logger_format = logging.Formatter(format_log)
+
+    def __init__(self, text):
+        # run the regular Handler __init__
+        logging.Handler.__init__(self)
+        # Store a reference to the Text it will log to
+        self.text = text
+
+    def emit(self, record):
+        msg = self.format(record)
+
+        def append():
+            self.text.configure(state="normal")
+            self.text.insert(tk.END, msg + "\n")
+            self.text.configure(state="disabled")
+            # Autoscroll to the bottom
+            self.text.yview(tk.END)
+
+        # This is necessary because we can't modify the Text from other threads
+        self.text.after(0, append)
+
+
+class myGUI(tk.Frame):
+    # This class defines the graphical user interface
+
+    def __init__(self, parent, *args, **kwargs):
+        tk.Frame.__init__(self, parent, *args, **kwargs)
+        self.root = parent
+        self.build_gui()
+
+    def build_gui(self):
+        # Build GUI
+        global IsOpen
+        self.root.title("Brodota-bot")
+        self.root.option_add("*tearOff", "FALSE")
+        self.grid(column=0, row=3, sticky="ew")
+        self.grid_columnconfigure(0, weight=1, uniform="a")
+        self.grid_columnconfigure(1, weight=1, uniform="a")
+        self.grid_columnconfigure(2, weight=1, uniform="a")
+        self.grid_columnconfigure(3, weight=1, uniform="a")
+        button1 = tk.Button(self, text="Start (Ctrl+F10)", command=threading_main)
+        if IsOpen is True:
+            button1["state"] = "disabled"
+        button1.grid(column=0, row=0, sticky="ew")
+        # butt
+        # Add text widget to display logging info
+        st = ScrolledText.ScrolledText(self, state="disabled")
+        st.grid(column=0, row=1, sticky="w", columnspan=4)
+        st.configure(font="TkFixedFont")
+        st.grid(column=0, row=1, sticky="w", columnspan=4)
+        format_log = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")
+
+        # Create textLogger
+        text_handler = TextHandler(st)
+        text_handler.setFormatter(format_log)
+        # Logging configuration
+        # logging.basicConfig(
+        #     filename="test.log",
+        #     level=logging.INFO,
+        #     format="%(asctime)s - %(levelname)s - %(message)s",
+        # )
+
+        # Add the handler to logger
+        # logger = logging.getLogger()
+        logger.addHandler(text_handler)
 
 
 def get_app_window_handle(app_name):
@@ -206,5 +272,25 @@ def gui():
 
 
 if __name__ == "__main__":
-    gui()
+    # global IsOpen
+    root = tk.Tk()
+
+    def on_activate():
+        # Điều gì đó bạn muốn thực hiện khi phím tắt được kích hoạt
+        # print("F9 Hotkey activated!")
+        root.destroy()
+
+    def on_closing():
+        root.destroy()
+
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    myGUI(root)
+    if IsOpen is False:
+        root.button1["state"] = "disabled"
+    # t1 = threading.Thread(target=main, args=[])
+    # t1.start()
+    keyboard.add_hotkey("Ctrl+F9", on_activate)
+    keyboard.add_hotkey("Ctrl+q", on_activate)
+    keyboard.add_hotkey("Ctrl+F10", threading_main)
+    root.mainloop()
     # t1.join()
