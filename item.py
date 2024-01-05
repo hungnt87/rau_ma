@@ -6,6 +6,32 @@ import pydirectinput
 from PIL import Image
 import os
 import sys
+import threading
+
+event_stop = threading.Event()
+event_pause = threading.Event()
+
+
+def set_event_stop():
+    global event_stop
+    event_pause.set()
+    event_stop.set()
+
+
+def set_event_run():
+    global event_stop
+    event_stop.clear()
+    event_pause.set()
+
+
+def set_event_pause():
+    global event_pause
+    event_pause.clear()
+
+
+def set_event_resume():
+    global event_pause
+    event_pause.set()
 
 
 def resource_path(relative_path):
@@ -50,8 +76,7 @@ class ItemInfo:
         if self.img is None:
             file_name = para_name + ".png"
             relative_path = os.path.join(path_data, path_image, path_item, file_name)
-            imgae = Image.open(resource_path(relative_path))
-            self.img = imgae
+            self.img = Image.open(resource_path(relative_path))
         return self.img
 
 
@@ -70,9 +95,13 @@ def reset_status_money():
     item_status_money = True
 
 
-def buy_item_info(ItemInfo, number_item=3):
+def buy_item_info(
+    ItemInfo, number_item=3, stop_event=event_stop, pause_event=event_pause
+):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
-
+    if stop_event.is_set():
+        return
+    pause_event.wait()
     global count_buy_item, item_status_money, previous_item, REGION_BUY_ITEM, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
     number = ItemInfo.number
     number_buy = number_item - number
@@ -349,6 +378,7 @@ def buy_all_item_lv6():
     Returns:
         None
     """
+
     logger.info("Ban dang mua item lv6")
     buy_item_info(PantyMask_lv6, 1)
     buy_item_info(ExtraDamage30_lv6, 1)
