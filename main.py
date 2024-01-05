@@ -127,11 +127,11 @@ class QueueHandler(logging.Handler):
 
 def gui():
     global event_stop, event_pause, threadedApp, main_status
-    button_pause = "Pause"
+    button_pause = "Pause (Ctrl + F11)"
     layout = [
         [
-            sg.Button("Start Thread", bind_return_key=True, key="-START-"),
-            sg.Button("Stop Thread", key="-STOP-", disabled=True),
+            sg.Button("Start (Ctrl + F9)", bind_return_key=True, key="-START-"),
+            sg.Button("Stop (Ctrl + F10)", key="-STOP-", disabled=True),
             sg.Button(button_pause, key="-PAUSE-", disabled=True),
         ],
         [sg.Output(size=(60, 10), key="-LOG-")],
@@ -187,9 +187,9 @@ def gui():
             if threadedApp:
                 threadedApp.pause()
                 if button_pause == "Pause":
-                    button_pause = "Resume"
+                    button_pause = "Resume (Ctrl + F11)"
                 else:
-                    button_pause = "Pause"
+                    button_pause = "Pause (Ctrl + F11)"
                 # button_pause = "Resume"
                 window["-PAUSE-"].update(button_pause)
                 # window["-S-"].update(disabled=True)
