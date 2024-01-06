@@ -11,7 +11,6 @@ import round as r
 import keyboard
 import controller.global_variables as cgv
 
-
 gv = cgv.Global_variables()
 
 
