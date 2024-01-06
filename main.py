@@ -142,14 +142,7 @@ def gui():
 
     while True:
         event, values = window.read(timeout=100)
-        if main_status:
-            window["-START-"].update(disabled=True)
-            window["-STOP-"].update(disabled=False)
-            window["-PAUSE-"].update(disabled=False)
-        else:
-            window["-START-"].update(disabled=False)
-            window["-STOP-"].update(disabled=True)
-            window["-PAUSE-"].update(disabled=True)
+
         if event == "-START-":
             if appStarted is False:
                 threadedApp.run()
@@ -181,7 +174,14 @@ def gui():
             #     # button_pause = "Resume"
             window["-PAUSE-"].update(button_pause)
             # window["-S-"].update(disabled=True)
-
+        if main_status:
+            window["-START-"].update(disabled=True)
+            window["-STOP-"].update(disabled=False)
+            window["-PAUSE-"].update(disabled=False)
+        else:
+            window["-START-"].update(disabled=False)
+            window["-STOP-"].update(disabled=True)
+            window["-PAUSE-"].update(disabled=True)
         try:
             record = log_queue.get(block=False)
         except queue.Empty:

@@ -44,7 +44,7 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
         # logger.info("Stop thread round 1")
         return False
     n = 0
-    while True:
+    while n < 20:
         if gv.check_event():
             # logger.info("Stop thread round 2")
             break
