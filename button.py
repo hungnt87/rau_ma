@@ -2,10 +2,8 @@ import os
 import sys
 import pyautogui
 import time
-from log import logger
 import pydirectinput
-import os
-import sys
+from controller.filelog import logger
 import controller.global_variables as cgv
 
 # from controller.global_variables import Global_variables

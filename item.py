@@ -1,7 +1,7 @@
 import pyautogui
 import time
 import button
-from log import logger
+from controller.filelog import logger
 import pydirectinput
 import os
 import sys

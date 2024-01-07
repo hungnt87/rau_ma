@@ -4,7 +4,7 @@ import threading
 import pyautogui
 import time
 import button
-from log import logger
+from controller.filelog import logger
 import pydirectinput
 import controller.global_variables as cgv
 

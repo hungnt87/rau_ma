@@ -5,13 +5,19 @@ import win32con
 import time
 import button
 import logging
-import queue
-from log import logger
+
 import round as r
 import keyboard
 import controller.global_variables as cgv
+from controller.filelog import logger, OutputHandler
+
+event = cgv.Event()
 
 gv = cgv.Global_variables()
+main_stop = False
+main_start = False
+appStarted = False
+main_pause = False
 
 
 def get_app_window_handle(app_name):
@@ -47,7 +53,7 @@ def main():
         logger.info(f"Tim thay cua so  '{app_name}'")
         main_status = True
         while True:
-            if gv.check_event():
+            if event.check_event():
                 # logger.info("Stop thread main")
                 break
             n += 1
@@ -80,114 +86,163 @@ class ThreadedApp:
 
     def run(self):
         gv.app_start()
+        event.app_start()
+
         self.t1 = threading.Thread(target=main, args=(), daemon=True)
         self.t1.start()
 
     def stop(self):
         gv.app_stop()
+        event.app_stop()
+        self.t1.join()
 
     def pause(self):
         gv.app_pause()
         # self._pause_event.set()
+        event.app_pause()
 
     def resume(self):
         gv.app_resume()
         # self._pause_event.clear()
 
 
-class QueueHandler(logging.Handler):
-    def __init__(self, log_queue):
-        super().__init__()
-        self.log_queue = log_queue
-
-    def emit(self, record):
-        self.log_queue.put(record)
+button_pause = "Pause (Ctrl + Space)"
 
 
-# pause = threading.Event()
+def make_win2():
+    global button_pause
+    layout = [
+        [
+            sg.Output(
+                key="-OUTPUT-",
+                size=(30, 5),
+                font="Helvetica 11",
+                background_color="black",
+                text_color="green",
+                sbar_arrow_color="black",
+                sbar_background_color="black",
+                sbar_frame_color="black",
+                sbar_width=0,
+                sbar_arrow_width=0,
+                sbar_relief="flat",
+                # autoscroll=True,
+                # border_width=0,
+                # disabled=True,
+            )
+        ],
+    ]
+    return sg.Window(
+        "Second Window",
+        layout,
+        location=(10, 850),
+        finalize=True,
+        no_titlebar=True,
+        keep_on_top=True,
+        background_color="black",
+        transparent_color="black",
+        # alpha_channel=0.9,
+        alpha_channel=0.9,
+        border_depth=0,
+    )
+
+
+def make_win1():
+    global button_pause
+    layout = [
+        [
+            sg.Button("Start (Ctrl + F9)", key="-START-"),
+            sg.Button("Stop (Ctrl + Q)", key="-STOP-", disabled=True),
+            sg.Button(button_pause, key="-PAUSE-", disabled=True),
+        ],
+        [sg.Output(size=(50, 10), key="-OUTPUT-")],
+    ]
+    return sg.Window(
+        "Brodota-bot",
+        layout,
+        # location=(1000, 400),
+        finalize=True,
+    )
 
 
 def gui():
-    global main_status
-    button_pause = "Pause (Ctrl + F11)"
-    layout = [
-        [
-            sg.Button("Start (Ctrl + F9)", bind_return_key=True, key="-START-"),
-            sg.Button("Stop (Ctrl + F10)", key="-STOP-", disabled=True),
-            sg.Button(button_pause, key="-PAUSE-", disabled=True),
-        ],
-        [sg.Output(size=(60, 10), key="-LOG-")],
-        [sg.Button("Exit")],
-    ]
-    # format_log = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")
-    window = sg.Window(
-        "Brodota-bot",
-        layout,
-        default_element_size=(30, 2),
-        font=("Helvetica", " 10"),
-        default_button_element_size=(8, 2),
-        # background_color="red",
-        keep_on_top=True,
-        # transparent_color="red",
-        alpha_channel=1,
-        grab_anywhere=True,
-    )
-
+    global main_status, button_pause, main_stop, main_start, appStarted, main_pause
+    window1, window2 = make_win1(), None
     appStarted = False
-    log_queue = queue.Queue()
-    queue_handler = QueueHandler(log_queue)
-    logger.addHandler(queue_handler)
     threadedApp = ThreadedApp()
-
+    log_output1 = OutputHandler(window1)
+    logger.addHandler(log_output1)
     while True:
-        event, values = window.read(timeout=100)
-
-        if event == "-START-":
+        window, event, values = sg.read_all_windows()
+        if event == sg.WIN_CLOSED or event == "Exit":
+            # window.close()
+            if window == window2:  # if closing win 2, mark as closed
+                window2 = None
+            elif window == window1:  # if closing win 1, exit program
+                break
+        elif event == "-START-" and not window2:
             if appStarted is False:
+                window2 = make_win2()
                 threadedApp.run()
-                logger.debug("App started")
                 appStarted = True
-        elif event in (sg.WIN_CLOSED, "Exit"):
-            if threadedApp:
-                threadedApp.stop()
-            break
+
         elif event == "-STOP-":
-            if threadedApp:
+            if appStarted is True:
                 threadedApp.stop()
-                # threadedApp.join()
-                logger.debug("App stopped")
-                window["-START-"].update(disabled=False)
-                window["-PAUSE-"].update(disabled=True)
-                window["-STOP-"].update(disabled=True)
                 appStarted = False
                 main_status = False
+                window2.close()
+                window2 = None
+                window1["-START-"].update(disabled=False)
+                window1["-STOP-"].update(disabled=True)
+                window1["-PAUSE-"].update(disabled=True)
         elif event == "-PAUSE-":
-            # pause.set()
-            # button_pause = "Resume"
-            if threadedApp:
-                threadedApp.pause()
-                if button_pause == "Pause":
-                    button_pause = "Resume (Ctrl + F11)"
+            if appStarted is True:
+                if button_pause == "Pause (Ctrl + Space)":
+                    button_pause = "Resume (Ctrl + Space)"
+                    window1["-PAUSE-"].update(button_pause)
+                    threadedApp.pause()
                 else:
-                    button_pause = "Pause (Ctrl + F11)"
-            #     # button_pause = "Resume"
-            window["-PAUSE-"].update(button_pause)
-            # window["-S-"].update(disabled=True)
-        if main_status:
+                    button_pause = "Pause (Ctrl + Space)"
+                    window1["-PAUSE-"].update(button_pause)
+                    threadedApp.pause()
+
+        elif event == "Emit":
+            if window2 is not None:
+                window2["-OUTPUT-"].update(values[event] + "\n", append=True)
+            window1["-OUTPUT-"].update(values[event] + "\n", append=True)
+            # window2.refresh()
+        if main_status is True:
             window["-START-"].update(disabled=True)
-            window["-STOP-"].update(disabled=False)
             window["-PAUSE-"].update(disabled=False)
-        else:
-            window["-START-"].update(disabled=False)
-            window["-STOP-"].update(disabled=True)
-            window["-PAUSE-"].update(disabled=True)
-        try:
-            record = log_queue.get(block=False)
-        except queue.Empty:
-            pass
-        else:
-            msg = queue_handler.format(record)
-            window["-LOG-"].update(msg + "\n", append=True)
+            window["-STOP-"].update(disabled=False)
+        if main_stop is True:
+            if appStarted is True:
+                threadedApp.stop()
+                appStarted = False
+                main_status = False
+                window2.close()
+                window2 = None
+                window1["-START-"].update(disabled=False)
+                window1["-STOP-"].update(disabled=True)
+                window1["-PAUSE-"].update(disabled=True)
+            main_stop = False
+        if main_start is True:
+            if appStarted is False:
+                window2 = make_win2()
+                threadedApp.run()
+                appStarted = True
+                main_start = False
+        if main_pause is True:
+            if appStarted is True:
+                if button_pause == "Pause (Ctrl + Space)":
+                    button_pause = "Resume (Ctrl + Space)"
+                    window1["-PAUSE-"].update(button_pause)
+                    threadedApp.pause()
+                else:
+                    button_pause = "Pause (Ctrl + Space)"
+                    window1["-PAUSE-"].update(button_pause)
+                    threadedApp.pause()
+            main_pause = False
 
     window.close()
 
@@ -195,8 +250,10 @@ def gui():
 def test1():
     i = 0
     while True:
+        if gv.check_event():
+            break
         i += 1
-        print(f"test1 {i}")
+        logger.debug(f"test1 {i}")
         time.sleep(1)
         if i == 5:
             break
@@ -208,7 +265,7 @@ def test2():
         if gv.check_event():
             break
         i += 1
-        print(f"test2 {i}")
+        logger.debug(f"test2 {i}")
         time.sleep(1)
         if i == 5:
             break
@@ -221,8 +278,42 @@ def main1():
     test2()
 
 
+def on_hotkey_stop():
+    time.sleep(1)
+    global main_stop, main_start
+    main_stop = True
+    main_start = False
+    logger.debug("Stop thread main")
+
+
+def on_hotkey_start():
+    time.sleep(1)
+    global main_stop, main_start, appStarted
+    if appStarted is False and main_stop is False:
+        main_start = True
+        main_stop = False
+        logger.debug("Stop thread main")
+    else:
+        logger.debug("App is running")
+
+
+def on_hotkey_pause():
+    time.sleep(1)
+    global main_stop, main_start, appStarted, main_pause, button_pause
+    if appStarted is True and main_stop is False and main_pause is False:
+        main_pause = True
+        logger.debug("Pause thread main")
+
+
+hotkey_combination_start = 'ctrl+f9'
+hotkey_combination_stop = 'ctrl+q'
+hotkey_combination_pause = "ctrl+space"
+keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
+keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
+keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
 if __name__ == "__main__":
     # main(pause_event=event_pause, stop_event=event_stop)
-    gui()
+    # gui()
 
+    gui()
     pass

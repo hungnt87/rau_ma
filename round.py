@@ -3,12 +3,12 @@ import time
 import button
 import hero
 import item
-from datetime import datetime
-from log import logger
-import threading
+from controller.filelog import logger
 import controller.global_variables as cgv
+from controller.button import Button
 
 gv = cgv.Global_variables()
+event = cgv.Event()
 event_stop = cgv.event_stop
 event_pause = cgv.event_pause
 
@@ -40,12 +40,12 @@ def reset_status_not_money():
 
 
 def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
-    if gv.check_event():
+    if event.check_event():
         # logger.info("Stop thread round 1")
         return False
     n = 0
     while n < 20:
-        if gv.check_event():
+        if event.check_event():
             # logger.info("Stop thread round 2")
             break
         n = n + 1
@@ -67,9 +67,9 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
             number_buy = 9
         if n == 1:
             # button.click(button.CreateCustomLobby)
-            if button.enter_game() is False:
+            if Button.enter_game() is False:
                 break
-            if button.check_proceed_to_round() is False:
+            if Button.run_round() is False:
                 break
         else:
             reset_count_buy()
@@ -104,7 +104,9 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
                     break
 
             if n < 20:
-                if button.next_round() is False:
+                if Button.next_round() is False:
+                    break
+                if Button.run_round() is False:
                     break
                 logger.info(f"Day la vong auto lan thu {round_number}, round {n}")
             else:
@@ -112,10 +114,10 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
                 hero.reset_previous_hero()
                 item.reset_item()
                 item.reset_previous_item()
-                if button.click_procceed_to_round() is False:
+                if Button.exit_round20() is False:
                     break
                 for s in range(50):
-                    if gv.check_event():
+                    if event.check_event():
                         # logger.info("Stop thread round 3")
                         break
                     s = 50 - s
