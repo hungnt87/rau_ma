@@ -1,13 +1,13 @@
 import pyautogui
 import time
-import button
-import hero
+
+
 import item
 from controller.filelog import logger
 import controller.global_variables as cgv
 from controller.button import Button
+import controller.hero as hero
 
-gv = cgv.Global_variables()
 event = cgv.Event()
 event_stop = cgv.event_stop
 event_pause = cgv.event_pause
@@ -16,27 +16,13 @@ event_pause = cgv.event_pause
 # hero.hero_status_money
 # item.item_status_money
 def get_count_buy():
-    count = hero.get_count_buy_hero() + item.get_count_buy_item()
+    count = cgv.get_count_of_buy()
     return count
 
 
 def reset_count_buy():
-    hero.reset_count_buy_hero()
-    item.reset_count_buy_item()
-
-
-def get_status_not_money():
-    # global hero.hero_status_money, item.item_status_money
-    if button.get_status_not_money() is True:
-        # logger.debug("Du tien")
-        return True
-    else:
-        # logger.debug("Khong du tien")
-        return False
-
-
-def reset_status_not_money():
-    button.set_status_not_money(False)
+    cgv.reset_count_of_buy()
+    # item.reset_count_buy_item()
 
 
 def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
@@ -72,16 +58,19 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
             if Button.run_round() is False:
                 break
         else:
-            reset_count_buy()
-            reset_status_not_money()
+            # reset_count_buy()
+            # reset_status_not_money()
+            cgv.reset_count_of_buy()
+            cgv.set_money(True)
+
             while True:
-                if gv.check_event():
+                if event.check_event():
                     # logger.info("Stop thread round 3")
                     break
-                if get_status_not_money() is True:
+                if cgv.check_money() is False:
                     break
                 if number_roll > 0:
-                    if button.roll_game() is False:
+                    if Button.roll_game() is False:
                         break
                 number_roll += 1
                 if hero.buy_all_previous_hero() is False:
@@ -96,9 +85,11 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
                     break
                 if item.buy_all_item(round_number=n) is False:
                     break
-                if get_status_not_money() is True:
+                logger.debug(f"Da roll {number_roll} lan")
+                logger.debug(f"Da mua {cgv.get_count_of_buy()} lan")
+                if cgv.check_money() is False:
                     break
-                if get_count_buy() >= number_buy:
+                if cgv.get_count_of_buy() >= number_buy:
                     break
                 if number_roll >= number_buy + 2:
                     break
@@ -110,6 +101,9 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
                     break
                 logger.info(f"Day la vong auto lan thu {round_number}, round {n}")
             else:
+                # reset_count_buy()
+                cgv.reset_count_of_buy()
+                cgv.set_money(True)
                 hero.reset_hero()
                 hero.reset_previous_hero()
                 item.reset_item()

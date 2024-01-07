@@ -3,7 +3,6 @@ import threading
 import win32gui
 import win32con
 import time
-import button
 import logging
 
 import round as r
@@ -12,7 +11,6 @@ import controller.global_variables as cgv
 from controller.filelog import logger, OutputHandler
 
 event = cgv.Event()
-
 gv = cgv.Global_variables()
 main_stop = False
 main_start = False
@@ -37,7 +35,7 @@ main_status = False
 
 
 def main():
-    global main_status, gv
+    global main_status
     # ten cua so
     app_name = "Dota 2"
     # toa do cua so
@@ -65,7 +63,7 @@ def main():
                 break
             logger.info("Ket thuc auto lan {}".format(n))
             for t in range(10):
-                if gv.check_event():
+                if event.check_event():
                     break
 
                 t = 10 - t
@@ -85,25 +83,18 @@ class ThreadedApp:
         self.t1 = threading.Thread()
 
     def run(self):
-        gv.app_start()
         event.app_start()
 
         self.t1 = threading.Thread(target=main, args=(), daemon=True)
         self.t1.start()
 
     def stop(self):
-        gv.app_stop()
         event.app_stop()
+        event.set_event_stop_exit_round()
         self.t1.join()
 
     def pause(self):
-        gv.app_pause()
-        # self._pause_event.set()
         event.app_pause()
-
-    def resume(self):
-        gv.app_resume()
-        # self._pause_event.clear()
 
 
 button_pause = "Pause (Ctrl + Space)"
@@ -179,13 +170,17 @@ def gui():
                 window2 = None
             elif window == window1:  # if closing win 1, exit program
                 break
-        elif event == "-START-" and not window2:
+        elif (event == "-START-" or main_start is True) and not window2:
             if appStarted is False:
-                window2 = make_win2()
                 threadedApp.run()
+                window2 = make_win2()  # if main_status is True:
+                window1["-START-"].update(disabled=True)
+                window1["-PAUSE-"].update(disabled=False)
+                window1["-STOP-"].update(disabled=False)
                 appStarted = True
+            main_start = False
 
-        elif event == "-STOP-":
+        elif (event == "-STOP-") or (main_stop is True):
             if appStarted is True:
                 threadedApp.stop()
                 appStarted = False
@@ -195,7 +190,8 @@ def gui():
                 window1["-START-"].update(disabled=False)
                 window1["-STOP-"].update(disabled=True)
                 window1["-PAUSE-"].update(disabled=True)
-        elif event == "-PAUSE-":
+            main_stop = False
+        elif (event == "-PAUSE-") or (main_pause is True):
             if appStarted is True:
                 if button_pause == "Pause (Ctrl + Space)":
                     button_pause = "Resume (Ctrl + Space)"
@@ -205,7 +201,7 @@ def gui():
                     button_pause = "Pause (Ctrl + Space)"
                     window1["-PAUSE-"].update(button_pause)
                     threadedApp.pause()
-
+            main_pause = False
         elif event == "Emit":
             if window2 is not None:
                 window2["-OUTPUT-"].update(values[event] + "\n", append=True)
@@ -250,7 +246,7 @@ def gui():
 def test1():
     i = 0
     while True:
-        if gv.check_event():
+        if event.check_event():
             break
         i += 1
         logger.debug(f"test1 {i}")
@@ -262,13 +258,12 @@ def test1():
 def test2():
     i = 0
     while True:
-        if gv.check_event():
+        if event.check_event():
             break
         i += 1
         logger.debug(f"test2 {i}")
         time.sleep(1)
-        if i == 5:
-            break
+        break
 
 
 def main1():
@@ -279,34 +274,31 @@ def main1():
 
 
 def on_hotkey_stop():
+    global main_stop
     time.sleep(1)
-    global main_stop, main_start
-    main_stop = True
-    main_start = False
-    logger.debug("Stop thread main")
+    if main_stop is False:
+        main_stop = True
+        logger.debug("Stop thread main")
 
 
 def on_hotkey_start():
     time.sleep(1)
-    global main_stop, main_start, appStarted
-    if appStarted is False and main_stop is False:
+    global main_start
+    if main_start is False:
         main_start = True
-        main_stop = False
-        logger.debug("Stop thread main")
-    else:
-        logger.debug("App is running")
+        logger.debug("Start thread main")
 
 
 def on_hotkey_pause():
     time.sleep(1)
-    global main_stop, main_start, appStarted, main_pause, button_pause
-    if appStarted is True and main_stop is False and main_pause is False:
+    global main_pause
+    if main_pause is False:
         main_pause = True
         logger.debug("Pause thread main")
 
 
-hotkey_combination_start = 'ctrl+f9'
-hotkey_combination_stop = 'ctrl+q'
+hotkey_combination_start = "ctrl+f9"
+hotkey_combination_stop = "ctrl+q"
 hotkey_combination_pause = "ctrl+space"
 keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
 keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
@@ -315,5 +307,6 @@ if __name__ == "__main__":
     # main(pause_event=event_pause, stop_event=event_stop)
     # gui()
 
-    gui()
+    # gui()
+    main()
     pass

@@ -4,6 +4,7 @@ import threading
 import win32gui
 import win32con
 import controller.filelog as filelog
+import time
 
 event_stop = threading.Event()
 event_pause = threading.Event()
@@ -11,62 +12,16 @@ event_stop_exit_round = threading.Event()
 event_pause_exit_round = threading.Event()
 event_pause.set()
 logger = filelog.logger
+# number_of_buy = None
+count_of_buy = None
+money = None
 
 
 class Global_variables:
     name = ""
-    money = None
-    number_of_buy = None
-    count_of_buy = None
 
     def __init__(self):
         self.name = "Global_variables"
-        self.money = True
-        self.number_of_buy = 0
-        self.count_of_buy = 0
-
-    def app_start(self):
-        event_pause.set()
-        event_stop.clear()
-        logger.debug("App started")
-
-    def app_stop(self):
-        event_stop.set()
-        event_pause.set()
-        logger.debug("App stopped")
-
-    def app_pause(self):
-        if event_pause.is_set():
-            event_pause.clear()
-            logger.debug("App paused")
-        else:
-            event_pause.set()
-            logger.debug("App resumed")
-
-    def app_resume(self):
-        event_pause.set()
-        # logger.debug("App resumed")
-
-    def check_event(self):
-        if event_stop.is_set():
-            return True
-        event_pause.wait()
-        return False
-
-    def check_money(self):
-        return self.money
-
-    def set_money(self, money):
-        self.money = money
-
-    def get_number_of_buy(self):
-        return self.number_of_buy
-
-    def set_number_of_buy(self, number_of_buy):
-        self.number_of_buy = number_of_buy
-
-    def add_number_of_buy(self):
-        self.number_of_buy += 1
 
 
 class Event:
@@ -123,6 +78,12 @@ class Event:
         self.event_pause_exit_round.wait()
         return False
 
+    def sleep(self, time_sleep=1):
+        for t in range(time_sleep):
+            if self.check_event():
+                break
+            time.sleep(1)
+
 
 class PathManager:
     base_path = ""
@@ -172,20 +133,30 @@ class SelectWindow:
         return (0, 0, width, height)
 
 
-def check_event(func):
-    def wrapper():
-        if gv.check_event():
-            return
-        func()
+def check_money():
+    global money
+    return money
 
-    return wrapper
+
+def set_money(status):
+    global money
+    money = status
+
+
+def get_count_of_buy():
+    global count_of_buy
+    return count_of_buy
+
+
+def add_count_of_buy(number):
+    global count_of_buy
+    count_of_buy += number
+def reset_count_of_buy():
+    global count_of_buy
+    count_of_buy = 0
 
 
 gv = Global_variables()
 path = PathManager()
 if __name__ == "__main__":
-    gv.add_number_of_buy()
-    gv.add_number_of_buy()
-    print(gv.get_number_of_buy())
-
     pass
