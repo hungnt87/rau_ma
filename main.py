@@ -5,9 +5,8 @@ import win32con
 import time
 
 from controller.button import Button
-import round as r
+import controller.round as r
 import keyboard
-import controller.global_variables as cgv
 from controller.filelog import logger, OutputHandler
 from controller.global_variables import global_event, character_moves_event
 

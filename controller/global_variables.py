@@ -26,8 +26,8 @@ class Event:
         logger.debug(f"{self.name} started")
 
     def app_stop(self):
-        self.event_stop.set()
         self.event_pause.set()
+        self.event_stop.set()
         logger.debug(f"{self.name} stopped")
 
     def app_pause(self):

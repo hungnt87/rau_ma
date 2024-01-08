@@ -1,15 +1,10 @@
-import pyautogui
 import time
-
-
-import item
 from controller.filelog import logger
 import controller.global_variables as cgv
 from controller.button import Button
 import controller.hero as hero
 from controller.global_variables import global_event
-
-
+import controller.item as item
 
 
 def round_all(round_number=1):
@@ -106,8 +101,7 @@ def round_all(round_number=1):
                     logger.info(
                         f"Ban dang danh boss round {n}, thoi gian con lai {s}/50s"
                     )
-                logger.info(f"Ket thuc round {n}")
-                # time.sleep(130)
+                logger.info(f"Ket thuc round {n}")  # time.sleep(130)
 
 
 if __name__ == "__main__":
