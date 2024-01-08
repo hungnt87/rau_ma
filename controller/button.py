@@ -123,7 +123,7 @@ class Button:
                 i = i + 1
                 if i > 2:
                     return False
-                logger.debug(f"Dang tim hinh anh {Button("Look").name} so lan {i}")
+                logger.debug(f"Dang tim hinh anh {Button('Look').name} so lan {i}")
                 time.sleep(1)
                 break
             except Exception as e:
@@ -367,6 +367,27 @@ class Button:
             return False
         Button("ProceedToRound").click(time_sleep=2, time_wait=20)
 
+
+    @staticmethod
+    def exit_game_round20():
+        if event.check_event():
+            return False
+        logger.info("Thoat game")
+        Button("Button_X").click(time_sleep=2, time_wait=5)
+        Button("Hide").click(time_sleep=2, time_wait=5)
+        Button("Equip").click(time_sleep=2, time_wait=5)
+        Button("BulkDisassembly").click(time_sleep=2, time_wait=5)
+        # click(BulkAll)
+        Button("BulkBlue").click(time_sleep=2, time_wait=5)
+        Button("BulkGreen").click(time_sleep=2, time_wait=5)
+        Button("BulkPink").click(time_sleep=2, time_wait=5)
+        Button("ConfirmDisassemBingEquip").click(time_sleep=2, time_wait=5)
+        Button("ClickToClose").click(time_sleep=2, time_wait=5)
+        Button("Back").click(time_sleep=2, time_wait=5)
+        Button("Disconnect").click(time_sleep=2, time_wait=5)
+        Button("LeaveGame").click(time_sleep=2, time_wait=5)
+        logger.info("Check game co update trong 10s")
+        Button("Update").click(time_sleep=2, time_wait=10)
     @staticmethod
     def roll_game():
         if event.check_event():

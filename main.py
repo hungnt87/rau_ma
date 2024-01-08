@@ -4,7 +4,7 @@ import win32gui
 import win32con
 import time
 import logging
-
+from controller.button import Button
 import round as r
 import keyboard
 import controller.global_variables as cgv
@@ -59,7 +59,7 @@ def main():
             logger.info("Bat dau auto lan: {}".format(n))
             if r.round_all(n) is False:
                 break
-            if button.exit_game_round20() is False:
+            if Button.exit_game_round20() is False:
                 break
             logger.info("Ket thuc auto lan {}".format(n))
             for t in range(10):
