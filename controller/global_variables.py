@@ -8,8 +8,8 @@ import time
 
 logger = filelog.logger
 # number_of_buy = None
-count_of_buy = None
-money = None
+count_of_buy = 0
+money = True
 
 
 class Event:
@@ -55,7 +55,7 @@ class Event:
     def sleep(self, time_sleep=1):
         for t in range(time_sleep):
             if self.check_event():
-                break
+                return False
             time.sleep(1)
 
 

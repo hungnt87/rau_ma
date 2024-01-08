@@ -1,9 +1,10 @@
 import os
-import sys
 import threading
+import time
 
 import pyautogui
 import pydirectinput
+
 import controller.global_variables as cgv
 from controller.button import Button
 from controller.filelog import logger
@@ -159,7 +160,7 @@ def buy_all_previous_item():
             if Button.check_money():
                 logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
                 value.number += 1
-                cgv.add_count_of_buy(1)
+                cgv.count_of_buy += 1
                 del previous_item[key]
                 pydirectinput.moveTo(222, 213)
             else:
@@ -168,6 +169,7 @@ def buy_all_previous_item():
                 if Button.click_lock(value.name, look_region) is True:
                     # del previous_item[key]
                     logger.debug("Khong du tien, Khoa item")
+
                 else:
                     del previous_item[key]
 
@@ -327,27 +329,32 @@ def buy_all_item(round_number):
     #     buy_all_item_round2()
     # if round_number == 3:
     #     buy_all_item_round3()
+    t1 = threading.Thread(target=buy_all_item_lv1, args=())
+    t2 = threading.Thread(target=buy_all_item_lv2, args=())
+    t3 = threading.Thread(target=buy_all_item_lv3, args=())
+    t4 = threading.Thread(target=buy_all_item_lv4, args=())
+    t5 = threading.Thread(target=buy_all_item_lv5, args=())
+    t6 = threading.Thread(target=buy_all_item_lv6, args=())
+
     if 3 < round_number <= 6:
-        t1 = threading.Thread(target=buy_all_item_lv1)
-        t2 = threading.Thread(buy_all_item_lv2)
         t1.start()
+
         t2.start()
         t1.join()
         t2.join()
-    if 6 < round_number <= 9:
-        t1 = threading.Thread(target=buy_all_item_lv1)
-        t2 = threading.Thread(buy_all_item_lv2)
-        t3 = threading.Thread(buy_all_item_lv3)
+
+        # buy_all_item_lv1()
+
+    elif round_number <= 9:
+
         t1.start()
         t2.start()
         t3.start()
         t1.join()
         t2.join()
         t3.join()  # buy_all_item_lv1()  # buy_all_item_lv2()  # buy_all_item_lv3()
-    if 9 < round_number <= 12:
-        t2 = threading.Thread(buy_all_item_lv2)
-        t3 = threading.Thread(buy_all_item_lv3)
-        t4 = threading.Thread(buy_all_item_lv4)
+    elif round_number <= 12:
+
         t2.start()
         t3.start()
         t4.start()
@@ -356,11 +363,8 @@ def buy_all_item(round_number):
         t4.join()
 
         # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()
-    if 12 < round_number <= 15:
-        t2 = threading.Thread(buy_all_item_lv2)
-        t3 = threading.Thread(buy_all_item_lv3)
-        t4 = threading.Thread(buy_all_item_lv4)
-        t5 = threading.Thread(buy_all_item_lv5)
+    elif round_number <= 15:
+
         t2.start()
         t3.start()
         t4.start()
@@ -369,12 +373,7 @@ def buy_all_item(round_number):
         t3.join()
         t4.join()
         t5.join()  # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()
-    if 15 < round_number <= 20:
-
-        t3 = threading.Thread(buy_all_item_lv3)
-        t4 = threading.Thread(buy_all_item_lv4)
-        t5 = threading.Thread(buy_all_item_lv5)
-        t6 = threading.Thread(buy_all_item_lv6)
+    elif round_number <= 20:
 
         t3.start()
         t4.start()
@@ -509,3 +508,8 @@ def reset_item():
 def reset_previous_item():
     global previous_item
     previous_item.clear()
+
+
+if __name__ == "__main__":
+    time.sleep(3)
+    buy_all_item(4)

@@ -63,11 +63,7 @@ class Hero:
         logger.debug("Bat dau tim hero {}".format(self.name))
         try:
             res_center = pyautogui.locateCenterOnScreen(
-                self.img,
-                confidence=self.confidence,
-                region=self.region,
-                grayscale=self.grayscale,
-            )
+                self.img, confidence=self.confidence, region=self.region, grayscale=self.grayscale, )
             # res_center = pyautogui.center(res)
             # pydirectinput.moveTo(res_center.x, res_center.y)
             pydirectinput.click(res_center[0], res_center[1])
@@ -112,8 +108,7 @@ class Hero:
                         box_lock = (location.x, location.y, 267, 312)
                         if Button.click_lock_hero(box_lock) is True:
                             previous_hero[location] = self
-                        return False
-                        # break
+                        return False  # break
                     else:
                         number = number + 1
                         if number_hero == None:
@@ -121,7 +116,7 @@ class Hero:
                         else:
                             number_buy = number_hero - number
                         self.number = number
-                        cgv.add_count_of_buy(number=1)
+                        cgv.count_of_buy += 1
                         if number_hero == None:
                             logger.info(
                                 f"Ban da mua thanh cong 1 hero {self.name} da khoa round truoc"
@@ -145,11 +140,7 @@ class Hero:
             if global_event.check_event():
                 return False
             res = pyautogui.locateCenterOnScreen(
-                self.img,
-                confidence=self.confidence,
-                region=REGION_HERO,
-                grayscale=self.grayscale,
-            )
+                self.img, confidence=self.confidence, region=REGION_HERO, grayscale=self.grayscale, )
             return True
         except pyautogui.ImageNotFoundException:
             return False
@@ -163,11 +154,7 @@ class Hero:
         global REGION_SELL_HERO
         try:
             res_center = pyautogui.locateCenterOnScreen(
-                self.img_lv1,
-                confidence=self.confidence,
-                region=self.region_sell,
-                grayscale=self.grayscale,
-            )
+                self.img_lv1, confidence=self.confidence, region=self.region_sell, grayscale=self.grayscale, )
             pydirectinput.rightClick(res_center.x, res_center.y)
             time.sleep(1)
             pydirectinput.click(res_center.x + 20, res_center.y)
@@ -382,7 +369,7 @@ def buy_all_hero(round_number):
         buy_troll_warlord()
         buy_morphling()
         buy_wind_ranger()
-    elif round_number <= 8:
+    elif round_number < 8:
         buy_dazzale()
         buy_oracle()
         buy_hood_wink()
@@ -394,6 +381,7 @@ def buy_all_hero(round_number):
         buy_dark_willow()
         buy_clinkz()
         buy_witch_doctor()
+    else:
         buy_sniper()
         buy_snapfire()
         buy_drow_ranger()
@@ -431,7 +419,5 @@ if __name__ == "__main__":
     time.sleep(2)
     # reset_hero()
     # print(Hoodwink.number)
-    Hoodwink.buy_hero(1)
-    Windranger.buy_hero(1)
-    WinterWyvern.buy_hero(1)
+    buy_snapfire()
     pass
