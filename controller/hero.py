@@ -294,7 +294,7 @@ def buy_sniper():
             if Luna.number == 0:
                 Luna.number = 1
             else:
-                Luna.sell_hero()a
+                Luna.sell_hero()
             Sniper.buy_hero(5)
     else:
         Sniper.buy_hero(5)
