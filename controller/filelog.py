@@ -2,8 +2,6 @@ import logging
 import PySimpleGUI as sg
 
 
-
-
 class OutputHandler(logging.Handler):
     # window: sg.Window
 

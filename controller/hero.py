@@ -7,9 +7,8 @@ import pydirectinput
 import controller.global_variables as cgv
 from controller.button import Button
 from controller.filelog import logger
+from controller.global_variables import global_event
 
-
-event = cgv.Event()
 path = cgv.PathManager()
 REGION_HERO = (537, 125, 1158, 406)
 
@@ -59,7 +58,7 @@ class Hero:
         self.number = 0
 
     def buy(self):
-        if event.check_event():
+        if global_event.check_event():
             return False
         logger.debug("Bat dau tim hero {}".format(self.name))
         try:
@@ -82,7 +81,7 @@ class Hero:
             return
 
     def buy_hero(self, number_hero=1):
-        if event.check_event():
+        if global_event.check_event():
             return False
         # logger.debug("Bat dau tim hero {}".format(Hero.name))
 
@@ -94,7 +93,7 @@ class Hero:
         else:
             number_buy = number_hero - number
         while True:
-            if event.check_event():
+            if global_event.check_event():
                 break
             if i >= 2:
                 break
@@ -139,11 +138,11 @@ class Hero:
                 break
 
     def check_hero(self):
-        if event.check_event():
+        if global_event.check_event():
             return False
 
         try:
-            if event.check_event():
+            if global_event.check_event():
                 return False
             res = pyautogui.locateCenterOnScreen(
                 self.img,
@@ -159,7 +158,7 @@ class Hero:
             return False
 
     def sell_hero(self):
-        if event.check_event():
+        if global_event.check_event():
             return
         global REGION_SELL_HERO
         try:
@@ -184,7 +183,7 @@ class Hero:
 
 
 def buy_all_previous_hero():
-    if event.check_event():
+    if global_event.check_event():
         return False
 
     if previous_hero:
@@ -367,12 +366,13 @@ def buy_zet():
 
 
 def buy_all_hero(round_number):
-    if event.check_event():
+    if global_event.check_event():
         return False
     logger.info(f"Bat dau mua hero in round: {round_number}")
     if cgv.check_money() is False:
         logger.debug("Khong du tien, next round")
         return False
+
     if round_number <= 3:
         buy_dazzale()
         buy_oracle()
@@ -402,6 +402,8 @@ def buy_all_hero(round_number):
 
 
 def reset_hero():
+    if global_event.check_event():
+        return False
     # global Windranger, Luna, TrollWarlord, Morphling, DarkWillow, Clinkz, Sniper, Snapfire, DrowRanger, TemplarAssassin, Zet
     WinterWyvern.reset_hero_number()
     Hoodwink.reset_hero_number()

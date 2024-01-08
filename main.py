@@ -3,19 +3,20 @@ import threading
 import win32gui
 import win32con
 import time
-import logging
+
 from controller.button import Button
 import round as r
 import keyboard
 import controller.global_variables as cgv
 from controller.filelog import logger, OutputHandler
+from controller.global_variables import global_event, character_moves_event
 
-event = cgv.Event()
-gv = cgv.Global_variables()
 main_stop = False
 main_start = False
 appStarted = False
 main_pause = False
+main_status = False
+button_pause = "Pause (Ctrl + Space)"
 
 
 def get_app_window_handle(app_name):
@@ -29,9 +30,6 @@ def move_window_to(handle, x, y):
 
     # Thay đổi kích thước và vị trí của cửa sổ
     win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
-
-
-main_status = False
 
 
 def main():
@@ -51,7 +49,7 @@ def main():
         logger.info(f"Tim thay cua so  '{app_name}'")
         main_status = True
         while True:
-            if event.check_event():
+            if global_event.check_event():
                 # logger.info("Stop thread main")
                 break
             n += 1
@@ -63,7 +61,7 @@ def main():
                 break
             logger.info("Ket thuc auto lan {}".format(n))
             for t in range(10):
-                if event.check_event():
+                if global_event.check_event():
                     break
 
                 t = 10 - t
@@ -83,21 +81,19 @@ class ThreadedApp:
         self.t1 = threading.Thread()
 
     def run(self):
-        event.app_start()
-
+        global_event.app_start()
+        character_moves_event.app_start()
         self.t1 = threading.Thread(target=main, args=(), daemon=True)
         self.t1.start()
 
     def stop(self):
-        event.app_stop()
-        event.set_event_stop_exit_round()
+        global_event.app_stop()
+        character_moves_event.app_stop()
         self.t1.join()
 
     def pause(self):
-        event.app_pause()
-
-
-button_pause = "Pause (Ctrl + Space)"
+        global_event.app_pause()
+        character_moves_event.app_pause()
 
 
 def make_win2():
@@ -243,36 +239,6 @@ def gui():
     window.close()
 
 
-def test1():
-    i = 0
-    while True:
-        if event.check_event():
-            break
-        i += 1
-        logger.debug(f"test1 {i}")
-        time.sleep(1)
-        if i == 5:
-            break
-
-
-def test2():
-    i = 0
-    while True:
-        if event.check_event():
-            break
-        i += 1
-        logger.debug(f"test2 {i}")
-        time.sleep(1)
-        break
-
-
-def main1():
-    global main_status
-    main_status = True
-    test1()
-    test2()
-
-
 def on_hotkey_stop():
     global main_stop
     time.sleep(1)
@@ -307,6 +273,6 @@ if __name__ == "__main__":
     # main(pause_event=event_pause, stop_event=event_stop)
     # gui()
 
-    # gui()
-    main()
+    gui()
+    #main()
     pass

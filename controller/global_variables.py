@@ -6,76 +6,50 @@ import win32con
 import controller.filelog as filelog
 import time
 
-event_stop = threading.Event()
-event_pause = threading.Event()
-event_stop_exit_round = threading.Event()
-event_pause_exit_round = threading.Event()
-event_pause.set()
 logger = filelog.logger
 # number_of_buy = None
 count_of_buy = None
 money = None
 
 
-class Global_variables:
-    name = ""
-
-    def __init__(self):
-        self.name = "Global_variables"
-
-
 class Event:
-    event_stop = threading.Event()
-    event_pause = threading.Event()
-    event_stop_exit_round = threading.Event()
-    event_pause_exit_round = threading.Event()
-
-    def __init__(self):
-        self.name = "event"
-        self.event_stop.clear()
+    def __init__(self, para_name):
+        self.name = para_name
+        self.event_stop = threading.Event()
+        self.event_pause = threading.Event()
         self.event_pause.set()
-        self.event_stop_exit_round.clear()
+        self.event_stop.clear()
 
     def app_start(self):
         self.event_pause.set()
         self.event_stop.clear()
-        logger.debug("App started")
+        logger.debug(f"{self.name} started")
 
     def app_stop(self):
         self.event_stop.set()
         self.event_pause.set()
-        logger.debug("App stopped")
+        logger.debug(f"{self.name} stopped")
 
     def app_pause(self):
         if self.event_pause.is_set():
             self.event_pause.clear()
-            logger.debug("App paused")
+            logger.debug(f"{self.name} paused")
         else:
             self.event_pause.set()
-            logger.debug("App resumed")
+            logger.debug(f"{self.name} resumed")
+
+    def app_resume(self):
+        if self.event_pause.is_set():
+            self.event_pause.clear()
+            logger.debug(f"{self.name} paused")
+        else:
+            self.event_pause.set()
+            logger.debug(f"{self.name} resumed")
 
     def check_event(self):
         if self.event_stop.is_set():
             return True
         self.event_pause.wait()
-        return False
-
-    def set_event_stop_exit_round(self):
-        self.event_stop_exit_round.set()
-
-    def clear_event_stop_exit_round(self):
-        self.event_stop_exit_round.clear()
-
-    def set_pause_button_character_moves(self):
-        self.event_pause_exit_round.clear()
-
-    def set_resume_button_character_moves(self):
-        self.event_pause_exit_round.set()
-
-    def check_event_exit_round(self):
-        if self.event_stop_exit_round.is_set():
-            return True
-        self.event_pause_exit_round.wait()
         return False
 
     def sleep(self, time_sleep=1):
@@ -151,12 +125,16 @@ def get_count_of_buy():
 def add_count_of_buy(number):
     global count_of_buy
     count_of_buy += number
+
+
 def reset_count_of_buy():
     global count_of_buy
     count_of_buy = 0
 
 
-gv = Global_variables()
 path = PathManager()
+
+global_event = Event("global_event")
+character_moves_event = Event("character_moves_event")
 if __name__ == "__main__":
     pass

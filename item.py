@@ -7,12 +7,7 @@ import sys
 import threading
 import controller.global_variables as cgv
 from controller.button import Button
-
-
-event = cgv.Event()
-event_stop = cgv.event_stop
-event_pause = cgv.event_pause
-
+from controller.global_variables import global_event
 
 def resource_path(relative_path):
     """Get absolute path to resource, works for dev and for PyInstaller"""
@@ -24,8 +19,7 @@ path_data = "data"
 path_image = "image"
 path_item = "item"
 
-count_buy_item = 0
-item_status_money = True
+
 previous_item = dict()
 REGION_BUY_ITEM = (394, 321, 1384, 692)
 CONFIDENCE_BUY_ITEM = 0.8
@@ -60,28 +54,13 @@ class ItemInfo:
         return self.img
 
 
-def reset_count_buy_item():
-    global count_buy_item
-    count_buy_item = 0
-
-
-def get_count_buy_item():
-    global count_buy_item
-    return count_buy_item
-
-
-def reset_status_money():
-    global item_status_money
-    item_status_money = True
-
-
 def buy_item_info(
-        ItemInfo, number_item=3, stop_event=event_stop, pause_event=event_pause
+        ItemInfo, number_item=3
 ):
     # logger.info("Ban dang tim item {}".format(ItemInfo.name))
-    if event.check_event():
+    if global_event.check_event():
         return False
-    global count_buy_item, item_status_money, previous_item, REGION_BUY_ITEM, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
+    global previous_item, REGION_BUY_ITEM, CONFIDENCE_BUY_ITEM, GRAYSCALE_BUY_ITEM
     number = ItemInfo.number
     number_buy = number_item - number
     if number_buy > 0:
@@ -105,7 +84,6 @@ def buy_item_info(
                 number_buy = number_item - number
                 logger.info(f"Ban da mua thanh cong 1 cai {ItemInfo.name}")
                 ItemInfo.number = number
-                count_buy_item = count_buy_item + 1
                 cgv.add_count_of_buy(1)
                 return True
         except pyautogui.ImageNotFoundException:
@@ -208,9 +186,9 @@ TomeOfKnowledge_lv3 = ItemInfo("TomeOfKnowledge_lv3", 1)
 
 
 def buy_all_previous_item():
-    if event.check_event():
+    if global_event.check_event():
         return False
-    global previous_item, count_buy_item
+    global previous_item
     if previous_item:
         logger.debug("Ban dang mua item khoa o round truoc")
         for key, value in list(previous_item.items()):
@@ -220,14 +198,14 @@ def buy_all_previous_item():
             else:
                 logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
                 value.number = value.number + 1
-                count_buy_item = count_buy_item + 1
+                cgv.add_count_of_buy(1)
                 del previous_item[key]
     else:
         logger.debug("Khong co item khoa o round truoc")
 
 
 def buy_all_set_item(round_number):
-    if event.check_event():
+    if global_event.check_event():
         return False
     logger.debug("Ban dang mua set item")
     buy_item_info(PickupRange100_lv1, 1)
@@ -248,7 +226,7 @@ def buy_all_set_item(round_number):
 
 
 def buy_all_item_investments(round_number):
-    if event.check_event():
+    if global_event.check_event():
         return False
     logger.debug("Ban dang mua item investments")
     if round_number <= 9:
@@ -271,7 +249,7 @@ def buy_all_item_round3():
 
 
 def buy_all_item_lv1():
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv1")
 
@@ -283,7 +261,7 @@ def buy_all_item_lv1():
 
 
 def buy_all_item_lv2():
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv2")
     buy_item_info(PreciseDamage12_Speed12_lv2)
@@ -304,7 +282,7 @@ def buy_all_item_lv2():
 
 
 def buy_all_item_lv3():
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv3")
     # buy_item_info(Investment198_Speed7_lv3)
@@ -328,7 +306,7 @@ def buy_all_item_lv3():
 
 
 def buy_all_item_lv4():
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv4")
     buy_item_info(Pillager_lv4)
@@ -347,7 +325,7 @@ def buy_all_item_lv4():
 
 
 def buy_all_item_lv5():
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv5")
     buy_item_info(Immunity10_lv5)
@@ -374,7 +352,7 @@ def buy_all_item_lv6():
     Returns:
         None
     """
-    if event.check_event():
+    if global_event.check_event():
         return
     logger.info("Ban dang mua item lv6")
     buy_item_info(PantyMask_lv6, 1)
@@ -386,7 +364,7 @@ def buy_all_item_lv6():
 
 
 def buy_all_item(round_number):
-    if event.check_event():
+    if global_event.check_event():
         return False
     logger.info(f"Ban dang mua item round {round_number}")
     if cgv.check_money() is False:
@@ -447,7 +425,8 @@ def reset_item():
     # global PreciseDamage12_Every1s_Plus1_lv6, PreciseDamage12_Speed12_lv2, PreciseDamage16_Strike16_lv3, Random_10_28_Evasion_lv4, Random_10_28_HealthRegen_lv3
     # global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6, RevivalCount1_CriticalRate5_lv3, RevivalCount1_Health5_lv4
     # global Set_Defense8_lv2, Set_Defense188_lv3, Set_ExtraDamage17_lv4, Set_Investment108_lv2, ShopDiscount_lv1, SplitTheVoid_lv2, TomeOfKnowledge_lv3
-
+    if global_event.check_event():
+        return False
     Attack10EveryBuyPlus5_lv2.reset_item_number()
     Attack12_Kill1000_Unique_lv2.reset_item_number()
     Attack16_Arcane16_lv3.reset_item_number()

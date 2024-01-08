@@ -7,31 +7,18 @@ from controller.filelog import logger
 import controller.global_variables as cgv
 from controller.button import Button
 import controller.hero as hero
-
-event = cgv.Event()
-event_stop = cgv.event_stop
-event_pause = cgv.event_pause
+from controller.global_variables import global_event
 
 
-# hero.hero_status_money
-# item.item_status_money
-def get_count_buy():
-    count = cgv.get_count_of_buy()
-    return count
 
 
-def reset_count_buy():
-    cgv.reset_count_of_buy()
-    # item.reset_count_buy_item()
-
-
-def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
-    if event.check_event():
+def round_all(round_number=1):
+    if global_event.check_event():
         # logger.info("Stop thread round 1")
         return False
     n = 0
     while n < 20:
-        if event.check_event():
+        if global_event.check_event():
             # logger.info("Stop thread round 2")
             break
         n = n + 1
@@ -64,7 +51,7 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
             cgv.set_money(True)
 
             while True:
-                if event.check_event():
+                if global_event.check_event():
                     # logger.info("Stop thread round 3")
                     break
                 if cgv.check_money() is False:
@@ -111,7 +98,7 @@ def round_all(round_number=1, stop_event=event_stop, pause_event=event_pause):
                 if Button.exit_round20() is False:
                     break
                 for s in range(50):
-                    if event.check_event():
+                    if global_event.check_event():
                         # logger.info("Stop thread round 3")
                         break
                     s = 50 - s
