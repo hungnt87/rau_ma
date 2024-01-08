@@ -291,6 +291,10 @@ def buy_sniper():
                 Dazzale.number = 1
             else:
                 Dazzale.sell_hero()
+            if Luna.number == 0:
+                Luna.number = 1
+            else:
+                Luna.sell_hero()a
             Sniper.buy_hero(5)
     else:
         Sniper.buy_hero(5)
@@ -307,6 +311,10 @@ def buy_snapfire():
                 Morphling.number = 1
             else:
                 Morphling.sell_hero()
+            if WitchDoctor.number == 0:
+                WitchDoctor.number = 1
+            else:
+                WitchDoctor.sell_hero()
             Snapfire.buy_hero(5)
     else:
         Snapfire.buy_hero(5)
