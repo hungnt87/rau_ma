@@ -237,7 +237,7 @@ class Button:
         logger.debug("Cho bat dau di chuyen")
         global REGION, CONFIDENCE, GRAYSCALE
         i = 0
-        Button("Resurrect").click(time_sleep = 2, time_wait = 5)
+        Button("Resurrect").click(time_sleep = 2, time_wait = 8)
         character_moves_event.app_resume()
         logger.debug("Bat dau di chuyen")
         while True:
@@ -287,14 +287,17 @@ class Button:
         loc = (973, 575)
         loc1 = 130
         number_click = 0
+        number_click_first = 0
         if round_number == 1:
             number_click = 10
+            number_click_first=6
         else:
             number_click = 14
+            number_click_first = 8
         # time.sleep(3)
         # pydirectinput.moveTo(loc[0], loc[1])
 
-        for i in range(0, 10):
+        for i in range(0, number_click_first):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():

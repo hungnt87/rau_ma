@@ -164,22 +164,21 @@ def buy_all_previous_hero():
     if previous_hero:
         logger.debug("Ban dang mua hero ")
         for key, value in list(previous_hero.items()):
-            if check_sell_hero(value) is True:
-                pydirectinput.click(key[0], key[1])
-                if Button.check_money() is True:
-                    logger.info(f"Ban da mua thanh cong 1 {value.name}")
-                    value.number = value.number + 1
-                    cgv.count_of_buy += 1
-                    del previous_hero[key]
+            check_sell_hero(value)
+            pydirectinput.click(key[0], key[1])
+            if Button.check_money() is True:
+                logger.info(f"Ban da mua thanh cong 1 {value.name}")
+                value.number = value.number + 1
+                cgv.count_of_buy += 1
+                del previous_hero[key]
+            else:
+                look_region = (key[0], key[1], 267, 312)
+                cgv.set_money(False)
+                if Button.click_lock(value.name, look_region) is True:
+                    # del previous_item[key]
+                    logger.debug("Khong du tien, Khoa hero")
                 else:
-                    look_region = (key[0], key[1], 267, 312)
-                    cgv.set_money(False)
-                    if Button.click_lock(value.name, look_region) is True:
-                        # del previous_item[key]
-                        logger.debug("Khong du tien, Khoa hero")
-
-                    else:
-                        del previous_hero[key]
+                    del previous_hero[key]
 
     else:
         logger.debug("Khong co hero khoa o round truoc")
@@ -199,10 +198,9 @@ Oracle = Hero(name = "Oracle", need_buy = 1)
 
 TrollWarlord = Hero(name = "TrollWarlord", need_buy = 1)
 Morphling = Hero(name = "Morphling", need_buy = 1)
-WitchDoctor = Hero(name = "WitchDoctor", need_buy = 1)
 
 # hero lv3
-
+WitchDoctor = Hero(name = "WitchDoctor", need_buy = 1)
 DarkWillow = Hero(name = "DarkWillow", need_buy = 1)
 
 Clinkz = Hero(name = "Clinkz", need_buy = 1)
@@ -219,40 +217,43 @@ Zet = Hero(name = "Zet", need_buy = 1)
 def check_sell_hero(hero: Hero):
     if global_event.check_event():
         return False
-    if hero.name == Clinkz.name:
-        if TrollWarlord.sell_hero() is True:
-            return True
+    # slot 1
+    if hero.name == Luna.name:
+        Dazzale.sell_hero()
+    elif hero.name == Sniper.name:
+        Dazzale.sell_hero()
+        Luna.sell_hero()
 
-    if hero.name == WitchDoctor.name:
-        if Morphling.sell_hero() is True:
-            return True
-    if hero.name == DarkWillow.name:
-        if Windranger.sell_hero() is True:
-            return True
-    if hero.name == Sniper.name:
-        if Dazzale.sell_hero() is True:
-            return True
-        if Luna.sell_hero() is True:
-            return True
-    if hero.name == Snapfire.name:
-        if Oracle.sell_hero() is True:
-            return True
-        if Morphling.sell_hero() is True:
-            return True
-        if WitchDoctor.sell_hero() is True:
-            return True
-    if hero.name == DrowRanger.name:
-        if HoodWink.sell_hero() is True:
-            return True
-    if hero.name == TemplarAssassin.name:
-        if WinterWyvern.sell_hero() is True:
-            return True
-    if hero.name == Zet.name:
-        if Clinkz.sell_hero() is True:
-            return True
-        if TrollWarlord.sell_hero() is True:
-            return True
-    return True
+    # slot 2
+    elif hero.name == Morphling.name:
+        Oracle.sell_hero()
+    elif hero.name == WitchDoctor.name:
+        Morphling.sell_hero()
+        Oracle.sell_hero()
+
+    elif hero.name == Snapfire.name:
+        Oracle.sell_hero()
+        Morphling.sell_hero()
+        TrollWarlord.sell_hero()
+    # slot 3
+    elif hero.name == DarkWillow.name:
+        Windranger.sell_hero()
+
+    # slot 4
+    elif hero.name == DrowRanger.name:
+        HoodWink.sell_hero()
+
+
+    # slot 5
+    elif hero.name == TemplarAssassin.name:
+        WinterWyvern.sell_hero()
+
+    # slot 6
+    elif hero.name == Clinkz.name:
+        TrollWarlord.sell_hero()
+    elif hero.name == Zet.name:
+        Clinkz.sell_hero()
+        TrollWarlord.sell_hero()
 
 
 def buy_all_hero(round_number):
