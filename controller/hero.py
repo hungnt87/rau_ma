@@ -201,17 +201,17 @@ Morphling = Hero(name = "Morphling", need_buy = 1)
 
 # hero lv3
 WitchDoctor = Hero(name = "WitchDoctor", need_buy = 1)
-DarkWillow = Hero(name = "DarkWillow", need_buy = 1)
+DarkWillow = Hero(name = "DarkWillow", need_buy = 5)
 
 Clinkz = Hero(name = "Clinkz", need_buy = 1)
 
 # hero lv4
 Sniper = Hero(name = "Sniper", need_buy = 5)
-Snapfire = Hero(name = "Snapfire", need_buy = 1)
+Snapfire = Hero(name = "Snapfire", need_buy = 5)
 # hero lv5
-DrowRanger = Hero(name = "DrowRanger", need_buy = 1)
-TemplarAssassin = Hero(name = "TemplarAssassin", need_buy = 1)
-Zet = Hero(name = "Zet", need_buy = 1)
+DrowRanger = Hero(name = "DrowRanger", need_buy = 5)
+TemplarAssassin = Hero(name = "TemplarAssassin", need_buy =5)
+Zet = Hero(name = "Zet", need_buy = 5)
 
 
 def check_sell_hero(hero: Hero):
