@@ -26,10 +26,10 @@ I. Huớng dẫn sử dụng
 7. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
 
 - Momo:
-  ![1744596027](https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a)
+  ![Momo](https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a)
 
 - Tài khoản ngân hàng:
-  ![Vietcombank 893d04a1-7ade-4e0b-a060-7c10797afa9a](https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e)
+  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e width="250" alt="Scan QR Code" />
 
 II. Hướng dẫn chạy tại source code
 
