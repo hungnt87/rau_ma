@@ -7,7 +7,7 @@ import pydirectinput
 
 import controller.global_variables as cgv
 from controller.filelog import logger
-from controller.global_variables import PathManager, SelectWindow, global_event, character_moves_event
+from controller.global_variables import (PathManager, SelectWindow, global_event, character_moves_event, )
 
 path = PathManager()
 
@@ -36,7 +36,9 @@ class Button:
         # global HERO_IMG
         if self.img is None:
             file_name = para_name + ".png"
-            self.img = path.get_absolute_path(os.path.join("assets", "img", "button", file_name))
+            self.img = path.get_absolute_path(
+                os.path.join("assets", "img", "button", file_name)
+            )
         return self.img
 
     def check_button(self, time_wait = 15):
@@ -68,7 +70,7 @@ class Button:
                 logger.error(e)
                 break
 
-    def click(self, time_sleep = 2, time_wait = 15, ):
+    def click(self, time_sleep = 3, time_wait = 30):
         if global_event.check_event():
             return False
         logger.info(f"Click {self.name}")
@@ -105,7 +107,7 @@ class Button:
                     Button("Look").img, confidence=0.8, region=box, grayscale=True
                 )
                 # pydirectinput.moveTo(res)
-                # time.sleep(1)
+                time.sleep(1)
                 pydirectinput.click(res.x, res.y)
                 # time.sleep(1)
                 pydirectinput.moveTo(200, 200)
@@ -138,7 +140,7 @@ class Button:
                     Button("Lock_hero").img, confidence=0.8, region=box, grayscale=True
                 )
                 # pydirectinput.moveTo(res.x, res.y+20)
-                # time.sleep(1)
+                time.sleep(1)
                 pydirectinput.click(res.x, res.y + 20)
                 # time.sleep(1)
                 pydirectinput.moveTo(200, 200)
@@ -163,8 +165,7 @@ class Button:
                 if global_event.check_event():
                     break
                 res_center = pyautogui.locateCenterOnScreen(
-                    Button("NotMoney").img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE
-                )
+                    Button("NotMoney").img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
                 if res_center is not None:
                     logger.debug("Ban khong du tien, di tiep vong sau")
                     cgv.set_money(False)
@@ -189,8 +190,7 @@ class Button:
                 break
             try:
                 res_center = pyautogui.locateCenterOnScreen(
-                    Button(para_name).img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE
-                )
+                    Button(para_name).img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
 
                 # pydirectinput.moveTo(res.x, res.y)
                 pydirectinput.click(res_center[0], res_center[1])
@@ -282,7 +282,7 @@ class Button:
 
     @staticmethod
     def character_moves(round_number = 2):
-        #logger.debug("Cho bat dau di chuyen")
+        # logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
         if character_moves_event.check_event():
@@ -292,7 +292,7 @@ class Button:
         loc1 = 130
         number_click = 0
         number_click_first = 0
-        #logger.debug("Bat dau di chuyen")
+        # logger.debug("Bat dau di chuyen")
         if round_number == 1:
             number_click = 10
             number_click_first = 6
@@ -307,13 +307,17 @@ class Button:
                 return False
             if character_moves_event.check_event():
                 return False
-            pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)  # time.sleep(time_click)
+            pydirectinput.rightClick(
+                loc[0], loc[1] + loc1 + 30
+            )  # time.sleep(time_click)
         for i in range(0, 8):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
                 return False
-            pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)  # time.sleep(time_click)
+            pydirectinput.rightClick(
+                loc[0] - loc1 - 30, loc[1] + 20
+            )  # time.sleep(time_click)
         while True:
             if global_event.check_event():
                 return False
@@ -324,7 +328,9 @@ class Button:
                     return False
                 if character_moves_event.check_event():
                     return False
-                pydirectinput.rightClick(loc[0], loc[1] - loc1)  # time.sleep(time_click)
+                pydirectinput.rightClick(
+                    loc[0], loc[1] - loc1
+                )  # time.sleep(time_click)
             for i in range(0, number_click):
                 if global_event.check_event():
                     return False
@@ -342,7 +348,9 @@ class Button:
                     return False
                 if character_moves_event.check_event():
                     return False
-                pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)  # time.sleep(time_click)
+                pydirectinput.rightClick(
+                    loc[0] - loc1 - 30, loc[1] + 20
+                )  # time.sleep(time_click)
 
     @staticmethod
     def run_round(round_number = 2):
@@ -351,7 +359,9 @@ class Button:
         logger.debug("Bat dau run round")
         character_moves_event.app_start()
         t1 = threading.Thread(target=Button.check_exit_round, args=(40,), daemon=True)
-        t2 = threading.Thread(target=Button.character_moves, args=(round_number,), daemon=True)
+        t2 = threading.Thread(
+            target=Button.character_moves, args=(round_number,), daemon=True
+        )
         t1.start()
         t2.start()
         t1.join()
@@ -397,8 +407,7 @@ class Button:
                 break
             try:
                 res = pyautogui.locateCenterOnScreen(
-                    Button("Roll").img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE
-                )
+                    Button("Roll").img, confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
                 pydirectinput.click(res.x, res.y)
                 pyautogui.moveTo(200, 200)
                 if Button.check_money() is False:
