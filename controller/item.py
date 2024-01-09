@@ -122,7 +122,7 @@ Luck60_Speed25_lv4 = Item("Luck60_Speed25_lv4", number_need_buy=1)
 MasterChefHat_lv2 = Item("MasterChefHat_lv2")
 Minazuki_lv4 = Item("Minazuki_lv4")
 MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
-MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
+#MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
 PantyMask_lv6 = Item("PantyMask_lv6")
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy=3)
 Pillager_lv4 = Item("Pillager_lv4")
@@ -148,6 +148,7 @@ ShopPlus1_lv4 = Item("ShopPlus1_lv4", number_need_buy=1)
 SoulCrystalsPlus35EveryMango_lv3 = Item("SoulCrystalsPlus35EveryMango_lv3", number_need_buy=1)
 SplitTheVoid_lv2 = Item("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = Item("TomeOfKnowledge_lv3")
+
 
 
 def buy_all_previous_item():
