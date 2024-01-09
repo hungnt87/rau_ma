@@ -1,6 +1,8 @@
 import os
 import sys
 import threading
+from typing import Tuple
+
 import pyautogui
 import time
 import pydirectinput
@@ -12,7 +14,7 @@ from controller.global_variables import global_event
 path = cgv.PathManager()
 REGION_HERO = (537, 125, 1158, 406)
 
-REGION_SELL_HERO = (662, 791, 704, 358)
+REGION_SELL_HERO: tuple[int, int, int, int] = (662, 791, 704, 358)
 CONFIDENCE = 0.8
 GRAYSCALE = True
 count_WinterWyvern = 0
@@ -25,16 +27,16 @@ class Hero:
     img = None
     img_lv1 = None
 
-    def __init__(self, para_name, para_number_hero=0):
-        self.name = para_name
-        self.img = self._get_hero_img(para_name)
-        self.img_lv1 = self._get_hero_img_lv1(para_name)
-        self.number = para_number_hero
+    def __init__(self, name, number_hero=0, need_buy=0):
+        self.name = name
+        self.img = self._get_hero_img(name)
+        self.img_lv1 = self._get_hero_img_lv1(name)
+        self.number = number_hero
         self.region = REGION_HERO
         self.region_sell = REGION_SELL_HERO
         self.confidence = CONFIDENCE
         self.grayscale = True
-        self.count_buy_hero = 0
+        self.need_buy = need_buy
 
     def _get_hero_img(self, para_name):
         # global HERO_IMG
@@ -172,7 +174,7 @@ class Hero:
 def buy_all_previous_hero():
     if global_event.check_event():
         return False
-
+    global previous_hero
     if previous_hero:
         logger.debug("Ban dang mua hero khoa o round truoc")
         for key, value in list(previous_hero.items()):
@@ -339,7 +341,7 @@ def buy_templar_assassin():
                 WinterWyvern.number = 1
             else:
                 WinterWyvern.sell_hero()
-            TemplarAssassin.sell_hero()
+            TemplarAssassin.buy_hero(5)
     else:
         TemplarAssassin.buy_hero(5)
 
