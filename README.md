@@ -1,6 +1,6 @@
 # brodota-bot
 
-Tính năng:
+## Tính năng:
 
 - Tự động vào game
 - Mua đồ và hero
@@ -10,7 +10,7 @@ Tính năng:
 
 - PS: Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
 
-I. Huớng dẫn sử dụng
+### I. Huớng dẫn sử dụng
 
 1. Tải file phiên bải brodota-bot.zip tại https://github.com/hungnt87/brodota-bot/releases
 2. Giải nén file brodota-bot.zip
@@ -25,13 +25,15 @@ I. Huớng dẫn sử dụng
 
 7. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
 
-- Momo:
+### Momo:
+
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a" width="250" alt="Scan QR Code" />
 
-- Tài khoản ngân hàng:
+### Tài khoản ngân hàng:
+
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e" width="250" alt="Scan QR Code" />
 
-II. Hướng dẫn chạy tại source code
+### II. Hướng dẫn chạy tại source code
 
-Video hướng dẫn chạy tại source code
-https://youtu.be/1B_rowkZvLE
+- Video hướng dẫn chạy tại source code
+  https://youtu.be/1B_rowkZvLE
