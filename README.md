@@ -16,10 +16,12 @@
 2. Giải nén file brodota-bot.zip
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
-   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/6218a8d0-baaa-4b6f-a477-336e1d7996c5" width="800" alt="Do phan giai" />
+
+   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/6218a8d0-baaa-4b6f-a477-336e1d7996c5" width="600" alt="Do phan giai" />
+
 5. Sau đó để sẵn cửa sổ game như hình dưới
 
-<img src="https://github.com/hungnt87/brodota-bot/assets/71305971/9820772b-ba40-4214-8781-7be315bc1b9e" width="800" alt="Mau game" />
+   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/9820772b-ba40-4214-8781-7be315bc1b9e" width="600" alt="Mau game" />
 
 6. Start và tận hưởng
 
@@ -27,7 +29,7 @@
 
 # Momo:
 
-  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a" width="250" alt="Scan QR Code" />
+  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a" width="200" alt="Scan QR Code" />
 
 # Tài khoản ngân hàng:
 
