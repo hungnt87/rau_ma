@@ -102,8 +102,9 @@ class Hero:
             if count_buy > 0:
                 location = self.buy()
                 if location:
-                    previous_hero[location] = self
-                    return True
+                    if check_sell_hero(self) is not False:
+                        previous_hero[location] = self
+                        return True
                 else:
                     pass
             else:
@@ -282,7 +283,7 @@ def buy_all_hero(round_number):
         thread_buy_troll_warlord.join()
         thread_buy_morphling.join()
         thread_buy_windranger.join()
-    elif round_number < 8:
+    elif round_number <= 10:
         # start
         thread_buy_dazzale.start()
         thread_buy_oracle.start()
