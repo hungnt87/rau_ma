@@ -210,7 +210,7 @@ Sniper = Hero(name = "Sniper", need_buy = 5)
 Snapfire = Hero(name = "Snapfire", need_buy = 5)
 # hero lv5
 DrowRanger = Hero(name = "DrowRanger", need_buy = 5)
-TemplarAssassin = Hero(name = "TemplarAssassin", need_buy =5)
+TemplarAssassin = Hero(name = "TemplarAssassin", need_buy = 5)
 Zet = Hero(name = "Zet", need_buy = 5)
 
 
@@ -343,21 +343,21 @@ def buy_all_hero(round_number):
 def reset_hero():
     if global_event.check_event():
         return False
-    WinterWyvern.reset_hero_number()
-    HoodWink.reset_hero_number()
-    Dazzale.reset_hero_number()
-    Oracle.reset_hero_number()
-    TrollWarlord.reset_hero_number()
-    Luna.reset_hero_number()
-    Windranger.reset_hero_number()
-    Morphling.reset_hero_number()
-    DarkWillow.reset_hero_number()
-    Clinkz.reset_hero_number()
-    Sniper.reset_hero_number()
-    Snapfire.reset_hero_number()
-    DrowRanger.reset_hero_number()
-    TemplarAssassin.reset_hero_number()
-    Zet.reset_hero_number()
+    WinterWyvern.number = number_winter_wyvern
+    HoodWink.number = number_hood_wink
+    Dazzale.number = number_dazzale
+    Oracle.number = 0
+    TrollWarlord.number = 0
+    Luna.number = 0
+    Windranger.number = 0
+    Morphling.number = 0
+    DarkWillow.number = 0
+    Clinkz.number = 0
+    Sniper.number = 0
+    Snapfire.number = 0
+    DrowRanger.number = 0
+    TemplarAssassin.number = 0
+    Zet.number = 0
 
 
 def reset_previous_hero():
