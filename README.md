@@ -29,7 +29,7 @@ I. Huớng dẫn sử dụng
   ![Momo](https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a)
 
 - Tài khoản ngân hàng:
-  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e width="250" alt="Scan QR Code" />
+  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e" width="250" alt="Scan QR Code" />
 
 II. Hướng dẫn chạy tại source code
 
