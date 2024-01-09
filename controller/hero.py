@@ -164,16 +164,15 @@ def buy_all_previous_hero():
     if previous_hero:
         logger.debug("Ban dang mua hero ")
         for key, value in list(previous_hero.items()):
-
-            pydirectinput.click(key[0], key[1])
-            if Button.check_money() is False:
-                return False
-            else:
-                if check_sell_hero(value) is True:
+            if check_sell_hero(value) is True:
+                pydirectinput.click(key[0], key[1])
+                if Button.check_money() is True:
                     logger.info(f"Ban da mua thanh cong 1 {value.name}")
                     value.number = value.number + 1
                     cgv.count_of_buy += 1
                     del previous_hero[key]
+                else:
+                    pass
     else:
         logger.debug("Khong co hero khoa o round truoc")
 
@@ -245,7 +244,7 @@ def check_sell_hero(hero: Hero):
             return True
         if TrollWarlord.sell_hero() is True:
             return True
-    return None
+    return True
 
 
 def buy_all_hero(round_number):

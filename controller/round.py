@@ -7,7 +7,7 @@ from controller.global_variables import global_event
 import controller.item as item
 
 
-def round_all(round_number=1):
+def round_all(round_number = 1):
     if global_event.check_event():
         # logger.info("Stop thread round 1")
         return False
@@ -37,7 +37,7 @@ def round_all(round_number=1):
             # button.click(button.CreateCustomLobby)
             if Button.enter_game() is False:
                 break
-            if Button.run_round() is False:
+            if Button.run_round(round_number = n) is False:
                 break
         else:
             # reset_count_buy()
@@ -59,13 +59,13 @@ def round_all(round_number=1):
                     break
                 if item.buy_all_previous_item() is False:
                     break
-                if hero.buy_all_hero(round_number=n) is False:
+                if hero.buy_all_hero(round_number = n) is False:
                     break
-                if item.buy_all_item_investments(round_number=n) is False:
+                if item.buy_all_item_investments(round_number = n) is False:
                     break
-                if item.buy_all_set_item(round_number=n) is False:
+                if item.buy_all_set_item(round_number = n) is False:
                     break
-                if item.buy_all_item(round_number=n) is False:
+                if item.buy_all_item(round_number = n) is False:
                     break
                 logger.debug(f"Da roll {number_roll} lan")
                 logger.debug(f"Da mua {cgv.get_count_of_buy()} lan")
@@ -79,7 +79,7 @@ def round_all(round_number=1):
             if n < 20:
                 if Button.next_round() is False:
                     break
-                if Button.run_round() is False:
+                if Button.run_round(round_number = n) is False:
                     break
                 logger.info(f"Day la vong auto lan thu {round_number}, round {n}")
             else:
@@ -98,8 +98,7 @@ def round_all(round_number=1):
                         break
                     s = 50 - s
                     time.sleep(1)
-                    logger.info(
-                        f"Ban dang danh boss round {n}, thoi gian con lai {s}/50s"
+                    logger.info(f"Ban dang danh boss round {n}, thoi gian con lai {s}/50s"
                     )
                 logger.info(f"Ket thuc round {n}")  # time.sleep(130)
 
