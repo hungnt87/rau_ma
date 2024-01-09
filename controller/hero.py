@@ -172,7 +172,15 @@ def buy_all_previous_hero():
                     cgv.count_of_buy += 1
                     del previous_hero[key]
                 else:
-                    pass
+                    look_region = (key[0], key[1], 267, 312)
+                    cgv.set_money(False)
+                    if Button.click_lock(value.name, look_region) is True:
+                        # del previous_item[key]
+                        logger.debug("Khong du tien, Khoa hero")
+
+                    else:
+                        del previous_hero[key]
+
     else:
         logger.debug("Khong co hero khoa o round truoc")
 
