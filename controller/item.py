@@ -385,7 +385,7 @@ def buy_all_item(round_number):
         t4.join()
         t5.join()
         t6.join()
-    buy_all_previous_item()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()  # buy_all_item_lv6()
+    #buy_all_previous_item()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()  # buy_all_item_lv6()
 
 
 def reset_item():
@@ -512,5 +512,8 @@ def reset_previous_item():
 
 
 if __name__ == "__main__":
-    time.sleep(3)
-    buy_all_item(4)
+    start=time.time()
+    buy_all_item(10)
+    start=time.time()-start
+
+    print(start)
