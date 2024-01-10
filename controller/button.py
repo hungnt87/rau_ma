@@ -66,7 +66,7 @@ class Button:
                 logger.error(e)
                 break
     
-    def click(self, time_sleep=2, time_wait=60):
+    def click(self, time_sleep=1, time_wait=60):
         if global_event.check_event():
             return False
         if self.name == "Button_X" or self.name == "Hide":
@@ -102,8 +102,6 @@ class Button:
         if global_event.check_event():
             return False
         logger.info("Click lock")
-        i = 0
-        
         try:
             res = pyautogui.locateCenterOnScreen(Button("Look").img, minSearchTime=1, confidence=0.8, region=box,
                                                  grayscale=True
@@ -116,14 +114,11 @@ class Button:
             logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
-            i = i + 1
-            if i > 2:
-                return False
             logger.debug(f"Dang tim hinh anh {Button('Look').name} so lan {i}")
-            global_event.sleep(1)
+            return False
         except Exception as e:
             logger.error(e)
-            return None
+            return False
     
     @staticmethod
     def click_lock_hero(box):

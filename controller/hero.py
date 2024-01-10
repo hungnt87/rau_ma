@@ -167,6 +167,7 @@ def buy_all_previous_hero():
         for key, value in list(previous_hero.items()):
             check_sell_hero(value)
             pydirectinput.click(key[0], key[1])
+            pydirectinput.moveTo(213, 201)
             if Button.check_money() is True:
                 logger.info(f"Ban da mua thanh cong 1 {value.name}")
                 value.number = value.number + 1
