@@ -69,7 +69,7 @@ class Button:
     def click(self, time_sleep=2, time_wait=60):
         if global_event.check_event():
             return False
-        if self.name == "Button_X":
+        if self.name == "Button_X" or self.name == "Hide":
             logger.info(f"Chuan bi thoat game sau {time_sleep}s")
             character_moves_event.app_stop()
             global_event.sleep(time_sleep=time_sleep)
@@ -186,11 +186,6 @@ class Button:
             res_center = pyautogui.locateCenterOnScreen(Button(para_name).img, minSearchTime=time_wait,
                                                         confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
             
-            # pydirectinput.moveTo(res.x, res.y)
-            #global_event.sleep(1)
-            #pydirectinput.click(res_center[0], res_center[1])
-            #pydirectinput.moveTo(200, 200)
-            # logger.info("Khong lay item")
             if res_center:
                 return True
         except pyautogui.ImageNotFoundException:

@@ -121,6 +121,8 @@ def attatk_boss():
         s = time_wait - s
         if s == 45:
             character_moves_event.app_resume()
+        if s == 10:
+            character_moves_event.app_stop()
         time.sleep(1)
         logger.info(
             f"Ban dang danh boss round {s}, thoi gian con lai {s}/{time_wait}s"
