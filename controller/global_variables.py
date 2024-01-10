@@ -52,10 +52,11 @@ class Event:
         while True:
             if self.check_event():
                 return False
-            time.sleep(time_sleep)
-            i += 1
-            if i >= time_sleep:
+            i += time_sleep
+            if i > time_sleep:
                 break
+            time.sleep(time_sleep)
+            
 
 
 class PathManager:
