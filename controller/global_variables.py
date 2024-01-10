@@ -52,10 +52,10 @@ class Event:
         while True:
             if self.check_event():
                 return False
-            i += time_sleep
+            i += 0.1
             if i > time_sleep:
                 break
-            time.sleep(time_sleep)
+            time.sleep(0.1)
             
 
 
@@ -145,7 +145,7 @@ def reset_count_of_buy():
 
 path = PathManager()
 
-global_event = Event("global_event")
+global_event: Event = Event("global_event")
 character_moves_event = Event("character_moves_event")
 if __name__ == "__main__":
     get_app_window_handle("03. Danh mục Hồ sơ thanh toán.docx  -  AutoRecovered  -  Compatibility Mode - Word")

@@ -61,7 +61,7 @@ class Item:
             pass  # logger.debug(  #     f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"  # )
 
 
-Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2",10)
+Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2", 10)
 Attack12_Kill1000_Unique_lv2 = Item("Attack12_Kill1000_Unique_lv2", number_need_buy=1)
 Attack16_Arcane16_lv3 = Item("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = Item("Attack16_Strike16_lv3")
@@ -84,9 +84,9 @@ Evasion12_Strike6_lv2 = Item("Evasion12_Strike6_lv2", number_need_buy=3)
 Evasion13_Health13_lv2 = Item("Evasion13_Health13_lv2", number_need_buy=3)
 Evasion16_Investment16_lv3 = Item("Evasion16_Investment16_lv3", number_need_buy=3)
 Evasion21_Attack5_lv4 = Item("Evasion21_Attack5_lv4", number_need_buy=2)
-Exp20_Range5_lv1 = Item("Exp20_Range5_lv1",3)
-Exp40_Luck6_lv2 = Item("Exp40_Luck6_lv2",3)
-Exp45_Attack4_lv2 = Item("Exp45_Attack4_lv2",3)
+Exp20_Range5_lv1 = Item("Exp20_Range5_lv1", 3)
+Exp40_Luck6_lv2 = Item("Exp40_Luck6_lv2", 3)
+Exp45_Attack4_lv2 = Item("Exp45_Attack4_lv2", 3)
 ExtraDamage10_lv3 = Item("ExtraDamage10_lv3")
 ExtraDamage13_For_Precise_lv2 = Item("ExtraDamage13_For_Precise_lv2")
 ExtraDamage14_Kill1000_Unique_lv2 = Item("ExtraDamage14_Kill1000_Unique_lv2", number_need_buy=1)
@@ -94,8 +94,8 @@ ExtraDamage30_Luck30_lv5 = Item("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = Item("ExtraDamage30_lv6")
 ExtraDamage40_Kill100_Unique_lv5 = Item("ExtraDamage40_Kill100_Unique_lv5", number_need_buy=1)
 Health30_Speed20_lv4 = Item("Health30_Speed20_lv4")
-Health48_For_Precise_lv3 = Item("Health48_For_Precise_lv3",1)
-Health88_lv5 = Item("Health88_lv5",1)
+Health48_For_Precise_lv3 = Item("Health48_For_Precise_lv3", 1)
+Health88_lv5 = Item("Health88_lv5", 1)
 HealthRegen10_For_Precise_lv1 = Item("HealthRegen10_For_Precise_lv1")
 HealthRegen12_HitRecovery15_lv2 = Item("HealthRegen12_HitRecovery15_lv2")
 HealthRegen18_Mango50_lv2 = Item("HealthRegen18_Mango50_lv2")
@@ -109,25 +109,25 @@ Immunity6_lv3 = Item("Immunity6_lv3")
 Immunity10_lv5 = Item("Immunity10_lv5")
 ImmunityCount4_lv4 = Item("ImmunityCount4_lv4")
 Investment88_For_Precise_lv1 = Item("Investment88_For_Precise_lv1")
-Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2",3)
-Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3",3)
-Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3",2)
-Investment368_HitRecovery18_lv5 = Item("Investment368_HitRecovery18_lv5",1)
+Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2", 3)
+Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3", 3)
+Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3", 2)
+Investment368_HitRecovery18_lv5 = Item("Investment368_HitRecovery18_lv5", 1)
 Locomotive_lv2 = Item("Locomotive_lv2")
 Luck13_lv1 = Item("Luck13_lv1", number_need_buy=2)
 Luck32ForPrecise_lv2 = Item("Luck32ForPrecise_lv2", number_need_buy=2)
 Luck45_HitRecovery25_lv3 = Item("Luck45_HitRecovery25_lv3", number_need_buy=2)
 Luck54_Arcane27_lv4 = Item("Luck54_Arcane27_lv4", number_need_buy=2)
 Luck60_Speed25_lv4 = Item("Luck60_Speed25_lv4", number_need_buy=0)
-MasterChefHat_lv2 = Item("MasterChefHat_lv2",2)
+MasterChefHat_lv2 = Item("MasterChefHat_lv2", 2)
 Minazuki_lv4 = Item("Minazuki_lv4")
 MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
 # MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
-PantyMask_lv6 = Item("PantyMask_lv6",1)
+PantyMask_lv6 = Item("PantyMask_lv6", 1)
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy=3)
 Pillager_lv4 = Item("Pillager_lv4")
-PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6",1)
-PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2",1)
+PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6", 1)
+PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2", 1)
 PreciseDamage16_Strike16_lv3 = Item("PreciseDamage16_Strike16_lv3")
 Random_10_28_Evasion_lv4 = Item("Random_10_28_Evasion_lv4", number_need_buy=2)
 Random_10_28_HealthRegen_lv3 = Item("Random_10_28_HealthRegen_lv3")
@@ -183,12 +183,14 @@ def buy_all_previous_item():
     if global_event.check_event():
         return False
 
+
 def buy_all_set_item(round_number):
     if global_event.check_event():
         return False
-    logger.debug("Ban dang mua set item")
-    if round_number > 4:
+    logger.debug("Ban dang tim set item")
+    if round_number > 2:
         PickupRange100_lv1.buy()
+    if round_number > 4:
         Set_Speed_lv1.buy()
         Set_Speed22_lv2.buy()
         Set_Defense8_lv2.buy()
@@ -210,7 +212,7 @@ def buy_all_set_item(round_number):
 def buy_all_item_investments(round_number):
     if global_event.check_event():
         return False
-    logger.debug("Ban dang mua item investments")
+    logger.debug("Ban dang mua tim investments")
     if round_number <= 9:
         Investment88_For_Precise_lv1.buy()
     if 3 <= round_number <= 13:
@@ -224,8 +226,7 @@ def buy_all_item_investments(round_number):
 def buy_all_item_lv1():
     if global_event.check_event():
         return
-    logger.debug("Ban dang mua item lv1")
-    
+    logger.debug("Ban dang tim item lv1")
     ShopDiscount_lv1.buy()
     Evasion8_Speed5_lv1.buy()
     Exp20_Range5_lv1.buy()
@@ -236,7 +237,7 @@ def buy_all_item_lv1():
 def buy_all_item_lv2():
     if global_event.check_event():
         return
-    logger.debug("Ban dang mua item lv2")
+    logger.debug("Ban dang tim item lv2")
     PreciseDamage12_Speed12_lv2.buy()
     Exp40_Luck6_lv2.buy()
     Exp45_Attack4_lv2.buy()
@@ -256,9 +257,7 @@ def buy_all_item_lv2():
 def buy_all_item_lv3():
     if global_event.check_event():
         return
-    logger.debug("Ban dang mua item lv3")
-    # buy_item_info(Investment198_Speed7_lv3)
-    # buy_item_info(Investment218_Evasion8_lv3)
+    logger.debug("Ban dang tim item lv3")
     Critical20_Defense_lv3.buy()
     Immunity6_lv3.buy()
     ExtraDamage10_lv3.buy()
@@ -275,12 +274,13 @@ def buy_all_item_lv3():
     Luck45_HitRecovery25_lv3.buy()
     Critical21_For_Precise_lv3.buy()
     RevivalCount1_CriticalRate5_lv3.buy()
+    SoulCrystalsPlus35EveryMango_lv3.buy()
 
 
 def buy_all_item_lv4():
     if global_event.check_event():
         return
-    logger.debug("Ban dang mua item lv4")
+    logger.debug("Ban dang tim item lv4")
     Pillager_lv4.buy()
     ImmunityCount4_lv4.buy()
     Minazuki_lv4.buy()
@@ -294,16 +294,17 @@ def buy_all_item_lv4():
     Holding_Plus_Cooldown35_lv4.buy()
     Holding_Plus_HealthRegen30_lv4.buy()
     RevivalCount1_Health5_lv4.buy()
+    ShopPlus1_lv4.buy()
 
 
 def buy_all_item_lv5():
     if global_event.check_event():
         return
-    logger.debug("Ban dang mua item lv5")
+    logger.debug("Ban dang tim item lv5")
     Immunity10_lv5.buy()
     Immunity_Unique_lv5.buy()
     Health88_lv5.buy()
-    # buy_item_info(Range16_Def16_lv5, 1)
+    Range16_Def16_lv5.buy()
     Range15_Invest55_lv5.buy()
     Critical30_Defense10_lv5.buy()
     ExtraDamage30_Luck30_lv5.buy()
@@ -314,11 +315,11 @@ def buy_all_item_lv5():
 def buy_all_item_lv6():
     if global_event.check_event():
         return
-    logger.info("Ban dang mua item lv6")
+    logger.info("Ban dang tim item lv6")
     PantyMask_lv6.buy()
     ExtraDamage30_lv6.buy()
     Cooldown45_Speed15_lv6.buy()
-    # buy_item_info(Range24_ExtraDamage14_lv6, 1)
+    Range24_ExtraDamage14_lv6.buy()
     PreciseDamage12_Every1s_Plus1_lv6.buy()
     EnemyCount10_lv6.buy()
 
@@ -334,57 +335,85 @@ def buy_all_item(round_number):
     #     buy_all_item_round2()
     # if round_number == 3:
     #     buy_all_item_round3()
+    thread_buy_all_item_investments = threading.Thread(target=buy_all_item_investments, args=(round_number,))
+    thread_buy_all_set_item = threading.Thread(target=buy_all_set_item, args=(round_number,))
     t1 = threading.Thread(target=buy_all_item_lv1, args=())
     t2 = threading.Thread(target=buy_all_item_lv2, args=())
     t3 = threading.Thread(target=buy_all_item_lv3, args=())
     t4 = threading.Thread(target=buy_all_item_lv4, args=())
     t5 = threading.Thread(target=buy_all_item_lv5, args=())
     t6 = threading.Thread(target=buy_all_item_lv6, args=())
+    if round_number <= 2:
+        thread_buy_all_item_investments.start()
+        thread_buy_all_set_item.start()
+        thread_buy_all_item_investments.join()
+        thread_buy_all_set_item.join()
     
-    if 3 < round_number <= 6:
+    elif 2 < round_number <= 6:
+        thread_buy_all_set_item.start()
+        thread_buy_all_item_investments.start()
         t1.start()
-        
         t2.start()
+        thread_buy_all_set_item.join()
+        thread_buy_all_item_investments.join()
         t1.join()
         t2.join()
+        
         
         # buy_all_item_lv1()
     
     elif round_number <= 9:
+        thread_buy_all_item_investments.start()
+        thread_buy_all_set_item.start()
         
         t1.start()
         t2.start()
         t3.start()
+        
+        thread_buy_all_item_investments.join()
+        thread_buy_all_set_item.join()
         t1.join()
         t2.join()
         t3.join()  # buy_all_item_lv1()  # buy_all_item_lv2()  # buy_all_item_lv3()
     elif round_number <= 12:
-        
+        thread_buy_all_item_investments.start()
+        thread_buy_all_set_item.start()
         t2.start()
         t3.start()
         t4.start()
+        
+        thread_buy_all_item_investments.join()
+        thread_buy_all_set_item.join()
         t2.join()
         t3.join()
         t4.join()
         
         # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()
     elif round_number <= 15:
-        
+        thread_buy_all_item_investments.start()
+        thread_buy_all_set_item.start()
         t2.start()
         t3.start()
         t4.start()
         t5.start()
+        
+        thread_buy_all_item_investments.join()
+        thread_buy_all_set_item.join()
         t2.join()
         t3.join()
         t4.join()
         t5.join()  # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()
     elif round_number <= 20:
         
+        thread_buy_all_item_investments.start()
+        thread_buy_all_set_item.start()
         t3.start()
         t4.start()
         t5.start()
         t6.start()
         
+        thread_buy_all_item_investments.join()
+        thread_buy_all_set_item.join()
         t3.join()
         t4.join()
         t5.join()

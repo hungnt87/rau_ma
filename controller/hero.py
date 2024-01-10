@@ -82,11 +82,7 @@ class Hero:
         try:
             res_center = pyautogui.locateCenterOnScreen(
                 self.img, minSearchTime=1, confidence=self.confidence, region=self.region, grayscale=self.grayscale, )
-            # res_center = pyautogui.center(res)
-            # pydirectinput.moveTo(res_center.x, res_center.y)
-            # pydirectinput.click(res_center[0], res_center[1])
-            # pydirectinput.moveTo(201, 213)
-            # logger.debug("Tim thay hinh anh {}".format(self.img))
+            
             return res_center
         except pyautogui.ImageNotFoundException:
             # logger.debug("Khong tim thay hinh anh {}".format(self.img))
@@ -176,7 +172,7 @@ def buy_all_previous_hero():
             else:
                 look_region = (key[0], key[1], 267, 312)
                 cgv.set_money(False)
-                if Button.click_lock(value.name, look_region) is True:
+                if Button.click_lock_hero(value.name, look_region) is True:
                     # del previous_item[key]
                     logger.debug("Khong du tien, Khoa hero")
                 else:

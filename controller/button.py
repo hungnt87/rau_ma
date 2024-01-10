@@ -95,6 +95,8 @@ class Button:
             except Exception as e:
                 logger.error(e)
                 return
+        if global_event.check_event():
+            return False
     
     @staticmethod
     def click_lock(name_item, box):
@@ -162,8 +164,6 @@ class Button:
     @staticmethod
     def button_check(para_name, time_wait=2, ):
         global REGION, CONFIDENCE, GRAYSCALE
-        i = 0
-        
         if global_event.check_event():
             return False
         try:
@@ -232,11 +232,12 @@ class Button:
                     character_moves_event.app_stop()
                     Button("Recycle").click()
                 i = i + 1
+                logger.debug(f"Cho ket thuc round lan {i}/{time_wait}")
+                global_event.sleep(1)
                 if i > time_wait:
                     character_moves_event.app_stop()
                     return False
-                logger.debug(f"Cho ket thuc round lan {i}/{time_wait}")
-                global_event.sleep(1)
+            
             except Exception as e:
                 logger.error(e)
                 break
@@ -252,33 +253,31 @@ class Button:
     
     @staticmethod
     def character_moves(round_number=2):
-        # logger.debug("Cho bat dau di chuyen")
+        logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
-        if character_moves_event.check_event():
-            return False
+        if not global_event.event_stop.is_set():
+            if character_moves_event.check_event():
+                return False
         pydirectinput.PAUSE = 0.1
         loc = (973, 575)
         loc1 = 130
         number_click = 0
         number_click_first = 0
-        # logger.debug("Bat dau di chuyen")
+        logger.debug("Bat dau di chuyen")
         if round_number == 1:
-            number_click = 6
-            number_click_first = 3
+            number_click = 9
+            number_click_first = 6
         else:
             number_click = 12
-            number_click_first = 4
-        # time.sleep(3)
-        # pydirectinput.moveTo(loc[0], loc[1])
-        
+            number_click_first = 8
         for i in range(0, number_click_first):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
                 return False
             pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
-        for i in range(0, number_click_first / 2):
+        for i in range(0, 6):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
@@ -322,7 +321,7 @@ class Button:
         logger.debug("Bat dau run round")
         character_moves_event.app_start()
         t1 = threading.Thread(target=Button.check_exit_round, args=(40,))
-        t2 = threading.Thread(target=Button.character_moves, args=(round_number,))
+        t2 = threading.Thread(target=Button.character_moves, args=(round_number,), daemon=True)
         t1.start()
         t2.start()
         t1.join()
@@ -385,8 +384,6 @@ class Button:
         except Exception as e:
             logger.error(e)
             return None
-        if global_event.check_event():
-            return False
 
 
 def main():
