@@ -226,6 +226,7 @@ class Button:
     def check_exit_round(time_wait=40):
         if global_event.check_event():
             return False
+        character_moves_event.app_start()
         character_moves_event.app_pause()
         logger.debug("Cho bat dau di chuyen")
         global REGION, CONFIDENCE, GRAYSCALE
@@ -346,9 +347,8 @@ class Button:
             return False
         logger.debug("Bat dau run round")
         character_moves_event.app_start()
-        t1 = threading.Thread(target=Button.check_exit_round, args=(40,), daemon=True)
-        t2 = threading.Thread(target=Button.character_moves, args=(round_number,), daemon=True
-                              )
+        t1 = threading.Thread(target=Button.check_exit_round, args=(40,))
+        t2 = threading.Thread(target=Button.character_moves, args=(round_number,))
         t1.start()
         t2.start()
         t1.join()

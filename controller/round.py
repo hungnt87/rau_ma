@@ -111,6 +111,7 @@ def round_all(round_number=1):
 
 
 def attatk_boss():
+    character_moves_event.app_start()
     character_moves_event.app_pause()
     time_wait = 60
     for s in range(time_wait):
@@ -119,7 +120,7 @@ def attatk_boss():
             break
         s = time_wait - s
         if s == 45:
-            character_moves_event.app_start()
+            character_moves_event.app_resume()
         time.sleep(1)
         logger.info(
             f"Ban dang danh boss round {s}, thoi gian con lai {s}/{time_wait}s"

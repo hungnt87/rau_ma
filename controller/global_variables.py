@@ -39,12 +39,7 @@ class Event:
             logger.debug(f"{self.name} resumed")
     
     def app_resume(self):
-        if self.event_pause.is_set():
-            self.event_pause.clear()
-            logger.debug(f"{self.name} paused")
-        else:
-            self.event_pause.set()
-            logger.debug(f"{self.name} resumed")
+        self.event_pause.set()
     
     def check_event(self):
         if self.event_stop.is_set():
