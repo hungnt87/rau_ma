@@ -236,7 +236,7 @@ class Button:
                     character_moves_event.app_stop()
                     return False
                 logger.debug(f"Cho ket thuc round lan {i}/{time_wait}")
-                time.sleep(1)
+                global_event.sleep(1)
             except Exception as e:
                 logger.error(e)
                 break
@@ -268,7 +268,7 @@ class Button:
             number_click_first = 3
         else:
             number_click = 12
-            number_click_first = 6
+            number_click_first = 4
         # time.sleep(3)
         # pydirectinput.moveTo(loc[0], loc[1])
         
@@ -278,7 +278,7 @@ class Button:
             if character_moves_event.check_event():
                 return False
             pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
-        for i in range(0, 8):
+        for i in range(0, number_click_first / 2):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
@@ -295,7 +295,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0], loc[1] - loc1)
-                
+            
             for i in range(0, number_click):
                 if global_event.check_event():
                     return False
@@ -314,6 +314,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
+        
     
     @staticmethod
     def run_round(round_number=2):
@@ -327,6 +328,8 @@ class Button:
         t2.start()
         t1.join()
         t2.join()
+        if global_event.check_event():
+            return False
         
         # Button("ProceedToRound").click(time_sleep=2, time_wait=20)  # Button("Resurrect").click(time_sleep=2, time_wait=10)
     
@@ -335,6 +338,8 @@ class Button:
         if global_event.check_event():
             return False
         Button("ProceedToRound").click()
+        if global_event.check_event():
+            return False
     
     @staticmethod
     def exit_game_round20():
@@ -356,6 +361,8 @@ class Button:
         Button("LeaveGame").click()
         logger.info("Check game co update trong 15s")
         Button("Update").click(time_sleep=2, time_wait=15)
+        if global_event.check_event():
+            return False
     
     @staticmethod
     def roll_game():
@@ -379,6 +386,8 @@ class Button:
         except Exception as e:
             logger.error(e)
             return None
+        if global_event.check_event():
+            return False
 
 
 def main():
