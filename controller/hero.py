@@ -136,24 +136,25 @@ class Hero:
             return False
         global REGION_SELL_HERO
         # khong mua hero nay nua
-        self.number = 10
-        try:
-            res_center = pyautogui.locateCenterOnScreen(
-                self.img_lv1, confidence=self.confidence, region=self.region_sell, grayscale=self.grayscale, )
-            pydirectinput.rightClick(res_center.x, res_center.y)
-            time.sleep(0.5)
-            pydirectinput.click(res_center.x + 20, res_center.y)
-            pydirectinput.moveTo(213, 201)
-            logger.debug(f"Ban thanh cong hero {self.name}")
-            time.sleep(0.5)
-            self.number = 10
-            return True
-        except pyautogui.ImageNotFoundException:
-            logger.debug(f"Khong co hero  {self.name} de ban")
-            return False
-        except Exception as e:
-            logger.error(e)
-            return False
+        if self.number < 10:
+            self.number = 100
+            try:
+                res_center = pyautogui.locateCenterOnScreen(
+                    self.img_lv1, confidence=self.confidence,minSearchTime=1, region=self.region_sell, grayscale=self.grayscale, )
+                pydirectinput.rightClick(res_center.x, res_center.y)
+                time.sleep(0.5)
+                pydirectinput.click(res_center.x + 20, res_center.y)
+                pydirectinput.moveTo(213, 201)
+                logger.debug(f"Ban thanh cong hero {self.name}")
+                time.sleep(0.5)
+
+                return True
+            except pyautogui.ImageNotFoundException:
+                logger.debug(f"Khong co hero  {self.name} de ban")
+                return False
+            except Exception as e:
+                logger.error(e)
+                return False
 
 
 def buy_all_previous_hero():
@@ -191,19 +192,19 @@ HoodWink = Hero(name="Hoodwink", number=number_hood_wink, need_buy=need_Hoodwink
 Dazzale = Hero(name="Dazzale", number=number_dazzale, need_buy=need_Dazzale)
 # hero lv2
 
-Luna = Hero(name="Luna", need_buy=1)
+Luna = Hero(name="Luna", need_buy=5)
 
-Windranger = Hero(name="Windranger", need_buy=1)
+Windranger = Hero(name="Windranger", need_buy=5)
 
 Oracle = Hero(name="Oracle", need_buy=1)
 
-TrollWarlord = Hero(name="TrollWarlord", need_buy=1)
-Morphling = Hero(name="Morphling", need_buy=1)
+TrollWarlord = Hero(name="TrollWarlord", need_buy=5)
+Morphling = Hero(name="Morphling", need_buy=5)
 
 # hero lv3
-WitchDoctor = Hero(name="WitchDoctor", need_buy=1)
-DarkWillow = Hero(name="DarkWillow", need_buy=1)
-Mirana = Hero(name="Mirana", need_buy=1)
+WitchDoctor = Hero(name="WitchDoctor", need_buy=5)
+DarkWillow = Hero(name="DarkWillow", need_buy=5)
+Mirana = Hero(name="Mirana", need_buy=5)
 Clinkz = Hero(name="Clinkz", need_buy=1)
 
 # hero lv4
@@ -220,32 +221,34 @@ def check_sell_hero(hero: Hero):
     if global_event.check_event():
         return False
     # slot 1
-    if hero.name == Mirana.name:
+    if hero.name == Morphling.name:
         Dazzale.sell_hero()
+    elif hero.name == Mirana.name:
+        Dazzale.sell_hero()
+        Morphling.sell_hero()
     elif hero.name == Sniper.name:
         Dazzale.sell_hero()
+        Morphling.sell_hero()
         Mirana.sell_hero()
     
     # slot 2
-    elif hero.name == Morphling.name:
+    elif hero.name == Luna.name:
         Oracle.sell_hero()
     elif hero.name == Snapfire.name:
         Oracle.sell_hero()
-        Morphling.sell_hero()
+        Luna.sell_hero()
     
     # slot 3
-    elif hero.name == DarkWillow.name:
-        Windranger.sell_hero()
     elif hero.name == DragonKnight.name:
-        DarkWillow.sell_hero()
         Windranger.sell_hero()
     
+    
     # slot 4
-    elif hero.name == Luna.name:
+    elif hero.name == DarkWillow.name:
         HoodWink.sell_hero()
     elif hero.name == DrowRanger.name:
         HoodWink.sell_hero()
-        Luna.sell_hero()
+        DarkWillow.sell_hero()
     
     
     # slot 5
