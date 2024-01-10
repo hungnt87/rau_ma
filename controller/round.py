@@ -9,7 +9,7 @@ from controller.filelog import logger
 from controller.global_variables import global_event, character_moves_event
 
 
-def round_all(round_number = 1):
+def round_all(round_number=1):
     if global_event.check_event():
         # logger.info("Stop thread round 1")
         return False
@@ -22,7 +22,7 @@ def round_all(round_number = 1):
         logger.info(f"Bat dau roll in round: {n}")
         time.sleep(1)
         number_roll = 0
-
+        
         if n == 2:
             number_buy = 4
         elif n <= 4:
@@ -46,7 +46,7 @@ def round_all(round_number = 1):
             # reset_status_not_money()
             cgv.reset_count_of_buy()
             cgv.set_money(True)
-
+            
             while True:
                 if global_event.check_event():
                     # logger.info("Stop thread round 3")
@@ -83,7 +83,7 @@ def round_all(round_number = 1):
                     break
                 if number_roll >= number_buy + 2:
                     break
-
+            
             if n < 20:
                 if Button.next_round() is False:
                     break
@@ -106,17 +106,19 @@ def round_all(round_number = 1):
                 t2.start()
                 t1.join()
                 t2.join()
-
+                
                 logger.info(f"Ket thuc round {n}")  # time.sleep(130)
 
 
 def attatk_boss():
-    character_moves_event.app_start()
+    character_moves_event.app_pause()
     for s in range(10):
         if global_event.check_event():
             # logger.info("Stop thread round 3")
             break
         s = 50 - s
+        if s == 45:
+            character_moves_event.app_start()
         time.sleep(1)
         logger.info(
             f"Ban dang danh boss round {s}, thoi gian con lai {s}/50s"

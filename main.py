@@ -20,13 +20,14 @@ button_pause = "Pause (Ctrl + Space)"
 
 def get_app_window_handle(app_name):
     hwnd = win32gui.FindWindow(None, app_name)
+    
     return hwnd
 
 
 def move_window_to(handle, x, y):
     # Lấy kích thước hiện tại của cửa sổ
     _, _, width, height = win32gui.GetWindowRect(handle)
-
+    
     # Thay đổi kích thước và vị trí của cửa sổ
     win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
 
@@ -62,12 +63,12 @@ def main():
             for t in range(10):
                 if global_event.check_event():
                     break
-
+                
                 t = 10 - t
                 # print("Dang cho 5s")
                 logger.info(f"Dang cho bat auto lai sau {t}/10s")
                 time.sleep(1)
-
+    
     else:
         main_status = False
         logger.info("Khong tim thay cua so co ten {}".format(app_name))
@@ -75,21 +76,21 @@ def main():
 
 class ThreadedApp:
     global main_status
-
+    
     def __init__(self):
         self.t1 = threading.Thread()
-
+    
     def run(self):
         global_event.app_start()
         character_moves_event.app_start()
         self.t1 = threading.Thread(target=main, args=(), daemon=True)
         self.t1.start()
-
+    
     def stop(self):
         global_event.app_stop()
         character_moves_event.app_stop()
         self.t1.join()
-
+    
     def pause(self):
         global_event.app_pause()
         character_moves_event.app_pause()
@@ -97,57 +98,26 @@ class ThreadedApp:
 
 def make_win2():
     global button_pause
-    layout = [
-        [
-            sg.Output(
-                key="-OUTPUT-",
-                size=(30, 5),
-                font="Helvetica 11",
-                background_color="black",
-                text_color="green",
-                sbar_arrow_color="black",
-                sbar_background_color="black",
-                sbar_frame_color="black",
-                sbar_width=0,
-                sbar_arrow_width=0,
-                sbar_relief="flat",
-                # autoscroll=True,
-                # border_width=0,
-                # disabled=True,
-            )
-        ],
-    ]
-    return sg.Window(
-        "Second Window",
-        layout,
-        location=(10, 850),
-        finalize=True,
-        no_titlebar=True,
-        keep_on_top=True,
-        background_color="black",
-        transparent_color="black",
-        # alpha_channel=0.9,
-        alpha_channel=0.9,
-        border_depth=0,
-    )
+    layout = [[sg.Output(key="-OUTPUT-", size=(30, 5), font="Helvetica 11", background_color="black",
+                         text_color="green", sbar_arrow_color="black", sbar_background_color="black",
+                         sbar_frame_color="black",
+                         sbar_width=0, sbar_arrow_width=0, sbar_relief="flat",  # autoscroll=True,
+                         # border_width=0,
+                         # disabled=True,
+                         )], ]
+    return sg.Window("Second Window", layout, location=(10, 850), finalize=True, no_titlebar=True,
+                     keep_on_top=True, background_color="black", transparent_color="black",  # alpha_channel=0.9,
+                     alpha_channel=0.9, border_depth=0, )
 
 
 def make_win1():
     global button_pause
     layout = [
-        [
-            sg.Button("Start (Ctrl + F9)", key="-START-"),
-            sg.Button("Stop (Ctrl + Q)", key="-STOP-", disabled=True),
-            sg.Button(button_pause, key="-PAUSE-", disabled=True),
-        ],
-        [sg.Output(size=(50, 10), key="-OUTPUT-")],
-    ]
-    return sg.Window(
-        "Brodota-bot",
-        layout,
-        # location=(1000, 400),
-        finalize=True,
-    )
+        [sg.Button("Start (Ctrl + F9)", key="-START-"), sg.Button("Stop (Ctrl + Q)", key="-STOP-", disabled=True),
+         sg.Button(button_pause, key="-PAUSE-", disabled=True), ],
+        [sg.Output(size=(50, 10), key="-OUTPUT-")], ]
+    return sg.Window("Brodota-bot", layout,  # location=(1000, 400),
+                     finalize=True, )
 
 
 def gui():
@@ -174,7 +144,7 @@ def gui():
                 window1["-STOP-"].update(disabled=False)
                 appStarted = True
             main_start = False
-
+        
         elif (event == "-STOP-") or (main_stop is True):
             if appStarted is True:
                 threadedApp.stop()
@@ -200,8 +170,7 @@ def gui():
         elif event == "Emit":
             if window2 is not None:
                 window2["-OUTPUT-"].update(values[event] + "\n", append=True)
-            window1["-OUTPUT-"].update(values[event] + "\n", append=True)
-            # window2.refresh()
+            window1["-OUTPUT-"].update(values[event] + "\n", append=True)  # window2.refresh()
         if main_status is True:
             window["-START-"].update(disabled=True)
             window["-PAUSE-"].update(disabled=False)
@@ -234,7 +203,7 @@ def gui():
                     window1["-PAUSE-"].update(button_pause)
                     threadedApp.pause()
             main_pause = False
-
+    
     window.close()
 
 
@@ -271,7 +240,7 @@ keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
 if __name__ == "__main__":
     # main(pause_event=event_pause, stop_event=event_stop)
     # gui()
-
+    
     gui()
-    #main()
+    # main()
     pass
