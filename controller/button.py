@@ -1,10 +1,12 @@
 import os
 import threading
+
 import pyautogui
 import pydirectinput
+
 import controller.global_variables as cgv
 from controller.filelog import logger
-from controller.global_variables import (SelectWindow, global_event, character_moves_event, path, )
+from controller.global_variables import SelectWindow, character_moves_event, global_event, path
 
 Dota2 = SelectWindow("Dota 2")
 REGION = (0, 0, 1936, 1119)
@@ -69,6 +71,7 @@ class Button:
             global_event.sleep(time_sleep = time_sleep)
         else:
             pass
+
         logger.info(f"Click {self.name}")
         # time.sleep(time_sleep)
         if self.check_button(time_wait = time_wait) is True:
@@ -204,10 +207,9 @@ class Button:
             return False
         character_moves_event.app_start()
         character_moves_event.app_pause()
-        logger.debug("Cho bat dau di chuyen")
         global REGION, CONFIDENCE, GRAYSCALE
         i = 0
-        Button("Resurrect").click(time_sleep = 2, time_wait = 6)
+
         character_moves_event.app_resume()
         logger.debug("Bat dau di chuyen")
         while True:
@@ -241,6 +243,40 @@ class Button:
             return False
 
     @staticmethod
+    def check_resurrect():
+        if global_event.check_event():
+            return False
+        global REGION, CONFIDENCE, GRAYSCALE
+        i = 0
+        while True:
+            if global_event.check_event():
+                break
+            try:
+                res_center = pyautogui.locateCenterOnScreen(Button("Resurrect").img, confidence = CONFIDENCE,
+                                                            region = REGION, grayscale = GRAYSCALE, )
+                if res_center:
+                    global_event.sleep(0.5)
+                    pydirectinput.click(res_center[0], res_center[1])
+                    global_event.sleep(0.5)
+                    pydirectinput.moveTo(200, 200)
+                    global_event.sleep(1)
+                    character_moves_event.app_resume()
+                    return True
+            except pyautogui.ImageNotFoundException:
+                i = i + 1
+                logger.debug(f"Cho ket thuc round lan {i}/10")
+                global_event.sleep(1)
+                if i > 3:
+                    character_moves_event.app_resume()
+                if i > 10:
+                    return False
+            except Exception as e:
+                logger.error(e)
+                break
+        if global_event.check_event():
+            return False
+
+    @staticmethod
     def next_round():
         if global_event.check_event():
             return False
@@ -258,8 +294,6 @@ class Button:
         pydirectinput.PAUSE = 0.1
         loc = (973, 575)
         loc1 = 130
-        number_click = 0
-        number_click_first = 0
         logger.debug("Bat dau di chuyen")
         if round_number == 1:
             number_click = 9
@@ -316,16 +350,19 @@ class Button:
             return False
         logger.debug("Bat dau run round")
         character_moves_event.app_start()
-        t1 = threading.Thread(target = Button.check_exit_round, args = (40,))
-        t2 = threading.Thread(target = Button.character_moves, args = (round_number,), daemon = True)
-        t1.start()
-        t2.start()
-        t1.join()
-        t2.join()
+        character_moves_event.app_pause()
+        t_check_exit_round = threading.Thread(target = Button.check_exit_round, args = (40,))
+        t_check_resurrect = threading.Thread(target = Button.check_resurrect, args = (), daemon = True)
+        t_character_moves = threading.Thread(target = Button.character_moves, args = (round_number,), daemon = True)
+        # start thread
+        t_check_exit_round.start()
+        t_check_resurrect.start()
+        t_character_moves.start()
+        # join thread
+        t_check_exit_round.join()
+        t_character_moves.join()
         if global_event.check_event():
             return False
-
-        # Button("ProceedToRound").click(time_sleep=2, time_wait=20)  # Button("Resurrect").click(time_sleep=2, time_wait=10)
 
     @staticmethod
     def exit_round20():
