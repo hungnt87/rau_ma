@@ -39,11 +39,8 @@ class Button:
     
     def check_button(self, time_wait=30):
         if global_event.check_event():
-            # logger.info(f"Stop thread check button 1{ButtonInfor.name}")
-            return
+            return False
         i = 0
-        # time.sleep(1)
-        # logger.debug(f"Check button {self.name}")
         while True:
             if global_event.check_event():
                 # logger.info(f"Stop thread check button 1{ButtonInfor.name}")
@@ -51,9 +48,8 @@ class Button:
             try:
                 res = pyautogui.locateCenterOnScreen(self.img, confidence=self.confidence, region=self.region,
                                                      grayscale=self.grayscale, )
-                if res is not None:
+                if res:
                     logger.debug("Da tim thay {}".format(self.name))
-                    # pydirectinput.moveTo(res.x, res.y)
                     return True
             except pyautogui.ImageNotFoundException:
                 i = i + 1
@@ -65,6 +61,8 @@ class Button:
             except Exception as e:
                 logger.error(e)
                 break
+        if global_event.check_event():
+            return False
     
     def click(self, time_sleep=1, time_wait=60):
         if global_event.check_event():
@@ -86,8 +84,9 @@ class Button:
                 res = pyautogui.locateCenterOnScreen(self.img, minSearchTime=1, confidence=self.confidence,
                                                      region=self.region,
                                                      grayscale=self.grayscale, )
-                global_event.sleep(1)
+                global_event.sleep(0.5)
                 pydirectinput.click(res[0], res[1])
+                global_event.sleep(0.5)
                 pydirectinput.moveTo(200, 200)
                 return True
             except pyautogui.ImageNotFoundException:
@@ -107,14 +106,14 @@ class Button:
                                                  grayscale=True
                                                  )
             # pydirectinput.moveTo(res)
-            global_event.sleep(1)
+            global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
+            global_event.sleep(0.5)
             # time.sleep(1)
             pydirectinput.moveTo(200, 200)
             logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
-            logger.debug(f"Dang tim hinh anh {Button('Look').name} so lan {i}")
             return False
         except Exception as e:
             logger.error(e)
@@ -125,31 +124,21 @@ class Button:
         if global_event.check_event():
             return False
         logger.info("Click lock")
-        i = 0
-        # box=(828,169,296,348)
-        # box = (687,237,158,276)
-        while True:
-            if global_event.check_event():
-                break
-            try:
-                res = pyautogui.locateCenterOnScreen(Button("Lock_hero").img, minSearchTime=1, confidence=0.8,
-                                                     region=box, grayscale=True)
-                # pydirectinput.moveTo(res.x, res.y+20)
-                time.sleep(1)
-                pydirectinput.click(res.x, res.y + 20)
-                # time.sleep(1)
-                pydirectinput.moveTo(200, 200)
-                logger.debug(f"Ban khong du tien mua  khoa de lan sau mua")
-                return True
-            except pyautogui.ImageNotFoundException:
-                i = i + 1
-                if i > 2:
-                    return False
-                logger.debug(f"Dang tim hinh anh Lock_hero so lan {i}")
-                time.sleep(0.5)
-            except Exception as e:
-                logger.error(e)
-                break
+        try:
+            res = pyautogui.locateCenterOnScreen(Button("Lock_hero").img, minSearchTime=1, confidence=0.8,
+                                                 region=box, grayscale=True)
+            global_event.sleep(0.5)
+            pydirectinput.click(res.x, res.y + 20)
+            global_event.sleep(0.5)
+            pydirectinput.moveTo(200, 200)
+            logger.debug(f"Ban khong du tien mua  khoa de lan sau mua")
+            return True
+        except pyautogui.ImageNotFoundException:
+            logger.debug(f"Khong tim thay hinh anh {Button('Lock_hero').name}")
+            return False
+        except Exception as e:
+            logger.error(e)
+            return False
     
     @staticmethod
     def check_money():
@@ -176,18 +165,18 @@ class Button:
         i = 0
         
         if global_event.check_event():
-            return
+            return False
         try:
             res_center = pyautogui.locateCenterOnScreen(Button(para_name).img, minSearchTime=time_wait,
                                                         confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
-            
             if res_center:
                 return True
         except pyautogui.ImageNotFoundException:
-            return
+            logger.debug(f"Khong tim thay hinh anh {Button(para_name).name}")
+            return False
         except Exception as e:
             logger.error(e)
-            return
+            return False
     
     @staticmethod
     def enter_game():
@@ -231,7 +220,7 @@ class Button:
             try:
                 res_center = pyautogui.locateCenterOnScreen(Button("ProceedToRound").img, confidence=CONFIDENCE,
                                                             region=REGION, grayscale=GRAYSCALE, )
-                if res_center is not None:
+                if res_center:
                     logger.debug("Da ket thuc round")
                     character_moves_event.app_stop()
                     return True
@@ -374,10 +363,11 @@ class Button:
             return False
         logger.info("Click roll")
         try:
-            res = pyautogui.locateCenterOnScreen(Button("Roll").img, minSearchTime=2, confidence=CONFIDENCE,
+            res = pyautogui.locateCenterOnScreen(Button("Roll").img, minSearchTime=1, confidence=CONFIDENCE,
                                                  region=REGION, grayscale=GRAYSCALE, )
-            global_event.sleep(1)
+            global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
+            global_event.sleep(0.5)
             pyautogui.moveTo(200, 200)
             if Button.check_money() is False:
                 cgv.set_money(False)
