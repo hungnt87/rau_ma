@@ -42,7 +42,7 @@ previous_hero = dict()
 class Hero:
     img = None
     img_lv1 = None
-
+    
     def __init__(self, name: str, number: int = 0, need_buy: int = 0):
         self.name = name
         self.img = self._get_hero_img(name)
@@ -53,7 +53,7 @@ class Hero:
         self.region_sell = REGION_SELL_HERO
         self.confidence = CONFIDENCE
         self.grayscale = GRAYSCALE
-
+    
     def _get_hero_img(self, para_name):
         # global HERO_IMG
         if self.img is None:
@@ -62,7 +62,7 @@ class Hero:
                 os.path.join("assets", "img", "hero", file_name)
             )
         return self.img
-
+    
     def _get_hero_img_lv1(self, para_name):
         # global HERO_IMG
         if self.img_lv1 is None:
@@ -71,10 +71,10 @@ class Hero:
                 os.path.join("assets", "img", "hero", file_name)
             )
         return self.img_lv1
-
+    
     def reset_hero_number(self):
         self.number = 0
-
+    
     def buy(self):
         if global_event.check_event():
             return False
@@ -94,13 +94,13 @@ class Hero:
         except Exception as e:
             logger.error(e)
             return None
-
+    
     def buy_hero(self):
         if global_event.check_event():
             return False
         logger.debug("Bat dau tim hero {}".format(self.name))
         count_buy = self.need_buy - self.number
-
+        
         if count_buy > 0:
             # logger.debug(f"Con {count_buy} {self.name} can mua")
             try:
@@ -115,7 +115,7 @@ class Hero:
             except Exception as e:
                 logger.error(e)
                 return None
-
+    
     def check_hero(self):
         if global_event.check_event():
             return False
@@ -130,11 +130,13 @@ class Hero:
         except Exception as e:
             logger.error(e)
             return False
-
+    
     def sell_hero(self):
         if global_event.check_event():
             return False
         global REGION_SELL_HERO
+        # khong mua hero nay nua
+        self.number = 10
         try:
             res_center = pyautogui.locateCenterOnScreen(
                 self.img_lv1, confidence=self.confidence, region=self.region_sell, grayscale=self.grayscale, )
@@ -177,7 +179,7 @@ def buy_all_previous_hero():
                     logger.debug("Khong du tien, Khoa hero")
                 else:
                     del previous_hero[key]
-
+    
     else:
         logger.debug("Khong co hero khoa o round truoc")
     pydirectinput.moveTo(213, 201)
@@ -223,36 +225,36 @@ def check_sell_hero(hero: Hero):
     elif hero.name == Sniper.name:
         Dazzale.sell_hero()
         Mirana.sell_hero()
-
+    
     # slot 2
     elif hero.name == Morphling.name:
         Oracle.sell_hero()
     elif hero.name == Snapfire.name:
         Oracle.sell_hero()
         Morphling.sell_hero()
-
+    
     # slot 3
     elif hero.name == DarkWillow.name:
         Windranger.sell_hero()
     elif hero.name == DragonKnight.name:
         DarkWillow.sell_hero()
         Windranger.sell_hero()
-
+    
     # slot 4
     elif hero.name == Luna.name:
         HoodWink.sell_hero()
     elif hero.name == DrowRanger.name:
         HoodWink.sell_hero()
         Luna.sell_hero()
-
-
+    
+    
     # slot 5
     elif hero.name == WitchDoctor.name:
         WinterWyvern.sell_hero()
     elif hero.name == TemplarAssassin.name:
         WinterWyvern.sell_hero()
         WitchDoctor.sell_hero()
-
+    
     # slot 6
     elif hero.name == Clinkz.name:
         # logger.debug("Ban Clinkz")
@@ -287,7 +289,7 @@ def buy_all_hero(round_number):
     thread_buy_templar_assassin = threading.Thread(target=TemplarAssassin.buy_hero, args=())
     thread_buy_zet = threading.Thread(target=Zet.buy_hero, args=())
     thread_buy_dragon_knight = threading.Thread(target=DragonKnight.buy_hero, args=())
-
+    
     if round_number <= 3:
         thread_buy_dazzale.start()
         thread_buy_oracle.start()
@@ -334,7 +336,7 @@ def buy_all_hero(round_number):
         thread_buy_mirana.join()
     else:
         # start
-
+        
         thread_buy_dark_willow.start()
         thread_buy_clinkz.start()
         thread_buy_witch_doctor.start()
@@ -346,7 +348,7 @@ def buy_all_hero(round_number):
         thread_buy_zet.start()
         thread_buy_dragon_knight.start()
         # join
-
+        
         thread_buy_dark_willow.join()
         thread_buy_clinkz.join()
         thread_buy_witch_doctor.join()
@@ -405,7 +407,7 @@ if __name__ == "__main__":
     Mirana.number = 1
     Windranger.number = 1
     # Mirana.sell_hero()
-
+    
     buy_all_hero(16)
     start = time.time() - start
     buy_all_previous_hero()
