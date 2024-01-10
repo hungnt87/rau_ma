@@ -187,11 +187,12 @@ class Button:
                                                         confidence=CONFIDENCE, region=REGION, grayscale=GRAYSCALE, )
             
             # pydirectinput.moveTo(res.x, res.y)
-            global_event.sleep(1)
-            pydirectinput.click(res_center[0], res_center[1])
-            pydirectinput.moveTo(200, 200)
+            #global_event.sleep(1)
+            #pydirectinput.click(res_center[0], res_center[1])
+            #pydirectinput.moveTo(200, 200)
             # logger.info("Khong lay item")
-            return True
+            if res_center:
+                return True
         except pyautogui.ImageNotFoundException:
             return
         except Exception as e:
@@ -245,14 +246,12 @@ class Button:
                     character_moves_event.app_stop()
                     return True
             except pyautogui.ImageNotFoundException:
-                # check_resurrect(2)
-                # check_abandon()
-                # check_find_item()
                 if Button.button_check("Abandon", 2):
                     character_moves_event.app_stop()
-                
+                    Button("Abandon").click()
                 if Button.button_check("Recycle", 2):
                     character_moves_event.app_stop()
+                    Button("Recycle").click()
                 i = i + 1
                 if i > time_wait:
                     character_moves_event.app_stop()
@@ -270,8 +269,7 @@ class Button:
         if global_event.check_event():
             return False
         logger.info("Next round")
-        Button("ProceedToRound").click(time_sleep=2, time_wait=20
-                                       )  # Button("Resurrect").click(time_sleep=2, time_wait=10)
+        Button("ProceedToRound").click(time_sleep=2, time_wait=20)
     
     @staticmethod
     def character_moves(round_number=2):
@@ -300,15 +298,13 @@ class Button:
                 return False
             if character_moves_event.check_event():
                 return False
-            pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30
-                                     )  # time.sleep(time_click)
+            pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
         for i in range(0, 8):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
                 return False
-            pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20
-                                     )  # time.sleep(time_click)
+            pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
         while True:
             if global_event.check_event():
                 return False
@@ -319,8 +315,8 @@ class Button:
                     return False
                 if character_moves_event.check_event():
                     return False
-                pydirectinput.rightClick(loc[0], loc[1] - loc1
-                                         )  # time.sleep(time_click)
+                pydirectinput.rightClick(loc[0], loc[1] - loc1)
+                
             for i in range(0, number_click):
                 if global_event.check_event():
                     return False
@@ -338,8 +334,7 @@ class Button:
                     return False
                 if character_moves_event.check_event():
                     return False
-                pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20
-                                         )  # time.sleep(time_click)
+                pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
     
     @staticmethod
     def run_round(round_number=2):
@@ -388,29 +383,22 @@ class Button:
         if global_event.check_event():
             return False
         logger.info("Click roll")
-        i = 0
-        while True:
-            if global_event.check_event():
-                break
-            try:
-                res = pyautogui.locateCenterOnScreen(Button("Roll").img, minSearchTime=1, confidence=CONFIDENCE,
-                                                     region=REGION, grayscale=GRAYSCALE, )
-                global_event.sleep(1)
-                pydirectinput.click(res.x, res.y)
-                pyautogui.moveTo(200, 200)
-                if Button.check_money() is False:
-                    cgv.set_money(False)
-                    return False
-                return True
-            except pyautogui.ImageNotFoundException:
-                i = i + 1
-                if i > 5:
-                    return False
-                logger.debug(f"Dang tim hinh anh Roll so lan {i}/5")
-                global_event.sleep(1)
-            except Exception as e:
-                logger.error(e)
-                break
+        try:
+            res = pyautogui.locateCenterOnScreen(Button("Roll").img, minSearchTime=2, confidence=CONFIDENCE,
+                                                 region=REGION, grayscale=GRAYSCALE, )
+            global_event.sleep(1)
+            pydirectinput.click(res.x, res.y)
+            pyautogui.moveTo(200, 200)
+            if Button.check_money() is False:
+                cgv.set_money(False)
+                return False
+            return True
+        except pyautogui.ImageNotFoundException:
+            logger.debug(f"Khong tim thay hinh anh {Button('Roll').name}")
+            return False
+        except Exception as e:
+            logger.error(e)
+            return None
 
 
 def main():
