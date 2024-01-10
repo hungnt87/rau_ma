@@ -1,9 +1,7 @@
 import os
 import threading
-
 import pyautogui
 import pydirectinput
-
 import controller.global_variables as cgv
 from controller.filelog import logger
 from controller.global_variables import (SelectWindow, global_event, character_moves_event, path, )
