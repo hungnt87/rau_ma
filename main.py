@@ -88,11 +88,7 @@ def make_win2():
     global button_pause
     layout = [[sg.Output(key = "-OUTPUT-", size = (30, 5), font = "Helvetica 11", background_color = "black",
                          text_color = "green", sbar_arrow_color = "black", sbar_background_color = "black",
-                         sbar_frame_color = "black", sbar_width = 0, sbar_arrow_width = 0, sbar_relief = "flat",
-                         # autoscroll=True,
-                         # border_width=0,
-                         # disabled=True,
-                         )], ]
+                         sbar_frame_color = "black", sbar_width = 0, sbar_arrow_width = 0, sbar_relief = "flat", )], ]
     return sg.Window("Second Window", layout, location = (10, 850), finalize = True, no_titlebar = True,
                      keep_on_top = True, background_color = "black", transparent_color = "black",  # alpha_channel=0.9,
                      alpha_channel = 0.9, border_depth = 0, )
@@ -101,10 +97,12 @@ def make_win2():
 def make_win1():
     global button_pause
     layout = [
-        [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], [sg.Output(size = (50, 10), key = "-OUTPUT-")], ]
-    return sg.Window("Brodota-bot", layout,  # location=(1000, 400),
-                     finalize = True, )
+        [sg.Button("Start (Ctrl + F9)", key = "-START-"),
+         sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
+         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ],
+        [sg.Output(size = (50, 10), key = "-OUTPUT-")],
+        [sg.Button("Exit", key = "Exit")],]
+    return sg.Window("Brodota-bot", layout, finalize = True, )
 
 
 def gui():
