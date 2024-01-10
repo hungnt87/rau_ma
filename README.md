@@ -15,6 +15,7 @@
 
 # Cập nhật sắp tới:
 
+-   Thêm tính năng nếu chết thì khởi động lại vòng mới
 -   Thêm tùy chọn ban đầu( chọn chế độ Burn, tắt hình like nếu ai có, chọn chế độ phân giải thấp hơn)
 -   Thêm tính năng đi Devil's Grave (tương lai gần)
 -   Thêm tinh năng đi Mine (tương lai xa)
