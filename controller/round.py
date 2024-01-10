@@ -57,10 +57,16 @@ def round_all(round_number=1):
                     break
                 if item.buy_all_previous_item() is False:
                     break
+                thread_buy_all_item_investments = threading.Thread(target=item.buy_all_item_investments, args=(n,))
+                thread_buy_all_set_item = threading.Thread(target=item.buy_all_set_item, args=(n,))
                 thread_buy_all_hero = threading.Thread(target=hero.buy_all_hero, args=(n,))
                 thread_buy_all_item = threading.Thread(target=item.buy_all_item, args=(n,))
+                thread_buy_all_item_investments.start()
+                thread_buy_all_set_item.start()
                 thread_buy_all_hero.start()
                 thread_buy_all_item.start()
+                thread_buy_all_item_investments.join()
+                thread_buy_all_set_item.join()
                 thread_buy_all_hero.join()
                 thread_buy_all_item.join()
                 logger.debug(f"Da roll {number_roll} lan")
@@ -123,14 +129,23 @@ def attack_boss():
 
 
 if __name__ == "__main__":
+    time.sleep(2)
     logger.info("Start")
+    
+    n = 2
     start = time.time()
-    t1 = threading.Thread(target=attack_boss, args=(), daemon=True)
-    t2 = threading.Thread(target=Button.character_moves, args=(2,), daemon=True)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+    thread_buy_all_item_investments = threading.Thread(target=item.buy_all_item_investments, args=(n,))
+    thread_buy_all_set_item = threading.Thread(target=item.buy_all_set_item, args=(n,))
+    thread_buy_all_hero = threading.Thread(target=hero.buy_all_hero, args=(n,))
+    thread_buy_all_item = threading.Thread(target=item.buy_all_item, args=(n,))
+    thread_buy_all_item_investments.start()
+    thread_buy_all_set_item.start()
+    thread_buy_all_hero.start()
+    thread_buy_all_item.start()
+    thread_buy_all_item_investments.join()
+    thread_buy_all_set_item.join()
+    thread_buy_all_hero.join()
+    thread_buy_all_item.join()
     end = time.time()
     print(end - start)
     pass

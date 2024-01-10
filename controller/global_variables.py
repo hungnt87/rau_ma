@@ -1,10 +1,12 @@
 import os
 import sys
 import threading
-import win32gui
-import win32con
-import controller.filelog as filelog
 import time
+
+import win32con
+import win32gui
+
+import controller.filelog as filelog
 
 logger = filelog.logger
 # number_of_buy = None
@@ -56,7 +58,6 @@ class Event:
             if i > time_sleep:
                 break
             time.sleep(0.1)
-            
 
 
 class PathManager:
@@ -84,16 +85,6 @@ class PathManager:
         return absolute_path
 
 
-def get_app_window_handle(app_name):
-    hwnd = None
-    hwnd = win32gui.FindWindow(None, app_name)
-    
-    hWndex = win32gui.FindWindowEx(hwnd, None, None, None)
-    logger.debug("hwnd: {}".format(hwnd))
-    logger.debug("hWndex: {}".format(hWndex))
-    return win32gui.FindWindow(None, app_name)
-
-
 class SelectWindow:
     hwnd = None
     
@@ -101,9 +92,9 @@ class SelectWindow:
         self.hwnd = self.get_app_window_handle(app_name)
     
     def get_app_window_handle(self, app_name):
-        hwnd = win32gui.FindWindow(None, app_name)
+        self.hwnd = win32gui.FindWindow(None, app_name)
         
-        return hwnd
+        return self.hwnd
     
     def move_window_to(self, x=0, y=0):
         # Lấy kích thước hiện tại của cửa sổ

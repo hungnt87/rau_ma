@@ -1,12 +1,13 @@
-import PySimpleGUI as sg
 import threading
-import win32gui
-import win32con
 import time
 
-from controller.button import Button
-import controller.round as r
+import PySimpleGUI as sg
 import keyboard
+import win32con
+import win32gui
+
+import controller.round as r
+from controller.button import Button
 from controller.filelog import logger, OutputHandler
 from controller.global_variables import global_event, character_moves_event
 
@@ -122,7 +123,7 @@ def make_win1():
 
 def gui():
     global main_status, button_pause, main_stop, main_start, appStarted, main_pause
-    window1, window2 = make_win1(), None
+    window1, window2 = make_win1(), make_win2()
     appStarted = False
     threadedApp = ThreadedApp()
     log_output1 = OutputHandler(window1)
@@ -135,10 +136,11 @@ def gui():
                 window2 = None
             elif window == window1:  # if closing win 1, exit program
                 break
-        elif (event == "-START-" or main_start is True) and not window2:
+        elif event == "-START-" or main_start is True:
             if appStarted is False:
                 threadedApp.run()
-                window2 = make_win2()  # if main_status is True:
+                
+                # if main_status is True:
                 window1["-START-"].update(disabled=True)
                 window1["-PAUSE-"].update(disabled=False)
                 window1["-STOP-"].update(disabled=False)
@@ -150,8 +152,8 @@ def gui():
                 threadedApp.stop()
                 appStarted = False
                 main_status = False
-                window2.close()
-                window2 = None
+                # window2.close()
+                # window2 = None
                 window1["-START-"].update(disabled=False)
                 window1["-STOP-"].update(disabled=True)
                 window1["-PAUSE-"].update(disabled=True)
@@ -168,42 +170,13 @@ def gui():
                     threadedApp.pause()
             main_pause = False
         elif event == "Emit":
-            if window2 is not None:
-                window2["-OUTPUT-"].update(values[event] + "\n", append=True)
-            window1["-OUTPUT-"].update(values[event] + "\n", append=True)  # window2.refresh()
+            window1["-OUTPUT-"].update(values[event] + "\n", append=True)
+            # if window2 is not None:
+            window2["-OUTPUT-"].update(values[event] + "\n", append=True)
         if main_status is True:
             window["-START-"].update(disabled=True)
             window["-PAUSE-"].update(disabled=False)
             window["-STOP-"].update(disabled=False)
-        if main_stop is True:
-            if appStarted is True:
-                threadedApp.stop()
-                appStarted = False
-                main_status = False
-                window2.close()
-                window2 = None
-                window1["-START-"].update(disabled=False)
-                window1["-STOP-"].update(disabled=True)
-                window1["-PAUSE-"].update(disabled=True)
-            main_stop = False
-        if main_start is True:
-            if appStarted is False:
-                window2 = make_win2()
-                threadedApp.run()
-                appStarted = True
-                main_start = False
-        if main_pause is True:
-            if appStarted is True:
-                if button_pause == "Pause (Ctrl + Space)":
-                    button_pause = "Resume (Ctrl + Space)"
-                    window1["-PAUSE-"].update(button_pause)
-                    threadedApp.pause()
-                else:
-                    button_pause = "Pause (Ctrl + Space)"
-                    window1["-PAUSE-"].update(button_pause)
-                    threadedApp.pause()
-            main_pause = False
-    
     window.close()
 
 
