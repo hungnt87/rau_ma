@@ -288,8 +288,8 @@ class Button:
             number_click = 6
             number_click_first = 3
         else:
-            number_click = 10
-            number_click_first = 5
+            number_click = 12
+            number_click_first = 6
         # time.sleep(3)
         # pydirectinput.moveTo(loc[0], loc[1])
         
