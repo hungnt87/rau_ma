@@ -48,10 +48,14 @@ class Event:
         return False
     
     def sleep(self, time_sleep=1):
-        for t in range(time_sleep):
+        i = 0
+        while True:
             if self.check_event():
                 return False
-            time.sleep(1)
+            time.sleep(time_sleep)
+            i += 1
+            if i >= time_sleep:
+                break
 
 
 class PathManager:

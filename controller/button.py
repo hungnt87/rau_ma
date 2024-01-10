@@ -314,7 +314,6 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
-        
     
     @staticmethod
     def run_round(round_number=2):
