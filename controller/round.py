@@ -112,16 +112,17 @@ def round_all(round_number=1):
 
 def attatk_boss():
     character_moves_event.app_pause()
-    for s in range(10):
+    time_wait = 60
+    for s in range(time_wait):
         if global_event.check_event():
             # logger.info("Stop thread round 3")
             break
-        s = 50 - s
+        s = time_wait - s
         if s == 45:
             character_moves_event.app_start()
         time.sleep(1)
         logger.info(
-            f"Ban dang danh boss round {s}, thoi gian con lai {s}/50s"
+            f"Ban dang danh boss round {s}, thoi gian con lai {s}/{time_wait}s"
         )
     character_moves_event.app_stop()
 
