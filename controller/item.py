@@ -18,26 +18,26 @@ GRAYSCALE_BUY_ITEM = True
 
 class Item:
     img = None
-
+    
     def __init__(self, name, number_need_buy=5):
         self.name = name
         self.number = 0
         self.number_need_buy = number_need_buy
         self.img = self.get_item_img(name)
-
+    
     def reset_item_number(self):
         self.number = 0
-
+    
     def get_item_img(self, name):
         # global HERO_IMG
         if self.img is None:
             file_name = name + ".png"
-
+            
             self.img = self.img = path.get_absolute_path(
                 os.path.join("assets", "img", "item", file_name)
             )
         return self.img
-
+    
     def buy(self):
         # logger.info("Ban dang tim item {}".format(ItemInfo.name))
         if global_event.check_event():
@@ -51,7 +51,7 @@ class Item:
                     self.img, confidence=CONFIDENCE_BUY_ITEM, region=REGION_BUY_ITEM, grayscale=GRAYSCALE_BUY_ITEM, )
                 previous_item[
                     location] = self  # pydirectinput.click(location[0], location[1])  # pydirectinput.moveTo(222, 213)  # if Button.check_money():  #     self.number += 1  #     cgv.add_count_of_buy(1)  #     logger.info(f"Ban da mua thanh cong 1 cai {self.name}")  #     return True  # else:  #     look_region = (location.x, location.y, 267, 312)  #     cgv.set_money(False)  #     if Button.click_lock(self.name, look_region) is True:  #         previous_item[location] = self  #     return False
-
+            
             except pyautogui.ImageNotFoundException:
                 return False
             except Exception as e:
@@ -61,32 +61,32 @@ class Item:
             pass  # logger.debug(  #     f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"  # )
 
 
-Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2")
+Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2",10)
 Attack12_Kill1000_Unique_lv2 = Item("Attack12_Kill1000_Unique_lv2", number_need_buy=1)
 Attack16_Arcane16_lv3 = Item("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = Item("Attack16_Strike16_lv3")
 Attack35_Kill1000_Unique_lv5 = Item("Attack35_Kill1000_Unique_lv5", number_need_buy=1)
-Bicycle_lv3 = Item("Bicycle_lv3",number_need_buy = 0)
+Bicycle_lv3 = Item("Bicycle_lv3", number_need_buy=0)
 Cooldown16_Kill1000_Unique_lv2 = Item("Cooldown16_Kill1000_Unique_lv2", number_need_buy=1)
-Cooldown21_lv5 = Item("Cooldown21_lv5",number_need_buy = 1)
-Cooldown45_Speed15_lv6 = Item("Cooldown45_Speed15_lv6",number_need_buy = 1)
-Critical9_Luck_lv3 = Item("Critical9_Luck_lv3",number_need_buy = 1)
+Cooldown21_lv5 = Item("Cooldown21_lv5", number_need_buy=1)
+Cooldown45_Speed15_lv6 = Item("Cooldown45_Speed15_lv6", number_need_buy=1)
+Critical9_Luck_lv3 = Item("Critical9_Luck_lv3", number_need_buy=1)
 Critical16_Kill1000_Unique_lv2 = Item("Critical16_Kill1000_Unique_lv2", number_need_buy=1)
 Critical20_Defense_lv3 = Item("Critical20_Defense_lv3", number_need_buy=1)
 Critical30_Defense10_lv5 = Item("Critical30_Defense10_lv5", number_need_buy=1)
 Critical40_Kill1000_Unique_lv5 = Item("Critical40_Kill1000_Unique_lv5", number_need_buy=1)
-Defense20_Speed10_lv2 = Item("Defense20_Speed10_lv2", number_need_buy=0)
+Defense20_Speed10_lv2 = Item("Defense20_Speed10_lv2", number_need_buy=1)
 Critical21_For_Precise_lv3 = Item("Critical21_For_Precise_lv3")
 EnemyCount10_lv6 = Item("EnemyCount10_lv6")
-Evasion6_For_Precise_lv1 = Item("Evasion6_For_Precise_lv1", number_need_buy=2)
-Evasion8_Speed5_lv1 = Item("Evasion8_Speed5_lv1", number_need_buy=2)
-Evasion12_Strike6_lv2 = Item("Evasion12_Strike6_lv2", number_need_buy=2)
-Evasion13_Health13_lv2 = Item("Evasion13_Health13_lv2", number_need_buy=2)
-Evasion16_Investment16_lv3 = Item("Evasion16_Investment16_lv3", number_need_buy=2)
+Evasion6_For_Precise_lv1 = Item("Evasion6_For_Precise_lv1", number_need_buy=3)
+Evasion8_Speed5_lv1 = Item("Evasion8_Speed5_lv1", number_need_buy=3)
+Evasion12_Strike6_lv2 = Item("Evasion12_Strike6_lv2", number_need_buy=3)
+Evasion13_Health13_lv2 = Item("Evasion13_Health13_lv2", number_need_buy=3)
+Evasion16_Investment16_lv3 = Item("Evasion16_Investment16_lv3", number_need_buy=3)
 Evasion21_Attack5_lv4 = Item("Evasion21_Attack5_lv4", number_need_buy=2)
-Exp20_Range5_lv1 = Item("Exp20_Range5_lv1")
-Exp40_Luck6_lv2 = Item("Exp40_Luck6_lv2")
-Exp45_Attack4_lv2 = Item("Exp45_Attack4_lv2")
+Exp20_Range5_lv1 = Item("Exp20_Range5_lv1",3)
+Exp40_Luck6_lv2 = Item("Exp40_Luck6_lv2",3)
+Exp45_Attack4_lv2 = Item("Exp45_Attack4_lv2",3)
 ExtraDamage10_lv3 = Item("ExtraDamage10_lv3")
 ExtraDamage13_For_Precise_lv2 = Item("ExtraDamage13_For_Precise_lv2")
 ExtraDamage14_Kill1000_Unique_lv2 = Item("ExtraDamage14_Kill1000_Unique_lv2", number_need_buy=1)
@@ -94,8 +94,8 @@ ExtraDamage30_Luck30_lv5 = Item("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = Item("ExtraDamage30_lv6")
 ExtraDamage40_Kill100_Unique_lv5 = Item("ExtraDamage40_Kill100_Unique_lv5", number_need_buy=1)
 Health30_Speed20_lv4 = Item("Health30_Speed20_lv4")
-Health48_For_Precise_lv3 = Item("Health48_For_Precise_lv3")
-Health88_lv5 = Item("Health88_lv5")
+Health48_For_Precise_lv3 = Item("Health48_For_Precise_lv3",1)
+Health88_lv5 = Item("Health88_lv5",1)
 HealthRegen10_For_Precise_lv1 = Item("HealthRegen10_For_Precise_lv1")
 HealthRegen12_HitRecovery15_lv2 = Item("HealthRegen12_HitRecovery15_lv2")
 HealthRegen18_Mango50_lv2 = Item("HealthRegen18_Mango50_lv2")
@@ -109,32 +109,32 @@ Immunity6_lv3 = Item("Immunity6_lv3")
 Immunity10_lv5 = Item("Immunity10_lv5")
 ImmunityCount4_lv4 = Item("ImmunityCount4_lv4")
 Investment88_For_Precise_lv1 = Item("Investment88_For_Precise_lv1")
-Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2")
-Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3")
-Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3")
-Investment368_HitRecovery18_lv5 = Item("Investment368_HitRecovery18_lv5")
+Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2",3)
+Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3",3)
+Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3",2)
+Investment368_HitRecovery18_lv5 = Item("Investment368_HitRecovery18_lv5",1)
 Locomotive_lv2 = Item("Locomotive_lv2")
-Luck13_lv1 = Item("Luck13_lv1", number_need_buy=1)
-Luck32ForPrecise_lv2 = Item("Luck32ForPrecise_lv2", number_need_buy=1)
-Luck45_HitRecovery25_lv3 = Item("Luck45_HitRecovery25_lv3", number_need_buy=1)
-Luck54_Arcane27_lv4 = Item("Luck54_Arcane27_lv4", number_need_buy=1)
-Luck60_Speed25_lv4 = Item("Luck60_Speed25_lv4", number_need_buy=1)
-MasterChefHat_lv2 = Item("MasterChefHat_lv2")
+Luck13_lv1 = Item("Luck13_lv1", number_need_buy=2)
+Luck32ForPrecise_lv2 = Item("Luck32ForPrecise_lv2", number_need_buy=2)
+Luck45_HitRecovery25_lv3 = Item("Luck45_HitRecovery25_lv3", number_need_buy=2)
+Luck54_Arcane27_lv4 = Item("Luck54_Arcane27_lv4", number_need_buy=2)
+Luck60_Speed25_lv4 = Item("Luck60_Speed25_lv4", number_need_buy=0)
+MasterChefHat_lv2 = Item("MasterChefHat_lv2",2)
 Minazuki_lv4 = Item("Minazuki_lv4")
 MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
-#MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
-PantyMask_lv6 = Item("PantyMask_lv6")
+# MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
+PantyMask_lv6 = Item("PantyMask_lv6",1)
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy=3)
 Pillager_lv4 = Item("Pillager_lv4")
-PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6")
-PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2")
+PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6",1)
+PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2",1)
 PreciseDamage16_Strike16_lv3 = Item("PreciseDamage16_Strike16_lv3")
-Random_10_28_Evasion_lv4 = Item("Random_10_28_Evasion_lv4", number_need_buy=1)
+Random_10_28_Evasion_lv4 = Item("Random_10_28_Evasion_lv4", number_need_buy=2)
 Random_10_28_HealthRegen_lv3 = Item("Random_10_28_HealthRegen_lv3")
 Random_16_36_Defense_lv4 = Item("Random_16_36_Defense_lv4")
-Range15_Invest55_lv5 = Item("Range15_Invest55_lv5",number_need_buy = 1)
+Range15_Invest55_lv5 = Item("Range15_Invest55_lv5", number_need_buy=1)
 Range16_Def16_lv5 = Item("Range16_Def16_lv5", number_need_buy=0)
-Range24_ExtraDamage14_lv6 = Item("Range24_ExtraDamage14_lv6",number_need_buy = 0)
+Range24_ExtraDamage14_lv6 = Item("Range24_ExtraDamage14_lv6", number_need_buy=0)
 RevivalCount1_CriticalRate5_lv3 = Item("RevivalCount1_CriticalRate5_lv3")
 RevivalCount1_Health5_lv4 = Item("RevivalCount1_Health5_lv4")
 Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
@@ -150,7 +150,6 @@ SplitTheVoid_lv2 = Item("SplitTheVoid_lv2")
 TomeOfKnowledge_lv3 = Item("TomeOfKnowledge_lv3")
 
 
-
 def buy_all_previous_item():
     if global_event.check_event():
         return False
@@ -158,7 +157,10 @@ def buy_all_previous_item():
     if previous_item:
         logger.debug("Ban dang mua item")
         for key, value in list(previous_item.items()):
+            if global_event.check_event():
+                return False
             pydirectinput.click(key[0], key[1])
+            pydirectinput.moveTo(222, 213)
             if Button.check_money():
                 logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
                 value.number += 1
@@ -171,29 +173,31 @@ def buy_all_previous_item():
                 if Button.click_lock(value.name, look_region) is True:
                     # del previous_item[key]
                     logger.debug("Khong du tien, Khoa item")
-
+                
                 else:
                     del previous_item[key]
-
+                
                 # return False
     else:
         logger.debug("Khong co item khoa o round truoc")
-
+    if global_event.check_event():
+        return False
 
 def buy_all_set_item(round_number):
     if global_event.check_event():
         return False
     logger.debug("Ban dang mua set item")
-    if round_number > 3:
+    if round_number > 4:
         PickupRange100_lv1.buy()
         Set_Speed_lv1.buy()
+        Set_Speed22_lv2.buy()
         Set_Defense8_lv2.buy()
         Set_Investment108_lv2.buy()
         Set_Defense188_lv3.buy()
         Set_ExtraDamage17_lv4.buy()
         Attack10EveryBuyPlus5_lv2.buy()
         SplitTheVoid_lv2.buy()
-    if round_number < 18:
+    if 4 < round_number < 18:
         Attack12_Kill1000_Unique_lv2.buy()
         Cooldown16_Kill1000_Unique_lv2.buy()
         Critical16_Kill1000_Unique_lv2.buy()
@@ -211,7 +215,7 @@ def buy_all_item_investments(round_number):
         Investment88_For_Precise_lv1.buy()
     if 3 <= round_number <= 13:
         Investment138_Defense3_lv2.buy()
-    if 6 <= round_number <= 15:
+    if 6 <= round_number < 15:
         Investment198_Speed7_lv3.buy()
         Investment218_Evasion8_lv3.buy()
         Investment368_HitRecovery18_lv5.buy()
@@ -221,7 +225,7 @@ def buy_all_item_lv1():
     if global_event.check_event():
         return
     logger.debug("Ban dang mua item lv1")
-
+    
     ShopDiscount_lv1.buy()
     Evasion8_Speed5_lv1.buy()
     Exp20_Range5_lv1.buy()
@@ -308,7 +312,6 @@ def buy_all_item_lv5():
 
 
 def buy_all_item_lv6():
-
     if global_event.check_event():
         return
     logger.info("Ban dang mua item lv6")
@@ -337,18 +340,18 @@ def buy_all_item(round_number):
     t4 = threading.Thread(target=buy_all_item_lv4, args=())
     t5 = threading.Thread(target=buy_all_item_lv5, args=())
     t6 = threading.Thread(target=buy_all_item_lv6, args=())
-
+    
     if 3 < round_number <= 6:
         t1.start()
-
+        
         t2.start()
         t1.join()
         t2.join()
-
+        
         # buy_all_item_lv1()
-
+    
     elif round_number <= 9:
-
+        
         t1.start()
         t2.start()
         t3.start()
@@ -356,17 +359,17 @@ def buy_all_item(round_number):
         t2.join()
         t3.join()  # buy_all_item_lv1()  # buy_all_item_lv2()  # buy_all_item_lv3()
     elif round_number <= 12:
-
+        
         t2.start()
         t3.start()
         t4.start()
         t2.join()
         t3.join()
         t4.join()
-
+        
         # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()
     elif round_number <= 15:
-
+        
         t2.start()
         t3.start()
         t4.start()
@@ -376,46 +379,20 @@ def buy_all_item(round_number):
         t4.join()
         t5.join()  # buy_all_item_lv2()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()
     elif round_number <= 20:
-
+        
         t3.start()
         t4.start()
         t5.start()
         t6.start()
-
+        
         t3.join()
         t4.join()
         t5.join()
         t6.join()
-    #buy_all_previous_item()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()  # buy_all_item_lv6()
+    # buy_all_previous_item()  # buy_all_item_lv3()  # buy_all_item_lv4()  # buy_all_item_lv5()  # buy_all_item_lv6()
 
 
 def reset_item():
-    # global Attack10EveryBuyPlus5_lv2, Attack12_Kill1000_Unique_lv2, Attack16_Arcane16_lv3, Attack16_Arcane16_lv3,
-    # Attack35_Kill1000_Unique_lv5, Bicycle_lv3, Cooldown16_Kill1000_Unique_lv2
-    # global Cooldown45_Speed15_lv6, Critical16_Kill1000_Unique_lv2, Critical20_Defense_lv3,
-    # Critical21_For_Precise_lv3, Critical30_Defense10_lv5, Critical40_Kill1000_Unique_lv5, Defense20_Speed10_lv2,
-    # EnemyCount10_lv6, Evasion6_For_Precise_lv1, Evasion8_Speed5_lv1, Evasion12_Strike6_lv2
-    # global Evasion13_Health13_lv2, Evasion16_Investment16_lv3, Evasion21_Attack5_lv4, ExtraDamage10_lv3,
-    # ExtraDamage13_For_Precise_lv2, ExtraDamage14_Kill1000_Unique_lv2
-    # global ExtraDamage30_Luck30_lv5, Evasion21_Attack5_lv4, Exp20_Range5_lv1, Exp40_Luck6_lv2, Exp45_Attack4_lv2
-    # global ExtraDamage30_lv6, ExtraDamage40_Kill100_Unique_lv5
-    # global Health30_Speed20_lv4, Health48_For_Precise_lv3, Health88_lv5, HealthRegen10_For_Precise_lv1
-    # global HealthRegen12_HitRecovery15_lv2, HealthRegen12_HitRecovery15_lv2
-    # global HealthRegen18_Mango50_lv2, HealthRegen20_Strike20_lv2, HealthRegen45_Invest99_lv5,
-    # Holding_Plus_Cooldown35_lv4
-    # global Holding_Plus_Def32_lv4, Holding_Plus_HealthRegen30_lv4, Immunity_Unique_lv5, Immunity6_lv3,
-    # Immunity10_lv5, ImmunityCount4_lv4
-    # global Investment88_For_Precise_lv1, Investment138_Defense3_lv2, Investment198_Speed7_lv3
-    # global Investment218_Evasion8_lv3, Investment368_HitRecovery18_lv5, Locomotive_lv2, Luck13_lv1,
-    # Luck32ForPrecise_lv2, Luck45_HitRecovery25_lv3
-    # global Luck54_Arcane27_lv4, Luck60_Speed25_lv4
-    # global MasterChefHat_lv2, Minazuki_lv4, MultishotDamage20_lv3, PantyMask_lv6, PickupRange100_lv1, Pillager_lv4
-    # global PreciseDamage12_Every1s_Plus1_lv6, PreciseDamage12_Speed12_lv2, PreciseDamage16_Strike16_lv3,
-    # Random_10_28_Evasion_lv4, Random_10_28_HealthRegen_lv3
-    # global Random_16_36_Defense_lv4, Range15_Invest55_lv5, Range16_Def16_lv5, Range24_ExtraDamage14_lv6,
-    # RevivalCount1_CriticalRate5_lv3, RevivalCount1_Health5_lv4
-    # global Set_Defense8_lv2, Set_Defense188_lv3, Set_ExtraDamage17_lv4, Set_Investment108_lv2, ShopDiscount_lv1,
-    # SplitTheVoid_lv2, TomeOfKnowledge_lv3
     if global_event.check_event():
         return False
     Attack10EveryBuyPlus5_lv2.reset_item_number()
@@ -513,8 +490,8 @@ def reset_previous_item():
 
 
 if __name__ == "__main__":
-    start=time.time()
+    start = time.time()
     buy_all_item(10)
-    start=time.time()-start
-
+    start = time.time() - start
+    
     print(start)
