@@ -46,7 +46,7 @@ class Item:
         if count_of_buy > 0:
             try:
                 location = pyautogui.locateCenterOnScreen(self.img, confidence = CONFIDENCE_BUY_ITEM,
-                    region = REGION_BUY_ITEM, grayscale = GRAYSCALE_BUY_ITEM, )
+                                                          region = REGION_BUY_ITEM, grayscale = GRAYSCALE_BUY_ITEM, )
                 previous_item[location] = self
             except pyautogui.ImageNotFoundException:
                 return False
@@ -121,6 +121,7 @@ MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
 # MultishotDamage20_lv3 = Item("MultishotDamage20_lv3")
 PantyMask_lv6 = Item("PantyMask_lv6", 1)
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy = 3)
+PickupRange300_Unique_lv3 = Item("PickupRange300_Unique_lv3", number_need_buy = 1)
 Pillager_lv4 = Item("Pillager_lv4")
 PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6", 1)
 PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2", 1)
@@ -184,8 +185,10 @@ def buy_all_set_item(round_number):
     if global_event.check_event():
         return False
     logger.debug("Ban dang tim set item")
-    if round_number > 2:
+    if 2 < round_number < 18:
         PickupRange100_lv1.buy()
+        if PickupRange100_lv1.number < 3:
+            PickupRange300_Unique_lv3.buy()
     if round_number > 4:
         Set_Speed_lv1.buy()
         Set_Speed22_lv2.buy()
@@ -456,6 +459,7 @@ def reset_item():
     MultishotDamage20_lv3.reset_item_number()
     PantyMask_lv6.reset_item_number()
     PickupRange100_lv1.reset_item_number()
+    PickupRange300_Unique_lv3.reset_item_number()
     Pillager_lv4.reset_item_number()
     PreciseDamage12_Every1s_Plus1_lv6.reset_item_number()
     PreciseDamage12_Speed12_lv2.reset_item_number()
