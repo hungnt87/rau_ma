@@ -3,13 +3,11 @@ import time
 
 import PySimpleGUI as sg
 import keyboard
-import win32con
-import win32gui
 
 import controller.round as r
 from controller.button import Button
 from controller.filelog import logger, OutputHandler
-from controller.global_variables import global_event, character_moves_event
+from controller.global_variables import global_event, character_moves_event, Dota2
 
 main_stop = False
 main_start = False
@@ -17,38 +15,24 @@ appStarted = False
 main_pause = False
 main_status = False
 button_pause = "Pause (Ctrl + Space)"
-
-
-def get_app_window_handle(app_name):
-    hwnd = win32gui.FindWindow(None, app_name)
-    
-    return hwnd
-
-
-def move_window_to(handle, x, y):
-    # Lấy kích thước hiện tại của cửa sổ
-    _, _, width, height = win32gui.GetWindowRect(handle)
-    
-    # Thay đổi kích thước và vị trí của cửa sổ
-    win32gui.SetWindowPos(handle, win32con.HWND_TOP, x, y, width, height, 0)
+hotkey_combination_start = "ctrl+f9"
+hotkey_combination_stop = "ctrl+q"
+hotkey_combination_pause = "ctrl+space"
 
 
 def main():
     global main_status
-    # ten cua so
-    app_name = "Dota 2"
-    # toa do cua so
-    new_x, new_y = 0, 0
-    hwnd = get_app_window_handle(app_name)
-    n = 0
+
+    hwnd = Dota2.get_app_window_handle()
+
     if hwnd:
-        time.sleep(1)
-        win32gui.SetForegroundWindow(hwnd)
-        time.sleep(1)
-        move_window_to(hwnd, new_x, new_y)
-        # print(f"Tim thay cua so  '{app_name}'")
-        logger.info(f"Tim thay cua so  '{app_name}'")
         main_status = True
+        global_event.sleep(1)
+        Dota2.move_window_to()
+        global_event.sleep(1)
+        logger.info(f"Tim thay cua so {Dota2.app_name}")
+        global_event.sleep(1)
+        n = 0
         while True:
             if global_event.check_event():
                 # logger.info("Stop thread main")
@@ -64,68 +48,70 @@ def main():
             for t in range(10):
                 if global_event.check_event():
                     break
-                
                 t = 10 - t
                 # print("Dang cho 5s")
                 logger.info(f"Dang cho bat auto lai sau {t}/10s")
-                time.sleep(1)
-    
+                global_event.sleep(1)
+
     else:
         main_status = False
-        logger.info("Khong tim thay cua so co ten {}".format(app_name))
+        logger.info("Khong tim thay cua so co ten {}".format(Dota2.app_name))
 
 
 class ThreadedApp:
-    global main_status
-    
     def __init__(self):
         self.t1 = threading.Thread()
-    
+
     def run(self):
         global_event.app_start()
         character_moves_event.app_start()
-        self.t1 = threading.Thread(target=main, args=(), daemon=True)
+        self.t1 = threading.Thread(target = main, args = (), daemon = True)
         self.t1.start()
-    
+
     def stop(self):
         global_event.app_stop()
         character_moves_event.app_stop()
         self.t1.join()
-    
-    def pause(self):
+
+    @staticmethod
+    def pause():
         global_event.app_pause()
         character_moves_event.app_pause()
+
+    @staticmethod
+    def resume():
+        global_event.app_resume()
+        character_moves_event.app_resume()
 
 
 def make_win2():
     global button_pause
-    layout = [[sg.Output(key="-OUTPUT-", size=(30, 5), font="Helvetica 11", background_color="black",
-                         text_color="green", sbar_arrow_color="black", sbar_background_color="black",
-                         sbar_frame_color="black",
-                         sbar_width=0, sbar_arrow_width=0, sbar_relief="flat",  # autoscroll=True,
+    layout = [[sg.Output(key = "-OUTPUT-", size = (30, 5), font = "Helvetica 11", background_color = "black",
+                         text_color = "green", sbar_arrow_color = "black", sbar_background_color = "black",
+                         sbar_frame_color = "black", sbar_width = 0, sbar_arrow_width = 0, sbar_relief = "flat",
+                         # autoscroll=True,
                          # border_width=0,
                          # disabled=True,
                          )], ]
-    return sg.Window("Second Window", layout, location=(10, 850), finalize=True, no_titlebar=True,
-                     keep_on_top=True, background_color="black", transparent_color="black",  # alpha_channel=0.9,
-                     alpha_channel=0.9, border_depth=0, )
+    return sg.Window("Second Window", layout, location = (10, 850), finalize = True, no_titlebar = True,
+                     keep_on_top = True, background_color = "black", transparent_color = "black",  # alpha_channel=0.9,
+                     alpha_channel = 0.9, border_depth = 0, )
 
 
 def make_win1():
     global button_pause
     layout = [
-        [sg.Button("Start (Ctrl + F9)", key="-START-"), sg.Button("Stop (Ctrl + Q)", key="-STOP-", disabled=True),
-         sg.Button(button_pause, key="-PAUSE-", disabled=True), ],
-        [sg.Output(size=(50, 10), key="-OUTPUT-")], ]
+        [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
+         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], [sg.Output(size = (50, 10), key = "-OUTPUT-")], ]
     return sg.Window("Brodota-bot", layout,  # location=(1000, 400),
-                     finalize=True, )
+                     finalize = True, )
 
 
 def gui():
     global main_status, button_pause, main_stop, main_start, appStarted, main_pause
     window1, window2 = make_win1(), make_win2()
     appStarted = False
-    threadedApp = ThreadedApp()
+    threaded_app = ThreadedApp()
     log_output1 = OutputHandler(window1)
     logger.addHandler(log_output1)
     while True:
@@ -138,45 +124,45 @@ def gui():
                 break
         elif event == "-START-" or main_start is True:
             if appStarted is False:
-                threadedApp.run()
-                
+                threaded_app.run()
                 # if main_status is True:
-                window1["-START-"].update(disabled=True)
-                window1["-PAUSE-"].update(disabled=False)
-                window1["-STOP-"].update(disabled=False)
+                window1["-START-"].update(disabled = True)
+                window1["-PAUSE-"].update(disabled = False)
+                window1["-STOP-"].update(disabled = False)
                 appStarted = True
             main_start = False
-        
+
         elif (event == "-STOP-") or (main_stop is True):
             if appStarted is True:
-                threadedApp.stop()
+                threaded_app.stop()
                 appStarted = False
                 main_status = False
                 # window2.close()
                 # window2 = None
-                window1["-START-"].update(disabled=False)
-                window1["-STOP-"].update(disabled=True)
-                window1["-PAUSE-"].update(disabled=True)
+                window1["-START-"].update(disabled = False)
+                window1["-STOP-"].update(disabled = True)
+                window1["-PAUSE-"].update(disabled = True)
             main_stop = False
         elif (event == "-PAUSE-") or (main_pause is True):
             if appStarted is True:
                 if button_pause == "Pause (Ctrl + Space)":
                     button_pause = "Resume (Ctrl + Space)"
                     window1["-PAUSE-"].update(button_pause)
-                    threadedApp.pause()
+                    threaded_app.pause()
                 else:
                     button_pause = "Pause (Ctrl + Space)"
                     window1["-PAUSE-"].update(button_pause)
-                    threadedApp.pause()
+                    threaded_app.resume()
             main_pause = False
         elif event == "Emit":
-            window1["-OUTPUT-"].update(values[event] + "\n", append=True)
+            window1["-OUTPUT-"].update(values[event] + "\n", append = True)
             # if window2 is not None:
-            window2["-OUTPUT-"].update(values[event] + "\n", append=True)
+            window2["-OUTPUT-"].update(values[event] + "\n", append = True)
         if main_status is True:
-            window["-START-"].update(disabled=True)
-            window["-PAUSE-"].update(disabled=False)
-            window["-STOP-"].update(disabled=False)
+            window["-START-"].update(disabled = True)
+            window["-PAUSE-"].update(disabled = False)
+            window["-STOP-"].update(disabled = False)
+            main_status = False
     window.close()
 
 
@@ -204,16 +190,12 @@ def on_hotkey_pause():
         logger.debug("Pause thread main")
 
 
-hotkey_combination_start = "ctrl+f9"
-hotkey_combination_stop = "ctrl+q"
-hotkey_combination_pause = "ctrl+space"
-keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
-keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
-keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
 if __name__ == "__main__":
-    # main(pause_event=event_pause, stop_event=event_stop)
-    # gui()
-    
+
+    keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
+    keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
+    keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
+
     gui()
     # main()
     pass
