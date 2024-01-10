@@ -189,20 +189,20 @@ HoodWink = Hero(name="Hoodwink", number=number_hood_wink, need_buy=need_Hoodwink
 Dazzale = Hero(name="Dazzale", number=number_dazzale, need_buy=need_Dazzale)
 # hero lv2
 
-Luna = Hero(name="Luna", need_buy=5)
+Luna = Hero(name="Luna", need_buy=3)
 
-Windranger = Hero(name="Windranger", need_buy=5)
+Windranger = Hero(name="Windranger", need_buy=3)
 
 Oracle = Hero(name="Oracle", need_buy=1)
 
-TrollWarlord = Hero(name="TrollWarlord", need_buy=5)
-Morphling = Hero(name="Morphling", need_buy=5)
+TrollWarlord = Hero(name="TrollWarlord", need_buy=3)
+Morphling = Hero(name="Morphling", need_buy=3)
 
 # hero lv3
-WitchDoctor = Hero(name="WitchDoctor", need_buy=5)
-DarkWillow = Hero(name="DarkWillow", need_buy=5)
-Mirana = Hero(name="Mirana", need_buy=5)
-Clinkz = Hero(name="Clinkz", need_buy=1)
+WitchDoctor = Hero(name="WitchDoctor", need_buy=4)
+DarkWillow = Hero(name="DarkWillow", need_buy=4)
+Mirana = Hero(name="Mirana", need_buy=4)
+Clinkz = Hero(name="Clinkz", need_buy=4)
 
 # hero lv4
 Sniper = Hero(name="Sniper", need_buy=5)
