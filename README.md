@@ -4,7 +4,7 @@
 
 - Tự động vào game
 - Mua đồ và hero
-- Di chuyển né quái
+- Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
 - Tính năng Stop và pause (lúc được lúc không, fix sau)
 
@@ -12,7 +12,7 @@
 
 # I. Huớng dẫn sử dụng
 
-1. Tải file phiên bải brodota-bot.zip tại https://github.com/hungnt87/brodota-bot/releases
+1. Tải file phiên bản brodota-bot.zip mới nhất tại https://github.com/hungnt87/brodota-bot/releases
 2. Giải nén file brodota-bot.zip
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
