@@ -100,8 +100,8 @@ def round_all(round_number=1):
                 item.reset_previous_item()
                 if Button.exit_round20() is False:
                     break
-                t1 = threading.Thread(target=attatk_boss, args=(), daemon=True)
-                t2 = threading.Thread(target=Button.character_moves, args=(n,), daemon=True)
+                t1 = threading.Thread(target=attatk_boss, args=())
+                t2 = threading.Thread(target=Button.character_moves, args=(n,))
                 t1.start()
                 t2.start()
                 t1.join()
