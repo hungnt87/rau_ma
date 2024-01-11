@@ -8,7 +8,6 @@ import controller.global_variables as cgv
 from controller.filelog import logger
 from controller.global_variables import SelectWindow, character_moves_event, global_event, path
 
-Dota2 = SelectWindow("Dota 2")
 REGION = (0, 0, 1936, 1119)
 CONFIDENCE = 0.8
 GRAYSCALE = True
@@ -17,24 +16,21 @@ GRAYSCALE = True
 class Button:
     name = ""
     img = None
-    region = None
-    grayscale = None
-    confidence = None
-
+    
     def __init__(self, para_name):
         self.name = para_name
         self.img = self._get_button_img(para_name)
         self.region = REGION
         self.grayscale = GRAYSCALE
         self.confidence = CONFIDENCE
-
+    
     def _get_button_img(self, para_name):
         # global HERO_IMG
         if self.img is None:
             file_name = para_name + ".png"
             self.img = path.get_absolute_path(os.path.join("assets", "img", "button", file_name))
         return self.img
-
+    
     def check_button(self, time_wait = 30):
         if global_event.check_event():
             return False
@@ -47,31 +43,31 @@ class Button:
                 res = pyautogui.locateCenterOnScreen(self.img, confidence = self.confidence, region = self.region,
                                                      grayscale = self.grayscale, )
                 if res:
-                    logger.debug("Da tim thay {}".format(self.name))
+                    logger.debug("Da tim thay: {}".format(self.name))
                     return True
             except pyautogui.ImageNotFoundException:
                 i = i + 1
                 if i > time_wait:
-                    logger.error(f"Khong tim thay hinh anh {self.name}")
+                    logger.error(f"Khong tim thay hinh anh: {self.name}")
                     return False
-                logger.debug(f"Dang tim hinh anh {self.name} so lan {i}/{time_wait}")
+                logger.debug(f"Dang tim hinh anh: {self.name} so lan {i}/{time_wait}")
                 global_event.sleep(1)  # return False
             except Exception as e:
                 logger.error(e)
                 break
         if global_event.check_event():
             return False
-
+    
     def click(self, time_sleep = 1, time_wait = 60):
         if global_event.check_event():
             return False
         if self.name == "Button_X" or self.name == "Hide":
-            logger.info(f"Chuan bi thoat game sau {time_sleep}s")
+            logger.info(f"Chuan bi thoat game sau: {time_sleep}s")
             character_moves_event.app_stop()
             global_event.sleep(time_sleep = time_sleep)
         else:
             pass
-
+        
         logger.info(f"Click {self.name}")
         # time.sleep(time_sleep)
         if self.check_button(time_wait = time_wait) is True:
@@ -88,16 +84,16 @@ class Button:
                 pydirectinput.moveTo(200, 200)
                 return True
             except pyautogui.ImageNotFoundException:
-                logger.debug(f"Khong tim thay hinh anh {self.name}")
+                logger.debug(f"Khong tim thay hinh anh: {self.name}")
                 return None
             except Exception as e:
                 logger.error(e)
                 return
         if global_event.check_event():
             return False
-
+    
     @staticmethod
-    def click_lock(name_item, box):
+    def click_lock_item(name_item, box):
         if global_event.check_event():
             return False
         logger.info("Click lock")
@@ -117,7 +113,7 @@ class Button:
         except Exception as e:
             logger.error(e)
             return False
-
+    
     @staticmethod
     def click_lock_hero(hero_name, box):
         if global_event.check_event():
@@ -138,7 +134,7 @@ class Button:
         except Exception as e:
             logger.error(e)
             return False
-
+    
     @staticmethod
     def check_money():
         global REGION, CONFIDENCE, GRAYSCALE
@@ -158,7 +154,7 @@ class Button:
         except Exception as e:
             logger.error(e)
             return None
-
+    
     @staticmethod
     def button_check(para_name, time_wait = 2, ):
         global REGION, CONFIDENCE, GRAYSCALE
@@ -176,7 +172,7 @@ class Button:
         except Exception as e:
             logger.error(e)
             return False
-
+    
     @staticmethod
     def enter_game():
         if global_event.check_event():
@@ -192,15 +188,15 @@ class Button:
         Button("StartGame").click(time_sleep = 5, time_wait = 30)
         Button("Accept").click(time_sleep = 5, time_wait = 30)
         # global_event.sleep(30)
-
+        
         Button("Confirm").click(time_sleep = 5, time_wait = 120)
         Button("Challenge").click()
         # click(ChallengeMax, 2)
-
+        
         Button("SelectCharacter").click()
         # py.moveTo(100, 100)
         Button("Prepare").click()
-
+    
     @staticmethod
     def check_exit_round(time_wait = 40):
         if global_event.check_event():
@@ -209,7 +205,7 @@ class Button:
         character_moves_event.app_pause()
         global REGION, CONFIDENCE, GRAYSCALE
         i = 0
-
+        
         character_moves_event.app_resume()
         logger.debug("Bat dau di chuyen")
         while True:
@@ -235,13 +231,13 @@ class Button:
                 if i > time_wait:
                     character_moves_event.app_stop()
                     return False
-
+            
             except Exception as e:
                 logger.error(e)
                 break
         if global_event.check_event():
             return False
-
+    
     @staticmethod
     def check_resurrect():
         if global_event.check_event():
@@ -275,14 +271,14 @@ class Button:
                 break
         if global_event.check_event():
             return False
-
+    
     @staticmethod
     def next_round():
         if global_event.check_event():
             return False
         logger.info("Next round")
         Button("ProceedToRound").click(time_sleep = 2, time_wait = 20)
-
+    
     @staticmethod
     def character_moves(round_number = 2):
         logger.debug("Cho bat dau di chuyen")
@@ -324,7 +320,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0], loc[1] - loc1)
-
+            
             for i in range(0, number_click):
                 if global_event.check_event():
                     return False
@@ -343,7 +339,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
-
+    
     @staticmethod
     def run_round(round_number = 2):
         if global_event.check_event():
@@ -363,7 +359,7 @@ class Button:
         t_character_moves.join()
         if global_event.check_event():
             return False
-
+    
     @staticmethod
     def exit_round20():
         if global_event.check_event():
@@ -371,7 +367,7 @@ class Button:
         Button("ProceedToRound").click()
         if global_event.check_event():
             return False
-
+    
     @staticmethod
     def exit_game_round20():
         if global_event.check_event():
@@ -394,7 +390,7 @@ class Button:
         Button("Update").click(time_sleep = 2, time_wait = 15)
         if global_event.check_event():
             return False
-
+    
     @staticmethod
     def roll_game():
         if global_event.check_event():

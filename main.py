@@ -22,9 +22,9 @@ hotkey_combination_pause = "ctrl+space"
 
 def main():
     global main_status
-
+    
     hwnd = Dota2.get_app_window_handle()
-
+    
     if hwnd:
         main_status = True
         global_event.sleep(1)
@@ -52,7 +52,7 @@ def main():
                 # print("Dang cho 5s")
                 logger.info(f"Dang cho bat auto lai sau {t}/10s")
                 global_event.sleep(1)
-
+    
     else:
         main_status = False
         logger.info("Khong tim thay cua so co ten {}".format(Dota2.app_name))
@@ -61,23 +61,23 @@ def main():
 class ThreadedApp:
     def __init__(self):
         self.t1 = threading.Thread()
-
+    
     def run(self):
         global_event.app_start()
         character_moves_event.app_start()
         self.t1 = threading.Thread(target = main, args = (), daemon = True)
         self.t1.start()
-
+    
     def stop(self):
         global_event.app_stop()
         character_moves_event.app_stop()
         self.t1.join()
-
+    
     @staticmethod
     def pause():
         global_event.app_pause()
         character_moves_event.app_pause()
-
+    
     @staticmethod
     def resume():
         global_event.app_resume()
@@ -97,11 +97,9 @@ def make_win2():
 def make_win1():
     global button_pause
     layout = [
-        [sg.Button("Start (Ctrl + F9)", key = "-START-"),
-         sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ],
-        [sg.Output(size = (50, 10), key = "-OUTPUT-")],
-        [sg.Button("Exit", key = "Exit")],]
+        [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
+         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], [sg.Output(size = (50, 10), key = "-OUTPUT-")],
+        [sg.Button("Exit", key = "Exit")], ]
     return sg.Window("Brodota-bot", layout, finalize = True, )
 
 
@@ -129,7 +127,7 @@ def gui():
                 window1["-STOP-"].update(disabled = False)
                 appStarted = True
             main_start = False
-
+        
         elif (event == "-STOP-") or (main_stop is True):
             if appStarted is True:
                 threaded_app.stop()
@@ -189,11 +187,11 @@ def on_hotkey_pause():
 
 
 if __name__ == "__main__":
-
+    
     keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
     keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
     keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
-
+    
     gui()
     # main()
     pass

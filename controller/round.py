@@ -9,7 +9,7 @@ from controller.filelog import logger
 from controller.global_variables import global_event, character_moves_event
 
 
-def round_all(auto_number=1):
+def round_all(auto_number = 1):
     if global_event.check_event():
         # logger.info("Stop thread round 1")
         return False
@@ -44,7 +44,7 @@ def round_all(auto_number=1):
             # button.click(button.CreateCustomLobby)
             if Button.enter_game() is False:
                 break
-            if Button.run_round(round_number=round_number) is False:
+            if Button.run_round(round_number = round_number) is False:
                 break
         else:
             while True:
@@ -61,8 +61,8 @@ def round_all(auto_number=1):
                     break
                 if item.buy_all_previous_item() is False:
                     break
-                t_buy_all_hero = threading.Thread(target=hero.buy_all_hero, args=(round_number,))
-                t_buy_all_item = threading.Thread(target=item.buy_all_item, args=(round_number,))
+                t_buy_all_hero = threading.Thread(target = hero.buy_all_hero, args = (round_number,))
+                t_buy_all_item = threading.Thread(target = item.buy_all_item, args = (round_number,))
                 t_buy_all_hero.start()
                 t_buy_all_item.start()
                 t_buy_all_hero.join()
@@ -84,15 +84,15 @@ def round_all(auto_number=1):
             if round_number < 20:
                 if Button.next_round() is False:
                     break
-                if Button.run_round(round_number=round_number) is False:
+                if Button.run_round(round_number = round_number) is False:
                     break
                 logger.info(f"Day la round: {round_number}, auto lan thu: {auto_number}")
             else:
                 
                 if Button.exit_round20() is False:
                     break
-                t1 = threading.Thread(target=attack_boss, args=())
-                t2 = threading.Thread(target=Button.character_moves, args=(round_number,))
+                t1 = threading.Thread(target = attack_boss, args = ())
+                t2 = threading.Thread(target = Button.character_moves, args = (round_number,))
                 t1.start()
                 t2.start()
                 t1.join()
@@ -115,9 +115,7 @@ def attack_boss():
             character_moves_event.app_stop()
         
         global_event.sleep(1)
-        logger.info(
-            f"Ban dang danh boss round {s}, thoi gian con lai {s}/{time_wait}s"
-        )
+        logger.info(f"Ban dang danh boss round {s}, thoi gian con lai {s}/{time_wait}s")
     character_moves_event.app_stop()
 
 
@@ -128,8 +126,8 @@ if __name__ == "__main__":
     n = 8
     start = time.time()
     
-    thread_buy_all_hero = threading.Thread(target=hero.buy_all_hero, args=(n,))
-    thread_buy_all_item = threading.Thread(target=item.buy_all_item, args=(n,))
+    thread_buy_all_hero = threading.Thread(target = hero.buy_all_hero, args = (n,))
+    thread_buy_all_item = threading.Thread(target = item.buy_all_item, args = (n,))
     
     thread_buy_all_hero.start()
     thread_buy_all_item.start()
