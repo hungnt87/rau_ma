@@ -201,13 +201,9 @@ class Button:
     def check_exit_round(time_wait = 40):
         if global_event.check_event():
             return False
-        character_moves_event.app_start()
-        character_moves_event.app_pause()
         global REGION, CONFIDENCE, GRAYSCALE
         i = 0
         
-        character_moves_event.app_resume()
-        logger.debug("Bat dau di chuyen")
         while True:
             if global_event.check_event():
                 break
@@ -284,9 +280,9 @@ class Button:
         logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
-        if not global_event.event_stop.is_set():
-            if character_moves_event.check_event():
-                return False
+        #if not global_event.event_stop.is_set():
+        if character_moves_event.check_event():
+            return False
         pydirectinput.PAUSE = 0.1
         loc = (973, 575)
         loc1 = 130
