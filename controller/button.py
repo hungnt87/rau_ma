@@ -355,6 +355,7 @@ class Button:
         t_character_moves.start()
         # join thread
         t_check_exit_round.join()
+        t_check_resurrect.join()
         t_character_moves.join()
         if global_event.check_event():
             return False
