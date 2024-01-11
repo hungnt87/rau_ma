@@ -96,11 +96,12 @@ def make_win2():
 
 def make_win1():
     global button_pause
+    sg.theme("SystemDefaultForReal")
     layout = [
         [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
          sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], [sg.Output(size = (50, 10), key = "-OUTPUT-")],
         [sg.Button("Exit", key = "Exit")], ]
-    return sg.Window("Brodota-bot", layout, finalize = True, )
+    return sg.Window("Brodota-bot", layout, finalize = True )
 
 
 def gui():
@@ -110,6 +111,7 @@ def gui():
     threaded_app = ThreadedApp()
     log_output1 = OutputHandler(window1)
     logger.addHandler(log_output1)
+
     while True:
         window, event, values = sg.read_all_windows()
         if event == sg.WIN_CLOSED or event == "Exit":
