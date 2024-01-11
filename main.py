@@ -1,6 +1,7 @@
 import threading
 import time
 
+import pydirectinput
 import PySimpleGUI as sg
 import keyboard
 
@@ -18,7 +19,7 @@ button_pause = "Pause (Ctrl + Space)"
 hotkey_combination_start = "ctrl+f9"
 hotkey_combination_stop = "ctrl+q"
 hotkey_combination_pause = "ctrl+space"
-
+pydirectinput.PAUSE = 0.2
 
 def main():
     global main_status

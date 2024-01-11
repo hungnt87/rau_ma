@@ -213,6 +213,7 @@ class Button:
                 if res_center:
                     logger.debug("Da ket thuc round")
                     character_moves_event.app_stop()
+                    global_event.sleep(1)
                     return True
             except pyautogui.ImageNotFoundException:
                 if Button.button_check("Abandon", 2):
@@ -226,6 +227,7 @@ class Button:
                 global_event.sleep(1)
                 if i > time_wait:
                     character_moves_event.app_stop()
+                    global_event.sleep(1)
                     return False
             
             except Exception as e:
@@ -283,7 +285,7 @@ class Button:
         #if not global_event.event_stop.is_set():
         if character_moves_event.check_event():
             return False
-        pydirectinput.PAUSE = 0.1
+        
         loc = (973, 575)
         loc1 = 130
         logger.debug("Bat dau di chuyen")
@@ -291,7 +293,7 @@ class Button:
             number_click = 9
             number_click_first = 6
         else:
-            number_click = 12
+            number_click = 14
             number_click_first = 8
         for i in range(0, number_click_first):
             if global_event.check_event():
@@ -299,6 +301,7 @@ class Button:
             if character_moves_event.check_event():
                 return False
             pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
+            
         for i in range(0, 6):
             if global_event.check_event():
                 return False
