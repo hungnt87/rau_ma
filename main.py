@@ -1,11 +1,12 @@
 import threading
 import time
 
-import pydirectinput
 import PySimpleGUI as sg
 import keyboard
+import pydirectinput
 
 import controller.round as r
+import interface
 from controller.button import Button
 from controller.filelog import logger, OutputHandler
 from controller.global_variables import global_event, character_moves_event, Dota2
@@ -24,9 +25,9 @@ pydirectinput.PAUSE = 0.1
 
 def main():
     global main_status
-    
+
     hwnd = Dota2.get_app_window_handle()
-    
+
     if hwnd:
         main_status = True
         global_event.sleep(1)
@@ -54,7 +55,7 @@ def main():
                 # print("Dang cho 5s")
                 logger.info(f"Dang cho bat auto lai sau {t}/10s")
                 global_event.sleep(1)
-    
+
     else:
         main_status = False
         logger.info("Khong tim thay cua so co ten {}".format(Dota2.app_name))
@@ -63,60 +64,40 @@ def main():
 class ThreadedApp:
     def __init__(self):
         self.t1 = threading.Thread()
-    
+
     def run(self):
         global_event.app_start()
         character_moves_event.app_start()
         self.t1 = threading.Thread(target = main, args = (), daemon = True)
         self.t1.start()
-    
+
     def stop(self):
         global_event.app_stop()
         character_moves_event.app_stop()
         self.t1.join()
-    
+
     @staticmethod
     def pause():
         global_event.app_pause()
         character_moves_event.app_pause()
-    
+
     @staticmethod
     def resume():
         global_event.app_resume()
         character_moves_event.app_resume()
 
 
-def window_config_auto():
-    
-    layout = [
-        [sg.Checkbox("Di chuyển tự động", default = True, key = "-Move-",enable_events = True, size = (50, 50), auto_size_text = True,
-                     pad = [20, 20, 20, 20])],
-        [sg.Checkbox("Tắt Like khi thoát game", default = True, key = "-Like-",enable_events = True, size = (50, 50), auto_size_text = True,
-                     pad = [20, 20, 20, 20])],
-        [sg.Button("Save", key = "-Save-")],
-        ]
-    window = sg.Window("Config auto", layout, finalize = True, size = (500, 300))
-    choice = None
-    while True:
-        event, values = window.read()
-        if event == "Exit" or event == sg.WIN_CLOSED:
-            break
-        elif values["-Move-"]:
-            logger.info("Cai dat di chuyen tu dong")
-        elif values["-Like-"]:
-            logger.info("Cai dat tat like khi thoat game")
-
-
 def make_win1():
     global button_pause
-    sg.theme("SystemDefaultForReal")
+    # sg.theme("SystemDefaultForReal")
     menu_def = [["Config", ["Auto", "Item", "Hero"]]]
-    
+
     layout = [[sg.Menu(menu_def, tearoff = False)],
-        [sg.Output(size = (50, 15), key = "-OUTPUT-")],
-        [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-            sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], ]
-    return sg.Window("Brodota-bot", layout, finalize = True, location = (1920, 100), )
+              [sg.Output(size = (50, 15), key = "-OUTPUT-")],
+              [sg.Button("Start (Ctrl + F9)", key = "-START-"),
+               sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
+               sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], ]
+    return sg.Window("Brodota-bot", layout, finalize = True)
 
 
 def gui():
@@ -126,7 +107,7 @@ def gui():
     threaded_app = ThreadedApp()
     log_output1 = OutputHandler(window)
     logger.addHandler(log_output1)
-    
+
     while True:
         event, values = window.read(timeout = 100)
         if event == sg.WIN_CLOSED or event == "Exit":
@@ -140,7 +121,7 @@ def gui():
                 window["-STOP-"].update(disabled = False)
                 appStarted = True
             main_start = False
-        
+
         elif (event == "-STOP-") or (main_stop is True):
             if appStarted is True:
                 threaded_app.stop()
@@ -162,9 +143,9 @@ def gui():
                     threaded_app.resume()
             main_pause = False
         elif event == "Auto":
-            logger.info("Auto")
-            window_config_auto()
-        
+            # logger.info("Auto")
+            interface.window_config_auto()
+
         elif event == "Emit":
             window["-OUTPUT-"].update(values[event] + "\n", append = True)
         if main_status is True:
@@ -200,11 +181,14 @@ def on_hotkey_pause():
 
 
 if __name__ == "__main__":
-    
+
     keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
     keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
     keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
-    
+
     gui()
     # main()
+    # print(config.sections())
+    # print(read_config("ConfigAuto", "MyBurn"))
+    # save_config("move", "100")
     pass
