@@ -21,6 +21,7 @@ hotkey_combination_stop = "ctrl+q"
 hotkey_combination_pause = "ctrl+space"
 pydirectinput.PAUSE = 0.2
 
+
 def main():
     global main_status
     
@@ -98,36 +99,31 @@ def make_win2():
 def make_win1():
     global button_pause
     sg.theme("SystemDefaultForReal")
-    layout = [
+    layout = [[sg.Output(size = (50, 40), key = "-OUTPUT-")],
         [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-         sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], [sg.Output(size = (50, 10), key = "-OUTPUT-")],
-        [sg.Button("Exit", key = "Exit")], ]
-    return sg.Window("Brodota-bot", layout, finalize = True )
+            sg.Button(button_pause, key = "-PAUSE-", disabled = True), sg.Button("Exit", key = "Exit")], ]
+    return sg.Window("Brodota-bot", layout, finalize = True, location = (1920, 100), )
 
 
 def gui():
     global main_status, button_pause, main_stop, main_start, appStarted, main_pause
-    window1, window2 = make_win1(), make_win2()
+    window = make_win1()
     appStarted = False
     threaded_app = ThreadedApp()
-    log_output1 = OutputHandler(window1)
+    log_output1 = OutputHandler(window)
     logger.addHandler(log_output1)
-
+    
     while True:
-        window, event, values = sg.read_all_windows()
+        event, values = window.read(timeout = 100)
         if event == sg.WIN_CLOSED or event == "Exit":
-            # window.close()
-            if window == window2:  # if closing win 2, mark as closed
-                window2 = None
-            elif window == window1:  # if closing win 1, exit program
-                break
+            break
         elif event == "-START-" or main_start is True:
             if appStarted is False:
                 threaded_app.run()
                 # if main_status is True:
-                window1["-START-"].update(disabled = True)
-                window1["-PAUSE-"].update(disabled = False)
-                window1["-STOP-"].update(disabled = False)
+                window["-START-"].update(disabled = True)
+                window["-PAUSE-"].update(disabled = False)
+                window["-STOP-"].update(disabled = False)
                 appStarted = True
             main_start = False
         
@@ -138,25 +134,23 @@ def gui():
                 main_status = False
                 # window2.close()
                 # window2 = None
-                window1["-START-"].update(disabled = False)
-                window1["-STOP-"].update(disabled = True)
-                window1["-PAUSE-"].update(disabled = True)
+                window["-START-"].update(disabled = False)
+                window["-STOP-"].update(disabled = True)
+                window["-PAUSE-"].update(disabled = True)
             main_stop = False
         elif (event == "-PAUSE-") or (main_pause is True):
             if appStarted is True:
                 if button_pause == "Pause (Ctrl + Space)":
                     button_pause = "Resume (Ctrl + Space)"
-                    window1["-PAUSE-"].update(button_pause)
+                    window["-PAUSE-"].update(button_pause)
                     threaded_app.pause()
                 else:
                     button_pause = "Pause (Ctrl + Space)"
-                    window1["-PAUSE-"].update(button_pause)
+                    window["-PAUSE-"].update(button_pause)
                     threaded_app.resume()
             main_pause = False
         elif event == "Emit":
-            window1["-OUTPUT-"].update(values[event] + "\n", append = True)
-            # if window2 is not None:
-            window2["-OUTPUT-"].update(values[event] + "\n", append = True)
+            window["-OUTPUT-"].update(values[event] + "\n", append = True)
         if main_status is True:
             window["-START-"].update(disabled = True)
             window["-PAUSE-"].update(disabled = False)
