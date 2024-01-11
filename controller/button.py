@@ -6,7 +6,7 @@ import pydirectinput
 
 import controller.global_variables as cgv
 from controller.filelog import logger
-from controller.global_variables import SelectWindow, character_moves_event, global_event, path
+from controller.global_variables import character_moves_event, global_event, path
 
 REGION = (0, 0, 1936, 1119)
 CONFIDENCE = 0.8
@@ -16,21 +16,21 @@ GRAYSCALE = True
 class Button:
     name = ""
     img = None
-    
+
     def __init__(self, para_name):
         self.name = para_name
         self.img = self._get_button_img(para_name)
         self.region = REGION
         self.grayscale = GRAYSCALE
         self.confidence = CONFIDENCE
-    
+
     def _get_button_img(self, para_name):
         # global HERO_IMG
         if self.img is None:
             file_name = para_name + ".png"
             self.img = path.get_absolute_path(os.path.join("assets", "img", "button", file_name))
         return self.img
-    
+
     def check_button(self, time_wait = 30):
         if global_event.check_event():
             return False
@@ -55,9 +55,7 @@ class Button:
             except Exception as e:
                 logger.error(e)
                 break
-        if global_event.check_event():
-            return False
-    
+
     def click(self, time_sleep = 1, time_wait = 60):
         if global_event.check_event():
             return False
@@ -67,7 +65,7 @@ class Button:
             global_event.sleep(time_sleep = time_sleep)
         else:
             pass
-        
+
         logger.info(f"Click {self.name}")
         # time.sleep(time_sleep)
         if self.check_button(time_wait = time_wait) is True:
@@ -89,9 +87,7 @@ class Button:
             except Exception as e:
                 logger.error(e)
                 return
-        if global_event.check_event():
-            return False
-    
+
     @staticmethod
     def click_lock_item(name_item, box):
         if global_event.check_event():
@@ -112,8 +108,8 @@ class Button:
             return False
         except Exception as e:
             logger.error(e)
-            return False
-    
+            return None
+
     @staticmethod
     def click_lock_hero(hero_name, box):
         if global_event.check_event():
@@ -133,8 +129,8 @@ class Button:
             return False
         except Exception as e:
             logger.error(e)
-            return False
-    
+            return None
+
     @staticmethod
     def check_money():
         global REGION, CONFIDENCE, GRAYSCALE
@@ -154,7 +150,7 @@ class Button:
         except Exception as e:
             logger.error(e)
             return None
-    
+
     @staticmethod
     def button_check(para_name, time_wait = 2, ):
         global REGION, CONFIDENCE, GRAYSCALE
@@ -171,8 +167,8 @@ class Button:
             return False
         except Exception as e:
             logger.error(e)
-            return False
-    
+            return None
+
     @staticmethod
     def enter_game():
         if global_event.check_event():
@@ -188,15 +184,15 @@ class Button:
         Button("StartGame").click(time_sleep = 5, time_wait = 30)
         Button("Accept").click(time_sleep = 5, time_wait = 30)
         # global_event.sleep(30)
-        
+
         Button("Confirm").click(time_sleep = 5, time_wait = 120)
         Button("Challenge").click()
         # click(ChallengeMax, 2)
-        
+
         Button("SelectCharacter").click()
         # py.moveTo(100, 100)
         Button("Prepare").click()
-    
+
     @staticmethod
     def check_exit_round(time_wait = 40):
         if global_event.check_event():
@@ -229,13 +225,11 @@ class Button:
                     character_moves_event.app_stop()
                     global_event.sleep(1)
                     return False
-            
+
             except Exception as e:
                 logger.error(e)
                 break
-        if global_event.check_event():
-            return False
-    
+
     @staticmethod
     def check_resurrect():
         if global_event.check_event():
@@ -267,25 +261,24 @@ class Button:
             except Exception as e:
                 logger.error(e)
                 break
-        if global_event.check_event():
-            return False
-    
+
+
     @staticmethod
     def next_round():
         if global_event.check_event():
             return False
         logger.info("Next round")
         Button("ProceedToRound").click(time_sleep = 2, time_wait = 20)
-    
+
     @staticmethod
     def character_moves(round_number = 2):
         logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
-        #if not global_event.event_stop.is_set():
+        # if not global_event.event_stop.is_set():
         if character_moves_event.check_event():
             return False
-        
+
         loc = (973, 575)
         loc1 = 150
         logger.debug("Bat dau di chuyen")
@@ -301,7 +294,7 @@ class Button:
             if character_moves_event.check_event():
                 return False
             pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
-            
+
         for i in range(0, 6):
             if global_event.check_event():
                 return False
@@ -319,7 +312,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0], loc[1] - loc1)
-            
+
             for i in range(0, number_click):
                 if global_event.check_event():
                     return False
@@ -338,7 +331,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
-    
+
     @staticmethod
     def run_round(round_number = 2):
         if global_event.check_event():
@@ -359,7 +352,7 @@ class Button:
         t_character_moves.join()
         if global_event.check_event():
             return False
-    
+
     @staticmethod
     def exit_round20():
         if global_event.check_event():
@@ -367,7 +360,7 @@ class Button:
         Button("ProceedToRound").click()
         if global_event.check_event():
             return False
-    
+
     @staticmethod
     def exit_game_round20():
         if global_event.check_event():
@@ -390,7 +383,7 @@ class Button:
         Button("Update").click(time_sleep = 2, time_wait = 15)
         if global_event.check_event():
             return False
-    
+
     @staticmethod
     def roll_game():
         if global_event.check_event():

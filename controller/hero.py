@@ -104,7 +104,7 @@ class Hero:
             return False
         except Exception as e:
             logger.error(e)
-            return False
+            return None
     
     def sell_hero(self):
         if global_event.check_event():
@@ -129,7 +129,7 @@ class Hero:
                 return False
             except Exception as e:
                 logger.error(e)
-                return False
+                return None
 
 
 def buy_all_previous_hero():

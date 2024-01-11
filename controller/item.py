@@ -49,7 +49,7 @@ class Item:
                 return False
             except Exception as e:
                 logger.error(e)
-                return False
+                return None
         else:
             pass  # logger.debug(  #     f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"  # )
 
