@@ -14,6 +14,10 @@ def round_all(auto_number = 1):
         # logger.info("Stop thread round 1")
         return False
     round_number = 0
+    hero.reset_hero()
+    hero.reset_previous_hero()
+    item.reset_item()
+    item.reset_previous_item()
     while round_number < 20:
         if global_event.check_event():
             # logger.info("Stop thread round 2")
@@ -24,10 +28,7 @@ def round_all(auto_number = 1):
         number_roll = 0
         cgv.reset_count_of_buy()
         cgv.set_money(True)
-        hero.reset_hero()
-        hero.reset_previous_hero()
-        item.reset_item()
-        item.reset_previous_item()
+        
         if round_number == 2:
             number_buy = 4
         elif round_number <= 4:

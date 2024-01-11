@@ -287,14 +287,14 @@ class Button:
             return False
         
         loc = (973, 575)
-        loc1 = 130
+        loc1 = 150
         logger.debug("Bat dau di chuyen")
         if round_number == 1:
-            number_click = 9
-            number_click_first = 6
+            number_click = 10
+            number_click_first = 7
         else:
-            number_click = 14
-            number_click_first = 8
+            number_click = 12
+            number_click_first = 6
         for i in range(0, number_click_first):
             if global_event.check_event():
                 return False

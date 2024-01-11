@@ -19,7 +19,7 @@ button_pause = "Pause (Ctrl + Space)"
 hotkey_combination_start = "ctrl+f9"
 hotkey_combination_stop = "ctrl+q"
 hotkey_combination_pause = "ctrl+space"
-pydirectinput.PAUSE = 0.2
+pydirectinput.PAUSE = 0.1
 
 
 def main():
@@ -99,9 +99,9 @@ def make_win2():
 def make_win1():
     global button_pause
     sg.theme("SystemDefaultForReal")
-    layout = [[sg.Output(size = (50, 40), key = "-OUTPUT-")],
+    layout = [[sg.Output(size = (50, 15), key = "-OUTPUT-")],
         [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-            sg.Button(button_pause, key = "-PAUSE-", disabled = True), sg.Button("Exit", key = "Exit")], ]
+            sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], ]
     return sg.Window("Brodota-bot", layout, finalize = True, location = (1920, 100), )
 
 
@@ -132,8 +132,6 @@ def gui():
                 threaded_app.stop()
                 appStarted = False
                 main_status = False
-                # window2.close()
-                # window2 = None
                 window["-START-"].update(disabled = False)
                 window["-STOP-"].update(disabled = True)
                 window["-PAUSE-"].update(disabled = True)
