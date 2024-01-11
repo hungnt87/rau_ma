@@ -78,22 +78,6 @@ class Hero:
     def buy(self):
         if global_event.check_event():
             return False
-        # logger.debug("Bat dau tim hero {}".format(self.name))
-        try:
-            res_center = pyautogui.locateCenterOnScreen(
-                self.img, minSearchTime=1, confidence=self.confidence, region=self.region, grayscale=self.grayscale, )
-            
-            return res_center
-        except pyautogui.ImageNotFoundException:
-            # logger.debug("Khong tim thay hinh anh {}".format(self.img))
-            return False
-        except Exception as e:
-            logger.error(e)
-            return None
-    
-    def buy_hero(self):
-        if global_event.check_event():
-            return False
         logger.debug("Bat dau tim hero {}".format(self.name))
         count_buy = self.need_buy - self.number
         
@@ -101,7 +85,7 @@ class Hero:
             # logger.debug(f"Con {count_buy} {self.name} can mua")
             try:
                 res_center = pyautogui.locateCenterOnScreen(
-                    self.img, minSearchTime=1.5, confidence=self.confidence, region=self.region,
+                    self.img, minSearchTime=1, confidence=self.confidence, region=self.region,
                     grayscale=self.grayscale, )
                 previous_hero[res_center] = self
                 return True
@@ -136,14 +120,15 @@ class Hero:
             self.number = 100
             try:
                 res_center = pyautogui.locateCenterOnScreen(
-                    self.img_lv1, confidence=self.confidence,minSearchTime=1, region=self.region_sell, grayscale=self.grayscale, )
+                    self.img_lv1, confidence=self.confidence, minSearchTime=1, region=self.region_sell,
+                    grayscale=self.grayscale, )
                 pydirectinput.rightClick(res_center.x, res_center.y)
                 time.sleep(0.5)
                 pydirectinput.click(res_center.x + 20, res_center.y)
                 pydirectinput.moveTo(213, 201)
                 logger.debug(f"Ban thanh cong hero {self.name}")
                 time.sleep(0.5)
-
+                
                 return True
             except pyautogui.ImageNotFoundException:
                 logger.debug(f"Khong co hero  {self.name} de ban")
@@ -172,7 +157,7 @@ def buy_all_previous_hero():
             else:
                 look_region = (key[0], key[1], 267, 312)
                 cgv.set_money(False)
-                if Button.click_lock_hero(value.name,look_region) is True:
+                if Button.click_lock_hero(value.name, look_region) is True:
                     # del previous_item[key]
                     logger.debug("Khong du tien, Khoa hero")
                 else:
@@ -239,14 +224,12 @@ def check_sell_hero(hero: Hero):
     elif hero.name == DragonKnight.name:
         Windranger.sell_hero()
     
-    
     # slot 4
     elif hero.name == DarkWillow.name:
         HoodWink.sell_hero()
     elif hero.name == DrowRanger.name:
         HoodWink.sell_hero()
         DarkWillow.sell_hero()
-    
     
     # slot 5
     elif hero.name == WitchDoctor.name:
@@ -271,24 +254,24 @@ def buy_all_hero(round_number):
     if cgv.check_money() is False:
         logger.debug("Khong du tien, next round")
         return None
-    thread_buy_dazzale = threading.Thread(target=Dazzale.buy_hero, args=())
-    thread_buy_oracle = threading.Thread(target=Oracle.buy_hero, args=())
-    thread_buy_hoodwink = threading.Thread(target=HoodWink.buy_hero, args=())
-    thread_buy_winter_wyvern = threading.Thread(target=WinterWyvern.buy_hero, args=())
-    thread_buy_luna = threading.Thread(target=Luna.buy_hero, args=())
-    thread_buy_troll_warlord = threading.Thread(target=TrollWarlord.buy_hero, args=())
-    thread_buy_morphling = threading.Thread(target=Morphling.buy_hero, args=())
-    thread_buy_windranger = threading.Thread(target=Windranger.buy_hero, args=())
-    thread_buy_mirana = threading.Thread(target=Mirana.buy_hero, args=())
-    thread_buy_dark_willow = threading.Thread(target=DarkWillow.buy_hero, args=())
-    thread_buy_clinkz = threading.Thread(target=Clinkz.buy_hero, args=())
-    thread_buy_witch_doctor = threading.Thread(target=WitchDoctor.buy_hero, args=())
-    thread_buy_sniper = threading.Thread(target=Sniper.buy_hero, args=())
-    thread_buy_snapfire = threading.Thread(target=Snapfire.buy_hero, args=())
-    thread_buy_drow_ranger = threading.Thread(target=DrowRanger.buy_hero, args=())
-    thread_buy_templar_assassin = threading.Thread(target=TemplarAssassin.buy_hero, args=())
-    thread_buy_zet = threading.Thread(target=Zet.buy_hero, args=())
-    thread_buy_dragon_knight = threading.Thread(target=DragonKnight.buy_hero, args=())
+    thread_buy_dazzale = threading.Thread(target=Dazzale.buy, args=())
+    thread_buy_oracle = threading.Thread(target=Oracle.buy, args=())
+    thread_buy_hoodwink = threading.Thread(target=HoodWink.buy, args=())
+    thread_buy_winter_wyvern = threading.Thread(target=WinterWyvern.buy, args=())
+    thread_buy_luna = threading.Thread(target=Luna.buy, args=())
+    thread_buy_troll_warlord = threading.Thread(target=TrollWarlord.buy, args=())
+    thread_buy_morphling = threading.Thread(target=Morphling.buy, args=())
+    thread_buy_windranger = threading.Thread(target=Windranger.buy, args=())
+    thread_buy_mirana = threading.Thread(target=Mirana.buy, args=())
+    thread_buy_dark_willow = threading.Thread(target=DarkWillow.buy, args=())
+    thread_buy_clinkz = threading.Thread(target=Clinkz.buy, args=())
+    thread_buy_witch_doctor = threading.Thread(target=WitchDoctor.buy, args=())
+    thread_buy_sniper = threading.Thread(target=Sniper.buy, args=())
+    thread_buy_snapfire = threading.Thread(target=Snapfire.buy, args=())
+    thread_buy_drow_ranger = threading.Thread(target=DrowRanger.buy, args=())
+    thread_buy_templar_assassin = threading.Thread(target=TemplarAssassin.buy, args=())
+    thread_buy_zet = threading.Thread(target=Zet.buy, args=())
+    thread_buy_dragon_knight = threading.Thread(target=DragonKnight.buy, args=())
     
     if round_number <= 3:
         thread_buy_dazzale.start()
@@ -358,7 +341,7 @@ def buy_all_hero(round_number):
         thread_buy_drow_ranger.join()
         thread_buy_templar_assassin.join()
         thread_buy_zet.join()
-        thread_buy_dragon_knight.join()  # buy_all_previous_hero()  # logger.info(f"Ket thuc mua hero in round: {round_number}")
+        thread_buy_dragon_knight.join()
 
 
 def reset_hero():
