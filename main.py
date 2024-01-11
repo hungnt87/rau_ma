@@ -86,20 +86,34 @@ class ThreadedApp:
         character_moves_event.app_resume()
 
 
-def make_win2():
-    global button_pause
-    layout = [[sg.Output(key = "-OUTPUT-", size = (30, 5), font = "Helvetica 11", background_color = "black",
-                         text_color = "green", sbar_arrow_color = "black", sbar_background_color = "black",
-                         sbar_frame_color = "black", sbar_width = 0, sbar_arrow_width = 0, sbar_relief = "flat", )], ]
-    return sg.Window("Second Window", layout, location = (10, 850), finalize = True, no_titlebar = True,
-                     keep_on_top = True, background_color = "black", transparent_color = "black",  # alpha_channel=0.9,
-                     alpha_channel = 0.9, border_depth = 0, )
+def window_config_auto():
+    
+    layout = [
+        [sg.Checkbox("Di chuyển tự động", default = True, key = "-Move-",enable_events = True, size = (50, 50), auto_size_text = True,
+                     pad = [20, 20, 20, 20])],
+        [sg.Checkbox("Tắt Like khi thoát game", default = True, key = "-Like-",enable_events = True, size = (50, 50), auto_size_text = True,
+                     pad = [20, 20, 20, 20])],
+        [sg.Button("Save", key = "-Save-")],
+        ]
+    window = sg.Window("Config auto", layout, finalize = True, size = (500, 300))
+    choice = None
+    while True:
+        event, values = window.read()
+        if event == "Exit" or event == sg.WIN_CLOSED:
+            break
+        elif values["-Move-"]:
+            logger.info("Cai dat di chuyen tu dong")
+        elif values["-Like-"]:
+            logger.info("Cai dat tat like khi thoat game")
 
 
 def make_win1():
     global button_pause
     sg.theme("SystemDefaultForReal")
-    layout = [[sg.Output(size = (50, 15), key = "-OUTPUT-")],
+    menu_def = [["Config", ["Auto", "Item", "Hero"]]]
+    
+    layout = [[sg.Menu(menu_def, tearoff = False)],
+        [sg.Output(size = (50, 15), key = "-OUTPUT-")],
         [sg.Button("Start (Ctrl + F9)", key = "-START-"), sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
             sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], ]
     return sg.Window("Brodota-bot", layout, finalize = True, location = (1920, 100), )
@@ -147,6 +161,10 @@ def gui():
                     window["-PAUSE-"].update(button_pause)
                     threaded_app.resume()
             main_pause = False
+        elif event == "Auto":
+            logger.info("Auto")
+            window_config_auto()
+        
         elif event == "Emit":
             window["-OUTPUT-"].update(values[event] + "\n", append = True)
         if main_status is True:
