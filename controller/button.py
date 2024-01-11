@@ -203,7 +203,7 @@ class Button:
             return False
         global REGION, CONFIDENCE, GRAYSCALE
         i = 0
-        
+        global_event.sleep(10)
         while True:
             if global_event.check_event():
                 break
