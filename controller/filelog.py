@@ -29,7 +29,7 @@ logger.setLevel(logging.DEBUG)
 
 # print(path)
 # now we can add the console logging
-# console = logging.StreamHandler()
-# console.setFormatter(console_format)
-# console.setLevel(logging.DEBUG)
-# logging.getLogger(__name__).addHandler(console)
+console = logging.StreamHandler()
+console.setFormatter(console_format)
+console.setLevel(logging.DEBUG)
+logging.getLogger(__name__).addHandler(console)

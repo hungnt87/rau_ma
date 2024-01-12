@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
     # keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
 
-    interface.main_window()
+    # interface.main_window()
     # main()
     # print(config.sections())
     # print(read_config("ConfigAuto", "MyBurn"))
