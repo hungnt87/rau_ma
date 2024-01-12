@@ -208,6 +208,7 @@ Clinkz = Hero(name="Clinkz", need_buy=4)
 # hero lv4
 Sniper = Hero(name="Sniper", need_buy=5)
 Snapfire = Hero(name="Snapfire", need_buy=5)
+Queen_of_Pain = Hero(name="Queen_of_Pain", need_buy=5)
 # hero lv5
 DrowRanger = Hero(name="DrowRanger", need_buy=5)
 TemplarAssassin = Hero(name="TemplarAssassin", need_buy=5)

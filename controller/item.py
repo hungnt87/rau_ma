@@ -60,7 +60,7 @@ class Item:
                 logger.error(e)
                 return None
         else:
-            pass  # logger.debug(  #     f"Ban da co {ItemInfo.number} item {ItemInfo.name} , du so luong roi"  # )
+            pass
 
 
 Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2", number_need_buy=10)
@@ -152,6 +152,10 @@ Range24_ExtraDamage14_lv6 = Item("Range24_ExtraDamage14_lv6", number_need_buy=0)
 RevivalCount1_CriticalRate5_lv3 = Item("RevivalCount1_CriticalRate5_lv3")
 RevivalCount1_Health5_lv4 = Item("RevivalCount1_Health5_lv4")
 Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
+Set_Attack24_lv5 = Item("Set_Attack24_lv5", number_need_buy=1)
+Set_CriticalRate18_lv4 = Item("Set_CriticalRate18_lv4", number_need_buy=1)
+Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
+Set_Defense19_lv3 = Item("Set_Defense19_lv3", number_need_buy=1)
 Set_Defense188_lv3 = Item("Set_Defense188_lv3", number_need_buy=1)
 Set_ExtraDamage17_lv4 = Item("Set_ExtraDamage17_lv4", number_need_buy=1)
 Set_Investment108_lv2 = Item("Set_Investment108_lv2", number_need_buy=1)
@@ -211,9 +215,12 @@ def buy_all_set_item(round_number):
         Set_Speed_lv1.buy()
         Set_Speed22_lv2.buy()
         Set_Defense8_lv2.buy()
+        Set_Defense19_lv3.buy()
         Set_Investment108_lv2.buy()
         Set_Defense188_lv3.buy()
         Set_ExtraDamage17_lv4.buy()
+        Set_CriticalRate18_lv4.buy()
+        Set_Attack24_lv5.buy()
         Attack10EveryBuyPlus5_lv2.buy()
         SplitTheVoid_lv2.buy()
     if 4 < round_number < 18:
@@ -466,7 +473,10 @@ def reset_item():
     Range24_ExtraDamage14_lv6.reset_item_number()
     RevivalCount1_CriticalRate5_lv3.reset_item_number()
     RevivalCount1_Health5_lv4.reset_item_number()
+    Set_Attack24_lv5.reset_item_number()
+    Set_CriticalRate18_lv4.reset_item_number()
     Set_Defense8_lv2.reset_item_number()
+    Set_Defense19_lv3.reset_item_number()
     Set_Defense188_lv3.reset_item_number()
     Set_ExtraDamage17_lv4.reset_item_number()
     Set_Investment108_lv2.reset_item_number()
