@@ -28,10 +28,12 @@ class Button:
         # global HERO_IMG
         if self.img is None:
             file_name = para_name + ".png"
-            self.img = path.get_absolute_path(os.path.join("assets", "img", "button", file_name))
+            self.img = path.get_absolute_path(
+                os.path.join("assets", "img", "button", file_name)
+            )
         return self.img
 
-    def check_button(self, time_wait = 30):
+    def check_button(self, time_wait=30):
         if global_event.check_event():
             return False
         i = 0
@@ -40,8 +42,12 @@ class Button:
                 # logger.info(f"Stop thread check button 1{ButtonInfor.name}")
                 break
             try:
-                res = pyautogui.locateCenterOnScreen(self.img, confidence = self.confidence, region = self.region,
-                                                     grayscale = self.grayscale, )
+                res = pyautogui.locateCenterOnScreen(
+                    self.img,
+                    confidence=self.confidence,
+                    region=self.region,
+                    grayscale=self.grayscale,
+                )
                 if res:
                     logger.debug("Da tim thay: {}".format(self.name))
                     return True
@@ -56,26 +62,31 @@ class Button:
                 logger.error(e)
                 break
 
-    def click(self, time_sleep = 1, time_wait = 60):
+    def click(self, time_sleep=1, time_wait=60):
         if global_event.check_event():
             return False
         if self.name == "Button_X" or self.name == "Hide":
             logger.info(f"Chuan bi thoat game sau: {time_sleep}s")
             character_moves_event.app_stop()
-            global_event.sleep(time_sleep = time_sleep)
+            global_event.sleep(time_sleep=time_sleep)
         else:
             pass
 
         logger.info(f"Click {self.name}")
         # time.sleep(time_sleep)
-        if self.check_button(time_wait = time_wait) is True:
+        if self.check_button(time_wait=time_wait) is True:
             global_event.sleep(time_sleep)
             # logger.info("Click {}".format(self.name))
             try:
                 if global_event.check_event():
                     return False
-                res = pyautogui.locateCenterOnScreen(self.img, minSearchTime = 1, confidence = self.confidence,
-                                                     region = self.region, grayscale = self.grayscale, )
+                res = pyautogui.locateCenterOnScreen(
+                    self.img,
+                    minSearchTime=1,
+                    confidence=self.confidence,
+                    region=self.region,
+                    grayscale=self.grayscale,
+                )
                 global_event.sleep(0.5)
                 pydirectinput.click(res[0], res[1])
                 global_event.sleep(0.5)
@@ -94,8 +105,13 @@ class Button:
             return False
         logger.info("Click lock")
         try:
-            res = pyautogui.locateCenterOnScreen(Button("Look").img, minSearchTime = 0.5, confidence = 0.8,
-                                                 region = box, grayscale = True)
+            res = pyautogui.locateCenterOnScreen(
+                Button("Look").img,
+                minSearchTime=0.5,
+                confidence=0.8,
+                region=box,
+                grayscale=True,
+            )
             # pydirectinput.moveTo(res)
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
@@ -116,8 +132,13 @@ class Button:
             return False
         logger.info("Click lock")
         try:
-            res = pyautogui.locateCenterOnScreen(Button("Lock_hero").img, minSearchTime = 0.5, confidence = 0.8,
-                                                 region = box, grayscale = True)
+            res = pyautogui.locateCenterOnScreen(
+                Button("Lock_hero").img,
+                minSearchTime=0.5,
+                confidence=0.8,
+                region=box,
+                grayscale=True,
+            )
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y + 20)
             global_event.sleep(0.5)
@@ -137,9 +158,13 @@ class Button:
         try:
             if global_event.check_event():
                 return
-            res_center = pyautogui.locateCenterOnScreen(Button("NotMoney").img, minSearchTime = 0.5,
-                                                        confidence = CONFIDENCE, region = REGION,
-                                                        grayscale = GRAYSCALE, )
+            res_center = pyautogui.locateCenterOnScreen(
+                Button("NotMoney").img,
+                minSearchTime=0.5,
+                confidence=CONFIDENCE,
+                region=REGION,
+                grayscale=GRAYSCALE,
+            )
             if res_center:
                 logger.debug("Ban khong du tien, di tiep vong sau")
                 cgv.set_money(False)
@@ -152,14 +177,21 @@ class Button:
             return None
 
     @staticmethod
-    def button_check(para_name, time_wait = 2, ):
+    def button_check(
+        para_name,
+        time_wait=2,
+    ):
         global REGION, CONFIDENCE, GRAYSCALE
         if global_event.check_event():
             return False
         try:
-            res_center = pyautogui.locateCenterOnScreen(Button(para_name).img, minSearchTime = time_wait,
-                                                        confidence = CONFIDENCE, region = REGION,
-                                                        grayscale = GRAYSCALE, )
+            res_center = pyautogui.locateCenterOnScreen(
+                Button(para_name).img,
+                minSearchTime=time_wait,
+                confidence=CONFIDENCE,
+                region=REGION,
+                grayscale=GRAYSCALE,
+            )
             if res_center:
                 return True
         except pyautogui.ImageNotFoundException:
@@ -181,11 +213,11 @@ class Button:
         pyautogui.write("asx")  # add password
         Button("CreateGame").click()
         # time.sleep(4)
-        Button("StartGame").click(time_sleep = 5, time_wait = 30)
-        Button("Accept").click(time_sleep = 5, time_wait = 30)
+        Button("StartGame").click(time_sleep=5, time_wait=30)
+        Button("Accept").click(time_sleep=5, time_wait=30)
         # global_event.sleep(30)
 
-        Button("Confirm").click(time_sleep = 5, time_wait = 120)
+        Button("Confirm").click(time_sleep=5, time_wait=120)
         Button("Challenge").click()
         # click(ChallengeMax, 2)
 
@@ -194,7 +226,7 @@ class Button:
         Button("Prepare").click()
 
     @staticmethod
-    def check_exit_round(time_wait = 40):
+    def check_exit_round(time_wait=40):
         if global_event.check_event():
             return False
         global REGION, CONFIDENCE, GRAYSCALE
@@ -204,8 +236,12 @@ class Button:
             if global_event.check_event():
                 break
             try:
-                res_center = pyautogui.locateCenterOnScreen(Button("ProceedToRound").img, confidence = CONFIDENCE,
-                                                            region = REGION, grayscale = GRAYSCALE, )
+                res_center = pyautogui.locateCenterOnScreen(
+                    Button("ProceedToRound").img,
+                    confidence=CONFIDENCE,
+                    region=REGION,
+                    grayscale=GRAYSCALE,
+                )
                 if res_center:
                     logger.debug("Da ket thuc round")
                     character_moves_event.app_stop()
@@ -240,8 +276,12 @@ class Button:
             if global_event.check_event():
                 break
             try:
-                res_center = pyautogui.locateCenterOnScreen(Button("Resurrect").img, confidence = CONFIDENCE,
-                                                            region = REGION, grayscale = GRAYSCALE, )
+                res_center = pyautogui.locateCenterOnScreen(
+                    Button("Resurrect").img,
+                    confidence=CONFIDENCE,
+                    region=REGION,
+                    grayscale=GRAYSCALE,
+                )
                 if res_center:
                     global_event.sleep(0.5)
                     pydirectinput.click(res_center[0], res_center[1])
@@ -262,16 +302,15 @@ class Button:
                 logger.error(e)
                 break
 
-
     @staticmethod
     def next_round():
         if global_event.check_event():
             return False
         logger.info("Next round")
-        Button("ProceedToRound").click(time_sleep = 2, time_wait = 20)
+        Button("ProceedToRound").click(time_sleep=2, time_wait=20)
 
     @staticmethod
-    def character_moves(round_number = 2):
+    def character_moves(round_number=2):
         logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
@@ -333,15 +372,21 @@ class Button:
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
 
     @staticmethod
-    def run_round(round_number = 2):
+    def run_round(round_number=2):
         if global_event.check_event():
             return False
         logger.debug("Bat dau run round")
         character_moves_event.app_start()
         character_moves_event.app_pause()
-        t_check_exit_round = threading.Thread(target = Button.check_exit_round, args = (40,))
-        t_check_resurrect = threading.Thread(target = Button.check_resurrect, args = (), daemon = True)
-        t_character_moves = threading.Thread(target = Button.character_moves, args = (round_number,), daemon = True)
+        t_check_exit_round = threading.Thread(
+            target=Button.check_exit_round, args=(40,)
+        )
+        t_check_resurrect = threading.Thread(
+            target=Button.check_resurrect, args=(), daemon=True
+        )
+        t_character_moves = threading.Thread(
+            target=Button.character_moves, args=(round_number,), daemon=True
+        )
         # start thread
         t_check_exit_round.start()
         t_check_resurrect.start()
@@ -380,7 +425,7 @@ class Button:
         Button("Disconnect").click()
         Button("LeaveGame").click()
         logger.info("Check game co update trong 15s")
-        Button("Update").click(time_sleep = 2, time_wait = 15)
+        Button("Update").click(time_sleep=2, time_wait=15)
         if global_event.check_event():
             return False
 
@@ -390,8 +435,13 @@ class Button:
             return False
         logger.info("Click roll")
         try:
-            res = pyautogui.locateCenterOnScreen(Button("Roll").img, minSearchTime = 1, confidence = CONFIDENCE,
-                                                 region = REGION, grayscale = GRAYSCALE, )
+            res = pyautogui.locateCenterOnScreen(
+                Button("Roll").img,
+                minSearchTime=1,
+                confidence=CONFIDENCE,
+                region=REGION,
+                grayscale=GRAYSCALE,
+            )
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
