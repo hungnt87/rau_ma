@@ -51,8 +51,11 @@ class Item:
                     grayscale=GRAYSCALE_BUY_ITEM,
                 )
                 previous_item[location] = self
+
             except pyautogui.ImageNotFoundException:
                 return False
+            except IOError:
+                logger.error("error item buy")
             except Exception as e:
                 logger.error(e)
                 return None
@@ -148,6 +151,7 @@ Range16_Def16_lv5 = Item("Range16_Def16_lv5", number_need_buy=0)
 Range24_ExtraDamage14_lv6 = Item("Range24_ExtraDamage14_lv6", number_need_buy=0)
 RevivalCount1_CriticalRate5_lv3 = Item("RevivalCount1_CriticalRate5_lv3")
 RevivalCount1_Health5_lv4 = Item("RevivalCount1_Health5_lv4")
+Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
 Set_Attack24_lv5 = Item("Set_Attack24_lv5", number_need_buy=1)
 Set_CriticalRate18_lv4 = Item("Set_CriticalRate18_lv4", number_need_buy=1)
 Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)

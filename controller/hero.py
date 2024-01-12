@@ -93,6 +93,8 @@ class Hero:
                 )
                 previous_hero[res_center] = self
                 return True
+            except IOError:
+                logger.error("error hero buy")
             except pyautogui.ImageNotFoundException:
                 # logger.debug("Khong tim thay hinh anh {}".format(self.img))
                 return False

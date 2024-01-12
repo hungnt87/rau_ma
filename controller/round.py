@@ -62,6 +62,8 @@ def round_all(auto_number=1):
                     break
                 if item.buy_all_previous_item() is False:
                     break
+                hero.buy_all_hero(round_number=round_number)
+                item.buy_all_item(round_number=round_number)
                 t_buy_all_hero = threading.Thread(
                     target=hero.buy_all_hero, args=(round_number,)
                 )
@@ -72,7 +74,6 @@ def round_all(auto_number=1):
                 t_buy_all_item.start()
                 t_buy_all_hero.join()
                 t_buy_all_item.join()
-
                 if hero.buy_all_previous_hero() is False:
                     break
                 if item.buy_all_previous_item() is False:
