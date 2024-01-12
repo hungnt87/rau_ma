@@ -1,15 +1,15 @@
 import threading
 import time
 
-import PySimpleGUI as sg
 import keyboard
 import pydirectinput
+import PySimpleGUI as sg
 
 import controller.round as r
 import interface
 from controller.button import Button
-from controller.filelog import logger, OutputHandler
-from controller.global_variables import global_event, character_moves_event, Dota2
+from controller.filelog import OutputHandler, logger
+from controller.global_variables import Dota2, character_moves_event, global_event
 
 main_stop = False
 main_start = False
@@ -68,7 +68,7 @@ class ThreadedApp:
     def run(self):
         global_event.app_start()
         character_moves_event.app_start()
-        self.t1 = threading.Thread(target = main, args = (), daemon = True)
+        self.t1 = threading.Thread(target=main, args=(), daemon=True)
         self.t1.start()
 
     def stop(self):
@@ -87,73 +87,13 @@ class ThreadedApp:
         character_moves_event.app_resume()
 
 
-def make_win1():
-    global button_pause
-    # sg.theme("SystemDefaultForReal")
-    menu_def = [["Config", ["Auto", "Item", "Hero"]]]
-
-    layout = [[sg.Menu(menu_def, tearoff = False)],
-              [sg.Output(size = (50, 15), key = "-OUTPUT-")],
-              [sg.Button("Start (Ctrl + F9)", key = "-START-"),
-               sg.Button("Stop (Ctrl + Q)", key = "-STOP-", disabled = True),
-               sg.Button(button_pause, key = "-PAUSE-", disabled = True), ], ]
-    return sg.Window("Brodota-bot", layout, finalize = True)
-
-
 def gui():
     global main_status, button_pause, main_stop, main_start, appStarted, main_pause
-    window = make_win1()
+
     appStarted = False
     threaded_app = ThreadedApp()
     log_output1 = OutputHandler(window)
     logger.addHandler(log_output1)
-
-    while True:
-        event, values = window.read(timeout = 100)
-        if event == sg.WIN_CLOSED or event == "Exit":
-            break
-        elif event == "-START-" or main_start is True:
-            if appStarted is False:
-                threaded_app.run()
-                # if main_status is True:
-                window["-START-"].update(disabled = True)
-                window["-PAUSE-"].update(disabled = False)
-                window["-STOP-"].update(disabled = False)
-                appStarted = True
-            main_start = False
-
-        elif (event == "-STOP-") or (main_stop is True):
-            if appStarted is True:
-                threaded_app.stop()
-                appStarted = False
-                main_status = False
-                window["-START-"].update(disabled = False)
-                window["-STOP-"].update(disabled = True)
-                window["-PAUSE-"].update(disabled = True)
-            main_stop = False
-        elif (event == "-PAUSE-") or (main_pause is True):
-            if appStarted is True:
-                if button_pause == "Pause (Ctrl + Space)":
-                    button_pause = "Resume (Ctrl + Space)"
-                    window["-PAUSE-"].update(button_pause)
-                    threaded_app.pause()
-                else:
-                    button_pause = "Pause (Ctrl + Space)"
-                    window["-PAUSE-"].update(button_pause)
-                    threaded_app.resume()
-            main_pause = False
-        elif event == "Auto":
-            # logger.info("Auto")
-            interface.window_config_auto()
-
-        elif event == "Emit":
-            window["-OUTPUT-"].update(values[event] + "\n", append = True)
-        if main_status is True:
-            window["-START-"].update(disabled = True)
-            window["-PAUSE-"].update(disabled = False)
-            window["-STOP-"].update(disabled = False)
-            main_status = False
-    window.close()
 
 
 def on_hotkey_stop():
@@ -181,12 +121,11 @@ def on_hotkey_pause():
 
 
 if __name__ == "__main__":
+    # keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
+    # keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
+    # keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
 
-    keyboard.add_hotkey(hotkey_combination_stop, on_hotkey_stop)
-    keyboard.add_hotkey(hotkey_combination_start, on_hotkey_start)
-    keyboard.add_hotkey(hotkey_combination_pause, on_hotkey_pause)
-
-    gui()
+    interface.main_window()
     # main()
     # print(config.sections())
     # print(read_config("ConfigAuto", "MyBurn"))
