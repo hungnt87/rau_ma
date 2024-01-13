@@ -1,24 +1,31 @@
-# brodota-bot v1.3.4
+# brodota-bot v1.4.0
+
+# Cập nhật v1.3.4 => v1.4.0
+
+- Thêm tùy chọn config => Auto:
+- Lựa chọn Chế độ di chuyển, Tắt like, Chọn độ khó Burn
+- Fix chế dộ di chuyển mượt mà hơn
+- Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
 
 # Tính năng:
 
--   Tự động vào game
--   Mua đồ và hero
--   Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
--   Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
--   Tính năng Stop và pause (lúc được lúc không, fix sau)
+- Tự động vào game
+- Mua đồ và hero (Mua giới hạn số lượng Hero và Item, các item thuộc Set và Unique chỉ mua 1 cái)
+- Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
+- Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
+- Tính năng Stop và pause (lúc được lúc không, fix sau)
 
 # PS:
 
--   Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
--   Tắt chương trình diệt virut (tùy theo máy bạn cài phàn mềm anti virut nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
+- Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
+- Tắt chương trình diệt virut (tùy theo máy bạn cài phàn mềm anti virut nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
 
 # Cập nhật sắp tới:
 
--   Thêm tính năng nếu chết thì khởi động lại vòng mới
--   Thêm tùy chọn ban đầu( chọn chế độ Burn, tắt hình like nếu ai có, chọn chế độ phân giải thấp hơn)
--   Thêm tính năng đi Devil's Grave (tương lai gần)
--   Thêm tinh năng đi Mine (tương lai xa)
+- Thêm tính năng nếu chết thì khởi động lại vòng mới
+- Thêm tùy chọn ban đầu( chọn chế độ phân giải thấp hơn)
+- Thêm tính năng đi Devil's Grave (tương lai gần)
+- Thêm tinh năng đi Mine (tương lai xa)
 
 # I. Huớng dẫn sử dụng
 
@@ -47,5 +54,5 @@
 
 # II. Hướng dẫn chạy tại source code
 
--   Video hướng dẫn chạy tại source code
-    https://youtu.be/1B_rowkZvLE
+- Video hướng dẫn chạy tại source code
+  https://youtu.be/1B_rowkZvLE
