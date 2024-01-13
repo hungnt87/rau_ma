@@ -30,6 +30,7 @@ def window_config_auto():
                 enable_events=True,
                 auto_size_text=True,
                 size=(20, 20),
+                tooltip="Yêu cầu cài đặt chế độ di chuyển trong game bằng chuột trước",
             )
         ],
         [

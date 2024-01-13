@@ -11,6 +11,7 @@ from controller.global_variables import (
     CONFIDENCE,
     GRAYSCALE,
     REGION,
+    bot_initialization,
     character_moves_event,
     config,
     global_event,
@@ -330,7 +331,7 @@ class Button:
                     pydirectinput.click(res_center[0], res_center[1])
                     global_event.sleep(0.5)
                     pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
-                    global_event.sleep(1)
+                    global_event.sleep(4)
                     character_moves_event.app_resume()
                     return True
             except pyautogui.ImageNotFoundException:
@@ -380,7 +381,7 @@ class Button:
                 number_click_first = 5
             else:
                 number_click = 12
-                number_click_first = 4
+                number_click_first = number_click // 2
             for i in range(0, number_click_first):
                 if global_event.check_event():
                     return False
@@ -412,7 +413,7 @@ class Button:
                     if character_moves_event.check_event():
                         return False
                     pydirectinput.rightClick(loc[0] + loc1 + 30, loc[1] + 20)
-                for i in range(0, number_click - 1):
+                for i in range(0, number_click):
                     if global_event.check_event():
                         return False
                     if character_moves_event.check_event():
@@ -556,7 +557,11 @@ def main():
 
 
 if __name__ == "__main__":
-    if config.read_config("AutoConfig", "move") == "False":
-        logger.info("Khong di chuyen")
+    global_event.sleep(2)
+    bot_initialization()
+    Button.next_round()
+    global_event.app_start()
+    character_moves_event.app_start()
+    Button.run_round(round_number=4)
 
     pass

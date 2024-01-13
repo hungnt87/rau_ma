@@ -97,8 +97,8 @@ def main():
 
 class ThreadedApp:
     def __init__(self):
-        self.t1 = threading.Thread()
-        self.t_stop = threading.Event()
+        self.t1 = None
+        self.t_stop = None
 
     def run(self):
         global_event.app_start()
@@ -107,10 +107,10 @@ class ThreadedApp:
         self.t1.start()
 
     def stop(self):
-        t_stop = threading.Thread(target=stop_app, args=(), daemon=True)
-        t_stop.start()
-        t_stop.join()
-        self.t1.join()
+        stop_app()
+        if self.t1 is not None:
+            self.t1.join()
+        # self.t1.join()
 
     @staticmethod
     def pause():
@@ -135,7 +135,15 @@ def main_window():
 
     layout = [
         [sg.Menu(menu_def)],
-        [sg.Output(key="-OUTPUT-", size=(60, 20), font=("Arial", 10))],
+        [
+            sg.Output(
+                key="-OUTPUT-",
+                size=(50, 20),
+                font=("Arial", 12),
+                background_color="black",
+                text_color="green",
+            )
+        ],
         [
             sg.Button("Start (Ctrl + F9)", key="-START-"),
             sg.Button("Stop (Ctrl + Q)", key="-STOP-", disabled=True),
@@ -146,7 +154,16 @@ def main_window():
     appStarted = False
     threaded_app = ThreadedApp()
 
-    window = sg.Window("Brodota-bot", layout, finalize=True)
+    window = sg.Window(
+        "Brodota-bot",
+        layout,
+        finalize=True,
+        element_padding=(10, 10),
+        auto_size_text=True,
+        element_justification="center",
+        auto_size_buttons=True,
+        default_button_element_size=(12, 1),
+    )
     log_output1 = OutputHandler(window)
     logger.addHandler(log_output1)
     while True:

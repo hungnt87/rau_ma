@@ -122,7 +122,7 @@ def attack_boss():
             break
         if s == 3:
             character_moves_event.app_resume()
-        if s == 100:
+        if s == 70:
             character_moves_event.app_stop()
 
         global_event.sleep(1)
