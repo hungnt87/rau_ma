@@ -3,7 +3,7 @@
 # Cập nhật v1.3.4 => v1.4.0
 
 - Thêm tùy chọn config => Auto:
-  <div > <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/2493af53-41af-489b-8143-36ad6648b191"  width="200" alt="config" /> </div>
+  <div > <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/2493af53-41af-489b-8143-36ad6648b191"  width="400" alt="config" /> </div>
 - Lựa chọn Chế độ di chuyển, Tắt like, Chọn độ khó Burn
 - Fix chế dộ di chuyển mượt mà hơn
 - Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
