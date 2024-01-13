@@ -93,14 +93,16 @@ class Hero:
                 )
                 previous_hero[res_center] = self
                 return True
-            except IOError:
-                logger.error("error hero buy")
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except pyautogui.ImageNotFoundException:
                 # logger.debug("Khong tim thay hinh anh {}".format(self.img))
                 return False
             except Exception as e:
                 logger.error(e)
-                return None
 
     def check_hero(self):
         if global_event.check_event():
@@ -115,6 +117,11 @@ class Hero:
                 grayscale=self.grayscale,
             )
             return True
+        except OSError as e:
+            logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
         except pyautogui.ImageNotFoundException:
             return False
         except Exception as e:
@@ -144,12 +151,16 @@ class Hero:
                 time.sleep(0.5)
 
                 return True
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except pyautogui.ImageNotFoundException:
                 logger.debug(f"Khong co hero  {self.name} de ban")
                 return False
             except Exception as e:
                 logger.error(e)
-                return None
 
 
 def buy_all_previous_hero():
@@ -160,22 +171,26 @@ def buy_all_previous_hero():
     if previous_hero:
         logger.debug("Ban dang mua hero ")
         for key, value in list(previous_hero.items()):
-            check_sell_hero(value)
-            pydirectinput.click(key[0], key[1])
-            pydirectinput.moveTo(213, 201)
-            if Button.check_money() is True:
-                logger.info(f"Ban da mua thanh cong 1 {value.name}")
-                value.number = value.number + 1
-                cgv.count_of_buy += 1
-                del previous_hero[key]
-            else:
-                look_region = (key[0], key[1], 267, 312)
-                cgv.set_money(False)
-                if Button.click_lock_hero(value.name, look_region) is True:
-                    # del previous_item[key]
-                    logger.debug(f"Khong du tien, Khoa hero ")
-                else:
+            count_buy = value.need_buy - value.number
+            if count_buy > 0:
+                check_sell_hero(value)
+                pydirectinput.click(key[0], key[1])
+                pydirectinput.moveTo(213, 201)
+                if Button.check_money() is True:
+                    logger.info(f"Ban da mua thanh cong 1 {value.name}")
+                    value.number = value.number + 1
+                    cgv.count_of_buy += 1
                     del previous_hero[key]
+                else:
+                    look_region = (key[0], key[1], 267, 312)
+                    cgv.set_money(False)
+                    if Button.click_lock_hero(value.name, look_region) is True:
+                        # del previous_item[key]
+                        logger.debug(f"Khong du tien, Khoa hero ")
+                    else:
+                        del previous_hero[key]
+            else:
+                del previous_hero[key]
 
     else:
         logger.debug("Khong co hero khoa o round truoc")

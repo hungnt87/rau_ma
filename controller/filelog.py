@@ -17,7 +17,7 @@ class OutputHandler(logging.Handler):
 logger = logging.getLogger(__name__)
 
 path_log = "log.log"
-file_logger = logging.FileHandler(path_log, mode="w")
+file_logger = logging.FileHandler(path_log, mode="w", encoding="utf-8")
 new_format = "[%(asctime)s] - [%(levelname)s] - %(message)s"
 
 file_logger_format = logging.Formatter(new_format)
