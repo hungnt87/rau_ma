@@ -212,6 +212,15 @@ class SelectWindow:
             return None
 
 
+class Region_Window:
+    def __init__(self, name):
+        self.name = name
+        self.x = 0
+        self.y = 0
+        self.width = 1920
+        self.height = 1080
+
+
 if __name__ == "__main__":
     dota2 = SelectWindow("Dota 2")
     # dota2.move_window_to(0, 0)

@@ -1,6 +1,6 @@
 import pydirectinput
 
-from controller import ConfigManager, Event, PathManager, SelectWindow
+from controller import ConfigManager, Event, PathManager, Region_Window, SelectWindow
 from controller.filelog import logger
 
 config = ConfigManager("config.ini")
@@ -12,27 +12,40 @@ path = PathManager()
 count_of_buy = 0
 money = True
 
-# window_x, window_y, window_width, window_height =
 CONFIDENCE = 0.8
 GRAYSCALE = True
-REGION = (0, 0, 1920, 1080)
-window_x = 0
-window_y = 0
-window_height = 1920
-window_width = 1080
+REGION = Region_Window("Dota 2")
+region_hero = Region_Window("hero")
+region_sell_hero = Region_Window("sell_hero")
+region_item = Region_Window("item")
 
 
 def bot_initialization():
-    global CONFIDENCE, GRAYSCALE, REGION, window_x, window_y, window_width, window_height
+    global CONFIDENCE, GRAYSCALE, REGION, region_hero, region_sell_hero, region_item
     dota2 = SelectWindow("Dota 2")
     if dota2.hwnd is None:
         # logger.debug("Không tìm thấy cửa sổ có tiêu đề 'Dota 2'")
         return None
     else:
-        window_x, window_y, window_width, window_height = dota2.get_window_region()
-        REGION = (window_x, window_y, window_width, window_height)
+        REGION.x, REGION.y, REGION.width, REGION.height = dota2.get_window_region()
+
+        region_hero.x = REGION.x + 537
+        region_hero.y = REGION.y + 125
+        region_hero.width = 1158
+        region_hero.height = 406
+
+        region_sell_hero.x = REGION.x + 662
+        region_sell_hero.y = REGION.y + 791
+        region_sell_hero.width = 704
+        region_sell_hero.height = 358
+
+        region_item.x = REGION.x + 394
+        region_item.y = REGION.y + 321
+        region_item.width = 1384
+        region_item.height = 692
+
     pydirectinput.FAILSAFE = False
-    pydirectinput.PAUSE = 0.05
+    pydirectinput.PAUSE = 0.1
 
     # logger.debug("Initialization completed.")
 

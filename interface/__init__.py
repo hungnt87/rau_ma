@@ -1,19 +1,7 @@
-import configparser
-import os
-import threading
-import time
-
-import pydirectinput
 import PySimpleGUI as sg
 
-from controller.filelog import OutputHandler, logger
-from controller.global_variables import (
-    SelectWindow,
-    character_moves_event,
-    config,
-    global_event,
-    path,
-)
+from controller.filelog import logger
+from controller.global_variables import config
 
 move_status = False
 like_status = False
@@ -41,6 +29,7 @@ def window_config_auto():
                 key="-Move-",
                 enable_events=True,
                 auto_size_text=True,
+                size=(20, 20),
             )
         ],
         [
@@ -73,7 +62,10 @@ def window_config_auto():
     ]
     layout = [
         [
-            sg.Column(layout_column1, vertical_scroll_only=True),
+            sg.Column(
+                layout_column1,
+                vertical_scroll_only=True,
+            ),
             sg.Column(layout_column2, vertical_scroll_only=True),
         ],
         [sg.Column(layout_column3, vertical_scroll_only=False)],
@@ -82,7 +74,6 @@ def window_config_auto():
     window1 = sg.Window(
         "Config auto",
         layout,
-        finalize=True,
         element_padding=(10, 10),
         auto_size_text=True,
     )

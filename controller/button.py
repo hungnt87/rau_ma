@@ -8,16 +8,13 @@ import controller.global_variables as cgv
 from controller import SelectWindow
 from controller.filelog import logger
 from controller.global_variables import (
-    character_moves_event,
-    global_event,
-    path,
     CONFIDENCE,
     GRAYSCALE,
     REGION,
-    window_x,
-    window_y,
-    window_height,
-    window_width,
+    character_moves_event,
+    config,
+    global_event,
+    path,
 )
 
 # bot_initialization()
@@ -30,7 +27,7 @@ class Button:
     def __init__(self, para_name):
         self.name = para_name
         self.img = self._get_button_img(para_name)
-        self.region = REGION
+        self.region = (REGION.x, REGION.y, REGION.width, REGION.height)
         self.grayscale = GRAYSCALE
         self.confidence = CONFIDENCE
 
@@ -105,7 +102,7 @@ class Button:
                 global_event.sleep(0.5)
                 pydirectinput.click(res[0], res[1])
                 global_event.sleep(0.5)
-                pydirectinput.moveTo(window_x + 200, window_y + 200)
+                pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
                 return True
             except OSError as e:
                 logger.error(e)
@@ -137,7 +134,7 @@ class Button:
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
             # time.sleep(1)
-            pydirectinput.moveTo(window_x + 200, window_y + 200)
+            pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
             logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
@@ -167,7 +164,7 @@ class Button:
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y + 20)
             global_event.sleep(0.5)
-            pydirectinput.moveTo(window_x + 200, window_y + 200)
+            pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
             logger.debug(f"Ban khong du tien {hero_name} khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
@@ -191,7 +188,7 @@ class Button:
                 Button("NotMoney").img,
                 minSearchTime=0.5,
                 confidence=CONFIDENCE,
-                region=REGION,
+                region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
             )
             if res_center:
@@ -223,7 +220,7 @@ class Button:
                 Button(para_name).img,
                 minSearchTime=time_wait,
                 confidence=CONFIDENCE,
-                region=REGION,
+                region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
             )
             if res_center:
@@ -257,6 +254,9 @@ class Button:
         # global_event.sleep(30)
 
         Button("Confirm").click(time_sleep=5, time_wait=120)
+        Button("BurnMin").click()
+        for i in range(0, get_burn()):
+            Button("BurnPlus10").click()
         Button("Challenge").click()
         # click(ChallengeMax, 2)
 
@@ -278,7 +278,7 @@ class Button:
                 res_center = pyautogui.locateCenterOnScreen(
                     Button("ProceedToRound").img,
                     confidence=CONFIDENCE,
-                    region=REGION,
+                    region=(REGION.x, REGION.y, REGION.width, REGION.height),
                     grayscale=GRAYSCALE,
                 )
                 if res_center:
@@ -322,14 +322,14 @@ class Button:
                 res_center = pyautogui.locateCenterOnScreen(
                     Button("Resurrect").img,
                     confidence=CONFIDENCE,
-                    region=REGION,
+                    region=(REGION.x, REGION.y, REGION.width, REGION.height),
                     grayscale=GRAYSCALE,
                 )
                 if res_center:
                     global_event.sleep(0.5)
                     pydirectinput.click(res_center[0], res_center[1])
                     global_event.sleep(0.5)
-                    pydirectinput.moveTo(window_x + 200, window_height + 200)
+                    pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
                     global_event.sleep(1)
                     character_moves_event.app_resume()
                     return True
@@ -360,67 +360,70 @@ class Button:
     def character_moves(round_number=2):
         if global_event.check_event():
             return False
-        logger.debug("Cho bat dau di chuyen")
-        dota2_window = SelectWindow("Dota 2")
-        # dota2_window.set_foreground()
-        center_x, center_y = dota2_window.get_center_window()
-
-        # if not global_event.event_stop.is_set():
-        if character_moves_event.check_event():
-            return False
-
-        loc = (center_x, center_y)
-        loc1 = 200
-        logger.debug("Bat dau di chuyen")
-        if round_number == 1:
-            number_click = 10
-            number_click_first = 5
+        if config.read_config("AutoConfig", "move") == "False":
+            return
         else:
-            number_click = 12
-            number_click_first = 4
-        for i in range(0, number_click_first):
-            if global_event.check_event():
-                return False
-            if character_moves_event.check_event():
-                return False
-            pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
+            logger.debug("Cho bat dau di chuyen")
+            dota2_window = SelectWindow("Dota 2")
+            # dota2_window.set_foreground()
+            center_x, center_y = dota2_window.get_center_window()
 
-        for i in range(0, number_click // 2):
-            if global_event.check_event():
-                return False
+            # if not global_event.event_stop.is_set():
             if character_moves_event.check_event():
                 return False
-            pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
-        while True:
-            if global_event.check_event():
-                return False
-            if character_moves_event.check_event():
-                return False
-            for i in range(0, number_click):
-                if global_event.check_event():
-                    return False
-                if character_moves_event.check_event():
-                    return False
-                pydirectinput.rightClick(loc[0], loc[1] - loc1)
 
-            for i in range(0, number_click):
+            loc = (center_x, center_y)
+            loc1 = 200
+            logger.debug("Bat dau di chuyen")
+            if round_number == 1:
+                number_click = 10
+                number_click_first = 5
+            else:
+                number_click = 12
+                number_click_first = 4
+            for i in range(0, number_click_first):
                 if global_event.check_event():
                     return False
                 if character_moves_event.check_event():
                     return False
-                pydirectinput.rightClick(loc[0] + loc1 + 30, loc[1] + 20)
-            for i in range(0, number_click - 1):
-                if global_event.check_event():
-                    return False
-                if character_moves_event.check_event():
-                    return False
-                pydirectinput.rightClick(loc[0], loc[1] + loc1 + 40)
-            for i in range(0, number_click):
+                pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
+
+            for i in range(0, number_click // 2):
                 if global_event.check_event():
                     return False
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
+            while True:
+                if global_event.check_event():
+                    return False
+                if character_moves_event.check_event():
+                    return False
+                for i in range(0, number_click):
+                    if global_event.check_event():
+                        return False
+                    if character_moves_event.check_event():
+                        return False
+                    pydirectinput.rightClick(loc[0], loc[1] - loc1)
+
+                for i in range(0, number_click):
+                    if global_event.check_event():
+                        return False
+                    if character_moves_event.check_event():
+                        return False
+                    pydirectinput.rightClick(loc[0] + loc1 + 30, loc[1] + 20)
+                for i in range(0, number_click - 1):
+                    if global_event.check_event():
+                        return False
+                    if character_moves_event.check_event():
+                        return False
+                    pydirectinput.rightClick(loc[0], loc[1] + loc1 + 40)
+                for i in range(0, number_click):
+                    if global_event.check_event():
+                        return False
+                    if character_moves_event.check_event():
+                        return False
+                    pydirectinput.rightClick(loc[0] - loc1 - 30, loc[1] + 20)
 
     @staticmethod
     def run_round(round_number=2):
@@ -474,6 +477,8 @@ class Button:
         Button("ClickToClose").click()
         Button("Back").click()
         Button("Disconnect").click()
+        if config.read_config("AutoConfig", "like") == "True":
+            Button("Like").click(time_sleep=1, time_wait=15)
         Button("LeaveGame").click()
         logger.info("Check game co update trong 15s")
         Button("Update").click(time_sleep=2, time_wait=15)
@@ -490,13 +495,13 @@ class Button:
                 Button("Roll").img,
                 minSearchTime=1,
                 confidence=CONFIDENCE,
-                region=REGION,
+                region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
             )
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
-            pyautogui.moveTo(window_x + 200, window_y + 200)
+            pyautogui.moveTo(REGION.x + 200, REGION.y + 200)
             if Button.check_money() is False:
                 cgv.set_money(False)
                 return False
@@ -507,6 +512,33 @@ class Button:
         except Exception as e:
             logger.error(e)
             return None
+
+
+def get_burn():
+    burn = config.read_config("AutoConfig", "burn")
+    if burn == "0":
+        burn = 0
+    elif burn == "10":
+        burn = 1
+    elif burn == "20":
+        burn = 2
+    elif burn == "30":
+        burn = 3
+    elif burn == "40":
+        burn = 4
+    elif burn == "50":
+        burn = 5
+    elif burn == "60":
+        burn = 6
+    elif burn == "70":
+        burn = 7
+    elif burn == "80":
+        burn = 8
+    elif burn == "90":
+        burn = 9
+    elif burn == "100":
+        burn = 10
+    return burn
 
 
 def main():
@@ -524,5 +556,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if config.read_config("AutoConfig", "move") == "False":
+        logger.info("Khong di chuyen")
+
     pass

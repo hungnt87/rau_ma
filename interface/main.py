@@ -7,16 +7,17 @@ import PySimpleGUI as sg
 
 import controller
 import interface
-from controller.filelog import OutputHandler, logger
+from controller import SelectWindow
 from controller import round as r
+from controller.button import Button
+from controller.filelog import OutputHandler, logger
 from controller.global_variables import (
+    bot_initialization,
     character_moves_event,
     config,
     global_event,
     path,
-    bot_initialization,
 )
-from controller import SelectWindow
 
 main_stop = False
 main_start = False
@@ -27,7 +28,6 @@ button_pause = "Pause (Ctrl + Space)"
 hotkey_combination_start = "ctrl+f9"
 hotkey_combination_stop = "ctrl+q"
 hotkey_combination_pause = "ctrl+space"
-pydirectinput.PAUSE = 0.1
 move_status = False
 like_status = False
 
@@ -98,6 +98,7 @@ def main():
 class ThreadedApp:
     def __init__(self):
         self.t1 = threading.Thread()
+        self.t_stop = threading.Event()
 
     def run(self):
         global_event.app_start()
@@ -106,8 +107,9 @@ class ThreadedApp:
         self.t1.start()
 
     def stop(self):
-        global_event.app_stop()
-        character_moves_event.app_stop()
+        t_stop = threading.Thread(target=stop_app, args=(), daemon=True)
+        t_stop.start()
+        t_stop.join()
         self.t1.join()
 
     @staticmethod
@@ -119,6 +121,11 @@ class ThreadedApp:
     def resume():
         global_event.app_resume()
         character_moves_event.app_resume()
+
+
+def stop_app():
+    global_event.app_stop()
+    character_moves_event.app_stop()
 
 
 def main_window():
@@ -182,7 +189,7 @@ def main_window():
 
         elif event == "Emit":
             window["-OUTPUT-"].update(values[event] + "\n", append=True)
-        if main_status is True:
+        elif main_status is True:
             window["-START-"].update(disabled=True)
             window["-PAUSE-"].update(disabled=False)
             window["-STOP-"].update(disabled=False)
