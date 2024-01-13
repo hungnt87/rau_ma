@@ -1,13 +1,18 @@
 import configparser
 import os
+import sys
 import threading
+import time
 
+import pyautogui
+import pydirectinput
 import win32api
+import win32con
 import win32gui
 
 from controller.filelog import logger
 
-# from controller.global_variables import path
+# from controller.global_variables import global_event
 
 
 class ConfigManager:
@@ -138,6 +143,12 @@ class SelectWindow:
             self.hwnd = win32gui.FindWindow(None, self.app_name)
         return self.hwnd
 
+    def set_foreground(self):
+        if self.hwnd:
+            win32gui.SetForegroundWindow(self.hwnd)
+        else:
+            logger.debug(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
+
     def move_window_to(self, x=0, y=0):
         # Lấy kích thước hiện tại của cửa sổ
         _, _, width, height = win32gui.GetWindowRect(self.hwnd)
@@ -147,11 +158,73 @@ class SelectWindow:
         win32gui.SetWindowPos(self.hwnd, win32con.HWND_TOP, x, y, width, height, 0)
 
     def get_region(self):
-        if global_event.check_event():
-            return False
         _, _, width, height = win32gui.GetWindowRect(self.hwnd)
         return 0, 0, width, height
 
+    def get_window_position(self):
+        x, y, width, height = win32gui.GetWindowRect(self.hwnd)
+        return x, y
+
+    def get_window_region(self):
+        x, y, width, height = win32gui.GetWindowRect(self.hwnd)
+        return x, y, width, height
+
+    def get_window_info(self):
+        try:
+            # Lấy danh sách các cửa sổ với tiêu đề tương ứng
+            windows = pyautogui.getWindowsWithTitle(self.app_name)
+
+            if not windows:
+                print(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
+                return None
+
+            # Lấy thông tin về cửa sổ đầu tiên trong danh sách
+            target_window = windows[0]
+            window_position = (target_window.left, target_window.top)
+            window_size = (target_window.width, target_window.height)
+
+            print(f"Thông tin cửa sổ '{self.app_name}':")
+            print(f"  Vị trí: {window_position}")
+            print(f"  Kích thước: {window_size}")
+            center_x = (window_size[0] // 2) + window_position[0]
+            center_y = (window_size[1] // 2) + window_position[1]
+            pydirectinput.moveTo(center_x, center_y)
+            print(f"  Tọa độ trung tâm: ({center_x}, {center_y})")
+            return window_position, window_size
+
+        except Exception as e:
+            print(f"Lỗi: {e}")
+            return None
+
+    def get_center_window(self):
+        try:
+            # Lấy danh sách các cửa sổ với tiêu đề tương ứng
+            windows = pyautogui.getWindowsWithTitle(self.app_name)
+
+            if not windows:
+                logger.debug(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
+                return None
+
+            # Lấy thông tin về cửa sổ đầu tiên trong danh sách
+            target_window = windows[0]
+            window_position = (target_window.left, target_window.top)
+            window_size = (target_window.width, target_window.height)
+
+            center_x = (window_size[0] // 2) + window_position[0]
+            center_y = (window_size[1] // 2) + window_position[1]
+            # logger.debug(f"  Tọa độ trung tâm: ({center_x}, {center_y})")
+            return center_x, center_y
+
+        except Exception as e:
+            print(f"Lỗi: {e}")
+            return None
+
 
 if __name__ == "__main__":
+    dota2 = SelectWindow("Dota 2")
+    # dota2.move_window_to(0, 0)
+    dota2.set_foreground()
+    # dota2.get_center_window()
+    x, y = dota2.get_window_position()
+    logger.debug(f"X: {x}, Y: {y}")
     pass
