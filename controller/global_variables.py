@@ -1,13 +1,7 @@
-import os
-import sys
-import threading
-import time
+import pydirectinput
 
-import win32con
-import win32gui
-
-import controller
-from controller import ConfigManager, Event, PathManager, SelectWindow, filelog
+from controller import ConfigManager, Event, PathManager, SelectWindow
+from controller.filelog import logger
 
 config = ConfigManager("config.ini")
 config.create_config({"AutoConfig": {"burn": "10", "move": "False", "like": "False"}})
@@ -17,6 +11,13 @@ path = PathManager()
 
 count_of_buy = 0
 money = True
+
+
+def bot_initialization():
+    pydirectinput.FAILSAFE = False
+    pydirectinput.PAUSE = 0.05
+
+    # logger.debug("Initialization completed.")
 
 
 def check_money():

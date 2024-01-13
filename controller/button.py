@@ -5,12 +5,22 @@ import pyautogui
 import pydirectinput
 
 import controller.global_variables as cgv
+from controller import SelectWindow
 from controller.filelog import logger
-from controller.global_variables import character_moves_event, global_event, path
+from controller.global_variables import (
+    bot_initialization,
+    character_moves_event,
+    global_event,
+    path,
+)
 
-REGION = (0, 0, 1936, 1119)
+bot_initialization()
+dota2 = SelectWindow("Dota 2")
+window_x, window_y, window_width, window_height = dota2.get_window_region()
 CONFIDENCE = 0.8
 GRAYSCALE = True
+REGION = (window_x, window_y, window_width, window_height)
+pydirectinput.PAUSE = 0.1
 
 
 class Button:
@@ -51,6 +61,11 @@ class Button:
                 if res:
                     logger.debug("Da tim thay: {}".format(self.name))
                     return True
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except pyautogui.ImageNotFoundException:
                 i = i + 1
                 if i > time_wait:
@@ -90,8 +105,13 @@ class Button:
                 global_event.sleep(0.5)
                 pydirectinput.click(res[0], res[1])
                 global_event.sleep(0.5)
-                pydirectinput.moveTo(200, 200)
+                pydirectinput.moveTo(window_x + 200, window_y + 200)
                 return True
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except pyautogui.ImageNotFoundException:
                 logger.debug(f"Khong tim thay hinh anh: {self.name}")
                 return None
@@ -117,11 +137,16 @@ class Button:
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
             # time.sleep(1)
-            pydirectinput.moveTo(200, 200)
+            pydirectinput.moveTo(window_x + 200, window_y + 200)
             logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
             return False
+        except OSError as e:
+            logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
         except Exception as e:
             logger.error(e)
             return None
@@ -142,15 +167,19 @@ class Button:
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y + 20)
             global_event.sleep(0.5)
-            pydirectinput.moveTo(200, 200)
+            pydirectinput.moveTo(window_x + 200, window_y + 200)
             logger.debug(f"Ban khong du tien {hero_name} khoa de lan sau mua")
             return True
         except pyautogui.ImageNotFoundException:
             logger.debug(f"Khong tim thay hinh anh {Button('Lock_hero').name}")
             return False
+        except OSError as e:
+            logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
         except Exception as e:
             logger.error(e)
-            return None
 
     @staticmethod
     def check_money():
@@ -172,6 +201,11 @@ class Button:
         except pyautogui.ImageNotFoundException:
             cgv.set_money(True)
             return True
+        except OSError as e:
+            logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
         except Exception as e:
             logger.error(e)
             return None
@@ -197,6 +231,11 @@ class Button:
         except pyautogui.ImageNotFoundException:
             logger.debug(f"Khong tim thay hinh anh {Button(para_name).name}")
             return False
+        except OSError as e:
+            logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
         except Exception as e:
             logger.error(e)
             return None
@@ -261,7 +300,11 @@ class Button:
                     character_moves_event.app_stop()
                     global_event.sleep(1)
                     return False
-
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except Exception as e:
                 logger.error(e)
                 break
@@ -286,18 +329,22 @@ class Button:
                     global_event.sleep(0.5)
                     pydirectinput.click(res_center[0], res_center[1])
                     global_event.sleep(0.5)
-                    pydirectinput.moveTo(200, 200)
+                    pydirectinput.moveTo(window_x + 200, window_height + 200)
                     global_event.sleep(1)
                     character_moves_event.app_resume()
                     return True
             except pyautogui.ImageNotFoundException:
                 i = i + 1
-                logger.debug(f"Cho ket thuc round lan {i}/10")
-                global_event.sleep(1)
-                if i > 3:
+                if i > 2:
                     character_moves_event.app_resume()
                 if i > 10:
                     return False
+                global_event.sleep(1)
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except Exception as e:
                 logger.error(e)
                 break
@@ -311,22 +358,26 @@ class Button:
 
     @staticmethod
     def character_moves(round_number=2):
-        logger.debug("Cho bat dau di chuyen")
         if global_event.check_event():
             return False
+        logger.debug("Cho bat dau di chuyen")
+        dota2_window = SelectWindow("Dota 2")
+        # dota2_window.set_foreground()
+        center_x, center_y = dota2_window.get_center_window()
+
         # if not global_event.event_stop.is_set():
         if character_moves_event.check_event():
             return False
 
-        loc = (973, 575)
-        loc1 = 150
+        loc = (center_x, center_y)
+        loc1 = 200
         logger.debug("Bat dau di chuyen")
         if round_number == 1:
             number_click = 10
-            number_click_first = 7
+            number_click_first = 5
         else:
             number_click = 12
-            number_click_first = 6
+            number_click_first = 4
         for i in range(0, number_click_first):
             if global_event.check_event():
                 return False
@@ -334,7 +385,7 @@ class Button:
                 return False
             pydirectinput.rightClick(loc[0], loc[1] + loc1 + 30)
 
-        for i in range(0, 6):
+        for i in range(0, number_click // 2):
             if global_event.check_event():
                 return False
             if character_moves_event.check_event():
@@ -345,7 +396,7 @@ class Button:
                 return False
             if character_moves_event.check_event():
                 return False
-            for i in range(0, number_click - 1):
+            for i in range(0, number_click):
                 if global_event.check_event():
                     return False
                 if character_moves_event.check_event():
@@ -358,7 +409,7 @@ class Button:
                 if character_moves_event.check_event():
                     return False
                 pydirectinput.rightClick(loc[0] + loc1 + 30, loc[1] + 20)
-            for i in range(0, number_click):
+            for i in range(0, number_click - 1):
                 if global_event.check_event():
                     return False
                 if character_moves_event.check_event():
@@ -375,7 +426,7 @@ class Button:
     def run_round(round_number=2):
         if global_event.check_event():
             return False
-        logger.debug("Bat dau run round")
+        # logger.debug("Bat dau run round")
         character_moves_event.app_start()
         character_moves_event.app_pause()
         t_check_exit_round = threading.Thread(
@@ -445,7 +496,7 @@ class Button:
             global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
-            pyautogui.moveTo(200, 200)
+            pyautogui.moveTo(window_x + 200, window_y + 200)
             if Button.check_money() is False:
                 cgv.set_money(False)
                 return False
@@ -459,9 +510,17 @@ class Button:
 
 
 def main():
+    dota2.set_foreground()
+    global_event.sleep(2)
+
+    # Button.next_round()
+    global_event.app_start()
+    character_moves_event.app_start()
+
+    Button.run_round(round_number=4)
     pass
 
 
 if __name__ == "__main__":
-    # main()
+    main()
     pass
