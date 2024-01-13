@@ -18,7 +18,7 @@ from controller.global_variables import (
 move_status = False
 like_status = False
 
-item_list = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+item_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 
 def window_config_auto():
@@ -40,7 +40,6 @@ def window_config_auto():
                 default=move_status,
                 key="-Move-",
                 enable_events=True,
-                size=(20, 1),
                 auto_size_text=True,
             )
         ],
@@ -50,7 +49,6 @@ def window_config_auto():
                 default=like_status,
                 key="-Like-",
                 enable_events=True,
-                size=(20, 1),
                 auto_size_text=True,
             )
         ],
@@ -67,7 +65,7 @@ def window_config_auto():
     layout_column3 = [
         [
             sg.Text("Độ khó Burn:"),
-            sg.Combo(item_list, default_value=item, key="-Item-", pad=(0, 0)),
+            sg.Combo(item_list, default_value=item, key="-Item-"),
         ],
     ]
     layout_column4 = [
@@ -81,7 +79,13 @@ def window_config_auto():
         [sg.Column(layout_column3, vertical_scroll_only=False)],
         [sg.Column(layout_column4, vertical_scroll_only=False, justification="right")],
     ]
-    window1 = sg.Window("Config auto", layout, finalize=True)
+    window1 = sg.Window(
+        "Config auto",
+        layout,
+        finalize=True,
+        element_padding=(10, 10),
+        auto_size_text=True,
+    )
     choice = None
     while True:
         event, values = window1.read()
@@ -99,6 +103,6 @@ def window_config_auto():
 
 
 if __name__ == "__main__":
-    # window_config_auto()
+    window_config_auto()
     # main_window()
     pass

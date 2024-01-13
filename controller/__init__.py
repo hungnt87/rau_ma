@@ -139,15 +139,16 @@ class SelectWindow:
         self.hwnd = self.get_app_window_handle()
 
     def get_app_window_handle(self):
-        if self.hwnd is None:
-            self.hwnd = win32gui.FindWindow(None, self.app_name)
-        return self.hwnd
+        hwnd = win32gui.FindWindow(None, self.app_name)
+        if hwnd:
+            self.hwnd = hwnd
+            return hwnd
+        else:
+            # logger.debug(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
+            return None
 
     def set_foreground(self):
-        if self.hwnd:
-            win32gui.SetForegroundWindow(self.hwnd)
-        else:
-            logger.debug(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
+        win32gui.SetForegroundWindow(self.hwnd)
 
     def move_window_to(self, x=0, y=0):
         # Lấy kích thước hiện tại của cửa sổ
@@ -174,10 +175,6 @@ class SelectWindow:
             # Lấy danh sách các cửa sổ với tiêu đề tương ứng
             windows = pyautogui.getWindowsWithTitle(self.app_name)
 
-            if not windows:
-                print(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
-                return None
-
             # Lấy thông tin về cửa sổ đầu tiên trong danh sách
             target_window = windows[0]
             window_position = (target_window.left, target_window.top)
@@ -200,11 +197,6 @@ class SelectWindow:
         try:
             # Lấy danh sách các cửa sổ với tiêu đề tương ứng
             windows = pyautogui.getWindowsWithTitle(self.app_name)
-
-            if not windows:
-                logger.debug(f"Không tìm thấy cửa sổ có tiêu đề '{self.app_name}'")
-                return None
-
             # Lấy thông tin về cửa sổ đầu tiên trong danh sách
             target_window = windows[0]
             window_position = (target_window.left, target_window.top)

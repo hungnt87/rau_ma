@@ -8,13 +8,15 @@ import PySimpleGUI as sg
 import controller
 import interface
 from controller.filelog import OutputHandler, logger
+from controller import round as r
 from controller.global_variables import (
-    SelectWindow,
     character_moves_event,
     config,
     global_event,
     path,
+    bot_initialization,
 )
+from controller import SelectWindow
 
 main_stop = False
 main_start = False
@@ -56,16 +58,17 @@ def on_hotkey_pause():
 
 def main():
     global main_status
-    dota2 = SelectWindow("Dota 2")
-    hwnd = dota2.get_app_window_handle()
 
-    if hwnd:
+    dota2 = SelectWindow("Dota 2")
+
+    if dota2.hwnd:
         main_status = True
         global_event.sleep(1)
         dota2.move_window_to()
         global_event.sleep(1)
         logger.info(f"Tim thay cua so {dota2.app_name}")
         global_event.sleep(1)
+        bot_initialization()
         n = 0
         while True:
             if global_event.check_event():

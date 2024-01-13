@@ -8,19 +8,19 @@ import controller.global_variables as cgv
 from controller import SelectWindow
 from controller.filelog import logger
 from controller.global_variables import (
-    bot_initialization,
     character_moves_event,
     global_event,
     path,
+    CONFIDENCE,
+    GRAYSCALE,
+    REGION,
+    window_x,
+    window_y,
+    window_height,
+    window_width,
 )
 
-bot_initialization()
-dota2 = SelectWindow("Dota 2")
-window_x, window_y, window_width, window_height = dota2.get_window_region()
-CONFIDENCE = 0.8
-GRAYSCALE = True
-REGION = (window_x, window_y, window_width, window_height)
-pydirectinput.PAUSE = 0.1
+# bot_initialization()
 
 
 class Button:
@@ -510,14 +510,16 @@ class Button:
 
 
 def main():
-    dota2.set_foreground()
-    global_event.sleep(2)
+    dota2 = SelectWindow("Dota 2")
+    if dota2.hwnd:
+        dota2.set_foreground()
+        global_event.sleep(2)
 
-    # Button.next_round()
-    global_event.app_start()
-    character_moves_event.app_start()
+        # Button.next_round()
+        global_event.app_start()
+        character_moves_event.app_start()
 
-    Button.run_round(round_number=4)
+        Button.run_round(round_number=4)
     pass
 
 
