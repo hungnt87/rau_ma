@@ -221,10 +221,7 @@ class Button:
             logger.error(e.errno)
 
     @staticmethod
-    def button_check(
-        para_name,
-        time_wait=2,
-    ):
+    def button_check(para_name, time_wait=2):
         global REGION, CONFIDENCE, GRAYSCALE
         if global_event.check_event():
             return False
@@ -581,5 +578,4 @@ if __name__ == "__main__":
     global_event.app_start()
     character_moves_event.app_start()
     Button.run_round(round_number=4)
-
     pass
