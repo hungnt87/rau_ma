@@ -6,7 +6,7 @@ from controller.global_variables import config
 move_status = False
 like_status = False
 
-item_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+item_list = tuple(str(i * 10) for i in range(0, 21))
 
 
 def window_config_auto():
@@ -55,7 +55,9 @@ def window_config_auto():
     layout_column3 = [
         [
             sg.Text("Độ khó Burn:"),
-            sg.Combo(item_list, default_value=item, key="-Item-"),
+            sg.Combo(
+                item_list, default_value=item, key="-Item-", readonly=True, size=(5, 1)
+            ),
         ],
     ]
     layout_column4 = [

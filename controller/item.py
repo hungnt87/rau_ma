@@ -29,13 +29,11 @@ class Item:
         self.number = 0
 
     def get_item_img(self, name):
-        # global HERO_IMG
-        if self.img is None:
-            file_name = name + ".png"
-            self.img = self.img = path.get_absolute_path(
-                os.path.join("assets", "img", "item", file_name)
-            )
-        return self.img
+        file_name = name + ".png"
+        img = self.img = path.get_resource_path(
+            os.path.join("assets", "img", "item", file_name)
+        )
+        return img
 
     def buy(self):
         # logger.info("Ban dang tim item {}".format(ItemInfo.name))
@@ -193,6 +191,7 @@ Set_Investment108_lv2 = Item("Set_Investment108_lv2", number_need_buy=1)
 Set_Luck88_lv6 = Item("Set_Luck88_lv6", number_need_buy=1)
 Set_Speed_lv1 = Item("Set_Speed_lv1", number_need_buy=1)
 Set_Speed22_lv2 = Item("Set_Speed22_lv2", number_need_buy=1)
+Set_Speed25_lv3 = Item("Set_Speed25_lv3", number_need_buy=1)
 ShopDiscount_lv1 = Item("ShopDiscount_lv1", number_need_buy=5)
 ShopPlus1_lv4 = Item("ShopPlus1_lv4", number_need_buy=1)
 SoulCrystalsPlus35EveryMango_lv2 = Item(
@@ -214,8 +213,8 @@ def buy_all_previous_item():
             if value.number < value.number_need_buy:
                 if global_event.check_event():
                     return False
+                global_event.sleep(0.5)
                 pydirectinput.click(key[0], key[1])
-                # global_event.sleep(0.5)
                 pydirectinput.moveTo(222, 213)
                 if Button.check_money():
                     logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
@@ -250,6 +249,7 @@ def buy_all_set_item(round_number):
     if round_number > 4:
         Set_Speed_lv1.buy()
         Set_Speed22_lv2.buy()
+        Set_Speed25_lv3.buy()
         Set_Defense8_lv2.buy()
         Set_Defense19_lv3.buy()
         Set_Investment108_lv2.buy()
@@ -556,8 +556,9 @@ def reset_item():
     Set_ExtraDamage17_lv4.reset_item_number()
     Set_Investment108_lv2.reset_item_number()
     Set_Luck88_lv6.reset_item_number()
-    Set_Speed22_lv2.reset_item_number()
     Set_Speed_lv1.reset_item_number()
+    Set_Speed22_lv2.reset_item_number()
+    Set_Speed25_lv3.reset_item_number()
     ShopDiscount_lv1.reset_item_number()
     ShopPlus1_lv4.reset_item_number()
     SoulCrystalsPlus35EveryMango_lv2.reset_item_number()
@@ -573,25 +574,29 @@ def reset_previous_item():
 
 
 if __name__ == "__main__":
-    start = time.time()
-    buy_all_set_item(5)
-    start = time.time() - start
+    # start = time.time()
+    # buy_all_set_item(5)
+    # start = time.time() - start
 
-    start2 = time.time()
-    t_buy_all_item_investments = threading.Thread(
-        target=buy_all_item_investments, args=(5,)
-    )
-    t_buy_all_set_item = threading.Thread(target=buy_all_set_item, args=(5,))
-    t_buy_all_item = threading.Thread(target=buy_all_item, args=(5,))
+    # start2 = time.time()
+    # t_buy_all_item_investments = threading.Thread(
+    #     target=buy_all_item_investments, args=(5,)
+    # )
+    # t_buy_all_set_item = threading.Thread(target=buy_all_set_item, args=(5,))
+    # t_buy_all_item = threading.Thread(target=buy_all_item, args=(5,))
 
-    t_buy_all_item_investments.start()
-    t_buy_all_set_item.start()
-    t_buy_all_item.start()
-    t_buy_all_item_investments.join()
-    t_buy_all_set_item.join()
-    t_buy_all_item.join()
+    # t_buy_all_item_investments.start()
+    # t_buy_all_set_item.start()
+    # t_buy_all_item.start()
+    # t_buy_all_item_investments.join()
+    # t_buy_all_set_item.join()
+    # t_buy_all_item.join()
 
-    start2 = time.time() - start2
+    # start2 = time.time() - start2
 
-    print("Time 1: ", start)
-    print("Time 2: ", start2)
+    # print("Time 1: ", start)
+    # print("Time 2: ", start2)
+    print(Question_lv2.img)
+    # Question_lv2.img
+    # logger.debug("Ban dang tim item lv1")
+    pass

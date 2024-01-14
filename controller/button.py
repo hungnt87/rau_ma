@@ -34,13 +34,9 @@ class Button:
         self.confidence = CONFIDENCE
 
     def _get_button_img(self, para_name):
-        # global HERO_IMG
-        if self.img is None:
-            file_name = para_name + ".png"
-            self.img = path.get_absolute_path(
-                os.path.join("assets", "img", "button", file_name)
-            )
-        return self.img
+        file_name = para_name + ".png"
+        img = path.get_resource_path(os.path.join("assets", "img", "button", file_name))
+        return img
 
     def check_button(self, time_wait=30):
         if global_event.check_event():

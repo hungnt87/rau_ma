@@ -123,11 +123,10 @@ class PathManager:
             base_path = sys._MEIPASS
         else:
             # If the script is not frozen, use the directory of the script
-            base_path = os.path.dirname(os.path.abspath(__file__))
+            base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
         # Combine the base path and the relative path to get the absolute path
         absolute_path = os.path.join(base_path, relative_path)
-
         return absolute_path
 
 
@@ -222,10 +221,11 @@ class Region_Window:
 
 
 if __name__ == "__main__":
-    dota2 = SelectWindow("Dota 2")
-    # dota2.move_window_to(0, 0)
-    dota2.set_foreground()
-    # dota2.get_center_window()
-    x, y = dota2.get_window_position()
-    logger.debug(f"X: {x}, Y: {y}")
+    # dota2 = SelectWindow("Dota 2")
+    # # dota2.move_window_to(0, 0)
+    # dota2.set_foreground()
+    # # dota2.get_center_window()
+    # x, y = dota2.get_window_position()
+    # logger.debug(f"X: {x}, Y: {y}")
+    # print(PathManager.get_resource_path("config.ini"))
     pass

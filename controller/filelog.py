@@ -25,7 +25,7 @@ console_format = logging.Formatter(new_format)
 file_logger.setFormatter(file_logger_format)
 
 logger.addHandler(file_logger)
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 
 # print(path)
 # now we can add the console logging

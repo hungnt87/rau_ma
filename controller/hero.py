@@ -56,21 +56,16 @@ class Hero:
 
     def _get_hero_img(self, para_name):
         # global HERO_IMG
-        if self.img is None:
-            file_name = para_name + ".png"
-            self.img = path.get_absolute_path(
-                os.path.join("assets", "img", "hero", file_name)
-            )
-        return self.img
+        file_name = para_name + ".png"
+        img = path.get_resource_path(os.path.join("assets", "img", "hero", file_name))
+        return img
 
     def _get_hero_img_lv1(self, para_name):
-        # global HERO_IMG
-        if self.img_lv1 is None:
-            file_name = para_name + "_lv1.png"
-            self.img_lv1 = path.get_absolute_path(
-                os.path.join("assets", "img", "hero", file_name)
-            )
-        return self.img_lv1
+        file_name = para_name + "_lv1.png"
+        img_lv1 = path.get_resource_path(
+            os.path.join("assets", "img", "hero", file_name)
+        )
+        return img_lv1
 
     def reset_hero_number(self):
         self.number = 0
@@ -197,36 +192,35 @@ def buy_all_previous_hero():
     pydirectinput.moveTo(213, 201)
 
 
-WinterWyvern = Hero(
-    name="WinterWyvern", number=number_winter_wyvern, need_buy=need_WinterWyvern
-)
+WinterWyvern = Hero(name="WinterWyvern", need_buy=1)
 
-HoodWink = Hero(name="Hoodwink", number=number_hood_wink, need_buy=need_Hoodwink)
-Dazzale = Hero(name="Dazzale", number=number_dazzale, need_buy=need_Dazzale)
+HoodWink = Hero(name="Hoodwink", need_buy=1)
+Dazzale = Hero(name="Dazzale", need_buy=1)
 # hero lv2
 
-Luna = Hero(name="Luna", need_buy=3)
+Luna = Hero(name="Luna", need_buy=1)
 
-Windranger = Hero(name="Windranger", need_buy=3)
+Windranger = Hero(name="Windranger", need_buy=2)
 
 Oracle = Hero(name="Oracle", need_buy=1)
 
-TrollWarlord = Hero(name="TrollWarlord", need_buy=3)
-Morphling = Hero(name="Morphling", need_buy=3)
+TrollWarlord = Hero(name="TrollWarlord", need_buy=2)
+Morphling = Hero(name="Morphling", need_buy=1)
 
 # hero lv3
-WitchDoctor = Hero(name="WitchDoctor", need_buy=4)
-DarkWillow = Hero(name="DarkWillow", need_buy=4)
-Mirana = Hero(name="Mirana", need_buy=4)
-Clinkz = Hero(name="Clinkz", need_buy=4)
+WitchDoctor = Hero(name="WitchDoctor", need_buy=1)
+DarkWillow = Hero(name="DarkWillow", need_buy=3)
+Mirana = Hero(name="Mirana", need_buy=1)
+Clinkz = Hero(name="Clinkz", need_buy=3)
 
 # hero lv4
 Sniper = Hero(name="Sniper", need_buy=5)
 Snapfire = Hero(name="Snapfire", need_buy=5)
 Queen_of_Pain = Hero(name="Queen_of_Pain", need_buy=5)
+Medusa = Hero(name="Medusa", need_buy=5)
 # hero lv5
 DrowRanger = Hero(name="DrowRanger", need_buy=5)
-TemplarAssassin = Hero(name="TemplarAssassin", need_buy=5)
+TemplarAssassin = Hero(name="TemplarAssassin", need_buy=0)
 Zet = Hero(name="Zet", need_buy=5)
 DragonKnight = Hero(name="DragonKnight", need_buy=5)
 
@@ -235,22 +229,15 @@ def check_sell_hero(hero: Hero):
     if global_event.check_event():
         return False
     # slot 1
-    if hero.name == Morphling.name:
+    if hero.name == Mirana.name:
         Dazzale.sell_hero()
-    elif hero.name == Mirana.name:
-        Dazzale.sell_hero()
-        Morphling.sell_hero()
     elif hero.name == Sniper.name:
         Dazzale.sell_hero()
-        Morphling.sell_hero()
         Mirana.sell_hero()
 
     # slot 2
-    elif hero.name == Luna.name:
-        Oracle.sell_hero()
     elif hero.name == Snapfire.name:
         Oracle.sell_hero()
-        Luna.sell_hero()
 
     # slot 3
     elif hero.name == DragonKnight.name:
@@ -258,25 +245,33 @@ def check_sell_hero(hero: Hero):
 
     # slot 4
     elif hero.name == DarkWillow.name:
-        HoodWink.sell_hero()
+        WinterWyvern.sell_hero()
     elif hero.name == DrowRanger.name:
-        HoodWink.sell_hero()
+        WinterWyvern.sell_hero()
         DarkWillow.sell_hero()
 
     # slot 5
+    elif hero.name == TrollWarlord.name:
+        HoodWink.sell_hero()
     elif hero.name == WitchDoctor.name:
-        WinterWyvern.sell_hero()
-    elif hero.name == TemplarAssassin.name:
-        WinterWyvern.sell_hero()
+        TrollWarlord.sell_hero()
+        HoodWink.sell_hero()
+    elif hero.name == Medusa.name:
+        TrollWarlord.sell_hero()
+        HoodWink.sell_hero()
         WitchDoctor.sell_hero()
 
     # slot 6
-    elif hero.name == Clinkz.name:
+    elif hero.name == Luna.name:
         # logger.debug("Ban Clinkz")
-        TrollWarlord.sell_hero()
+        Morphling.sell_hero()
+    elif hero.name == Clinkz.name:
+        Luna.sell_hero()
+        Morphling.sell_hero()
     elif hero.name == Zet.name:
+        Luna.sell_hero()
+        Morphling.sell_hero()
         Clinkz.sell_hero()
-        TrollWarlord.sell_hero()
 
 
 def buy_all_hero(round_number):
@@ -301,7 +296,7 @@ def buy_all_hero(round_number):
     thread_buy_sniper = threading.Thread(target=Sniper.buy, args=())
     thread_buy_snapfire = threading.Thread(target=Snapfire.buy, args=())
     thread_buy_drow_ranger = threading.Thread(target=DrowRanger.buy, args=())
-    thread_buy_templar_assassin = threading.Thread(target=TemplarAssassin.buy, args=())
+    thread_buy_templar_assassin = threading.Thread(target=Medusa.buy, args=())
     thread_buy_zet = threading.Thread(target=Zet.buy, args=())
     thread_buy_dragon_knight = threading.Thread(target=DragonKnight.buy, args=())
 
@@ -380,9 +375,9 @@ def reset_hero():
     if global_event.check_event():
         return False
     # hero lv1
-    WinterWyvern.number = number_winter_wyvern
-    HoodWink.number = number_hood_wink
-    Dazzale.number = number_dazzale
+    WinterWyvern.number = 0
+    HoodWink.number = 0
+    Dazzale.number = 0
     # hero lv2
     Oracle.number = 0
     TrollWarlord.number = 0
@@ -397,6 +392,8 @@ def reset_hero():
     # hero lv4
     Sniper.number = 0
     Snapfire.number = 0
+    Medusa.number = 0
+    Queen_of_Pain.number = 0
     # hero lv5
     DrowRanger.number = 0
     TemplarAssassin.number = 0
@@ -424,7 +421,7 @@ if __name__ == "__main__":
     # Mirana.sell_hero()
 
     buy_all_hero(16)
-    start = time.time() - start
     buy_all_previous_hero()
+    start = time.time() - start
     print(f"thoi gian {start}")
     pass
