@@ -12,8 +12,6 @@ path = PathManager()
 count_of_buy = 0
 money = True
 
-CONFIDENCE = 0.8
-GRAYSCALE = True
 REGION = Region_Window("Dota 2")
 region_hero = Region_Window("hero")
 region_sell_hero = Region_Window("sell_hero")
@@ -21,7 +19,7 @@ region_item = Region_Window("item")
 
 
 def bot_initialization():
-    global CONFIDENCE, GRAYSCALE, REGION, region_hero, region_sell_hero, region_item
+    global REGION, region_hero, region_sell_hero, region_item
     dota2 = SelectWindow("Dota 2")
     if dota2.hwnd is None:
         # logger.debug("Không tìm thấy cửa sổ có tiêu đề 'Dota 2'")

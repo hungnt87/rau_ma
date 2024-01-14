@@ -8,8 +8,6 @@ import controller.global_variables as cgv
 from controller import SelectWindow
 from controller.filelog import logger
 from controller.global_variables import (
-    CONFIDENCE,
-    GRAYSCALE,
     REGION,
     bot_initialization,
     character_moves_event,
@@ -19,6 +17,9 @@ from controller.global_variables import (
 )
 
 # bot_initialization()
+
+CONFIDENCE = 0.8
+GRAYSCALE = True
 
 
 class Button:
@@ -73,7 +74,9 @@ class Button:
                 global_event.sleep(1)  # return False
             except Exception as e:
                 logger.error(e)
-                break
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
 
     def click(self, time_sleep=1, time_wait=60):
         if global_event.check_event():
@@ -115,7 +118,9 @@ class Button:
                 return None
             except Exception as e:
                 logger.error(e)
-                return
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
 
     @staticmethod
     def click_lock_item(name_item, box):
@@ -147,7 +152,9 @@ class Button:
             logger.error(e.errno)
         except Exception as e:
             logger.error(e)
-            return None
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
 
     @staticmethod
     def click_lock_hero(hero_name, box):
@@ -178,6 +185,9 @@ class Button:
             logger.error(e.errno)
         except Exception as e:
             logger.error(e)
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
 
     @staticmethod
     def check_money():
@@ -206,7 +216,9 @@ class Button:
             logger.error(e.errno)
         except Exception as e:
             logger.error(e)
-            return None
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
 
     @staticmethod
     def button_check(
@@ -236,7 +248,9 @@ class Button:
             logger.error(e.errno)
         except Exception as e:
             logger.error(e)
-            return None
+            logger.error(e.strerror)
+            logger.error(e.filename)
+            logger.error(e.errno)
 
     @staticmethod
     def enter_game():
@@ -308,7 +322,9 @@ class Button:
                 logger.error(e.errno)
             except Exception as e:
                 logger.error(e)
-                break
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
 
     @staticmethod
     def check_resurrect():
@@ -348,7 +364,9 @@ class Button:
                 logger.error(e.errno)
             except Exception as e:
                 logger.error(e)
-                break
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
 
     @staticmethod
     def next_round():

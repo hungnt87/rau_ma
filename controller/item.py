@@ -8,10 +8,10 @@ import pydirectinput
 import controller.global_variables as cgv
 from controller.button import Button
 from controller.filelog import logger
-from controller.global_variables import global_event, path
+from controller.global_variables import global_event, path, region_item
 
 previous_item = dict()
-REGION_BUY_ITEM = (394, 321, 1384, 692)
+
 CONFIDENCE_BUY_ITEM = 0.8
 GRAYSCALE_BUY_ITEM = True
 
@@ -47,15 +47,23 @@ class Item:
                 location = pyautogui.locateCenterOnScreen(
                     self.img,
                     confidence=CONFIDENCE_BUY_ITEM,
-                    region=REGION_BUY_ITEM,
+                    region=(
+                        region_item.x,
+                        region_item.y,
+                        region_item.width,
+                        region_item.height,
+                    ),
                     grayscale=GRAYSCALE_BUY_ITEM,
                 )
                 previous_item[location] = self
 
             except pyautogui.ImageNotFoundException:
                 return False
-            except IOError:
-                logger.error("error item buy")
+            except OSError as e:
+                logger.error(e)
+                logger.error(e.strerror)
+                logger.error(e.filename)
+                logger.error(e.errno)
             except Exception as e:
                 logger.error(e)
                 return None
@@ -179,26 +187,28 @@ def buy_all_previous_item():
     if previous_item:
         logger.debug("Ban dang mua item")
         for key, value in list(previous_item.items()):
-            if global_event.check_event():
-                return False
-            pydirectinput.click(key[0], key[1])
-            global_event.sleep(0.5)
-            pydirectinput.moveTo(222, 213)
-            if Button.check_money():
-                logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
-                value.number += 1
-                cgv.count_of_buy += 1
-                del previous_item[key]
-            else:
-                look_region = (key[0], key[1], 267, 312)
-                cgv.set_money(False)
-                if Button.click_lock_item(value.name, look_region) is True:
-                    # del previous_item[key]
-                    logger.debug("Khong du tien, Khoa item")
-
-                else:
+            if value.number < value.number_need_buy:
+                if global_event.check_event():
+                    return False
+                pydirectinput.click(key[0], key[1])
+                # global_event.sleep(0.5)
+                pydirectinput.moveTo(222, 213)
+                if Button.check_money():
+                    logger.info(f"Ban da mua thanh cong 1 cai {value.name}")
+                    value.number += 1
+                    cgv.count_of_buy += 1
                     del previous_item[key]
+                else:
+                    look_region = (key[0], key[1], 267, 312)
+                    cgv.set_money(False)
+                    if Button.click_lock_item(value.name, look_region) is True:
+                        # del previous_item[key]
+                        logger.debug("Khong du tien, Khoa item")
 
+                    else:
+                        del previous_item[key]
+            else:
+                del previous_item[key]
                 # return False
     else:
         # logger.debug("Khong co item khoa o round truoc")

@@ -1,3 +1,4 @@
+import logging
 import threading
 import time
 
@@ -166,6 +167,7 @@ def main_window():
     )
     log_output1 = OutputHandler(window)
     logger.addHandler(log_output1)
+    logger.setLevel(logging.DEBUG)
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == "Exit":
