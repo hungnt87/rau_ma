@@ -109,8 +109,8 @@ class ThreadedApp:
 
     def stop(self):
         stop_app()
-        if self.t1 is not None:
-            self.t1.join()
+        # if self.t1 is not None:
+        #     self.t1.join()
         # self.t1.join()
 
     @staticmethod
