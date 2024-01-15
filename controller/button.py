@@ -57,10 +57,8 @@ class Button:
                     logger.debug("Da tim thay: {}".format(self.name))
                     return True
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"check button {e}")
+
             except pyautogui.ImageNotFoundException:
                 i = i + 1
                 if i > time_wait:
@@ -68,11 +66,6 @@ class Button:
                     return False
                 logger.debug(f"Dang tim hinh anh: {self.name} so lan {i}/{time_wait}")
                 global_event.sleep(1)  # return False
-            except Exception as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
 
     def click(self, time_sleep=1, time_wait=60):
         if global_event.check_event():
@@ -99,9 +92,9 @@ class Button:
                     region=self.region,
                     grayscale=self.grayscale,
                 )
-                global_event.sleep(0.5)
+                # global_event.sleep(0.5)
                 pydirectinput.click(res[0], res[1])
-                global_event.sleep(0.5)
+                global_event.sleep(0.3)
                 pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
                 return True
             except OSError as e:
@@ -132,7 +125,7 @@ class Button:
                 grayscale=True,
             )
             # pydirectinput.moveTo(res)
-            global_event.sleep(0.5)
+            # global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
             # time.sleep(1)
@@ -157,7 +150,7 @@ class Button:
                 region=box,
                 grayscale=True,
             )
-            global_event.sleep(0.5)
+            # global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y + 20)
             global_event.sleep(0.5)
             pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
@@ -185,7 +178,7 @@ class Button:
                 return
             res_center = pyautogui.locateCenterOnScreen(
                 Button("NotMoney").img,
-                minSearchTime=0.5,
+                minSearchTime=0.3,
                 confidence=CONFIDENCE,
                 region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
@@ -201,14 +194,13 @@ class Button:
             return True
 
     @staticmethod
-    def button_check(para_name, time_wait=2):
+    def button_check(para_name):
         global REGION, CONFIDENCE, GRAYSCALE
         if global_event.check_event():
             return False
         try:
             res_center = pyautogui.locateCenterOnScreen(
                 Button(para_name).img,
-                minSearchTime=time_wait,
                 confidence=CONFIDENCE,
                 region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
@@ -233,8 +225,8 @@ class Button:
         pyautogui.write("asx")  # add password
         Button("CreateGame").click()
         # time.sleep(4)
-        Button("StartGame").click(time_sleep=5, time_wait=30)
-        Button("Accept").click(time_sleep=5, time_wait=30)
+        Button("StartGame").click(time_sleep=3)
+        Button("Accept").click(time_sleep=3)
         # global_event.sleep(30)
 
         Button("Confirm").click(time_sleep=5, time_wait=120)
@@ -271,10 +263,10 @@ class Button:
                     global_event.sleep(1)
                     return True
             except pyautogui.ImageNotFoundException:
-                if Button.button_check("Abandon", 2):
+                if Button.button_check("Abandon"):
                     character_moves_event.app_stop()
                     Button("Abandon").click()
-                if Button.button_check("Recycle", 2):
+                if Button.button_check("Recycle"):
                     character_moves_event.app_stop()
                     Button("Recycle").click()
                 i = i + 1
@@ -285,15 +277,7 @@ class Button:
                     global_event.sleep(1)
                     return False
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
-            except Exception as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"Check exit round error: {e}")
 
     @staticmethod
     def check_resurrect():
@@ -312,11 +296,11 @@ class Button:
                     grayscale=GRAYSCALE,
                 )
                 if res_center:
-                    global_event.sleep(0.5)
+                    # global_event.sleep(0.5)
                     pydirectinput.click(res_center[0], res_center[1])
                     global_event.sleep(0.5)
                     pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
-                    global_event.sleep(4)
+                    global_event.sleep(5)
                     character_moves_event.app_resume()
                     return True
             except pyautogui.ImageNotFoundException:
@@ -327,22 +311,14 @@ class Button:
                     return False
                 global_event.sleep(1)
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
-            except Exception as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"Check resurrect error: {e}")
 
     @staticmethod
     def next_round():
         if global_event.check_event():
             return False
         logger.info("Next round")
-        Button("ProceedToRound").click(time_sleep=2, time_wait=20)
+        Button("ProceedToRound").click(time_wait=30)
 
     @staticmethod
     def character_moves(round_number=2):
@@ -476,7 +452,7 @@ class Button:
     @staticmethod
     def roll_game():
         if global_event.check_event():
-            return False
+            return "stop"
         logger.info("Click roll")
         try:
             res = pyautogui.locateCenterOnScreen(
@@ -486,14 +462,15 @@ class Button:
                 region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
             )
-            global_event.sleep(0.5)
+            # global_event.sleep(0.5)
             pydirectinput.click(res.x, res.y)
             global_event.sleep(0.5)
             pyautogui.moveTo(REGION.x + 200, REGION.y + 200)
             if Button.check_money() is False:
                 cgv.set_money(False)
                 return False
-            return True
+            else:
+                return True
         except pyautogui.ImageNotFoundException:
             logger.debug(f"Khong tim thay hinh anh {Button('Roll').name}")
             return False
@@ -504,29 +481,8 @@ class Button:
 
 def get_burn():
     burn = config.read_config("AutoConfig", "burn")
-    if burn == "0":
-        burn = 0
-    elif burn == "10":
-        burn = 1
-    elif burn == "20":
-        burn = 2
-    elif burn == "30":
-        burn = 3
-    elif burn == "40":
-        burn = 4
-    elif burn == "50":
-        burn = 5
-    elif burn == "60":
-        burn = 6
-    elif burn == "70":
-        burn = 7
-    elif burn == "80":
-        burn = 8
-    elif burn == "90":
-        burn = 9
-    elif burn == "100":
-        burn = 10
-    return burn
+    burn = int(burn) // 10
+    return int(burn)
 
 
 def main():
