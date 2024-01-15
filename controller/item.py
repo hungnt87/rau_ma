@@ -13,7 +13,7 @@ from controller.global_variables import global_event, path, region_item
 previous_item = dict()
 
 CONFIDENCE_BUY_ITEM = 0.8
-GRAYSCALE_BUY_ITEM = True
+GRAYSCALE_BUY_ITEM = False
 
 
 class Item:
