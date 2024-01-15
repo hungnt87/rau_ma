@@ -73,11 +73,11 @@ class Hero:
     def buy(self):
         if global_event.check_event():
             return False
-        logger.debug("Bat dau tim hero {}".format(self.name))
+
         count_buy = self.need_buy - self.number
 
         if count_buy > 0:
-            # logger.debug(f"Con {count_buy} {self.name} can mua")
+            logger.debug(f"Bat dau tim {count_buy}hero {self.name}")
             try:
                 res_center = pyautogui.locateCenterOnScreen(
                     self.img,
@@ -89,10 +89,8 @@ class Hero:
                 previous_hero[res_center] = self
                 return True
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"Tim hero {e}")
+
             except pyautogui.ImageNotFoundException:
                 # logger.debug("Khong tim thay hinh anh {}".format(self.img))
                 return False

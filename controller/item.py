@@ -58,13 +58,8 @@ class Item:
             except pyautogui.ImageNotFoundException:
                 return False
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
-            except Exception as e:
-                logger.error(e)
-                return None
+                logger.error(f"Item buy: {e}")
+
         else:
             pass
 
