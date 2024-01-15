@@ -198,7 +198,7 @@ HoodWink = Hero(name="Hoodwink", need_buy=1)
 Dazzale = Hero(name="Dazzale", need_buy=1)
 # hero lv2
 
-Luna = Hero(name="Luna", need_buy=1)
+Luna = Hero(name="Luna", need_buy=5)
 
 Windranger = Hero(name="Windranger", need_buy=2)
 
@@ -222,7 +222,7 @@ Medusa = Hero(name="Medusa", need_buy=5)
 DrowRanger = Hero(name="DrowRanger", need_buy=5)
 TemplarAssassin = Hero(name="TemplarAssassin", need_buy=0)
 Zet = Hero(name="Zet", need_buy=5)
-DragonKnight = Hero(name="DragonKnight", need_buy=5)
+DragonKnight = Hero(name="DragonKnight", need_buy=0)
 
 
 def check_sell_hero(hero: Hero):
@@ -240,7 +240,7 @@ def check_sell_hero(hero: Hero):
         Oracle.sell_hero()
 
     # slot 3
-    elif hero.name == DragonKnight.name:
+    elif hero.name == Luna.name:
         Windranger.sell_hero()
 
     # slot 4
@@ -262,14 +262,10 @@ def check_sell_hero(hero: Hero):
         WitchDoctor.sell_hero()
 
     # slot 6
-    elif hero.name == Luna.name:
-        # logger.debug("Ban Clinkz")
-        Morphling.sell_hero()
+
     elif hero.name == Clinkz.name:
-        Luna.sell_hero()
         Morphling.sell_hero()
     elif hero.name == Zet.name:
-        Luna.sell_hero()
         Morphling.sell_hero()
         Clinkz.sell_hero()
 

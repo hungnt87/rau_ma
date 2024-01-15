@@ -137,20 +137,12 @@ class Button:
             global_event.sleep(0.5)
             # time.sleep(1)
             pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
-            logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
+            # logger.debug(f"Ban khong du tien mua {name_item}, khoa de lan sau mua")
             return True
+        except OSError as e:
+            logger.error(f"Lock item {name_item} {e}")
         except pyautogui.ImageNotFoundException:
             return False
-        except OSError as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
-        except Exception as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
 
     @staticmethod
     def click_lock_hero(hero_name, box):
@@ -202,19 +194,11 @@ class Button:
                 logger.debug("Ban khong du tien, di tiep vong sau")
                 cgv.set_money(False)
                 return False
+        except OSError as e:
+            logger.error("Check money error: {}".format(e))
         except pyautogui.ImageNotFoundException:
             cgv.set_money(True)
             return True
-        except OSError as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
-        except Exception as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
 
     @staticmethod
     def button_check(para_name, time_wait=2):
@@ -231,19 +215,11 @@ class Button:
             )
             if res_center:
                 return True
+        except OSError as e:
+            logger.error(f"Check button {para_name} error: {e}")
         except pyautogui.ImageNotFoundException:
             logger.debug(f"Khong tim thay hinh anh {Button(para_name).name}")
             return False
-        except OSError as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
-        except Exception as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
 
     @staticmethod
     def enter_game():
