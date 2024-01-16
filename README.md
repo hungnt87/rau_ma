@@ -1,15 +1,19 @@
-# brodota-bot v1.4.0
+# brodota-bot v1.4.1
 
-# Cập nhật v1.3.4 => v1.4.0
+# Cập nhật v1.4.0 =>v1.4.1
+
+- Thêm 3 tùy chọn của độ khó
+- Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
+- Fix một số lỗi khi mua Item
+- Chức năng đi Mine sắp hoàn thiện, đang test kiểm thử ...
+
+# Tính năng:
 
 - Thêm tùy chọn config => Auto:
   <div > <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/2493af53-41af-489b-8143-36ad6648b191"  width="400" alt="config" /> </div>
 - Lựa chọn Chế độ di chuyển, Tắt like, Chọn độ khó Burn
 - Fix chế dộ di chuyển mượt mà hơn
 - Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
-
-# Tính năng:
-
 - Tự động vào game
 - Mua đồ và hero (Mua giới hạn số lượng Hero và Item, các item thuộc Set và Unique chỉ mua 1 cái)
 - Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
