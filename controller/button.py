@@ -240,7 +240,7 @@ class Button:
         Button("Prepare").click()
 
     @staticmethod
-    def check_exit_round(time_wait=40):
+    def check_exit_round(time_wait=120):
         if global_event.check_event():
             return False
         global REGION, CONFIDENCE, GRAYSCALE
@@ -396,7 +396,7 @@ class Button:
         character_moves_event.app_start()
         character_moves_event.app_pause()
         t_check_exit_round = threading.Thread(
-            target=Button.check_exit_round, args=(40,)
+            target=Button.check_exit_round, args=(120,)
         )
         t_check_resurrect = threading.Thread(
             target=Button.check_resurrect, args=(), daemon=True
