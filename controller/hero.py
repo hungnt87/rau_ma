@@ -89,7 +89,7 @@ class Hero:
                 previous_hero[res_center] = self
                 return True
             except OSError as e:
-                logger.error(f"Tim hero {e}")
+                logger.error(f"Buy hero {e}")
 
             except pyautogui.ImageNotFoundException:
                 # logger.debug("Khong tim thay hinh anh {}".format(self.img))
@@ -111,15 +111,10 @@ class Hero:
             )
             return True
         except OSError as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
+            logger.error(f"check hero {e}")
+
         except pyautogui.ImageNotFoundException:
             return False
-        except Exception as e:
-            logger.error(e)
-            return None
 
     def sell_hero(self):
         if global_event.check_event():
@@ -145,15 +140,11 @@ class Hero:
 
                 return True
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"sell hero {e}")
+
             except pyautogui.ImageNotFoundException:
                 logger.debug(f"Khong co hero  {self.name} de ban")
                 return False
-            except Exception as e:
-                logger.error(e)
 
 
 def buy_all_previous_hero():
