@@ -1,6 +1,8 @@
-# brodota-bot v1.4.1
+# brodota-bot v1.4.2
 
-# Cập nhật v1.4.0 =>v1.4.1
+# Cập nhật 1.4.1 => 1.4.2-hotfix
+
+- fix không nhận Recycle
 
 - Thêm 3 tùy chọn của độ khó
 - Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
