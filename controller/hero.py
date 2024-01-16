@@ -340,7 +340,9 @@ def buy_all_hero(round_number):
         thread_buy_mirana.join()
     else:
         # start
-
+        thread_buy_luna.start()
+        thread_buy_troll_warlord.start()
+        thread_buy_morphling.start()
         thread_buy_dark_willow.start()
         thread_buy_clinkz.start()
         thread_buy_witch_doctor.start()
@@ -352,7 +354,9 @@ def buy_all_hero(round_number):
         thread_buy_zet.start()
         thread_buy_dragon_knight.start()
         # join
-
+        thread_buy_luna.join()
+        thread_buy_troll_warlord.join()
+        thread_buy_morphling.join()
         thread_buy_dark_willow.join()
         thread_buy_clinkz.join()
         thread_buy_witch_doctor.join()
