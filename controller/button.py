@@ -119,7 +119,6 @@ class Button:
         try:
             res = pyautogui.locateCenterOnScreen(
                 Button("Look").img,
-                minSearchTime=0.5,
                 confidence=0.8,
                 region=box,
                 grayscale=True,
@@ -178,7 +177,7 @@ class Button:
                 return
             res_center = pyautogui.locateCenterOnScreen(
                 Button("NotMoney").img,
-                minSearchTime=0.3,
+                minSearchTime=0.5,
                 confidence=CONFIDENCE,
                 region=(REGION.x, REGION.y, REGION.width, REGION.height),
                 grayscale=GRAYSCALE,
