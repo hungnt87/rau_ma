@@ -4,6 +4,7 @@
 
 - Thêm 3 tùy chọn của độ khó
 - Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
+- Add thêm một số item còn thiếu (dữ liệu của: BossGames)
 - Fix một số lỗi khi mua Item
 - Chức năng đi Mine sắp hoàn thiện, đang test kiểm thử ...
 
