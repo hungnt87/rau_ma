@@ -4,7 +4,9 @@ from controller import ConfigManager, Event, PathManager, Region_Window, SelectW
 from controller.filelog import logger
 
 config = ConfigManager("config.ini")
-config.create_config({"AutoConfig": {"burn": "10", "move": "False", "like": "False"}})
+config.create_config(
+    {"AutoConfig": {"config_burn": 0, "burn": "10", "move": "False", "like": "False"}}
+)
 character_moves_event = Event("character_moves_event")
 global_event = Event("global_event")
 path = PathManager()

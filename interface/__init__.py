@@ -7,6 +7,7 @@ move_status = False
 like_status = False
 
 item_list = tuple(str(i * 10) for i in range(0, 21))
+config_burn = 0
 
 
 def window_config_auto():
@@ -20,6 +21,12 @@ def window_config_auto():
         like_status = True
     else:
         like_status = False
+    if config.read_config("AutoConfig", "config_burn") == "0":
+        config_burn = 0
+    elif config.read_config("AutoConfig", "config_burn") == "1":
+        config_burn = 1
+    elif config.read_config("AutoConfig", "config_burn") == "2":
+        config_burn = 2
     item = config.read_config("AutoConfig", "burn")
     layout_column1 = [
         [
@@ -54,13 +61,38 @@ def window_config_auto():
     ]
     layout_column3 = [
         [
+            sg.Radio(
+                "Tự chọn Burn trong game:",
+                key="Radio_0",
+                group_id="2",
+                default=(config_burn == 0),
+            )
+        ],
+        [
+            sg.Radio(
+                "Burn tăng từ min",
+                key="Radio_min",
+                group_id="2",
+                default=(config_burn == 1),
+            )
+        ],
+        [
+            sg.Radio(
+                "Burn giảm từ max",
+                key="Radio_max",
+                group_id="2",
+                default=(config_burn == 2),
+            )
+        ],
+        [
             sg.Text("Độ khó Burn:"),
             sg.Combo(
                 item_list, default_value=item, key="-Item-", readonly=True, size=(5, 1)
             ),
         ],
     ]
-    layout_column4 = [
+
+    layout_column5 = [
         [sg.Button("Save", key="-Save-")],
     ]
     layout = [
@@ -71,8 +103,10 @@ def window_config_auto():
             ),
             sg.Column(layout_column2, vertical_scroll_only=True),
         ],
-        [sg.Column(layout_column3, vertical_scroll_only=False)],
-        [sg.Column(layout_column4, vertical_scroll_only=False, justification="right")],
+        [
+            sg.Column(layout_column3, vertical_scroll_only=True, justification="left"),
+        ],
+        [sg.Column(layout_column5, vertical_scroll_only=False, justification="right")],
     ]
     window1 = sg.Window(
         "Config auto",
@@ -92,6 +126,15 @@ def window_config_auto():
             logger.info(f"Save config tat like khi thoat game: {str(values['-Like-'])}")
             config.save_config("AutoConfig", "burn", str(values["-Item-"]))
             logger.info(f"Save config burn: {str(values['-Item-'])}")
+            if values["Radio_0"]:
+                config.save_config("AutoConfig", "config_burn", "0")
+                logger.info(f"Chọn config burn trong game")
+            elif values["Radio_min"]:
+                config.save_config("AutoConfig", "config_burn", "1")
+                logger.info(f"Save config burn giảm từ max")
+            elif values["Radio_max"]:
+                config.save_config("AutoConfig", "config_burn", "2")
+                logger.info(f"Save config burn tăng từ min")
             window1.close()
             break
 

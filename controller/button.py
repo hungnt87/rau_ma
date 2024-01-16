@@ -159,15 +159,7 @@ class Button:
             logger.debug(f"Khong tim thay hinh anh {Button('Lock_hero').name}")
             return False
         except OSError as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
-        except Exception as e:
-            logger.error(e)
-            logger.error(e.strerror)
-            logger.error(e.filename)
-            logger.error(e.errno)
+            logger.error("Lock hero error: {}".format(e))
 
     @staticmethod
     def check_money():
@@ -229,9 +221,17 @@ class Button:
         # global_event.sleep(30)
 
         Button("Confirm").click(time_sleep=5, time_wait=120)
-        Button("BurnMin").click()
-        for i in range(0, get_burn()):
-            Button("BurnPlus10").click()
+
+        if config.read_config("AutoConfig", "config_burn") == "0":
+            pass
+        elif config.read_config("AutoConfig", "config_burn") == "2":
+            Button("BurnMax").click()
+            for i in range(0, get_burn() - 1):
+                Button("BurnMinus10").click()
+        elif config.read_config("AutoConfig", "config_burn") == "1":
+            Button("BurnMin").click()
+            for i in range(0, get_burn()):
+                Button("BurnPlus10").click()
         Button("Challenge").click()
         # click(ChallengeMax, 2)
 
