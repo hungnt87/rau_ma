@@ -396,7 +396,7 @@ class Button:
         character_moves_event.app_start()
         character_moves_event.app_pause()
         t_check_exit_round = threading.Thread(
-            target=Button.check_exit_round, args=(120,)
+            target=Button.check_exit_round, args=(150,)
         )
         t_check_resurrect = threading.Thread(
             target=Button.check_resurrect, args=(), daemon=True
