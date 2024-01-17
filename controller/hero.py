@@ -189,18 +189,18 @@ Dazzale = Hero(name="Dazzale", need_buy=1)
 
 Luna = Hero(name="Luna", need_buy=5)
 
-Windranger = Hero(name="Windranger", need_buy=2)
+Windranger = Hero(name="Windranger", need_buy=1)
 
 Oracle = Hero(name="Oracle", need_buy=1)
 
-TrollWarlord = Hero(name="TrollWarlord", need_buy=2)
+TrollWarlord = Hero(name="TrollWarlord", need_buy=1)
 Morphling = Hero(name="Morphling", need_buy=1)
 
 # hero lv3
 WitchDoctor = Hero(name="WitchDoctor", need_buy=1)
-DarkWillow = Hero(name="DarkWillow", need_buy=3)
+DarkWillow = Hero(name="DarkWillow", need_buy=1)
 Mirana = Hero(name="Mirana", need_buy=1)
-Clinkz = Hero(name="Clinkz", need_buy=3)
+Clinkz = Hero(name="Clinkz", need_buy=1)
 
 # hero lv4
 Sniper = Hero(name="Sniper", need_buy=5)

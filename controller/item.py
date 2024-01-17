@@ -4,6 +4,7 @@ import time
 
 import pyautogui
 import pydirectinput
+import pyscreeze
 
 import controller.global_variables as cgv
 from controller import SelectWindow
@@ -82,35 +83,52 @@ class Item:
         else:
             pass
 
-    def chech_item(self):
+    def check_item(self, confidence=0.85, grayscale=False):
         if global_event.check_event():
             return False
         if self.img == None:
             logger.error(f"Không tìm thấy hình ảnh item: {self.name}")
             return None
+        distance = pow(10, 2)
+        elements = []
         try:
-            location = pyautogui.locateCenterOnScreen(
+            locations = pyautogui.locateAllOnScreen(
                 self.img,
-                confidence=self.confidence,
+                confidence=confidence,
                 region=(
                     region_item.x,
                     region_item.y,
                     region_item.width,
                     region_item.height,
                 ),
-                grayscale=self.grayscale,
+                grayscale=grayscale,
             )
-            previous_item[location] = self
-            logger.info(f"Ban thấy item {self.name}")
-            pydirectinput.moveTo(location[0], location[1])
-            return True
+            if locations:
+                for location in locations:
+                    if all(
+                        map(
+                            lambda x: pow(location.left - x.left, 2)
+                            + pow(location.top - x.top, 2)
+                            > distance,
+                            elements,
+                        )
+                    ):
+                        elements.append(location)
+            if elements:
+                for element in elements:
+                    element = pyautogui.center(element)
+                    look_region = (element[0], element[1], 267, 312)
+                    Button.click_lock_item(self.name, look_region)
         except pyautogui.ImageNotFoundException:
+            return False
+        except pyscreeze.ImageNotFoundException:
             return False
         except OSError as e:
             logger.error(f"Item buy: {e}")
 
 
 Attack4EveryEndRound_lv4 = Item("Attack4EveryEndRound_lv4")
+Attack6_Range4_lv1 = Item("Attack6_Range4_lv1", number_need_buy=1)
 Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2", number_need_buy=10)
 Attack12_Kill1000_Unique_lv2 = Item(
     "Attack12_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
@@ -124,7 +142,10 @@ Attack35_Kill1000_Unique_lv5 = Item(
 )
 Bicycle_lv3 = Item("Bicycle_lv3", number_need_buy=0)
 Cooldown16_Kill1000_Unique_lv2 = Item(
-    "Cooldown16_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
+    "Cooldown16_Kill1000_Unique_lv2",
+    number_need_buy=1,
+    grayscale=False,
+    confidence=0.9,
 )
 Cooldown21_lv5 = Item("Cooldown21_lv5", number_need_buy=1)
 Cooldown45_Speed15_lv6 = Item("Cooldown45_Speed15_lv6", number_need_buy=1)
@@ -132,15 +153,23 @@ Cooldown50_Attack10_Health20_lv6 = Item(
     "Cooldown50_Attack10_Health20_lv6", number_need_buy=1
 )
 Critical9_Luck_lv3 = Item("Critical9_Luck_lv3", number_need_buy=1)
+Critical10_Attack5_lv1 = Item("Critical10_Attack5_lv1", number_need_buy=2)
 Critical16_Kill1000_Unique_lv2 = Item(
-    "Critical16_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
+    "Critical16_Kill1000_Unique_lv2",
+    number_need_buy=1,
+    grayscale=False,
+    confidence=0.9,
 )
 Critical20_Defense_lv3 = Item("Critical20_Defense_lv3", number_need_buy=1)
 Critical30_Defense10_lv5 = Item("Critical30_Defense10_lv5", number_need_buy=1)
 Critical40_Kill1000_Unique_lv5 = Item(
-    "Critical40_Kill1000_Unique_lv5", number_need_buy=1, grayscale=False, confidence=0.9
+    "Critical40_Kill1000_Unique_lv5",
+    number_need_buy=1,
+    grayscale=False,
+    confidence=0.9,
 )
 Defense20_Speed10_lv2 = Item("Defense20_Speed10_lv2", number_need_buy=1)
+Defense24_Evasion12_Lv3 = Item("Defense24_Evasion12_Lv3", number_need_buy=1)
 Critical21_For_Precise_lv3 = Item("Critical21_For_Precise_lv3")
 EnemyCount10_lv6 = Item("EnemyCount10_lv6")
 Evasion6_For_Precise_lv1 = Item("Evasion6_For_Precise_lv1", number_need_buy=2)
@@ -163,6 +192,7 @@ ExtraDamage14_Kill1000_Unique_lv2 = Item(
     grayscale=False,
     confidence=0.9,
 )
+ExtraDamage20FullHp_lv3 = Item("ExtraDamage20FullHp_lv3", number_need_buy=1)
 ExtraDamage30_Luck30_lv5 = Item("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = Item("ExtraDamage30_lv6")
 ExtraDamage40_HitRecovery8_lv6 = Item("ExtraDamage40_HitRecovery8_lv6")
@@ -187,6 +217,7 @@ Holding_Plus_HealthRegen30_lv4 = Item(
     "Holding_Plus_HealthRegen30_lv4", number_need_buy=0
 )
 Immunity_Unique_lv5 = Item("Immunity_Unique_lv5", number_need_buy=1)
+Immunity2_lv2 = Item("Immunity2_lv2")
 Immunity6_lv3 = Item("Immunity6_lv3")
 Immunity10_lv5 = Item("Immunity10_lv5")
 ImmunityCount4_lv4 = Item("ImmunityCount4_lv4")
@@ -213,8 +244,13 @@ PantyMask_lv6 = Item("PantyMask_lv6", 1)
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy=3)
 PickupRange300_Unique_lv3 = Item("PickupRange300_Unique_lv3", number_need_buy=1)
 Pillager_lv4 = Item("Pillager_lv4")
-PreciseDamage12_Every1s_Plus1_lv6 = Item("PreciseDamage12_Every1s_Plus1_lv6", 1)
-PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2", 1)
+PreciseDamage12_Every1s_Plus1_lv6 = Item(
+    "PreciseDamage12_Every1s_Plus1_lv6", number_need_buy=1
+)
+PreciseDamage12_Speed12_lv2 = Item("PreciseDamage12_Speed12_lv2", number_need_buy=1)
+PreciseDamage13_Investment33_lv2 = Item(
+    "PreciseDamage13_Investment33_lv2", number_need_buy=1
+)
 PreciseDamage16_Strike16_lv3 = Item("PreciseDamage16_Strike16_lv3")
 Presision40_Defense_lv6 = Item("Presision40_Defense_lv6", number_need_buy=1)
 Presision40_Range10_lv6 = Item("Presision40_Range10_lv6", number_need_buy=1)
@@ -237,6 +273,7 @@ Set_CriticalRate18_lv4 = Item("Set_CriticalRate18_lv4", number_need_buy=1)
 Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
 Set_Defense19_lv3 = Item("Set_Defense19_lv3", number_need_buy=1)
 Set_Defense188_lv3 = Item("Set_Defense188_lv3", number_need_buy=1)
+Set_ExtraDamage13_lv3 = Item("Set_ExtraDamage13_lv3", number_need_buy=1)
 Set_ExtraDamage17_lv4 = Item("Set_ExtraDamage17_lv4", number_need_buy=1)
 Set_Investment108_lv2 = Item("Set_Investment108_lv2", number_need_buy=1)
 Set_Luck88_lv6 = Item("Set_Luck88_lv6", number_need_buy=1)
@@ -309,6 +346,7 @@ def buy_all_set_item(round_number):
         Set_CriticalRate18_lv4.buy()
         Set_Attack24_lv5.buy()
         Set_Luck88_lv6.buy()
+        Set_ExtraDamage13_lv3.buy()
         Attack10EveryBuyPlus5_lv2.buy()
         SplitTheVoid_lv2.buy()
     if 4 < round_number < 18:
@@ -349,6 +387,8 @@ def buy_all_item_lv1(round_number):
         HealthRegen10_For_Precise_lv1.buy()
         Range4_AracaneDamage12_lv1.buy()
         Range4_StrikeDamage10_lv1.buy()
+        Critical10_Attack5_lv1.buy()
+        Attack6_Range4_lv1.buy()
 
 
 def buy_all_item_lv2(round_number):
@@ -373,6 +413,7 @@ def buy_all_item_lv2(round_number):
         SoulCrystalsPlus35EveryMango_lv2.buy()
         MultishotRate100_Precision5_lv2.buy()
         Question_lv2.buy()
+        PreciseDamage13_Investment33_lv2.buy()
 
 
 def buy_all_item_lv3(round_number):
@@ -396,6 +437,8 @@ def buy_all_item_lv3(round_number):
         Luck45_HitRecovery25_lv3.buy()
         Critical21_For_Precise_lv3.buy()
         RevivalCount1_CriticalRate5_lv3.buy()
+        Defense24_Evasion12_Lv3.buy()
+        ExtraDamage20FullHp_lv3.buy()
 
 
 def buy_all_item_lv4(round_number):
@@ -506,6 +549,7 @@ def reset_item():
     if global_event.check_event():
         return False
     Attack4EveryEndRound_lv4.reset_item_number()
+    Attack6_Range4_lv1.reset_item_number()
     Attack10EveryBuyPlus5_lv2.reset_item_number()
     Attack12_Kill1000_Unique_lv2.reset_item_number()
     Attack16_Arcane16_lv3.reset_item_number()
@@ -519,12 +563,14 @@ def reset_item():
     Cooldown45_Speed15_lv6.reset_item_number()
     Cooldown50_Attack10_Health20_lv6.reset_item_number()
     Critical9_Luck_lv3.reset_item_number()
+    Critical10_Attack5_lv1.reset_item_number()
     Critical16_Kill1000_Unique_lv2.reset_item_number()
     Critical20_Defense_lv3.reset_item_number()
     Critical21_For_Precise_lv3.reset_item_number()
     Critical30_Defense10_lv5.reset_item_number()
     Critical40_Kill1000_Unique_lv5.reset_item_number()
     Defense20_Speed10_lv2.reset_item_number()
+    Defense24_Evasion12_Lv3.reset_item_number()
     EnemyCount10_lv6.reset_item_number()
     Evasion6_For_Precise_lv1.reset_item_number()
     Evasion8_Speed5_lv1.reset_item_number()
@@ -539,7 +585,7 @@ def reset_item():
     ExtraDamage10_lv3.reset_item_number()
     ExtraDamage13_For_Precise_lv2.reset_item_number()
     ExtraDamage14_Kill1000_Unique_lv2.reset_item_number()
-    Random_10_28_HealthRegen_lv3.reset_item_number()
+    ExtraDamage20FullHp_lv3.reset_item_number()
     ExtraDamage30_Luck30_lv5.reset_item_number()
     ExtraDamage30_lv6.reset_item_number()
     ExtraDamage40_HitRecovery8_lv6.reset_item_number()
@@ -583,6 +629,7 @@ def reset_item():
     Pillager_lv4.reset_item_number()
     PreciseDamage12_Every1s_Plus1_lv6.reset_item_number()
     PreciseDamage12_Speed12_lv2.reset_item_number()
+    PreciseDamage13_Investment33_lv2.reset_item_number()
     PreciseDamage16_Strike16_lv3.reset_item_number()
     Presision40_Defense_lv6.reset_item_number()
     Presision40_Range10_lv6.reset_item_number()
@@ -604,6 +651,7 @@ def reset_item():
     Set_Defense8_lv2.reset_item_number()
     Set_Defense19_lv3.reset_item_number()
     Set_Defense188_lv3.reset_item_number()
+    Set_ExtraDamage13_lv3.reset_item_number()
     Set_ExtraDamage17_lv4.reset_item_number()
     Set_Investment108_lv2.reset_item_number()
     Set_Luck88_lv6.reset_item_number()
@@ -624,15 +672,24 @@ def reset_previous_item():
     previous_item.clear()
 
 
+def get_all_name_item():
+    image_files = [f for f in os.listdir("assets/img/item") if f.endswith(".png")]
+    list_name_item = list()
+    for img in image_files:
+        img = img.split(".")[0]
+        list_name_item.append(img)
+    return list_name_item
+
+
+def check_all_item():
+    for item in get_all_name_item():
+        Item(item).check_item(confidence=0.85, grayscale=False)
+
+
 if __name__ == "__main__":
     dota2 = SelectWindow("Dota 2")
     dota2.move_window_to(0, 0)
     dota2.set_foreground()
-    Cooldown16_Kill1000_Unique_lv2.chech_item()
-    Attack35_Kill1000_Unique_lv5.chech_item()
-    ExtraDamage14_Kill1000_Unique_lv2.chech_item()
-    ExtraDamage40_Kill100_Unique_lv5.chech_item()
-    Critical40_Kill1000_Unique_lv5.chech_item()
-    MultishotRate100_Precision5_lv2.chech_item()
+    check_all_item()
 
     pass

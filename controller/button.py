@@ -107,7 +107,7 @@ class Button:
     def click_lock_item(name_item, box):
         if global_event.check_event():
             return False
-        logger.info("Click lock")
+        logger.info(f"Click lock item: {name_item} ")
         try:
             res = pyautogui.locateCenterOnScreen(
                 Button("Look").img,
