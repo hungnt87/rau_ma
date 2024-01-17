@@ -13,17 +13,25 @@ from controller.global_variables import global_event, path, region_item
 previous_item = dict()
 
 CONFIDENCE_BUY_ITEM = 0.8
-GRAYSCALE_BUY_ITEM = False
+GRAYSCALE_BUY_ITEM = True
 
 
 class Item:
     img = None
 
-    def __init__(self, name, number_need_buy=5):
+    def __init__(
+        self,
+        name,
+        number_need_buy=5,
+        grayscale=GRAYSCALE_BUY_ITEM,
+        confidence=CONFIDENCE_BUY_ITEM,
+    ):
         self.name = name
         self.number = 0
         self.number_need_buy = number_need_buy
         self.img = self.get_item_img(name)
+        self.grayscale = grayscale
+        self.confidence = confidence
 
     def reset_item_number(self):
         self.number = 0
@@ -44,14 +52,14 @@ class Item:
             try:
                 location = pyautogui.locateCenterOnScreen(
                     self.img,
-                    confidence=CONFIDENCE_BUY_ITEM,
+                    confidence=self.confidence,
                     region=(
                         region_item.x,
                         region_item.y,
                         region_item.width,
                         region_item.height,
                     ),
-                    grayscale=GRAYSCALE_BUY_ITEM,
+                    grayscale=self.grayscale,
                 )
                 previous_item[location] = self
 
@@ -66,15 +74,19 @@ class Item:
 
 Attack4EveryEndRound_lv4 = Item("Attack4EveryEndRound_lv4")
 Attack10EveryBuyPlus5_lv2 = Item("Attack10EveryBuyPlus5_lv2", number_need_buy=10)
-Attack12_Kill1000_Unique_lv2 = Item("Attack12_Kill1000_Unique_lv2", number_need_buy=1)
+Attack12_Kill1000_Unique_lv2 = Item(
+    "Attack12_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
+)
 Attack16_Arcane16_lv3 = Item("Attack16_Arcane16_lv3")
 Attack16_Strike16_lv3 = Item("Attack16_Strike16_lv3")
 Attack16Every1RevivalCount_lv5 = Item("Attack16Every1RevivalCount_lv5")
 Attack35_Cooldown15_lv6 = Item("Attack35_Cooldown15_lv6")
-Attack35_Kill1000_Unique_lv5 = Item("Attack35_Kill1000_Unique_lv5", number_need_buy=1)
+Attack35_Kill1000_Unique_lv5 = Item(
+    "Attack35_Kill1000_Unique_lv5", number_need_buy=1, grayscale=False, confidence=0.9
+)
 Bicycle_lv3 = Item("Bicycle_lv3", number_need_buy=0)
 Cooldown16_Kill1000_Unique_lv2 = Item(
-    "Cooldown16_Kill1000_Unique_lv2", number_need_buy=1
+    "Cooldown16_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
 )
 Cooldown21_lv5 = Item("Cooldown21_lv5", number_need_buy=1)
 Cooldown45_Speed15_lv6 = Item("Cooldown45_Speed15_lv6", number_need_buy=1)
@@ -83,12 +95,12 @@ Cooldown50_Attack10_Health20_lv6 = Item(
 )
 Critical9_Luck_lv3 = Item("Critical9_Luck_lv3", number_need_buy=1)
 Critical16_Kill1000_Unique_lv2 = Item(
-    "Critical16_Kill1000_Unique_lv2", number_need_buy=1
+    "Critical16_Kill1000_Unique_lv2", number_need_buy=1, grayscale=False, confidence=0.9
 )
 Critical20_Defense_lv3 = Item("Critical20_Defense_lv3", number_need_buy=1)
 Critical30_Defense10_lv5 = Item("Critical30_Defense10_lv5", number_need_buy=1)
 Critical40_Kill1000_Unique_lv5 = Item(
-    "Critical40_Kill1000_Unique_lv5", number_need_buy=1
+    "Critical40_Kill1000_Unique_lv5", number_need_buy=1, grayscale=False, confidence=0.9
 )
 Defense20_Speed10_lv2 = Item("Defense20_Speed10_lv2", number_need_buy=1)
 Critical21_For_Precise_lv3 = Item("Critical21_For_Precise_lv3")
@@ -108,13 +120,19 @@ Exp45_Attack4_lv2 = Item("Exp45_Attack4_lv2", 1)
 ExtraDamage10_lv3 = Item("ExtraDamage10_lv3")
 ExtraDamage13_For_Precise_lv2 = Item("ExtraDamage13_For_Precise_lv2")
 ExtraDamage14_Kill1000_Unique_lv2 = Item(
-    "ExtraDamage14_Kill1000_Unique_lv2", number_need_buy=1
+    "ExtraDamage14_Kill1000_Unique_lv2",
+    number_need_buy=1,
+    grayscale=False,
+    confidence=0.9,
 )
 ExtraDamage30_Luck30_lv5 = Item("ExtraDamage30_Luck30_lv5")
 ExtraDamage30_lv6 = Item("ExtraDamage30_lv6")
 ExtraDamage40_HitRecovery8_lv6 = Item("ExtraDamage40_HitRecovery8_lv6")
 ExtraDamage40_Kill100_Unique_lv5 = Item(
-    "ExtraDamage40_Kill100_Unique_lv5", number_need_buy=1
+    "ExtraDamage40_Kill100_Unique_lv5",
+    number_need_buy=1,
+    grayscale=False,
+    confidence=0.9,
 )
 Health30_Speed20_lv4 = Item("Health30_Speed20_lv4", 0)
 Health48_For_Precise_lv3 = Item("Health48_For_Precise_lv3", 1)
