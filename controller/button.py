@@ -226,7 +226,7 @@ class Button:
             pass
         elif config.read_config("AutoConfig", "config_burn") == "2":
             Button("BurnMax").click()
-            for i in range(0, get_burn() - 1):
+            for i in range(0, get_burn()):
                 Button("BurnMinus10").click()
         elif config.read_config("AutoConfig", "config_burn") == "1":
             Button("BurnMin").click()
@@ -501,8 +501,9 @@ def main():
 if __name__ == "__main__":
     global_event.sleep(2)
     bot_initialization()
-    Button.next_round()
-    global_event.app_start()
-    character_moves_event.app_start()
-    Button.run_round(round_number=4)
+    # Button.next_round()
+    # global_event.app_start()
+    # character_moves_event.app_start()
+    # Button.run_round(round_number=4)
+    print(get_burn())
     pass
