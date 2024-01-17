@@ -98,18 +98,10 @@ class Button:
                 pydirectinput.moveTo(REGION.x + 200, REGION.y + 200)
                 return True
             except OSError as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
+                logger.error(f"Click {self.name} error: {e}")
             except pyautogui.ImageNotFoundException:
                 logger.debug(f"Khong tim thay hinh anh: {self.name}")
                 return None
-            except Exception as e:
-                logger.error(e)
-                logger.error(e.strerror)
-                logger.error(e.filename)
-                logger.error(e.errno)
 
     @staticmethod
     def click_lock_item(name_item, box):
