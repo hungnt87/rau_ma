@@ -15,7 +15,7 @@ from controller.global_variables import global_event, path, region_item
 previous_item = dict()
 
 CONFIDENCE_BUY_ITEM = 0.8
-GRAYSCALE_BUY_ITEM = True
+GRAYSCALE_BUY_ITEM = False
 
 
 class Item:
@@ -59,10 +59,12 @@ class Item:
         if self.img == None:
             logger.error(f"Không tìm thấy hình ảnh item: {self.name}")
             return None
+        distance = pow(10, 2)
+        elements = []
         count_of_buy = self.number_need_buy - self.number
         if count_of_buy > 0:
             try:
-                location = pyautogui.locateCenterOnScreen(
+                locations = pyautogui.locateAllOnScreen(
                     self.img,
                     confidence=self.confidence,
                     region=(
@@ -73,8 +75,23 @@ class Item:
                     ),
                     grayscale=self.grayscale,
                 )
-                previous_item[location] = self
-
+                if locations:
+                    for location in locations:
+                        if all(
+                            map(
+                                lambda x: pow(location.left - x.left, 2)
+                                + pow(location.top - x.top, 2)
+                                > distance,
+                                elements,
+                            )
+                        ):
+                            elements.append(location)
+                if elements:
+                    for element in elements:
+                        element = pyautogui.center(element)
+                        previous_item[element] = self
+            except pyscreeze.ImageNotFoundException:
+                return False
             except pyautogui.ImageNotFoundException:
                 return False
             except OSError as e:
