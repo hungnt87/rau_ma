@@ -6,6 +6,7 @@ import pyautogui
 import pydirectinput
 
 import controller.global_variables as cgv
+from controller import SelectWindow
 from controller.button import Button
 from controller.filelog import logger
 from controller.global_variables import global_event, path, region_item
@@ -38,15 +39,25 @@ class Item:
 
     def get_item_img(self, name):
         file_name = name + ".png"
-        img = self.img = path.get_resource_path(
-            os.path.join("assets", "img", "item", file_name)
-        )
-        return img
+        if self.img == None:
+            img = self.img = path.get_resource_path(
+                os.path.join("assets", "img", "item", file_name)
+            )
+            if os.path.exists(img) is False:
+                logger.error(f"Không tìm thấy file: {img} ")
+                return None
+            else:
+                return img
+        else:
+            return self.img
 
     def buy(self):
         # logger.info("Ban dang tim item {}".format(ItemInfo.name))
         if global_event.check_event():
             return False
+        if self.img == None:
+            logger.error(f"Không tìm thấy hình ảnh item: {self.name}")
+            return None
         count_of_buy = self.number_need_buy - self.number
         if count_of_buy > 0:
             try:
@@ -70,6 +81,33 @@ class Item:
 
         else:
             pass
+
+    def chech_item(self):
+        if global_event.check_event():
+            return False
+        if self.img == None:
+            logger.error(f"Không tìm thấy hình ảnh item: {self.name}")
+            return None
+        try:
+            location = pyautogui.locateCenterOnScreen(
+                self.img,
+                confidence=self.confidence,
+                region=(
+                    region_item.x,
+                    region_item.y,
+                    region_item.width,
+                    region_item.height,
+                ),
+                grayscale=self.grayscale,
+            )
+            previous_item[location] = self
+            logger.info(f"Ban thấy item {self.name}")
+            pydirectinput.moveTo(location[0], location[1])
+            return True
+        except pyautogui.ImageNotFoundException:
+            return False
+        except OSError as e:
+            logger.error(f"Item buy: {e}")
 
 
 Attack4EveryEndRound_lv4 = Item("Attack4EveryEndRound_lv4")
@@ -170,7 +208,7 @@ Luck60ForPrecise_lv5 = Item("Luck60ForPrecise_lv5", number_need_buy=1)
 MasterChefHat_lv2 = Item("MasterChefHat_lv2", 2)
 Minazuki_lv4 = Item("Minazuki_lv4")
 MultishotDamage20_lv3 = Item("MultishotDamage20_lv3", 1)
-MultishotRate100_Precision_lv2 = Item("MultishotRate100_Precision_lv2", 1)
+MultishotRate100_Precision5_lv2 = Item("MultishotRate100_Precision5_lv2", 1)
 PantyMask_lv6 = Item("PantyMask_lv6", 1)
 PickupRange100_lv1 = Item("PickupRange100_lv1", number_need_buy=3)
 PickupRange300_Unique_lv3 = Item("PickupRange300_Unique_lv3", number_need_buy=1)
@@ -333,7 +371,7 @@ def buy_all_item_lv2(round_number):
         HealthRegen20_Strike20_lv2.buy()
         HealthRegen12_HitRecovery15_lv2.buy()
         SoulCrystalsPlus35EveryMango_lv2.buy()
-        MultishotRate100_Precision_lv2.buy()
+        MultishotRate100_Precision5_lv2.buy()
         Question_lv2.buy()
 
 
@@ -538,7 +576,7 @@ def reset_item():
     MasterChefHat_lv2.reset_item_number()
     Minazuki_lv4.reset_item_number()
     MultishotDamage20_lv3.reset_item_number()
-    MultishotRate100_Precision_lv2.reset_item_number()
+    MultishotRate100_Precision5_lv2.reset_item_number()
     PantyMask_lv6.reset_item_number()
     PickupRange100_lv1.reset_item_number()
     PickupRange300_Unique_lv3.reset_item_number()
@@ -587,29 +625,14 @@ def reset_previous_item():
 
 
 if __name__ == "__main__":
-    # start = time.time()
-    # buy_all_set_item(5)
-    # start = time.time() - start
+    dota2 = SelectWindow("Dota 2")
+    dota2.move_window_to(0, 0)
+    dota2.set_foreground()
+    Cooldown16_Kill1000_Unique_lv2.chech_item()
+    Attack35_Kill1000_Unique_lv5.chech_item()
+    ExtraDamage14_Kill1000_Unique_lv2.chech_item()
+    ExtraDamage40_Kill100_Unique_lv5.chech_item()
+    Critical40_Kill1000_Unique_lv5.chech_item()
+    MultishotRate100_Precision5_lv2.chech_item()
 
-    # start2 = time.time()
-    # t_buy_all_item_investments = threading.Thread(
-    #     target=buy_all_item_investments, args=(5,)
-    # )
-    # t_buy_all_set_item = threading.Thread(target=buy_all_set_item, args=(5,))
-    # t_buy_all_item = threading.Thread(target=buy_all_item, args=(5,))
-
-    # t_buy_all_item_investments.start()
-    # t_buy_all_set_item.start()
-    # t_buy_all_item.start()
-    # t_buy_all_item_investments.join()
-    # t_buy_all_set_item.join()
-    # t_buy_all_item.join()
-
-    # start2 = time.time() - start2
-
-    # print("Time 1: ", start)
-    # print("Time 2: ", start2)
-    print(Question_lv2.img)
-    # Question_lv2.img
-    # logger.debug("Ban dang tim item lv1")
     pass
