@@ -141,6 +141,9 @@ Attack35_Kill1000_Unique_lv5 = Item(
     "Attack35_Kill1000_Unique_lv5", number_need_buy=1, grayscale=False, confidence=0.9
 )
 Bicycle_lv3 = Item("Bicycle_lv3", number_need_buy=0)
+BounceRate150_PrecisionDamage5_lv3 = Item(
+    "BounceRate150_PrecisionDamage5_lv3", number_need_buy=1
+)
 Cooldown16_Kill1000_Unique_lv2 = Item(
     "Cooldown16_Kill1000_Unique_lv2",
     number_need_buy=1,
@@ -162,12 +165,14 @@ Critical16_Kill1000_Unique_lv2 = Item(
 )
 Critical20_Defense_lv3 = Item("Critical20_Defense_lv3", number_need_buy=1)
 Critical30_Defense10_lv5 = Item("Critical30_Defense10_lv5", number_need_buy=1)
+Critical35_Luck15_lv5 = Item("Critical35_Luck15_lv5", number_need_buy=1)
 Critical40_Kill1000_Unique_lv5 = Item(
     "Critical40_Kill1000_Unique_lv5",
     number_need_buy=1,
     grayscale=False,
     confidence=0.9,
 )
+Critical45_Attack15_lv6 = Item("Critical45_Attack15_lv6", number_need_buy=1)
 Defense20_Speed10_lv2 = Item("Defense20_Speed10_lv2", number_need_buy=1)
 Defense24_Evasion12_Lv3 = Item("Defense24_Evasion12_Lv3", number_need_buy=1)
 Critical21_For_Precise_lv3 = Item("Critical21_For_Precise_lv3")
@@ -177,7 +182,9 @@ Evasion8_Speed5_lv1 = Item("Evasion8_Speed5_lv1", number_need_buy=2)
 Evasion12_Strike6_lv2 = Item("Evasion12_Strike6_lv2", number_need_buy=2)
 Evasion13_Health13_lv2 = Item("Evasion13_Health13_lv2", number_need_buy=2)
 Evasion16_Investment16_lv3 = Item("Evasion16_Investment16_lv3", number_need_buy=2)
+Evasion17_Range7_lv3 = Item("Evasion17_Range7_lv3", number_need_buy=2)
 Evasion21_Attack5_lv4 = Item("Evasion21_Attack5_lv4", number_need_buy=2)
+Evasion21_Attack11_lv5 = Item("Evasion21_Attack11_lv5", number_need_buy=1)
 Every30InvenstmentPlusDefense1_lv6 = Item(
     "Every30InvenstmentPlusDefense1_lv6", number_need_buy=1
 )
@@ -210,6 +217,7 @@ HealthRegen12_HitRecovery15_lv2 = Item("HealthRegen12_HitRecovery15_lv2")
 HealthRegen18_Mango50_lv2 = Item("HealthRegen18_Mango50_lv2")
 HealthRegen20_Strike20_lv2 = Item("HealthRegen20_Strike20_lv2")
 HealthRegen45_Invest99_lv5 = Item("HealthRegen45_Invest99_lv5")
+HealthRegen48_Range8_lv6 = Item("HealthRegen48_Range8_lv6", number_need_buy=1)
 HealthRegen52_HitRecovery25_lv6 = Item("HealthRegen52_HitRecovery25_lv6")
 Holding_Plus_Cooldown35_lv4 = Item("Holding_Plus_Cooldown35_lv4", number_need_buy=0)
 Holding_Plus_Def32_lv4 = Item("Holding_Plus_Def32_lv4", number_need_buy=0)
@@ -221,11 +229,16 @@ Immunity2_lv2 = Item("Immunity2_lv2")
 Immunity6_lv3 = Item("Immunity6_lv3")
 Immunity10_lv5 = Item("Immunity10_lv5")
 ImmunityCount4_lv4 = Item("ImmunityCount4_lv4")
-Investment88_For_Precise_lv1 = Item("Investment88_For_Precise_lv1", 6)
-Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2", 3)
-Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3", 3)
-Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3", 3)
-Investment368_HitRecovery18_lv5 = Item("Investment368_HitRecovery18_lv5", 1)
+Investment88_For_Precise_lv1 = Item("Investment88_For_Precise_lv1", number_need_buy=6)
+Investment138_Defense3_lv2 = Item("Investment138_Defense3_lv2", number_need_buy=3)
+Investment198_Speed7_lv3 = Item("Investment198_Speed7_lv3", number_need_buy=3)
+Investment218_Evasion8_lv3 = Item("Investment218_Evasion8_lv3", number_need_buy=3)
+Investment368_HitRecovery18_lv5 = Item(
+    "Investment368_HitRecovery18_lv5", number_need_buy=1
+)
+Investment388_AranceDamage28_lv5 = Item(
+    "Investment388_AranceDamage28_lv5", number_need_buy=1
+)
 Locomotive_lv2 = Item("Locomotive_lv2")
 LostAll_Investments_Get_Attack_Unique_lv6 = Item(
     "LostAll_Investments_Get_Attack_Unique_lv6", number_need_buy=1
@@ -252,6 +265,8 @@ PreciseDamage13_Investment33_lv2 = Item(
     "PreciseDamage13_Investment33_lv2", number_need_buy=1
 )
 PreciseDamage16_Strike16_lv3 = Item("PreciseDamage16_Strike16_lv3")
+PreciseDamage40_Health20_lv6 = Item("PreciseDamage40_Health20_lv6", number_need_buy=1)
+PreciseDamage40_Range10_lv6 = Item("PreciseDamage40_Range10_lv6", number_need_buy=1)
 Presision40_Defense_lv6 = Item("Presision40_Defense_lv6", number_need_buy=1)
 Presision40_Range10_lv6 = Item("Presision40_Range10_lv6", number_need_buy=1)
 Question_lv2 = Item("Question_lv2")
@@ -264,9 +279,11 @@ Range4_AracaneDamage12_lv1 = Item("Range4_AracaneDamage12_lv1", number_need_buy=
 Range4_StrikeDamage10_lv1 = Item("Range4_StrikeDamage10_lv1", number_need_buy=1)
 Range15_Invest55_lv5 = Item("Range15_Invest55_lv5", number_need_buy=1)
 Range16_Def16_lv5 = Item("Range16_Def16_lv5", number_need_buy=0)
+
 Range24_ExtraDamage14_lv6 = Item("Range24_ExtraDamage14_lv6", number_need_buy=0)
 RevivalCount1_CriticalRate5_lv3 = Item("RevivalCount1_CriticalRate5_lv3")
 RevivalCount1_Health5_lv4 = Item("RevivalCount1_Health5_lv4")
+RevivalCount2_lv6 = Item("RevivalCount2_lv6")
 Set_Defense8_lv2 = Item("Set_Defense8_lv2", number_need_buy=1)
 Set_Attack24_lv5 = Item("Set_Attack24_lv5", number_need_buy=1)
 Set_CriticalRate18_lv4 = Item("Set_CriticalRate18_lv4", number_need_buy=1)
@@ -363,7 +380,7 @@ def buy_all_item_investments(round_number):
     if global_event.check_event():
         return False
 
-    if round_number <= 9:
+    if round_number <= 10:
         logger.debug("Ban dang tim item investments")
         Investment88_For_Precise_lv1.buy()
         Investment138_Defense3_lv2.buy()
@@ -372,6 +389,7 @@ def buy_all_item_investments(round_number):
         Investment138_Defense3_lv2.buy()
         Investment198_Speed7_lv3.buy()
         Investment368_HitRecovery18_lv5.buy()
+        Investment388_AranceDamage28_lv5.buy()
 
 
 def buy_all_item_lv1(round_number):
@@ -414,6 +432,7 @@ def buy_all_item_lv2(round_number):
         MultishotRate100_Precision5_lv2.buy()
         Question_lv2.buy()
         PreciseDamage13_Investment33_lv2.buy()
+        Immunity2_lv2.buy()
 
 
 def buy_all_item_lv3(round_number):
@@ -439,6 +458,8 @@ def buy_all_item_lv3(round_number):
         RevivalCount1_CriticalRate5_lv3.buy()
         Defense24_Evasion12_Lv3.buy()
         ExtraDamage20FullHp_lv3.buy()
+        BounceRate150_PrecisionDamage5_lv3.buy()
+        Evasion17_Range7_lv3.buy()
 
 
 def buy_all_item_lv4(round_number):
@@ -484,6 +505,8 @@ def buy_all_item_lv5(round_number):
         Attack16Every1RevivalCount_lv5.buy()
         Random_15_35_Precision_lv5.buy()
         Speed45_Luck5_lv5.buy()
+        Critical35_Luck15_lv5.buy()
+        Evasion21_Attack11_lv5.buy()
 
 
 def buy_all_item_lv6(round_number):
@@ -507,6 +530,10 @@ def buy_all_item_lv6(round_number):
         Speed80_Range8_lv6.buy()
         if LostAll_Investments_Get_Attack_Unique_lv6.number < 1:
             Every30InvenstmentPlusDefense1_lv6.buy()
+        PreciseDamage40_Range10_lv6.buy()
+        HealthRegen48_Range8_lv6.buy()
+        Critical45_Attack15_lv6.buy()
+        RevivalCount2_lv6.buy()
 
 
 def buy_all_item(round_number):
@@ -558,6 +585,7 @@ def reset_item():
     Attack35_Cooldown15_lv6.reset_item_number()
     Attack35_Kill1000_Unique_lv5.reset_item_number()
     Bicycle_lv3.reset_item_number()
+    BounceRate150_PrecisionDamage5_lv3.reset_item_number()
     Cooldown16_Kill1000_Unique_lv2.reset_item_number()
     Cooldown21_lv5.reset_item_number()
     Cooldown45_Speed15_lv6.reset_item_number()
@@ -568,7 +596,9 @@ def reset_item():
     Critical20_Defense_lv3.reset_item_number()
     Critical21_For_Precise_lv3.reset_item_number()
     Critical30_Defense10_lv5.reset_item_number()
+    Critical35_Luck15_lv5.reset_item_number()
     Critical40_Kill1000_Unique_lv5.reset_item_number()
+    Critical45_Attack15_lv6.reset_item_number()
     Defense20_Speed10_lv2.reset_item_number()
     Defense24_Evasion12_Lv3.reset_item_number()
     EnemyCount10_lv6.reset_item_number()
@@ -577,7 +607,9 @@ def reset_item():
     Evasion13_Health13_lv2.reset_item_number()
     Evasion13_Health13_lv2.reset_item_number()
     Evasion16_Investment16_lv3.reset_item_number()
+    Evasion17_Range7_lv3.reset_item_number()
     Evasion21_Attack5_lv4.reset_item_number()
+    Evasion21_Attack11_lv5.reset_item_number()
     Every30InvenstmentPlusDefense1_lv6.reset_item_number()
     Exp20_Range5_lv1.reset_item_number()
     Exp40_Luck6_lv2.reset_item_number()
@@ -598,11 +630,13 @@ def reset_item():
     HealthRegen18_Mango50_lv2.reset_item_number()
     HealthRegen20_Strike20_lv2.reset_item_number()
     HealthRegen45_Invest99_lv5.reset_item_number()
+    HealthRegen48_Range8_lv6.reset_item_number()
     HealthRegen52_HitRecovery25_lv6.reset_item_number()
     Holding_Plus_Cooldown35_lv4.reset_item_number()
     Holding_Plus_Def32_lv4.reset_item_number()
     Holding_Plus_HealthRegen30_lv4.reset_item_number()
     Immunity_Unique_lv5.reset_item_number()
+    Immunity2_lv2.reset_item_number()
     Immunity6_lv3.reset_item_number()
     Immunity10_lv5.reset_item_number()
     ImmunityCount4_lv4.reset_item_number()
@@ -611,6 +645,7 @@ def reset_item():
     Investment198_Speed7_lv3.reset_item_number()
     Investment218_Evasion8_lv3.reset_item_number()
     Investment368_HitRecovery18_lv5.reset_item_number()
+    Investment388_AranceDamage28_lv5.reset_item_number()
     Locomotive_lv2.reset_item_number()
     LostAll_Investments_Get_Attack_Unique_lv6.reset_item_number()
     Luck13_lv1.reset_item_number()
@@ -643,9 +678,11 @@ def reset_item():
     Range4_StrikeDamage10_lv1.reset_item_number()
     Range15_Invest55_lv5.reset_item_number()
     Range16_Def16_lv5.reset_item_number()
+
     Range24_ExtraDamage14_lv6.reset_item_number()
     RevivalCount1_CriticalRate5_lv3.reset_item_number()
     RevivalCount1_Health5_lv4.reset_item_number()
+    RevivalCount2_lv6.reset_item_number()
     Set_Attack24_lv5.reset_item_number()
     Set_CriticalRate18_lv4.reset_item_number()
     Set_Defense8_lv2.reset_item_number()
