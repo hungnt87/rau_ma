@@ -2,7 +2,7 @@
 
 # Cập nhật v1.4.2-hotfix >> v2.0.0-beta
 
-- Thêm chức năng đi Instance: Mine (beta)
+- Thêm chức năng đi Instance: Mine (beta tại file exe)
 - Cải thiện chức năng mua Item: Mua nhiều item giống nhau cùng lúc
 - fix những lỗi vớ vẩn
 
