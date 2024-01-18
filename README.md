@@ -1,20 +1,18 @@
-# brodota-bot v1.4.2
+# brodota-bot v2.0.0-beta
 
-# Cập nhật 1.4.1 => 1.4.2-hotfix
+# Cập nhật v1.4.2-hotfix >> v2.0.0-beta
 
-- fix không nhận Recycle
-
-- Thêm 3 tùy chọn của độ khó
-- Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
-- Add thêm một số item còn thiếu (dữ liệu của: BossGames)
-- Fix một số lỗi khi mua Item
-- Chức năng đi Mine sắp hoàn thiện, đang test kiểm thử ...
+- Thêm chức năng đi Instance: Mine (beta)
+- Cải thiện chức năng mua Item: Mua nhiều item giống nhau cùng lúc
+- fix những lỗi vớ vẩn
 
 # Tính năng:
 
 - Thêm tùy chọn config => Auto:
-  <div > <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/2493af53-41af-489b-8143-36ad6648b191"  width="400" alt="config" /> </div>
-- Lựa chọn Chế độ di chuyển, Tắt like, Chọn độ khó Burn
+- Thêm 3 tùy chọn của độ khó
+- Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
+- Add thêm một số item còn thiếu (dữ liệu của: BossGames)
+- Fix một số lỗi khi mua Item
 - Fix chế dộ di chuyển mượt mà hơn
 - Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
 - Tự động vào game
