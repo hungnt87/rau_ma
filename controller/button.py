@@ -367,7 +367,7 @@ class Button:
                     if character_moves_event.check_event():
                         return False
                     pydirectinput.rightClick(loc[0] + loc1 + 30, loc[1] + 20)
-                for i in range(0, number_click):
+                for i in range(0, number_click - 2):
                     if global_event.check_event():
                         return False
                     if character_moves_event.check_event():
