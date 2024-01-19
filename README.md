@@ -1,19 +1,18 @@
-# brodota-bot v2.0.0-beta
+# brodota-bot v2.0.1
 
-# Cập nhật v1.4.2-hotfix >> v2.0.0-beta
+# Cập nhật v2.0.0-beta >> v2.0.1
 
-- Thêm chức năng đi Instance: Mine (beta tại file exe, nhớ bật tại Config >> Auto)
-- Cải thiện chức năng mua Item: Mua nhiều item giống nhau cùng lúc
-- fix những lỗi vớ vẩn
+- Thêm chức năng đi Instance: Mine (tối ưu hơn, để hoạt động chính xác thì đọc I. hướng dẫn sử dung => Phần 4 và phần 7 để càng ngày càng hoàn thiện)
+- Cải thiện chức năng mua Item, Hero: Mua nhiều item, hero giống nhau cùng lúc
+- Thêm tùy chọn Config Auto: Lựa chọn challenge
+- Tự config phím tắt tại file config
+- Tối ưu đánh boss round 20
+- Thêm item tăng damage xạ thủ theo thời gian
+- Mua item Holding khi không chọn Di chuyển tự động
 
 # Tính năng:
 
-- Thêm tùy chọn config => Auto:
-- Thêm 3 tùy chọn của độ khó
-- Cập nhật meta Medusa và Luna (đến từ tư vấn viên: Voicing)
-- Add thêm một số item còn thiếu (dữ liệu của: BossGames)
-- Fix một số lỗi khi mua Item
-- Fix chế dộ di chuyển mượt mà hơn
+- Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
 - Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
 - Tự động vào game
 - Mua đồ và hero (Mua giới hạn số lượng Hero và Item, các item thuộc Set và Unique chỉ mua 1 cái)
@@ -24,7 +23,7 @@
 # PS:
 
 - Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
-- Tắt chương trình diệt virut (tùy theo máy bạn cài phàn mềm anti virut nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
+- Tắt chương trình diệt virut (tùy theo máy bạn cài phần mềm anti virus nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
 
 # Cập nhật sắp tới:
 
@@ -40,7 +39,7 @@
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
 
- <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/6218a8d0-baaa-4b6f-a477-336e1d7996c5" width="600" alt="Do phan giai" />
+ <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/ff9a874d-7b4e-4175-ad4b-2d62787ecd4e" width="600" alt="Do phan giai" />
 
 5. Sau đó để sẵn cửa sổ game như hình dưới
 
