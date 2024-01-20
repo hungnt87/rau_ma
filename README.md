@@ -1,5 +1,5 @@
 # brodota-bot v2.0.1
-
+Bàn luận và báo lỗi tại: https://discord.gg/yKhACnup
 # Cập nhật v2.0.0-beta >> v2.0.1
 
 - Thêm chức năng đi Instance: Mine (tối ưu hơn, để hoạt động chính xác thì đọc I. hướng dẫn sử dung => Phần 4 và phần 7 để càng ngày càng hoàn thiện)
