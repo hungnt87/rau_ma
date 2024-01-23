@@ -34,7 +34,7 @@ Bàn luận và báo lỗi tại: https://discord.gg/yKhACnup
 
 # I. Huớng dẫn sử dụng
 
-1. Tải file phiên bản brodota-bot.zip mới nhất tại https://github.com/hungnt87/brodota-bot/releases
+1. Tải file phiên bản brodota-bot.zip mới nhất tại [https://github.com/hungnt87/rau_ma/releases]
 2. Giải nén file brodota-bot.zip
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
