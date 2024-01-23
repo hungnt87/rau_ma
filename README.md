@@ -1,4 +1,4 @@
-# brodota-bot v2.0.1
+# Rau má v2.0.1
 Bàn luận và báo lỗi tại: https://discord.gg/yKhACnup
 # Cập nhật v2.0.0-beta >> v2.0.1
 
