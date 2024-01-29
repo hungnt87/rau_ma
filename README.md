@@ -1,6 +1,6 @@
 # Rau má v2.1.0
-Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
-Active license: https://t.me/nthung87 hoặc tại discord bên trên
+ - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
+ - Active license: https://t.me/nthung87 hoặc tại discord bên trên
 # Cập nhật v2.0.1 >> v2.1.0
 - Thêm hệ thống License 
 - Thêm hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
