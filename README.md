@@ -1,25 +1,19 @@
-# Rau má v2.0.1
-Bàn luận và báo lỗi tại: https://discord.gg/yKhACnup
-# Cập nhật v2.0.0-beta >> v2.0.1
-
-- Thêm chức năng đi Instance: Mine (tối ưu hơn, để hoạt động chính xác thì đọc I. hướng dẫn sử dung => Phần 4 và phần 7 để càng ngày càng hoàn thiện)
+# Rau má v2.1.0
+Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
+Active license: https://t.me/nthung87 hoặc tại discord bên trên
+# Cập nhật v2.0.1 >> v2.1.0
+- Thêm hệ thống License 
+- Thêm hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
+- Thêm chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Cải thiện chức năng mua Item, Hero: Mua nhiều item, hero giống nhau cùng lúc
-- Thêm tùy chọn Config Auto: Lựa chọn challenge
 - Tự config phím tắt tại file config
-- Tối ưu đánh boss round 20
-- Thêm item tăng damage xạ thủ theo thời gian
-- Mua item Holding khi không chọn Di chuyển tự động
-
-# Tính năng:
-
 - Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
 - Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
 - Tự động vào game
-- Mua đồ và hero (Mua giới hạn số lượng Hero và Item, các item thuộc Set và Unique chỉ mua 1 cái)
+- Mua đồ và hero
 - Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
 - Tính năng Stop và pause (lúc được lúc không, fix sau)
-
 # PS:
 
 - Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
@@ -34,7 +28,7 @@ Bàn luận và báo lỗi tại: https://discord.gg/yKhACnup
 
 # I. Huớng dẫn sử dụng
 
-1. Tải file phiên bản brodota-bot.zip mới nhất tại [https://github.com/hungnt87/rau_ma/releases]
+1. Tải file phiên bản brodota-bot.zip mới nhất tại [https://github.com/thanhhung87/rau_ma/releases]
 2. Giải nén file brodota-bot.zip
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
