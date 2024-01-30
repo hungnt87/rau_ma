@@ -53,7 +53,7 @@
 # Tài khoản ngân hàng:
 
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e" width="250" alt="Scan QR Code" />
- # Paypal
+# Paypal:
   [https://paypal.me/hungnt1987]
 
 # II. Hướng dẫn chạy tại source code
