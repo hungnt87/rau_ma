@@ -1,7 +1,9 @@
-# Rau má v2.1.1
+# Rau má v2.1.2
  - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
  - Active license: https://t.me/nthung87 hoặc tại discord bên trên
-# Cập nhật v2.1.0 >> v2.1.1
+# Cập nhật v2.1.1 >> v2.1.2
+- Add thêm item
+- Fix hệ thống mua hero và item
 - Fix hệ thống hoạt động trên màn hình fullscreen 1920x1080
 - Thêm hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
 - Thêm chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
