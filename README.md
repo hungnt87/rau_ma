@@ -1,8 +1,8 @@
-# Rau má v2.1.0
+# Rau má v2.1.1
  - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
  - Active license: https://t.me/nthung87 hoặc tại discord bên trên
-# Cập nhật v2.0.1 >> v2.1.0
-- Thêm hệ thống License 
+# Cập nhật v2.1.0 >> v2.1.1
+- Fix hệ thống hoạt động trên màn hình fullscreen 1920x1080
 - Thêm hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
 - Thêm chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Cải thiện chức năng mua Item, Hero: Mua nhiều item, hero giống nhau cùng lúc
@@ -15,7 +15,6 @@
 - Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
 - Tính năng Stop và pause (lúc được lúc không, fix sau)
 # PS:
-
 - Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
 - Tắt chương trình diệt virut (tùy theo máy bạn cài phần mềm anti virus nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
 
