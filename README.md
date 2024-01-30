@@ -3,6 +3,7 @@
  - Active license: https://t.me/nthung87 hoặc tại discord bên trên
 # Cập nhật v2.1.1 >> v2.1.2
 - Chỉnh lại nơi lưu config mọi thứ về rau_ma tại C://User/<username>/Documents/rau_ma
+- Tăng số lượng mua hero: Sniper 5 =>10; Medusa 5 =>10
 - Add thêm item (cần chỉnh lại config item)
 - Fix hệ thống mua hero và item
 - Fix hệ thống hoạt động trên màn hình fullscreen 1920x1080
