@@ -1,19 +1,17 @@
-# Rau má v2.1.2
+# Rau má v2.1.3
  - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
- - Active license: https://t.me/nthung87 
- - https://discordapp.com/users/213165660648243210
-# Cập nhật v2.1.1 >> v2.1.2
-- Chỉnh lại nơi lưu config mọi thứ về rau_ma tại C://User/<username>/Documents/rau_ma
+ - Active license 1: https://t.me/nthung87 
+ - Active license 2: https://discordapp.com/users/213165660648243210
+# Cập nhật v2.1.2 >> v2.1.3
+- Fix lỗi mua bán hero khi Sniper trên 5
+- Chỉnh lại nơi lưu config mọi thứ về rau_ma tại C:/User/"username"/Documents/rau_ma
 - Tăng số lượng mua hero: Sniper 5 =>10; Medusa 5 =>10
-- Add thêm item (cần chỉnh lại config item)
-- Fix hệ thống mua hero và item
-- Fix hệ thống hoạt động trên màn hình fullscreen 1920x1080
-- Thêm hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
-- Thêm chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
-- Cải thiện chức năng mua Item, Hero: Mua nhiều item, hero giống nhau cùng lúc
+
+# Chức năng
+- Hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
+- Chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Tự config phím tắt tại file config
 - Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
-- Hỗ trợ tốt hơn màn hình chế độ toàn màn hình Full HD 1920x1080
 - Tự động vào game
 - Mua đồ và hero
 - Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
@@ -48,14 +46,11 @@
 7. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
 
 # Momo:
-
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/723d9c9b-53c1-42ab-8941-f77fa25a957a" width="200" alt="Scan QR Code" />
-
 # Tài khoản ngân hàng:
-
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/08ee8b14-e337-4697-aa11-9430e610c91e" width="250" alt="Scan QR Code" />
 # Paypal:
-  [https://paypal.me/hungnt1987]
+  - https://paypal.me/hungnt1987
 
 # II. Hướng dẫn chạy tại source code
 
