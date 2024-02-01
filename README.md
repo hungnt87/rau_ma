@@ -1,6 +1,7 @@
 # Rau má v2.1.2
  - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
- - Active license: https://t.me/nthung87 hoặc tại discord bên trên
+ - Active license: https://t.me/nthung87 
+ - https://discordapp.com/users/213165660648243210
 # Cập nhật v2.1.1 >> v2.1.2
 - Chỉnh lại nơi lưu config mọi thứ về rau_ma tại C://User/<username>/Documents/rau_ma
 - Tăng số lượng mua hero: Sniper 5 =>10; Medusa 5 =>10
