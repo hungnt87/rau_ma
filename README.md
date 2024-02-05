@@ -1,8 +1,8 @@
-# Rau má v2.1.4-hotfix-nian
+# Rau má v2.1.5-hotfix-nian
  - Bàn luận và báo lỗi tại: https://discord.gg/eN4gzg4dGh
  - Active license 1: https://t.me/nthung87 
  - Active license 2: https://discordapp.com/users/213165660648243210
-# Cập nhật v2.1.3 >> v2.1.4-hotfix-nian
+# Cập nhật v2.1.4 >> v2.1.5-hotfix-nian
 - thêm đánh boss Nian
 - Fix lỗi mua item giống nhau (có item nào giống nhau mà mua nhầm thì báo lỗi để fix)
 
