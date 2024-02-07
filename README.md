@@ -1,5 +1,5 @@
 # Rau má v2.1.5-hotfix-nian
- - Channel : https://t.me/auto_brodota
+ - Channel for update : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto: https://t.me/brodota_chat
  - Active license 1: https://t.me/nthung87 
  - Active license 2: https://discordapp.com/users/213165660648243210
