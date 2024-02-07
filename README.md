@@ -1,8 +1,8 @@
 # Rau má v2.1.5-hotfix-nian
- - Channel for update : https://t.me/auto_brodota
+ - Channel latest updated news : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto: https://t.me/brodota_chat
- - Active license 1: https://t.me/nthung87 
- - Active license 2: https://discordapp.com/users/213165660648243210
+ - Contact Active license 1: https://t.me/nthung87 
+ - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
 # Cập nhật v2.1.4 >> v2.1.5-hotfix-nian
 - thêm đánh boss Nian
