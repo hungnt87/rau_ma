@@ -4,10 +4,11 @@
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
-# Cập nhật v2.1.6 => v2.1.7
+# Cập nhật v2.1.7 => v2.1.8
+- Thêm chức năng Config => Hero: tùy chỉnh mua hero
+- Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
+
 - Fix lỗi Load time out
-- Add boss Nian
-- Fix lỗi mua item giống nhau (có item nào giống nhau mà mua nhầm thì báo lỗi để fix)
 # Chức năng
 - Thêm thuy chọn Config => Auto: Save pvp
 - Fix lỗi ko mua item Invenst lv3
