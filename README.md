@@ -1,4 +1,4 @@
-# Rau má v2.1.7
+# Rau má v2.1.8
  - Channel latest updated news : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto: https://t.me/brodota_chat
  - Contact Active license 1: https://t.me/nthung87 
