@@ -5,9 +5,10 @@
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
 # Cập nhật v2.1.7 => v2.1.8
+- Cập nhật hủy bỏ boss Nian
 - Thêm chức năng Config => Hero: tùy chỉnh mua hero
 - Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
-
+- Fix item Chungwa
 - Fix lỗi Load time out
 # Chức năng
 - Thêm thuy chọn Config => Auto: Save pvp
