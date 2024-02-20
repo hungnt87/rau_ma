@@ -4,6 +4,7 @@
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
+ - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Cập nhật v2.1.7 => v2.1.8
 - Cập nhật hủy bỏ boss Nian
 - Thêm chức năng Config => Hero: tùy chỉnh mua hero
