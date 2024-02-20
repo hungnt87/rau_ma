@@ -35,11 +35,14 @@
 2. Giải nén file rau_ma.zip
 3. Mở file main.exe
 4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
- <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/ff9a874d-7b4e-4175-ad4b-2d62787ecd4e" width="600" alt="Do phan giai" />
-5. Sau đó để sẵn cửa sổ game như hình dưới
- <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/9820772b-ba40-4214-8781-7be315bc1b9e" width="600" alt="Mau game" />
-6. Start và tận hưởng
-7. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
+
+  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/ff9a874d-7b4e-4175-ad4b-2d62787ecd4e" width="600" alt="Do phan giai" />
+6. Sau đó để sẵn cửa sổ game như hình dưới
+
+  <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/9820772b-ba40-4214-8781-7be315bc1b9e" width="600" alt="Mau game" />
+ 
+7. Start và tận hưởng
+8. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
 
 # II. Hướng dẫn chạy tại source code
 
