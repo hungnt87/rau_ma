@@ -1,17 +1,17 @@
-# Rau má v2.1.9
+# Rau má v2.2.0
  - Channel updated English version : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto English version: https://t.me/brodota_chat
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
-# Cập nhật v2.1.8 => v2.1.9
-- Cập nhật hủy bỏ boss Nian - hotfix
+# Cập nhật v2.1.9 => v2.2.0
+- Thêm chức năng Fusion pet: hướng dẫn https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
 - Thêm chức năng Config => Hero: tùy chỉnh mua hero
 - Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
-- Fix item Chungwa
 - Fix lỗi Load time out
 # Chức năng
+
 - Tự động vào game
 - Mua đồ và hero
 - Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
