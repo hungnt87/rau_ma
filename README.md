@@ -1,20 +1,22 @@
-# Rau má v2.2.0
+# Rau má v2.2.1
  - Channel updated English version : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto English version: https://t.me/brodota_chat
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
-# Cập nhật v2.1.9 => v2.2.0
-- Thêm chức năng Fusion pet: hướng dẫn https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
-- Thêm chức năng Config => Hero: tùy chỉnh mua hero
-- Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
-- Fix lỗi Load time out
-# Chức năng
+# Cập nhật v2.2.0 => v2.2.1
+- Làm lại hệ thống Hero và Item: Người dùng tự thêm ảnh vào forder Hero và Item với cấu trúc tên Hero, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
+- Fix lỗi lưu config Hero slot 4 và 5
+- Fusion pet tự trap hết số lượng
 
+# Chức năng
 - Tự động vào game
 - Mua đồ và hero
 - Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
+- Fusion pet: hướng dẫn https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
+- Config => Hero: tùy chỉnh mua hero
+- Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
 - Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
