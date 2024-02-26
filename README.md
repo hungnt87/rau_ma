@@ -1,15 +1,13 @@
-# Rau má v2.2.1
+# Rau má v2.2.2
  - Channel updated English version : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto English version: https://t.me/brodota_chat
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
-# Cập nhật v2.2.0 => v2.2.1
-- Làm lại hệ thống Hero và Item: Người dùng tự thêm ảnh vào forder Hero và Item với cấu trúc tên Hero, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
-- Fix lỗi lưu config Hero slot 4 và 5
-- Fusion pet tự trap hết số lượng
-
+# Cập nhật v2.2.1 => v2.2.2
+- Fusion pet improvement
+- Add function Config > Auto > Disassembly item: select Common, Rare, Epic and Legendary items
 # Chức năng
 - Tự động vào game
 - Mua đồ và hero
@@ -21,6 +19,7 @@
 - Chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
 - Hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
 - Vị trí lưu config mọi thứ về rau_ma tại C:/User/"username"/Documents/rau_ma
+- hệ thống Hero và Item: Người dùng tự thêm ảnh vào forder Hero và Item với cấu trúc tên Hero, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
 - Tự config phím tắt tại file config
 - Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
 - Tính năng Stop và pause
