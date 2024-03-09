@@ -1,4 +1,5 @@
-# Auto Brodota v3.0, custom map Dota 2
+# Auto Brodota v3.0
+  - Game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto English version: https://t.me/brodota_chat
