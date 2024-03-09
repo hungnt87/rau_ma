@@ -1,4 +1,4 @@
-# Rau má v2.2.2
+# Auto Brodota v3.0, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
  - Chat Discussion, error reporting and suggestions brodota bot auto English version: https://t.me/brodota_chat
@@ -6,9 +6,9 @@
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
-# Cập nhật v2.2.1 => v2.2.2
+# Cập nhật
 - Fusion pet improvement
-- Add function Config > Auto > Disassembly item: select Common, Rare, Epic and Legendary items
+- Buy item improvement
 # Chức năng
 - Tự động vào game
 - Mua đồ và hero
