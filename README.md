@@ -8,6 +8,7 @@
  - Link donate: http://hungnt87.opendt.net/
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
+- Add config number roll one round: Config > Auto
 - Add the function check  dota update
 - Add the function to check if a character dies before round 20
 # Chức năng
