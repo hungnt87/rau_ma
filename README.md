@@ -6,8 +6,8 @@
  - Contact Active license 1: https://t.me/nthung87 
  - Contact Active license 2: https://discordapp.com/users/213165660648243210
  - Link donate: http://hungnt87.opendt.net/
+ - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
- - https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
 # Update
 - Add new Hero and item for Strike
 - Fix bug rematch
