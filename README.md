@@ -1,4 +1,4 @@
-# Auto Brodota v3.2
+# Auto Brodota v3.3
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
@@ -9,51 +9,32 @@
  - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
-- Add new Hero and item for Strike
-- Fix bug rematch
-- Add config number roll one round: Config > Auto
-- Add the function check  dota update
-- Add the function to check if a character dies before round 20
-# Chức năng
-- Tự động vào game
-- Mua đồ và hero
-- Thêm tùy chọn config => Auto: nhiều tính năng được cập nhật
-- Fusion pet: hướng dẫn https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
-- Config => Hero: tùy chỉnh mua hero
-- Hướng dẫn config hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
-- Di chuyển né quái (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
-- Chức năng đi Instance: Mine (yêu cầu cài đặt di chuyển bằng chuột trong game trước)
-- Hệ thống tự config mua item theo nhu cầu (phục vụ nhiều build)
-- Vị trí lưu config mọi thứ về rau_ma tại C:/User/"username"/Documents/rau_ma
-- hệ thống Hero và Item: Người dùng tự thêm ảnh vào forder Hero và Item với cấu trúc tên Hero, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
-- Tự config phím tắt tại file config
-- Đánh boss xong tự bán đồ và thoát game và vào lại vòng mới
-- Tính năng Stop và pause
+- Config => Roll: Customize the number of rolls per round.
+- Config =>Auto => Pet: Number trap decreases from max
+# Features
+- Automatic game login, buy items and heroes, Move to dodge monsters (requires setting up mouse movement in-game), rematch...
+- Go to Instance: Mine (requires setting up mouse movement in-game)
+- Config => Auto: nhiều tính năng được cập nhật
+- Config => Hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
+- Config => Item: Customize buy number of items per round 
+- Fusion pet: https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
+- Location to save all configurations: C:/User/{username}/Documents/rau_ma
+- Hero and Item System: Users can add images to the Hero and Item folders with the following structure: Hero_Name, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
 # PS:
-- Chọn 1 trong 3 hero khởi đầu WinterWyvern, HoodWink hoặc Dazzale lúc đầu để tối ưu game nhé
-- Tắt chương trình diệt virut (tùy theo máy bạn cài phần mềm anti virus nào) nếu cần vì đây là phầm mềm can thiệp chuột và bàn phím nên có thể nhận nhầm là keylog (source ở đây bạn có thể check)
-
-# Cập nhật sắp tới:
-
-- Thêm tính năng nếu chết thì khởi động lại vòng mới
-- Thêm tùy chọn ban đầu( chọn chế độ phân giải thấp hơn)
-- Thêm tính năng đi Devil's Grave (tương lai gần)
+- Choose one of the three starting heroes: WinterWyvern, Hoodwink, or Dazzle initially to optimize the game.
+- Turn off your antivirus program (depending on which antivirus software your machine has installed) if necessary because this software involves mouse and keyboard interception, which might be mistaken for keylogging (you can check the source here).
 # I. Huớng dẫn sử dụng
-1. Tải file phiên bản rau_ma.zip mới nhất tại [https://github.com/thanhhung87/rau_ma/releases]
-2. Giải nén file rau_ma.zip
-3. Mở file main.exe
-4. mở game chế độ cửa sổ với độ phân giải 1920x1080 và điều chỉnh thông số game như sau:
+
+01. Download the latest version of the rau_ma.zip file from [https://github.com/thanhhung87/rau_ma/releases].
+02. Extract the AutoBrodota.zip file.
+O3. pen the AutoBrodota.exe file.
+04. Open the game in windowed mode with a resolution of 1920x1080 and adjust the game settings as follows:
 
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/ff9a874d-7b4e-4175-ad4b-2d62787ecd4e" width="600" alt="Do phan giai" />
   
-6. Sau đó để sẵn cửa sổ game như hình dưới
-
+6. Then arrange the game window as shown in the image below.
+7. 
   <img src="https://github.com/hungnt87/brodota-bot/assets/71305971/9820772b-ba40-4214-8781-7be315bc1b9e" width="600" alt="Mau game" />
  
-7. Start và tận hưởng
-8. Mua giúp tôi ly cafe nếu thấy hay nhé :D để giúp tôi có động lực phát triển thêm nhiều tính năng hơn nữa
+8. Start auto
 
-# II. Hướng dẫn chạy tại source code
-
-- Video hướng dẫn chạy tại source code
-  https://youtu.be/1B_rowkZvLE
