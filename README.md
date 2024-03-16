@@ -1,4 +1,4 @@
-# Auto Brodota v3.3
+# Auto Brodota v3.4
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
@@ -9,14 +9,14 @@
  - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
-- Config => Roll: Customize the number of rolls per round.
-- Config =>Auto => Pet: Number trap decreases from max
+- Optimize Instance: Mine
 # Features
 - Automatic game login, buy items and heroes, Move to dodge monsters (requires setting up mouse movement in-game), rematch...
 - Go to Instance: Mine (requires setting up mouse movement in-game)
 - Config => Auto: nhiều tính năng được cập nhật
 - Config => Hero: https://docs.google.com/document/d/1lHAN35P7pNxdRtH89PyBud01yBDwehYJ7ly7VZ56Hzg/edit?usp=sharing
-- Config => Item: Customize buy number of items per round 
+- Config => Item: Customize buy number of items per round
+- Config => Roll: Customize the number of rolls per round. 
 - Fusion pet: https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
 - Location to save all configurations: C:/User/{username}/Documents/rau_ma
 - Hero and Item System: Users can add images to the Hero and Item folders with the following structure: Hero_Name, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
