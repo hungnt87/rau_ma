@@ -1,4 +1,4 @@
-# Auto Brodota v3.6
+# Auto Brodota v3.8
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
@@ -9,9 +9,9 @@
  - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
-- add new item for strike
-- Optimize Instance: Mine
-- Set a time for treasure hunt digging
+- Fix error of not running in some cases
+- add new many item
+
 # Features
 - Automatic game login, buy items and heroes, Move to dodge monsters (requires setting up mouse movement in-game), rematch...
 - Go to Instance: Mine (requires setting up mouse movement in-game)
