@@ -1,4 +1,4 @@
-# Auto Brodota v4.0
+# Auto Brodota v4.1
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
@@ -9,9 +9,10 @@
  - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
-- Added function to block party invitations
+- Add pass create game
+- Add new config disassembly item
 - Fix error of not running in some cases
-- add new many item
+- Add new many item
 
 # Features
 - Automatic game login, buy items and heroes, Move to dodge monsters (requires setting up mouse movement in-game), rematch...
@@ -23,6 +24,8 @@
 - Fusion pet: https://docs.google.com/document/d/1LgnOi6HU56aDJkoJn6JAZ2MLRsZUcSHWNa4V8UlCm9U/edit?usp=sharing
 - Location to save all configurations: C:/User/{username}/Documents/rau_ma
 - Hero and Item System: Users can add images to the Hero and Item folders with the following structure: Hero_Name, Hero_lv1; Item_lv1, Item_lv2..., Item_lv6
+- Function to block party invitations
+
 # PS:
 - Choose one of the three starting heroes: WinterWyvern, Hoodwink, or Dazzle initially to optimize the game.
 - Turn off your antivirus program (depending on which antivirus software your machine has installed) if necessary because this software involves mouse and keyboard interception, which might be mistaken for keylogging (you can check the source here).
