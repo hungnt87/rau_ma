@@ -1,4 +1,4 @@
-# Auto Brodota v4.1
+# Auto Brodota v4.2
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
