@@ -1,4 +1,4 @@
-# Auto Brodota v4.2
+# Auto Brodota v4.3
   - Auto for game Brodota, custom map Dota 2
  - Video demo: https://www.youtube.com/playlist?list=PLVCvDW7Xj1WXLeBahZCJ1sjkStHHXwoih
  - Channel updated English version : https://t.me/auto_brodota
@@ -9,10 +9,7 @@
  - Setting game: https://docs.google.com/document/d/19zUuVfN01_wjiM_16GG2gha5ouiWZyklprnoiIwdy-8/edit?usp=sharing
  - User manual link English version: https://docs.google.com/document/d/1Z4zCsVXCy74TS8WK5BCXAlpN58B0ovjQ9JwTDBuJv0Q/edit?usp=sharing
 # Update
-- Add pass create game
-- Add new config disassembly item
-- Fix error of not running in some cases
-- Add new many item
+- Add Config Defeat Sea Monster
 
 # Features
 - Automatic game login, buy items and heroes, Move to dodge monsters (requires setting up mouse movement in-game), rematch...
